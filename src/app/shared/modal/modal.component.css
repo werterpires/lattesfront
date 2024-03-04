@@ -1,0 +1,27 @@
+#modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--lightGray);
+  opacity: 0.5;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalSquare {
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
+  background-color: var(--gray);
+  border-radius: 20px;
+  box-shadow: 0 0 20px var(--darkBlack);
+}

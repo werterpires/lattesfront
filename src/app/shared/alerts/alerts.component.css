@@ -1,0 +1,36 @@
+#alertsContainer {
+  padding: 10px;
+  border-radius: 10px;
+  font-family: var(--fontAnek);
+  color: white;
+}
+
+#alertsButtons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+#alertsButtons button {
+  min-width: 60px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+
+  background-color: var(--green);
+  color: white;
+
+  font-family: var(--fontAnek);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#alertsButtons button:hover {
+  background-color: var(--darkGreen);
+}
+
+#alertsButtons button:active {
+  background-color: var(--orange);
+}
