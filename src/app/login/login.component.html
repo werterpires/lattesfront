@@ -1,1 +1,16 @@
-<p>login works!</p>
+<app-modal>
+  <p>Login</p>
+
+  <form>
+    <label>
+      Email: <input name="email" type="text" [(ngModel)]="loginDto.email"
+    /></label>
+    <label>
+      Senha:<input
+        name="password"
+        type="password"
+        [(ngModel)]="loginDto.password"
+    /></label>
+    <button type="button" (click)="login()">Entrar</button>
+  </form>
+</app-modal>
