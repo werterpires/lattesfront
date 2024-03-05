@@ -1,6 +1,7 @@
 <header>
   <div class="headsup">Projeto Lattes</div>
-  <div>
+  <div class="headsub">
+    <div></div>
     <nav>
       <ul>
         <li>Página Inicial</li>
@@ -8,6 +9,12 @@
         <li>Objetos</li>
       </ul>
     </nav>
+
+    <p (click)="add = true">+Adicionar Currículos</p>
   </div>
 </header>
 <ng-content></ng-content>
+<app-add-curriculums
+  *ngIf="add"
+  (closeEmitter)="add = false"
+></app-add-curriculums>

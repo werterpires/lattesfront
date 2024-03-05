@@ -38,7 +38,6 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       },
       error: (error) => {
-        console.log(error);
         this.alerts.showAlerts('error', 'Não foi possível realizar o Login', [
           error.message,
         ]);

@@ -11,20 +11,11 @@ import { NgFor } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   curriculumns: ICurriculum[] = [];
   constructor(private curriculumService: CurriculumnsService) {
     this.curriculumService.curriculumns$.subscribe((curriculumns) => {
       this.curriculumns = curriculumns;
     });
-  }
-
-  ngOnInit() {
-    console.log('fazendo a chamada');
-    this.getAllCurriculos();
-  }
-
-  getAllCurriculos() {
-    this.curriculumService.getAllCurriculumns().subscribe();
   }
 }

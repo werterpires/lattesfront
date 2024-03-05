@@ -27,7 +27,6 @@ export class CurriculumnsService {
       })
       .pipe(
         catchError((error) => {
-          console.log(error);
           return throwError(() => new Error(error.error.message));
         }),
         map((curriculumns) => {

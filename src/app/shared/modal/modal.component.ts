@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [],
+  imports: [NgIf],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.css'
+  styleUrl: './modal.component.css',
 })
 export class ModalComponent {
-
+  @Input() login = false;
 }
