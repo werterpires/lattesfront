@@ -1,0 +1,16 @@
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.teacherCard {
+  width: 100px;
+  height: 100px;
+  background-color: #003b71;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

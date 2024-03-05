@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+.headsup {
+  background-color: var(--primary);
+  color: white;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+}

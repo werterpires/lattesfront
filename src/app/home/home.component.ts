@@ -1,12 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ContainerComponent } from '../shared/container/container.component';
+import { CurriculumnsService } from '../shared/services/curriculumns.service';
+import { ICurriculum } from '../shared/types';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [ContainerComponent, NgFor],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  curriculumns: ICurriculum[] = [];
+  constructor(private curriculumService: CurriculumnsService) {
+    this.curriculumService.curriculumns$.subscribe((curriculumns) => {
+      this.curriculumns = curriculumns;
+    });
+  }
 
+  ngOnInit() {
+    console.log('fazendo a chamada');
+    this.getAllCurriculos();
+  }
+
+  getAllCurriculos() {
+    this.curriculumService.getAllCurriculumns().subscribe();
+  }
 }
