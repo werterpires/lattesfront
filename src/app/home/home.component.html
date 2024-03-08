@@ -1,8 +1,10 @@
-<app-container> Professores </app-container>
-<div class="cards">
-  <ng-container *ngFor="let curriculum of curriculumns">
-    <div class="teacherCard">
-      <p>{{ curriculum.lattesId }}</p>
-    </div>
-  </ng-container>
-</div>
+<app-container>
+  Professores
+  <div class="cards">
+    <ng-container *ngFor="let curriculum of curriculumns">
+      <div class="teacherCard">
+        <p>{{ curriculum.lattesId }}</p>
+      </div>
+    </ng-container>
+  </div>
+</app-container>

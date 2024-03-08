@@ -1,9 +1,11 @@
+import { TrabalhoEmEventos } from './objTypes';
+
 export interface ICurriculum {
   _id: string;
   lattesId: string;
   active: boolean;
   serviceYears: string;
-  curriculum: string;
+  curriculum: string | ILattesCurriculum;
   updatedDate: string;
 }
 
@@ -17,4 +19,9 @@ export interface ICreateCurriculum {
   serviceYears: string;
   curriculum: string;
   updatedDate: string;
+}
+
+export interface ILattesCurriculum {
+  nome: string;
+  trabalhosEmEventos: TrabalhoEmEventos[];
 }

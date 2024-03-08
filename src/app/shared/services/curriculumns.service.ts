@@ -30,6 +30,8 @@ export class CurriculumnsService {
           return throwError(() => new Error(error.error.message));
         }),
         map((curriculumns) => {
+          curriculumns = this.extractCurriculumns(curriculumns);
+
           this.curriculumnsObject.next(curriculumns);
           return curriculumns;
         })
@@ -37,9 +39,20 @@ export class CurriculumnsService {
   }
 
   addCurriculumns(newCurriculum: ICurriculum[]) {
+    newCurriculum = this.extractCurriculumns(newCurriculum);
     this.curriculumnsObject.next([
       ...this.curriculumnsObject.value,
       ...newCurriculum,
     ]);
+  }
+
+  extractCurriculumns(initialCurriculumns: ICurriculum[]): ICurriculum[] {
+    const curriculumns: ICurriculum[] = initialCurriculumns.map((curr) => {
+      if (typeof curr.curriculum === 'string') {
+        return { ...curr, curriculum: JSON.parse(curr.curriculum) };
+      }
+      return curr;
+    });
+    return curriculumns;
   }
 }
