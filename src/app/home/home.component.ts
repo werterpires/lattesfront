@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContainerComponent } from '../shared/container/container.component';
 import { CurriculumnsService } from '../shared/services/curriculumns.service';
-import { ICurriculum } from '../shared/types';
+import { ICurriculum } from '../shared/services/types';
 import { NgFor } from '@angular/common';
 
 @Component({

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
-import { ICurriculum } from '../types';
+import { ICurriculum } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +34,12 @@ export class CurriculumnsService {
           return curriculumns;
         })
       );
+  }
+
+  addCurriculumns(newCurriculum: ICurriculum[]) {
+    this.curriculumnsObject.next([
+      ...this.curriculumnsObject.value,
+      ...newCurriculum,
+    ]);
   }
 }

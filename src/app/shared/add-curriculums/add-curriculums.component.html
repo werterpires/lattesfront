@@ -1,5 +1,5 @@
 <app-modal>
-  <input type="file" multiple />
-  <button type="button">Adicionar</button>
+  <input type="file" (change)="onFileSelected($event)" multiple />
+  <button type="button" (click)="addCurriculum()">Adicionar</button>
   <button (click)="closeEmitter.emit()" type="button">Cancelar</button>
 </app-modal>
