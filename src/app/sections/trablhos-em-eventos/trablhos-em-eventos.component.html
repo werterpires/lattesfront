@@ -1,0 +1,6 @@
+<ng-container *ngFor="let curriculum of curriculumns">
+  <div *ngIf="curriculum.curriculum.nome">
+    {{ curriculum.curriculum.nome }}
+    {{ countTrabalhosEmEventos(curriculum) }}
+  </div>
+</ng-container>
