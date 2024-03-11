@@ -1,0 +1,20 @@
+td {
+  width: 100%;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+
+  padding: 5px;
+}
+
+th {
+  width: auto;
+  max-width: 320px;
+  word-wrap: break-word;
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+}

@@ -25,6 +25,8 @@ export class UtilsService {
         );
       }
 
+      const palavrasChave = this.makePalavrasChave(element);
+
       const work: TrabalhoEmEventos = {
         sequenciaProducao: element['SEQUENCIA-PRODUCAO'],
         informacoesAdicionais: element['INFORMACOES-ADICIONAIS'],
@@ -63,8 +65,8 @@ export class UtilsService {
           volume: element['DETALHAMENTO-DO-TRABALHO']['_VOLUME'],
           fasciculo: element['DETALHAMENTO-DO-TRABALHO']['_FASCICULO'],
           serie: element['DETALHAMENTO-DO-TRABALHO']['_SERIE'],
-          paginaInicial: element['DETALHAMENTO-DO-TRABALHO']['_PAGINAICIAL'],
-          paginaFinal: element['DETALHAMENTO-DO-TRABALHO']['_PAGINAFINAL'],
+          paginaInicial: element['DETALHAMENTO-DO-TRABALHO']['_PAGINA-INICIAL'],
+          paginaFinal: element['DETALHAMENTO-DO-TRABALHO']['_PAGINA-FINAL'],
           isbn: element['DETALHAMENTO-DO-TRABALHO']['_ISBN'],
           nomeDaEditora:
             element['DETALHAMENTO-DO-TRABALHO']['_NOME-DA-EDITORA'],
@@ -74,7 +76,7 @@ export class UtilsService {
             element['DETALHAMENTO-DO-TRABALHO']['_NOME-DO-EVENTO-INGLES'],
         },
         autores,
-        palavrasChave: element['PALAVRAS-CHAVE'],
+        palavrasChave,
         areasDoConhecimento,
         setoresDeAtividade: element['SETORES-DE-ATIVIDADE'],
       };
@@ -82,6 +84,18 @@ export class UtilsService {
     });
 
     return works;
+  }
+
+  makePalavrasChave(data: any) {
+    const palavrasChave: string[] = [];
+    if (data['PALAVRAS-CHAVE']) {
+      palavrasChave.push(data['PALAVRAS-CHAVE']['_PALAVRA-CHAVE-1']);
+      palavrasChave.push(data['PALAVRAS-CHAVE']['_PALAVRA-CHAVE-2']);
+      palavrasChave.push(data['PALAVRAS-CHAVE']['_PALAVRA-CHAVE-3']);
+      palavrasChave.push(data['PALAVRAS-CHAVE']['_PALAVRA-CHAVE-4']);
+      palavrasChave.push(data['PALAVRAS-CHAVE']['_PALAVRA-CHAVE-5']);
+    }
+    return palavrasChave;
   }
 
   makeAreasDoConhecimento(data: any) {

@@ -1,2 +1,15 @@
 <app-container> Seçao do Lattes </app-container>
+<ng-container>
+  <input type="text" />
+  <div>
+    <p *ngFor="let section of sectionsToShow">
+      <a
+        [routerLink]="section.route"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        >{{ section.name }}</a
+      >
+    </p>
+  </div>
+</ng-container>
 <router-outlet></router-outlet>

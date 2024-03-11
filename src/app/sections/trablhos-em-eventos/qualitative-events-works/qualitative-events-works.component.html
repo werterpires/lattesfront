@@ -1,0 +1,101 @@
+<table>
+  <thead>
+    <tr>
+      <th>Professor</th>
+      <th>Título do trabalho</th>
+      <th>Natureza</th>
+      <th>Ano do trabalho</th>
+      <th>Pais do evento</th>
+      <th>Idioma</th>
+      <th>Meio de divulgacão</th>
+      <th>DOI</th>
+      <th>URL</th>
+      <th>Relevância?</th>
+      <th>Título do trabalho em inglês</th>
+      <th>Divulgação científica?</th>
+      <th>Nome do evento</th>
+      <th>Classificação do evento</th>
+      <th>Cidade do evento</th>
+      <th>Ano de realização</th>
+      <th>Título dos anais ou proceedings</th>
+      <th>Volume</th>
+      <th>Fasciculo</th>
+      <th>Serie</th>
+      <th>Pagina inicial</th>
+      <th>Pagina final</th>
+      <th>ISBN</th>
+      <th>Nome da editora</th>
+      <th>Cidade da editora</th>
+      <th>Nome do evento em inglês</th>
+      <th>Autores</th>
+      <th>Palavras-chave</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let curr of curriculums">
+      <ng-container *ngFor="let work of curr.curriculum.trabalhosEmEventos">
+        <tr>
+          <td>{{ curr.curriculum.nome | failData }}</td>
+          <td>
+            {{ work.dadosBasicosDoTrabalho?.tituloDoTrabalho | failData }}
+          </td>
+          <td>{{ work.dadosBasicosDoTrabalho?.natureza | failData }}</td>
+          <td>{{ work.dadosBasicosDoTrabalho?.anoDoTrabalho | failData }}</td>
+          <td>{{ work.dadosBasicosDoTrabalho?.paisDoEvento | failData }}</td>
+          <td>{{ work.dadosBasicosDoTrabalho?.idioma | failData }}</td>
+          <td>
+            {{ work.dadosBasicosDoTrabalho?.meioDeDivulgacao | failData }}
+          </td>
+          <td>{{ work.dadosBasicosDoTrabalho?.doi | failData }}</td>
+          <td>
+            {{ work.dadosBasicosDoTrabalho?.homePageDoTrabalho | failData }}
+          </td>
+          <td>{{ work.dadosBasicosDoTrabalho?.flagRelevancia | failData }}</td>
+          <td>
+            {{ work.dadosBasicosDoTrabalho?.tituloDoTrabalhoIngles | failData }}
+          </td>
+          <td>
+            {{
+              work.dadosBasicosDoTrabalho?.flagDivulgacaoCientifica | failData
+            }}
+          </td>
+          <td>{{ work.detalhamentoDoTrabalho?.nomeDoEvento | failData }}</td>
+          <td>
+            {{ work.detalhamentoDoTrabalho?.classificacaoDoEvento | failData }}
+          </td>
+          <td>{{ work.detalhamentoDoTrabalho?.cidadeDoEvento | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.anoDeRealizacao | failData }}</td>
+          <td>
+            {{
+              work.detalhamentoDoTrabalho?.tituloDosAnaisOuProceedings
+                | failData
+            }}
+          </td>
+          <td>{{ work.detalhamentoDoTrabalho?.volume | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.fasciculo | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.serie | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.paginaInicial | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.paginaFinal | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.isbn | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.nomeDaEditora | failData }}</td>
+          <td>{{ work.detalhamentoDoTrabalho?.cidadeDaEditora | failData }}</td>
+          <td>
+            {{ work.detalhamentoDoTrabalho?.nomeDoEventoIngles | failData }}
+          </td>
+          <td>
+            <ng-container *ngFor="let autor of work.autores"
+              ><p>
+                <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
+                  autor.nomeParaCitacao
+                }}), autor/a número {{ autor.ordemDeAutoria }}
+              </p>
+            </ng-container>
+          </td>
+          <td>
+            <span>{{ work.palavrasChave }}</span>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>

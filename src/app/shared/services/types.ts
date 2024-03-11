@@ -5,7 +5,7 @@ export interface ICurriculum {
   lattesId: string;
   active: boolean;
   serviceYears: string;
-  curriculum: string | ILattesCurriculum;
+  curriculum: ILattesCurriculum;
   updatedDate: string;
 }
 

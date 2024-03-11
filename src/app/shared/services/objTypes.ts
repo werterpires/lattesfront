@@ -12,7 +12,7 @@ export interface TrabalhoEmEventos {
 interface DadosBasicosDoTrabalho {
   natureza?: 'COMPLETO' | 'RESUMO' | 'RESUMO_EXPANDIDO' | 'NAO_INFORMADO';
   tituloDoTrabalho?: string;
-  anoDoTrabalho?: number;
+  anoDoTrabalho?: string;
   paisDoEvento?: string;
   idioma?: string;
   meioDeDivulgacao?:
@@ -40,7 +40,7 @@ interface DetalhamentoDoTrabalho {
     | 'NAO_INFORMADO';
   nomeDoEvento?: string;
   cidadeDoEvento?: string;
-  anoDeRealizacao?: number;
+  anoDeRealizacao?: string;
   tituloDosAnaisOuProceedings?: string;
   volume?: string;
   fasciculo?: string;

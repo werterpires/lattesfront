@@ -65,6 +65,7 @@ export class AddCurriculumsComponent {
       skipEmptyTextNodesForObj: false,
     });
     const jsonObj = parser.xml2js(xmlString);
+    console.log('jsonObj', jsonObj);
     return jsonObj;
   }
 
@@ -147,6 +148,7 @@ export class AddCurriculumsComponent {
       const createCurriculumDto = this.makeCreateCurriculumDto(
         curriculoData[0]
       );
+      console.log('createCurriculumDto', createCurriculumDto);
 
       if (createCurriculumDto)
         this.curriculumsData.curriculums.push(createCurriculumDto);
