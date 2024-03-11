@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FailDataPipe implements PipeTransform {
   transform(value: string | undefined): unknown {
     if (value === undefined || value.length === 0) {
-      return '###';
+      return 'Não informado';
     }
     return value;
   }
