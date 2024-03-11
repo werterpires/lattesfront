@@ -38,8 +38,6 @@ export class AddCurriculumsComponent {
     this.loader.showLoader();
     this.addCurriculumService.addCurriculum(this.curriculumsData).subscribe({
       next: (data) => {
-        console.log('dados recebidos do back:', data);
-
         this.alertService.showAlerts(
           'success',
           'Currículo adicionado com sucesso',
@@ -94,7 +92,6 @@ export class AddCurriculumsComponent {
       value['_HORA-ATUALIZACAO']
     );
 
-    console.log(value);
     const nome = value['DADOS-GERAIS']['_NOME-COMPLETO'];
 
     const producaoBibliografica = value['PRODUCAO-BIBLIOGRAFICA'];
@@ -116,8 +113,6 @@ export class AddCurriculumsComponent {
       nome,
       trabalhosEmEventos,
     };
-
-    console.log('trabalhos em eventos:', trabalhosEmEventos);
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
