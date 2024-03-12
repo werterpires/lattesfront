@@ -1,12 +1,51 @@
 export interface TrabalhoEmEventos {
-  dadosBasicosDoTrabalho?: DadosBasicosDoTrabalho;
-  detalhamentoDoTrabalho?: DetalhamentoDoTrabalho;
+  lattesid?: string;
+  nome?: string;
   autores?: Autor[];
   palavrasChave?: string[];
   areasDoConhecimento?: AreasDoConhecimento;
   setoresDeAtividade?: string[];
   informacoesAdicionais?: string;
   sequenciaProducao?: string;
+  natureza?: 'COMPLETO' | 'RESUMO' | 'RESUMO_EXPANDIDO' | 'NAO_INFORMADO';
+  tituloDoTrabalho?: string;
+  anoDoTrabalho?: string;
+  paisDoEvento?: string;
+  idioma?: string;
+  meioDeDivulgacao?:
+    | 'IMPRESSO'
+    | 'WEB'
+    | 'MEIO_MAGNETICO'
+    | 'MEIO_DIGITAL'
+    | 'FILME'
+    | 'HIPERTEXTO'
+    | 'OUTRO'
+    | 'VARIOS'
+    | 'NAO_INFORMADO';
+  homePageDoTrabalho?: string;
+  flagRelevancia?: 'SIM' | 'NAO';
+  doi?: string;
+  tituloDoTrabalhoIngles?: string;
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO';
+  classificacaoDoEvento?:
+    | 'INTERNACIONAL'
+    | 'NACIONAL'
+    | 'REGIONAL'
+    | 'LOCAL'
+    | 'NAO_INFORMADO';
+  nomeDoEvento?: string;
+  cidadeDoEvento?: string;
+  anoDeRealizacao?: string;
+  tituloDosAnaisOuProceedings?: string;
+  volume?: string;
+  fasciculo?: string;
+  serie?: string;
+  paginaInicial?: string;
+  paginaFinal?: string;
+  isbn?: string;
+  nomeDaEditora?: string;
+  cidadeDaEditora?: string;
+  nomeDoEventoIngles?: string;
 }
 
 interface DadosBasicosDoTrabalho {

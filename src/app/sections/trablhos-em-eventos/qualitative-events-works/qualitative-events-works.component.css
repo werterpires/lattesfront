@@ -6,6 +6,16 @@ td {
   text-wrap: nowrap;
 
   padding: 5px;
+
+  min-height: 60px;
+  font-size: 14px;
+  line-height: 19.2px;
+  font-weight: 400;
+}
+
+tr {
+  box-shadow: 0px 5px 2px 0px #a4a3a340;
+  height: 60px;
 }
 
 th {
@@ -13,8 +23,21 @@ th {
   max-width: 320px;
   word-wrap: break-word;
   padding: 5px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
 }
 
 table {
   width: 100%;
+}
+
+.arrowIcon {
+  width: 25px;
+}
+
+.rotate {
+  transform: rotate(180deg);
 }

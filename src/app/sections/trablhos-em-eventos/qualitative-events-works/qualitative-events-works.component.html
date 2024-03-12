@@ -1,3 +1,23 @@
+<select
+  #orderBySelect
+  name="orderBy"
+  id=""
+  [(ngModel)]="orderProp"
+  (change)="orderNow()"
+>
+  <option value="nome">Nome</option>
+  <option value="tituloDoTrabalho">Título do Trabalho</option>
+  <option value="anoDoTrabalho">Ano do Trabalho</option>
+  <option value="natureza">Natureza</option>
+</select>
+<img
+  class="arrowIcon"
+  src="assets/icons/arrowIcon.svg"
+  alt="Desenho de uma seta"
+  (click)="ascending = !ascending; orderNow()"
+  [ngClass]="{ rotate: !ascending }"
+/>
+
 <table>
   <thead>
     <tr>
@@ -32,70 +52,63 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let curr of curriculums">
-      <ng-container *ngFor="let work of curr.curriculum.trabalhosEmEventos">
-        <tr>
-          <td>{{ curr.curriculum.nome | failData }}</td>
-          <td>
-            {{ work.dadosBasicosDoTrabalho?.tituloDoTrabalho | failData }}
-          </td>
-          <td>{{ work.dadosBasicosDoTrabalho?.natureza | failData }}</td>
-          <td>{{ work.dadosBasicosDoTrabalho?.anoDoTrabalho | failData }}</td>
-          <td>{{ work.dadosBasicosDoTrabalho?.paisDoEvento | failData }}</td>
-          <td>{{ work.dadosBasicosDoTrabalho?.idioma | failData }}</td>
-          <td>
-            {{ work.dadosBasicosDoTrabalho?.meioDeDivulgacao | failData }}
-          </td>
-          <td>{{ work.dadosBasicosDoTrabalho?.doi | failData }}</td>
-          <td>
-            {{ work.dadosBasicosDoTrabalho?.homePageDoTrabalho | failData }}
-          </td>
-          <td>{{ work.dadosBasicosDoTrabalho?.flagRelevancia | failData }}</td>
-          <td>
-            {{ work.dadosBasicosDoTrabalho?.tituloDoTrabalhoIngles | failData }}
-          </td>
-          <td>
-            {{
-              work.dadosBasicosDoTrabalho?.flagDivulgacaoCientifica | failData
-            }}
-          </td>
-          <td>{{ work.detalhamentoDoTrabalho?.nomeDoEvento | failData }}</td>
-          <td>
-            {{ work.detalhamentoDoTrabalho?.classificacaoDoEvento | failData }}
-          </td>
-          <td>{{ work.detalhamentoDoTrabalho?.cidadeDoEvento | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.anoDeRealizacao | failData }}</td>
-          <td>
-            {{
-              work.detalhamentoDoTrabalho?.tituloDosAnaisOuProceedings
-                | failData
-            }}
-          </td>
-          <td>{{ work.detalhamentoDoTrabalho?.volume | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.fasciculo | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.serie | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.paginaInicial | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.paginaFinal | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.isbn | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.nomeDaEditora | failData }}</td>
-          <td>{{ work.detalhamentoDoTrabalho?.cidadeDaEditora | failData }}</td>
-          <td>
-            {{ work.detalhamentoDoTrabalho?.nomeDoEventoIngles | failData }}
-          </td>
-          <td>
-            <ng-container *ngFor="let autor of work.autores"
-              ><p>
-                <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
-                  autor.nomeParaCitacao
-                }}), autor/a número {{ autor.ordemDeAutoria }}
-              </p>
-            </ng-container>
-          </td>
-          <td>
-            <span>{{ work.palavrasChave }}</span>
-          </td>
-        </tr>
-      </ng-container>
+    <ng-container *ngFor="let work of eventsWorks">
+      <tr>
+        <td>{{ work.nome | failData }}</td>
+        <td>
+          {{ work.tituloDoTrabalho | failData }}
+        </td>
+        <td>{{ work.natureza | failData }}</td>
+        <td>{{ work.anoDoTrabalho | failData }}</td>
+        <td>{{ work.paisDoEvento | failData }}</td>
+        <td>{{ work.idioma | failData }}</td>
+        <td>
+          {{ work.meioDeDivulgacao | failData }}
+        </td>
+        <td>{{ work.doi | failData }}</td>
+        <td>
+          {{ work.homePageDoTrabalho | failData }}
+        </td>
+        <td>{{ work.flagRelevancia | failData }}</td>
+        <td>
+          {{ work.tituloDoTrabalhoIngles | failData }}
+        </td>
+        <td>
+          {{ work.flagDivulgacaoCientifica | failData }}
+        </td>
+        <td>{{ work.nomeDoEvento | failData }}</td>
+        <td>
+          {{ work.classificacaoDoEvento | failData }}
+        </td>
+        <td>{{ work.cidadeDoEvento | failData }}</td>
+        <td>{{ work.anoDeRealizacao | failData }}</td>
+        <td>
+          {{ work.tituloDosAnaisOuProceedings | failData }}
+        </td>
+        <td>{{ work.volume | failData }}</td>
+        <td>{{ work.fasciculo | failData }}</td>
+        <td>{{ work.serie | failData }}</td>
+        <td>{{ work.paginaInicial | failData }}</td>
+        <td>{{ work.paginaFinal | failData }}</td>
+        <td>{{ work.isbn | failData }}</td>
+        <td>{{ work.nomeDaEditora | failData }}</td>
+        <td>{{ work.cidadeDaEditora | failData }}</td>
+        <td>
+          {{ work.nomeDoEventoIngles | failData }}
+        </td>
+        <td>
+          <ng-container *ngFor="let autor of work.autores"
+            ><p>
+              <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
+                autor.nomeParaCitacao
+              }}), autor/a número {{ autor.ordemDeAutoria }}
+            </p>
+          </ng-container>
+        </td>
+        <td>
+          <span>{{ work.palavrasChave }}</span>
+        </td>
+      </tr>
     </ng-container>
   </tbody>
 </table>

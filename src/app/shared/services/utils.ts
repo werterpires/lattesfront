@@ -30,51 +30,47 @@ export class UtilsService {
       const work: TrabalhoEmEventos = {
         sequenciaProducao: element['SEQUENCIA-PRODUCAO'],
         informacoesAdicionais: element['INFORMACOES-ADICIONAIS'],
-        dadosBasicosDoTrabalho: {
-          natureza: element['DADOS-BASICOS-DO-TRABALHO']['_NATUREZA'],
-          tituloDoTrabalho:
-            element['DADOS-BASICOS-DO-TRABALHO']['_TITULO-DO-TRABALHO'],
-          anoDoTrabalho:
-            element['DADOS-BASICOS-DO-TRABALHO']['_ANO-DO-TRABALHO'],
-          paisDoEvento: element['DADOS-BASICOS-DO-TRABALHO']['_PAIS-DO-EVENTO'],
-          idioma: element['DADOS-BASICOS-DO-TRABALHO']['_IDIOMA'],
-          meioDeDivulgacao:
-            element['DADOS-BASICOS-DO-TRABALHO']['_MEIO-DE-DIVULGACAO'],
-          homePageDoTrabalho:
-            element['DADOS-BASICOS-DO-TRABALHO']['_HOME-PAGE-DO-TRABALHO'],
-          flagRelevancia:
-            element['DADOS-BASICOS-DO-TRABALHO']['_FLAG-RELEVANCIA'],
-          doi: element['DADOS-BASICOS-DO-TRABALHO']['_DOI'],
-          tituloDoTrabalhoIngles:
-            element['DADOS-BASICOS-DO-TRABALHO']['_TITULO-DO-TRABALHO-INGLES'],
-          flagDivulgacaoCientifica:
-            element['DADOS-BASICOS-DO-TRABALHO']['_FLAG-DIVULGACAO-CIENTIFICA'],
-        },
-        detalhamentoDoTrabalho: {
-          classificacaoDoEvento:
-            element['DETALHAMENTO-DO-TRABALHO']['_CLASSIFICACAO-DO-EVENTO'],
-          nomeDoEvento: element['DETALHAMENTO-DO-TRABALHO']['_NOME-DO-EVENTO'],
-          cidadeDoEvento:
-            element['DETALHAMENTO-DO-TRABALHO']['_CIDADE-DO-EVENTO'],
-          anoDeRealizacao:
-            element['DETALHAMENTO-DO-TRABALHO']['_ANO-DE-REALIZACAO'],
-          tituloDosAnaisOuProceedings:
-            element['DETALHAMENTO-DO-TRABALHO'][
-              '_TITULO-DOS-ANAIS-OU-PROCEEDINGS'
-            ],
-          volume: element['DETALHAMENTO-DO-TRABALHO']['_VOLUME'],
-          fasciculo: element['DETALHAMENTO-DO-TRABALHO']['_FASCICULO'],
-          serie: element['DETALHAMENTO-DO-TRABALHO']['_SERIE'],
-          paginaInicial: element['DETALHAMENTO-DO-TRABALHO']['_PAGINA-INICIAL'],
-          paginaFinal: element['DETALHAMENTO-DO-TRABALHO']['_PAGINA-FINAL'],
-          isbn: element['DETALHAMENTO-DO-TRABALHO']['_ISBN'],
-          nomeDaEditora:
-            element['DETALHAMENTO-DO-TRABALHO']['_NOME-DA-EDITORA'],
-          cidadeDaEditora:
-            element['DETALHAMENTO-DO-TRABALHO']['_CIDADE-DA-EDITORA'],
-          nomeDoEventoIngles:
-            element['DETALHAMENTO-DO-TRABALHO']['_NOME-DO-EVENTO-INGLES'],
-        },
+
+        natureza: element['DADOS-BASICOS-DO-TRABALHO']['_NATUREZA'],
+        tituloDoTrabalho:
+          element['DADOS-BASICOS-DO-TRABALHO']['_TITULO-DO-TRABALHO'],
+        anoDoTrabalho: element['DADOS-BASICOS-DO-TRABALHO']['_ANO-DO-TRABALHO'],
+        paisDoEvento: element['DADOS-BASICOS-DO-TRABALHO']['_PAIS-DO-EVENTO'],
+        idioma: element['DADOS-BASICOS-DO-TRABALHO']['_IDIOMA'],
+        meioDeDivulgacao:
+          element['DADOS-BASICOS-DO-TRABALHO']['_MEIO-DE-DIVULGACAO'],
+        homePageDoTrabalho:
+          element['DADOS-BASICOS-DO-TRABALHO']['_HOME-PAGE-DO-TRABALHO'],
+        flagRelevancia:
+          element['DADOS-BASICOS-DO-TRABALHO']['_FLAG-RELEVANCIA'],
+        doi: element['DADOS-BASICOS-DO-TRABALHO']['_DOI'],
+        tituloDoTrabalhoIngles:
+          element['DADOS-BASICOS-DO-TRABALHO']['_TITULO-DO-TRABALHO-INGLES'],
+        flagDivulgacaoCientifica:
+          element['DADOS-BASICOS-DO-TRABALHO']['_FLAG-DIVULGACAO-CIENTIFICA'],
+
+        classificacaoDoEvento:
+          element['DETALHAMENTO-DO-TRABALHO']['_CLASSIFICACAO-DO-EVENTO'],
+        nomeDoEvento: element['DETALHAMENTO-DO-TRABALHO']['_NOME-DO-EVENTO'],
+        cidadeDoEvento:
+          element['DETALHAMENTO-DO-TRABALHO']['_CIDADE-DO-EVENTO'],
+        anoDeRealizacao:
+          element['DETALHAMENTO-DO-TRABALHO']['_ANO-DE-REALIZACAO'],
+        tituloDosAnaisOuProceedings:
+          element['DETALHAMENTO-DO-TRABALHO'][
+            '_TITULO-DOS-ANAIS-OU-PROCEEDINGS'
+          ],
+        volume: element['DETALHAMENTO-DO-TRABALHO']['_VOLUME'],
+        fasciculo: element['DETALHAMENTO-DO-TRABALHO']['_FASCICULO'],
+        serie: element['DETALHAMENTO-DO-TRABALHO']['_SERIE'],
+        paginaInicial: element['DETALHAMENTO-DO-TRABALHO']['_PAGINA-INICIAL'],
+        paginaFinal: element['DETALHAMENTO-DO-TRABALHO']['_PAGINA-FINAL'],
+        isbn: element['DETALHAMENTO-DO-TRABALHO']['_ISBN'],
+        nomeDaEditora: element['DETALHAMENTO-DO-TRABALHO']['_NOME-DA-EDITORA'],
+        cidadeDaEditora:
+          element['DETALHAMENTO-DO-TRABALHO']['_CIDADE-DA-EDITORA'],
+        nomeDoEventoIngles:
+          element['DETALHAMENTO-DO-TRABALHO']['_NOME-DO-EVENTO-INGLES'],
         autores,
         palavrasChave,
         areasDoConhecimento,
