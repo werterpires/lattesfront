@@ -34,7 +34,7 @@ export class QualitativeEventsWorksComponent {
   );
   orderProp: string = 'nome';
   ascending: boolean = true;
-  onlyActives: boolean = false;
+  onlyActives: boolean = true;
   onlyServiceYears: boolean = false;
 
   eventProps: EventProps[] = [
@@ -322,12 +322,8 @@ export class QualitativeEventsWorksComponent {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
       this.curriculums = curriculumns;
       this.getEventsWorks();
-      this.orderNow();
+      this.filterNow();
     });
-  }
-
-  ngOnInit() {
-    this.getEventsWorks();
   }
 
   getEventsWorks() {

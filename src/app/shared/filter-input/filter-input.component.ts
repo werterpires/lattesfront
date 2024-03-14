@@ -39,9 +39,9 @@ export class FilterInputComponent {
         for (let i = inicioNum; i <= fimNum; i++) {
           newText.push(i.toString());
         }
-        return ''; // Substituir o trecho encontrado por uma string vazia para remover da string original
+        return '';
       } else {
-        return match; // Manter o trecho original se não atender aos critérios
+        return match;
       }
     });
 

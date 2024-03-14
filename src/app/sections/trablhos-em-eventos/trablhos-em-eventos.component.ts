@@ -5,11 +5,17 @@ import { NgFor, NgIf } from '@angular/common';
 import { QualitativeAnalysesComponent } from '../../shared/qualitative-analyses/qualitative-analyses.component';
 import { ITableElements } from '../../shared/qualitative-analyses/types';
 import { QualitativeEventsWorksComponent } from './qualitative-events-works/qualitative-events-works.component';
+import { QuantitativeEventsWorksComponent } from './quantitative-events-works/quantitative-events-works.component';
 
 @Component({
   selector: 'app-trablhos-em-eventos',
   standalone: true,
-  imports: [NgFor, NgIf, QualitativeEventsWorksComponent],
+  imports: [
+    NgFor,
+    NgIf,
+    QualitativeEventsWorksComponent,
+    QuantitativeEventsWorksComponent,
+  ],
   templateUrl: './trablhos-em-eventos.component.html',
   styleUrl: './trablhos-em-eventos.component.css',
 })

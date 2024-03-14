@@ -1,0 +1,113 @@
+<input #years type="text" (input)="getYears(years.value)" />
+<button (click)="cleanFiltersData()">Limpar filtros</button>
+<label for=""
+  >Apenas ativos<input
+    type="checkbox"
+    [(ngModel)]="onlyActives"
+    name="onlyActives"
+    (change)="filterNow()"
+/></label>
+<label for=""
+  >Apenas anos com vínculo<input
+    type="checkbox"
+    [(ngModel)]="onlyServiceYears"
+    name="onlyServiceYears"
+    (change)="filterNow()"
+/></label>
+<div class="qualitativeEvents">
+  <table>
+    <thead>
+      <tr class="headRow">
+        <th>
+          <app-filter-input
+            *ngIf="eventProps[0].showFilter"
+            [filter]="eventProps[0].filterObject"
+            (filterEvent)="eventProps[0].filterObject = $event; filterNow()"
+          ></app-filter-input>
+          <div
+            class="tableHead"
+            (mouseenter)="ascDesc.classList.remove('hidden')"
+            (mouseleave)="ascDesc.classList.add('hidden')"
+          >
+            <p (click)="eventProps[0].showFilter = !eventProps[0].showFilter">
+              Professor
+            </p>
+            <img
+              #ascDesc
+              class="arrowIcon hidden"
+              src="assets/icons/arrowIcon.svg"
+              alt="Desenho de uma seta"
+              (click)="
+                eventProps[0].ascending = !ascending;
+                ascending = eventProps[0].ascending;
+                orderProp = eventProps[0].key;
+                orderNow()
+              "
+              [ngClass]="{
+                rotate: !eventProps[0].ascending,
+                notRotate: eventProps[0].ascending
+              }"
+            />
+          </div>
+        </th>
+
+        <th *ngFor="let year of yersToConsider">{{ year }}</th>
+        <th>
+          <div
+            class="tableHead"
+            (mouseenter)="ascDes.classList.remove('hidden')"
+            (mouseleave)="ascDes.classList.add('hidden')"
+          >
+            <p>Total</p>
+            <img
+              #ascDes
+              class="arrowIcon hidden"
+              src="assets/icons/arrowIcon.svg"
+              alt="Desenho de uma seta"
+              (click)="
+                quantityDesc = !quantityDesc; sortProfessorsByWorkQuantity()
+              "
+              [ngClass]="{
+                rotate: quantityDesc,
+                notRotate: !quantityDesc
+              }"
+            />
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let professor of professorsToShow">
+        <tr class="contentRow">
+          <td>{{ professor }}</td>
+          <td *ngFor="let year of yersToConsider">
+            {{ countWorksByProfessorAndYear(professor, year) }}
+          </td>
+          <td>{{ countWorksByProfessor(professor) }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <div>
+    <label for=""
+      ><input
+        type="number"
+        [(ngModel)]="resultsPerPage"
+        (input)="getProfessorsToShow()"
+    /></label>
+  </div>
+  <div class="pages">
+    <div
+      *ngFor="let page of getPageNumbers()"
+      class="pageNumber"
+      [ngClass]="{ selectedPage: page === atualPage }"
+      (click)="atualPage = +page; getProfessorsToShow()"
+    >
+      {{ page }}
+    </div>
+  </div>
+  <div></div>
+</div>
