@@ -1,6 +1,8 @@
 export interface TrabalhoEmEventos {
   lattesid?: string;
   nome?: string;
+  active?: boolean;
+  serviceYears?: string;
   autores?: Autor[];
   palavrasChave?: string[];
   areasDoConhecimento?: AreasDoConhecimento;

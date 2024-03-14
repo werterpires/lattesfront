@@ -1,0 +1,12 @@
+<div class="filter">
+  <input
+    #filterInputs
+    type="text"
+    (blur)="getText(filterInputs.value)"
+    [value]="filter.text.join(' ')"
+  />
+  <label for=""
+    >Pesquisa disjuntiva<input type="checkbox" [(ngModel)]="filter.disjunctive"
+  /></label>
+  <button (click)="filterEvent.emit(filter)">Aplicar</button>
+</div>

@@ -1,114 +1,104 @@
-<select
-  #orderBySelect
-  name="orderBy"
-  id=""
-  [(ngModel)]="orderProp"
-  (change)="orderNow()"
->
-  <option value="nome">Nome</option>
-  <option value="tituloDoTrabalho">Título do Trabalho</option>
-  <option value="anoDoTrabalho">Ano do Trabalho</option>
-  <option value="natureza">Natureza</option>
-</select>
-<img
-  class="arrowIcon"
-  src="assets/icons/arrowIcon.svg"
-  alt="Desenho de uma seta"
-  (click)="ascending = !ascending; orderNow()"
-  [ngClass]="{ rotate: !ascending }"
-/>
-
-<table>
-  <thead>
-    <tr>
-      <th>Professor</th>
-      <th>Título do trabalho</th>
-      <th>Natureza</th>
-      <th>Ano do trabalho</th>
-      <th>Pais do evento</th>
-      <th>Idioma</th>
-      <th>Meio de divulgacão</th>
-      <th>DOI</th>
-      <th>URL</th>
-      <th>Relevância?</th>
-      <th>Título do trabalho em inglês</th>
-      <th>Divulgação científica?</th>
-      <th>Nome do evento</th>
-      <th>Classificação do evento</th>
-      <th>Cidade do evento</th>
-      <th>Ano de realização</th>
-      <th>Título dos anais ou proceedings</th>
-      <th>Volume</th>
-      <th>Fasciculo</th>
-      <th>Serie</th>
-      <th>Pagina inicial</th>
-      <th>Pagina final</th>
-      <th>ISBN</th>
-      <th>Nome da editora</th>
-      <th>Cidade da editora</th>
-      <th>Nome do evento em inglês</th>
-      <th>Autores</th>
-      <th>Palavras-chave</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let work of eventsWorks">
-      <tr>
-        <td>{{ work.nome | failData }}</td>
-        <td>
-          {{ work.tituloDoTrabalho | failData }}
-        </td>
-        <td>{{ work.natureza | failData }}</td>
-        <td>{{ work.anoDoTrabalho | failData }}</td>
-        <td>{{ work.paisDoEvento | failData }}</td>
-        <td>{{ work.idioma | failData }}</td>
-        <td>
-          {{ work.meioDeDivulgacao | failData }}
-        </td>
-        <td>{{ work.doi | failData }}</td>
-        <td>
-          {{ work.homePageDoTrabalho | failData }}
-        </td>
-        <td>{{ work.flagRelevancia | failData }}</td>
-        <td>
-          {{ work.tituloDoTrabalhoIngles | failData }}
-        </td>
-        <td>
-          {{ work.flagDivulgacaoCientifica | failData }}
-        </td>
-        <td>{{ work.nomeDoEvento | failData }}</td>
-        <td>
-          {{ work.classificacaoDoEvento | failData }}
-        </td>
-        <td>{{ work.cidadeDoEvento | failData }}</td>
-        <td>{{ work.anoDeRealizacao | failData }}</td>
-        <td>
-          {{ work.tituloDosAnaisOuProceedings | failData }}
-        </td>
-        <td>{{ work.volume | failData }}</td>
-        <td>{{ work.fasciculo | failData }}</td>
-        <td>{{ work.serie | failData }}</td>
-        <td>{{ work.paginaInicial | failData }}</td>
-        <td>{{ work.paginaFinal | failData }}</td>
-        <td>{{ work.isbn | failData }}</td>
-        <td>{{ work.nomeDaEditora | failData }}</td>
-        <td>{{ work.cidadeDaEditora | failData }}</td>
-        <td>
-          {{ work.nomeDoEventoIngles | failData }}
-        </td>
-        <td>
-          <ng-container *ngFor="let autor of work.autores"
-            ><p>
-              <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
-                autor.nomeParaCitacao
-              }}), autor/a número {{ autor.ordemDeAutoria }}
+<button (click)="cleanFiltersData()">Limpar filtros</button>
+<label for=""
+  >Apenas ativos<input
+    type="checkbox"
+    [(ngModel)]="onlyActives"
+    name="onlyActives"
+    (change)="filterNow()"
+/></label>
+<label for=""
+  >Apenas anos com vínculo<input
+    type="checkbox"
+    [(ngModel)]="onlyServiceYears"
+    name="onlyServiceYears"
+    (change)="filterNow()"
+/></label>
+<div class="qualitativeEvents">
+  <table>
+    <thead>
+      <tr class="headRow">
+        <th *ngFor="let prop of eventProps">
+          <app-filter-input
+            *ngIf="prop.showFilter"
+            [filter]="prop.filterObject"
+            (filterEvent)="prop.filterObject = $event; filterNow()"
+          ></app-filter-input>
+          <div
+            class="tableHead"
+            (mouseenter)="ascDesc.classList.remove('hidden')"
+            (mouseleave)="ascDesc.classList.add('hidden')"
+          >
+            <p
+              (click)="
+                changeAllShowFilterToFalse(prop.key);
+                prop.showFilter = !prop.showFilter
+              "
+            >
+              {{ prop.name }}
             </p>
-          </ng-container>
-        </td>
-        <td>
-          <span>{{ work.palavrasChave }}</span>
-        </td>
+            <img
+              #ascDesc
+              class="arrowIcon hidden"
+              src="assets/icons/arrowIcon.svg"
+              alt="Desenho de uma seta"
+              (click)="
+                prop.ascending = !ascending;
+                ascending = prop.ascending;
+                orderProp = prop.key;
+                orderNow()
+              "
+              [ngClass]="{ rotate: !prop.ascending, notRotate: prop.ascending }"
+            />
+          </div>
+        </th>
+
+        <th>Autores</th>
+        <th>Palavras-chave</th>
       </tr>
-    </ng-container>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let work of eventsWorksToShow">
+        <tr class="contentRow">
+          <td *ngFor="let prop of eventProps">
+            {{ work[prop.key] ? work[prop.key] : ("" | failData) }}
+          </td>
+
+          <td>
+            <ng-container *ngFor="let autor of work.autores"
+              ><p>
+                <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
+                  autor.nomeParaCitacao
+                }}), autor/a número {{ autor.ordemDeAutoria }}
+              </p>
+            </ng-container>
+          </td>
+          <td>
+            <span>{{ work.palavrasChave | failData }}</span>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <div>
+    <label for=""
+      ><input
+        type="number"
+        [(ngModel)]="resultsPerPage"
+        (input)="getWorksToShow()"
+    /></label>
+  </div>
+  <div class="pages">
+    <div
+      *ngFor="let page of getPageNumbers()"
+      class="pageNumber"
+      [ngClass]="{ selectedPage: page === atualPage }"
+      (click)="atualPage = +page; getWorksToShow()"
+    >
+      {{ page }}
+    </div>
+  </div>
+  <div></div>
+</div>

@@ -1,24 +1,322 @@
 import { Component, Input } from '@angular/core';
 import { ICurriculum } from '../../../shared/services/types';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { FailDataPipe } from '../../../pipes/fail-data.pipe';
 import { CurriculumnsService } from '../../../shared/services/curriculumns.service';
 import { TrabalhoEmEventos } from '../../../shared/services/objTypes';
 import { FormsModule } from '@angular/forms';
-import { EventsWorkKey } from '../types';
+import { EventProps, EventsWorkKey } from '../types';
+import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
 
 @Component({
   selector: 'app-qualitative-events-works',
   standalone: true,
-  imports: [NgFor, NgClass, FailDataPipe, FormsModule],
+  imports: [
+    NgFor,
+    NgIf,
+    NgClass,
+    FailDataPipe,
+    FormsModule,
+    FilterInputComponent,
+  ],
   templateUrl: './qualitative-events-works.component.html',
   styleUrl: './qualitative-events-works.component.css',
 })
 export class QualitativeEventsWorksComponent {
   curriculums: ICurriculum[] = [];
   eventsWorks: TrabalhoEmEventos[] = [];
+  eventsWorksToShow: TrabalhoEmEventos[] = [];
+  atualPage: number = 1;
+  resultsPerPage: number = 5;
+  //arredondado pra cima
+  pagesNumber: number = Math.ceil(
+    this.eventsWorks.length / this.resultsPerPage
+  );
   orderProp: string = 'nome';
   ascending: boolean = true;
+  onlyActives: boolean = false;
+  onlyServiceYears: boolean = false;
+
+  eventProps: EventProps[] = [
+    {
+      name: 'Professor',
+      key: 'nome',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+    {
+      name: 'Título do trabalho',
+      key: 'tituloDoTrabalho',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+    {
+      name: 'Natureza',
+      key: 'natureza',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+    {
+      name: 'Ano do trabalho',
+      key: 'anoDoTrabalho',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+    {
+      name: 'Pais do evento',
+      key: 'paisDoEvento',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Idioma',
+      key: 'idioma',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+    {
+      name: 'Meio de divulgacão',
+      key: 'meioDeDivulgacao',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+    {
+      name: 'DOI',
+      key: 'doi',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+    {
+      name: 'URL',
+      key: 'homePageDoTrabalho',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Relevância?',
+      key: 'flagRelevancia',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Título do trabalho em inglês',
+      key: 'tituloDoTrabalhoIngles',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Divulgação científica?',
+      key: 'flagDivulgacaoCientifica',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Nome do evento',
+      key: 'nomeDoEvento',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Classificação do evento',
+      key: 'classificacaoDoEvento',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Cidade do evento',
+      key: 'cidadeDoEvento',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Ano de realização',
+      key: 'anoDeRealizacao',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Título dos anais ou proceedings',
+      key: 'tituloDosAnaisOuProceedings',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Volume',
+      key: 'volume',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Fasciculo',
+      key: 'fasciculo',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Serie',
+      key: 'serie',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Pagina inicial',
+      key: 'paginaInicial',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Pagina final',
+      key: 'paginaFinal',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'ISBN',
+      key: 'isbn',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Nome da editora',
+      key: 'nomeDaEditora',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Cidade da editora',
+      key: 'cidadeDaEditora',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+
+    {
+      name: 'Nome do evento em inglês',
+      key: 'nomeDoEventoIngles',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+  ];
 
   constructor(private curriculumnsService: CurriculumnsService) {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
@@ -42,11 +340,12 @@ export class QualitativeEventsWorksComponent {
             ...work,
             nome: curriculum.curriculum.nome,
             lattesid: curriculum.lattesId,
+            active: curriculum.active,
+            serviceYears: curriculum.serviceYears,
           };
         }),
       ];
     });
-    console.log(this.eventsWorks);
   }
 
   orderNow() {
@@ -72,5 +371,100 @@ export class QualitativeEventsWorksComponent {
 
       return comparison;
     });
+    this.getWorksToShow();
+  }
+
+  filterNow() {
+    this.getEventsWorks();
+
+    for (const prop of this.eventProps) {
+      if (prop.filterObject.text.length === 0) {
+        continue;
+      }
+      if (prop.filterObject.disjunctive) {
+        this.eventsWorks = this.eventsWorks.filter((work) => {
+          const workValue = this.stringToLower(work[prop.key]);
+          for (const text of prop.filterObject.text) {
+            if (workValue.includes(this.stringToLower(text))) {
+              return true;
+            }
+          }
+          return false;
+        });
+      } else {
+        this.eventsWorks = this.eventsWorks.filter((work) => {
+          const workValue = this.stringToLower(work[prop.key]);
+          return prop.filterObject.text.every((text) =>
+            workValue.includes(this.stringToLower(text))
+          );
+        });
+      }
+    }
+
+    if (this.onlyActives) {
+      this.eventsWorks = this.eventsWorks.filter((work) => {
+        return work.active;
+      });
+    }
+
+    if (this.onlyServiceYears) {
+      this.eventsWorks = this.eventsWorks.filter((work) => {
+        return work.serviceYears?.includes(
+          work.anoDeRealizacao ? work.anoDeRealizacao : '?'
+        );
+      });
+    }
+
+    this.orderNow();
+  }
+
+  stringToLower(text: any) {
+    if (typeof text !== 'string') {
+      return '';
+    }
+    text = text.replace(/['"]/g, '');
+    return text.toLowerCase();
+  }
+
+  changeAllShowFilterToFalse(key: string) {
+    const oneProp = key as EventsWorkKey;
+    for (const prop of this.eventProps) {
+      if (prop.key !== oneProp) {
+        prop.showFilter = false;
+      }
+    }
+  }
+
+  cleanFiltersData() {
+    for (const prop of this.eventProps) {
+      prop.filterObject.text = [];
+    }
+
+    this.getEventsWorks();
+    this.orderNow();
+  }
+
+  getWorksToShow() {
+    if (!this.resultsPerPage) {
+      return;
+    }
+    this.pagesNumber = Math.ceil(this.eventsWorks.length / this.resultsPerPage);
+    this.eventsWorksToShow = this.eventsWorks.filter((work) => {
+      if (
+        this.eventsWorks.indexOf(work) >=
+          this.resultsPerPage * (this.atualPage - 1) &&
+        this.eventsWorks.indexOf(work) < this.resultsPerPage * this.atualPage
+      ) {
+        return true;
+      }
+
+      return false;
+    });
+  }
+
+  getPageNumbers(): number[] {
+    return Array(this.pagesNumber)
+      .fill(0)
+      .map((_, index) => index + 1);
   }
 }
