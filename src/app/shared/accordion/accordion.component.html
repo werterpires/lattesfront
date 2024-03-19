@@ -6,6 +6,7 @@
     alt="Triângulo azul"
   />
   <h1>{{ title }}</h1>
+  <p *ngIf="quantity">{{ quantity }}</p>
 </div>
 
 <div class="accordionContent" [ngClass]="open ? 'open' : 'closed'">

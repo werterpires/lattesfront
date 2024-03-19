@@ -7,6 +7,7 @@ import { TrabalhoEmEventos } from '../../../shared/services/objTypes';
 import { FormsModule } from '@angular/forms';
 import { EventProps, EventsWorkKey } from '../types';
 import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
+import { AccordionComponent } from '../../../shared/accordion/accordion.component';
 
 @Component({
   selector: 'app-qualitative-events-works',
@@ -18,12 +19,20 @@ import { FilterInputComponent } from '../../../shared/filter-input/filter-input.
     FailDataPipe,
     FormsModule,
     FilterInputComponent,
+    AccordionComponent,
   ],
   templateUrl: './qualitative-events-works.component.html',
   styleUrl: './qualitative-events-works.component.css',
 })
 export class QualitativeEventsWorksComponent {
-  curriculums: ICurriculum[] = [];
+  _curriculumns: ICurriculum[] = [];
+  @Input()
+  set curriculumns(value: ICurriculum[]) {
+    this._curriculumns = value;
+    this.getEventsWorks();
+    this.filterNow();
+  }
+
   eventsWorks: TrabalhoEmEventos[] = [];
   eventsWorksToShow: TrabalhoEmEventos[] = [];
   atualPage: number = 1;
@@ -34,8 +43,10 @@ export class QualitativeEventsWorksComponent {
   );
   orderProp: string = 'nome';
   ascending: boolean = true;
-  onlyActives: boolean = true;
+  @Input() onlyActives: boolean = true;
   onlyServiceYears: boolean = false;
+
+  @Input() title: string = 'Análise Qualitativa';
 
   eventProps: EventProps[] = [
     {
@@ -319,16 +330,21 @@ export class QualitativeEventsWorksComponent {
   ];
 
   constructor(private curriculumnsService: CurriculumnsService) {
-    this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
-      this.curriculums = curriculumns;
-      this.getEventsWorks();
-      this.filterNow();
-    });
+    // if (this.curriculums.length === 0) {
+    //   this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
+    //     this.curriculums = curriculumns;
+    //     this.getEventsWorks();
+    //     this.filterNow();
+    //   });
+    // } else {
+    //   this.getEventsWorks();
+    //   this.filterNow();
+    // }
   }
 
   getEventsWorks() {
     this.eventsWorks = [];
-    this.curriculums.forEach((curriculum) => {
+    this._curriculumns.forEach((curriculum) => {
       this.eventsWorks = [
         ...this.eventsWorks,
         ...curriculum.curriculum.trabalhosEmEventos.map((work) => {

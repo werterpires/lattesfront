@@ -3,6 +3,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { LattesSectionComponent } from './lattes-section/lattes-section.component';
 import { TrablhosEmEventosComponent } from './sections/trablhos-em-eventos/trablhos-em-eventos.component';
+import { ProfessorsComponent } from './professors/professors.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,5 +18,7 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: 'professors', component: ProfessorsComponent },
+  { path: 'professors/:professorId', component: ProfessorsComponent },
   { path: '', component: LoginComponent },
 ];

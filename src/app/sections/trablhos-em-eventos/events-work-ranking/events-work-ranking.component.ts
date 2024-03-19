@@ -75,7 +75,5 @@ export class EventsWorkRankingComponent {
     });
 
     this.totals.sort((a, b) => b - a);
-    console.log(this.totals);
-    console.log(ranking);
   }
 }

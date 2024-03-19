@@ -1,0 +1,19 @@
+<app-container> Professores </app-container>
+<ng-container *ngIf="professorCurriculum.length === 0">
+  <input type="text" />
+  <div>
+    <p *ngFor="let curr of curriculums" (click)="navigateTo(curr.lattesId)">
+      {{ curr.curriculum.nome }}
+    </p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="professorCurriculum.length === 1">
+  <button (click)="navigateTo('')">Voltar</button>
+
+  <app-qualitative-events-works
+    [onlyActives]="false"
+    [curriculumns]="professorCurriculum"
+    [title]="'Trabalhos em eventos'"
+  ></app-qualitative-events-works>
+</ng-container>

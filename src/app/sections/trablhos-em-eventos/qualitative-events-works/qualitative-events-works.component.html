@@ -1,104 +1,109 @@
-<button (click)="cleanFiltersData()">Limpar filtros</button>
-<label for=""
-  >Apenas ativos<input
-    type="checkbox"
-    [(ngModel)]="onlyActives"
-    name="onlyActives"
-    (change)="filterNow()"
-/></label>
-<label for=""
-  >Apenas anos com vínculo<input
-    type="checkbox"
-    [(ngModel)]="onlyServiceYears"
-    name="onlyServiceYears"
-    (change)="filterNow()"
-/></label>
-<div class="qualitativeEvents">
-  <table>
-    <thead>
-      <tr class="headRow">
-        <th *ngFor="let prop of eventProps">
-          <app-filter-input
-            *ngIf="prop.showFilter"
-            [filter]="prop.filterObject"
-            (filterEvent)="prop.filterObject = $event; filterNow()"
-          ></app-filter-input>
-          <div
-            class="tableHead"
-            (mouseenter)="ascDesc.classList.remove('hidden')"
-            (mouseleave)="ascDesc.classList.add('hidden')"
-          >
-            <p
-              (click)="
-                changeAllShowFilterToFalse(prop.key);
-                prop.showFilter = !prop.showFilter
-              "
+<app-accordion [title]="title" [quantity]="eventsWorks.length">
+  <button (click)="cleanFiltersData()">Limpar filtros</button>
+  <label for=""
+    >Apenas ativos<input
+      type="checkbox"
+      [(ngModel)]="onlyActives"
+      name="onlyActives"
+      (change)="filterNow()"
+  /></label>
+  <label for=""
+    >Apenas anos com vínculo<input
+      type="checkbox"
+      [(ngModel)]="onlyServiceYears"
+      name="onlyServiceYears"
+      (change)="filterNow()"
+  /></label>
+  <div class="qualitativeEvents">
+    <table>
+      <thead>
+        <tr class="headRow">
+          <th *ngFor="let prop of eventProps">
+            <app-filter-input
+              *ngIf="prop.showFilter"
+              [filter]="prop.filterObject"
+              (filterEvent)="prop.filterObject = $event; filterNow()"
+            ></app-filter-input>
+            <div
+              class="tableHead"
+              (mouseenter)="ascDesc.classList.remove('hidden')"
+              (mouseleave)="ascDesc.classList.add('hidden')"
             >
-              {{ prop.name }}
-            </p>
-            <img
-              #ascDesc
-              class="arrowIcon hidden"
-              src="assets/icons/arrowIcon.svg"
-              alt="Desenho de uma seta"
-              (click)="
-                prop.ascending = !ascending;
-                ascending = prop.ascending;
-                orderProp = prop.key;
-                orderNow()
-              "
-              [ngClass]="{ rotate: !prop.ascending, notRotate: prop.ascending }"
-            />
-          </div>
-        </th>
-
-        <th>Autores</th>
-        <th>Palavras-chave</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let work of eventsWorksToShow">
-        <tr class="contentRow">
-          <td *ngFor="let prop of eventProps">
-            {{ work[prop.key] ? work[prop.key] : ("" | failData) }}
-          </td>
-
-          <td>
-            <ng-container *ngFor="let autor of work.autores"
-              ><p>
-                <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
-                  autor.nomeParaCitacao
-                }}), autor/a número {{ autor.ordemDeAutoria }}
+              <p
+                (click)="
+                  changeAllShowFilterToFalse(prop.key);
+                  prop.showFilter = !prop.showFilter
+                "
+              >
+                {{ prop.name }}
               </p>
-            </ng-container>
-          </td>
-          <td>
-            <span>{{ work.palavrasChave | failData }}</span>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
-</div>
+              <img
+                #ascDesc
+                class="arrowIcon hidden"
+                src="assets/icons/arrowIcon.svg"
+                alt="Desenho de uma seta"
+                (click)="
+                  prop.ascending = !ascending;
+                  ascending = prop.ascending;
+                  orderProp = prop.key;
+                  orderNow()
+                "
+                [ngClass]="{
+                  rotate: !prop.ascending,
+                  notRotate: prop.ascending
+                }"
+              />
+            </div>
+          </th>
 
-<div>
+          <th>Autores</th>
+          <th>Palavras-chave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let work of eventsWorksToShow">
+          <tr class="contentRow">
+            <td *ngFor="let prop of eventProps">
+              {{ work[prop.key] ? work[prop.key] : ("" | failData) }}
+            </td>
+
+            <td>
+              <ng-container *ngFor="let autor of work.autores"
+                ><p>
+                  <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
+                    autor.nomeParaCitacao
+                  }}), autor/a número {{ autor.ordemDeAutoria }}
+                </p>
+              </ng-container>
+            </td>
+            <td>
+              <span>{{ work.palavrasChave | failData }}</span>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
   <div>
-    <label for=""
-      ><input
-        type="number"
-        [(ngModel)]="resultsPerPage"
-        (input)="getWorksToShow()"
-    /></label>
-  </div>
-  <div class="pages">
-    <div
-      *ngFor="let page of getPageNumbers()"
-      class="pageNumber"
-      [ngClass]="{ selectedPage: page === atualPage }"
-      (click)="atualPage = +page; getWorksToShow()"
-    >
-      {{ page }}
+    <div>
+      <label for=""
+        ><input
+          type="number"
+          [(ngModel)]="resultsPerPage"
+          (input)="getWorksToShow()"
+      /></label>
     </div>
+    <div class="pages">
+      <div
+        *ngFor="let page of getPageNumbers()"
+        class="pageNumber"
+        [ngClass]="{ selectedPage: page === atualPage }"
+        (click)="atualPage = +page; getWorksToShow()"
+      >
+        {{ page }}
+      </div>
+    </div>
+    <div></div>
   </div>
-  <div></div>
-</div>
+</app-accordion>
