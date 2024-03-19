@@ -7,6 +7,7 @@ import { ITableElements } from '../../shared/qualitative-analyses/types';
 import { QualitativeEventsWorksComponent } from './qualitative-events-works/qualitative-events-works.component';
 import { QuantitativeEventsWorksComponent } from './quantitative-events-works/quantitative-events-works.component';
 import { EventsWorkRankingComponent } from './events-work-ranking/events-work-ranking.component';
+import { AccordionComponent } from '../../shared/accordion/accordion.component';
 
 @Component({
   selector: 'app-trablhos-em-eventos',
@@ -17,6 +18,7 @@ import { EventsWorkRankingComponent } from './events-work-ranking/events-work-ra
     EventsWorkRankingComponent,
     QualitativeEventsWorksComponent,
     QuantitativeEventsWorksComponent,
+    AccordionComponent,
   ],
   templateUrl: './trablhos-em-eventos.component.html',
   styleUrl: './trablhos-em-eventos.component.css',

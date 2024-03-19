@@ -1,0 +1,13 @@
+<div (click)="open = !open" class="accordionTitle">
+  <img
+    class="triangle"
+    [ngClass]="{ down: open, right: !open }"
+    src="assets/icons/accordeonIcon.svg"
+    alt="Triângulo azul"
+  />
+  <h1>{{ title }}</h1>
+</div>
+
+<div class="accordionContent" [ngClass]="open ? 'open' : 'closed'">
+  <ng-content></ng-content>
+</div>

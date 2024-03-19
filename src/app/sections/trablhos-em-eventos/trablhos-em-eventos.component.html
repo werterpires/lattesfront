@@ -1,5 +1,11 @@
-<app-events-work-ranking></app-events-work-ranking>
+<app-accordion [title]="'Ranking'">
+  <app-events-work-ranking></app-events-work-ranking>
+</app-accordion>
 
-<app-quantitative-events-works></app-quantitative-events-works>
+<app-accordion [title]="'Análise Quantitativa'">
+  <app-quantitative-events-works></app-quantitative-events-works>
+</app-accordion>
 
-<app-qualitative-events-works></app-qualitative-events-works>
+<app-accordion [title]="'Análise Qualitativa'"
+  ><app-qualitative-events-works></app-qualitative-events-works
+></app-accordion>
