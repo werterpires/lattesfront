@@ -1,0 +1,11 @@
+<tbody>
+  <ng-container *ngFor="let professor of professorsToShow">
+    <tr class="contentRow">
+      <td>{{ professor }}</td>
+      <td *ngFor="let year of _yersToConsider">
+        {{ countWorksByProfessorAndYear(professor, year) }}
+      </td>
+      <td>{{ countWorksByProfessor(professor) }}</td>
+    </tr>
+  </ng-container>
+</tbody>

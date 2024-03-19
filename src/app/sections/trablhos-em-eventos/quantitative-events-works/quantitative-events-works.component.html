@@ -1,18 +1,16 @@
 <input #years type="text" (input)="getYears(years.value)" />
-<button (click)="cleanFiltersData()">Limpar filtros</button>
+<button>Limpar filtros</button>
 <label for=""
   >Apenas ativos<input
     type="checkbox"
     [(ngModel)]="onlyActives"
     name="onlyActives"
-    (change)="filterNow()"
 /></label>
 <label for=""
   >Apenas anos com vínculo<input
     type="checkbox"
     [(ngModel)]="onlyServiceYears"
     name="onlyServiceYears"
-    (change)="filterNow()"
 /></label>
 <div class="qualitativeEvents">
   <table>
@@ -22,7 +20,7 @@
           <app-filter-input
             *ngIf="eventProps[0].showFilter"
             [filter]="eventProps[0].filterObject"
-            (filterEvent)="eventProps[0].filterObject = $event; filterNow()"
+            (filterEvent)="eventProps[0].filterObject = $event"
           ></app-filter-input>
           <div
             class="tableHead"
@@ -40,8 +38,7 @@
               (click)="
                 eventProps[0].ascending = !ascending;
                 ascending = eventProps[0].ascending;
-                orderProp = eventProps[0].key;
-                orderNow()
+                orderProp = eventProps[0].key
               "
               [ngClass]="{
                 rotate: !eventProps[0].ascending,
@@ -64,9 +61,7 @@
               class="arrowIcon hidden"
               src="assets/icons/arrowIcon.svg"
               alt="Desenho de uma seta"
-              (click)="
-                quantityDesc = !quantityDesc; sortProfessorsByWorkQuantity()
-              "
+              (click)="quantityDesc = !quantityDesc"
               [ngClass]="{
                 rotate: quantityDesc,
                 notRotate: !quantityDesc
@@ -76,8 +71,22 @@
         </th>
       </tr>
     </thead>
-    <tbody>
-      <ng-container *ngFor="let professor of professorsToShow">
+
+    <app-quantitative-events-row
+      [atualPage]="atualPage"
+      [pagesNumber]="pagesNumber"
+      [resultsPerPage]="resultsPerPage"
+      [yersToConsider]="yersToConsider"
+      [quantityDesc]="quantityDesc"
+      [ascending]="ascending"
+      [curriculums]="curriculums"
+      [eventProps]="eventProps"
+      [onlyActives]="onlyActives"
+      [onlyServiceYears]="onlyServiceYears"
+      [orderProp]="orderProp"
+    ></app-quantitative-events-row>
+    <!-- <tbody>
+    <ng-container *ngFor="let professor of professorsToShow">
         <tr class="contentRow">
           <td>{{ professor }}</td>
           <td *ngFor="let year of yersToConsider">
@@ -86,25 +95,20 @@
           <td>{{ countWorksByProfessor(professor) }}</td>
         </tr>
       </ng-container>
-    </tbody>
+		</tbody> -->
   </table>
 </div>
 
 <div>
   <div>
-    <label for=""
-      ><input
-        type="number"
-        [(ngModel)]="resultsPerPage"
-        (input)="getProfessorsToShow()"
-    /></label>
+    <label for=""><input type="number" [(ngModel)]="resultsPerPage" /></label>
   </div>
   <div class="pages">
     <div
       *ngFor="let page of getPageNumbers()"
       class="pageNumber"
       [ngClass]="{ selectedPage: page === atualPage }"
-      (click)="atualPage = +page; getProfessorsToShow()"
+      (click)="atualPage = +page"
     >
       {{ page }}
     </div>

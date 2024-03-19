@@ -7,6 +7,7 @@ import { TrabalhoEmEventos } from '../../../shared/services/objTypes';
 import { FormsModule } from '@angular/forms';
 import { EventProps, EventsWorkKey } from '../types';
 import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
+import { QuantitativeEventsRowComponent } from '../quantitative-events-row/quantitative-events-row.component';
 
 @Component({
   selector: 'app-quantitative-events-works',
@@ -18,6 +19,7 @@ import { FilterInputComponent } from '../../../shared/filter-input/filter-input.
     FailDataPipe,
     FormsModule,
     FilterInputComponent,
+    QuantitativeEventsRowComponent,
   ],
   templateUrl: './quantitative-events-works.component.html',
   styleUrl: './quantitative-events-works.component.css',
@@ -26,7 +28,7 @@ export class QuantitativeEventsWorksComponent {
   curriculums: ICurriculum[] = [];
   eventsWorks: TrabalhoEmEventos[] = [];
   professors: string[] = [];
-  professorsToShow: string[] = [];
+  // professorsToShow: string[] = [];
   atualPage: number = 1;
   resultsPerPage: number = 5;
   pagesNumber!: number;
@@ -38,51 +40,49 @@ export class QuantitativeEventsWorksComponent {
   onlyServiceYears: boolean = false;
   quantityDesc = true;
 
-  eventProps: EventProps[] = [
-    {
-      name: 'Professor',
-      key: 'nome',
-      showFilter: false,
-      ascending: true,
-      filterObject: {
-        text: [],
-        disjunctive: true,
-      },
-    },
+  // eventProps: EventProps[] = [
+  //   {
+  //     name: 'Professor',
+  //     key: 'nome',
+  //     showFilter: false,
+  //     ascending: true,
+  //     filterObject: {
+  //       text: [],
+  //       disjunctive: true,
+  //     },
+  //   },
 
-    {
-      name: 'Ano de realização',
-      key: 'anoDeRealizacao',
-      showFilter: false,
-      ascending: true,
-      filterObject: {
-        text: [],
-        disjunctive: true,
-      },
-    },
-  ];
+  //   {
+  //     name: 'Ano de realização',
+  //     key: 'anoDeRealizacao',
+  //     showFilter: false,
+  //     ascending: true,
+  //     filterObject: {
+  //       text: [],
+  //       disjunctive: true,
+  //     },
+  //   },
+  // ];
 
   constructor(private curriculumnsService: CurriculumnsService) {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
       this.curriculums = curriculumns;
-      this.getEventsWorks();
-      this.filterNow();
     });
   }
 
-  sortProfessorsByWorkQuantity() {
-    this.professors.sort((a, b) => {
-      const order =
-        this.countWorksByProfessor(a) - this.countWorksByProfessor(b);
+  // sortProfessorsByWorkQuantity() {
+  //   this.professors.sort((a, b) => {
+  //     const order =
+  //       this.countWorksByProfessor(a) - this.countWorksByProfessor(b);
 
-      if (this.quantityDesc) {
-        return -order;
-      } else {
-        return order;
-      }
-    });
-    this.getProfessorsToShow();
-  }
+  //     if (this.quantityDesc) {
+  //       return -order;
+  //     } else {
+  //       return order;
+  //     }
+  //   });
+  //   this.getProfessorsToShow();
+  // }
 
   getLastFiveYears() {
     const currentYear = new Date().getFullYear();
@@ -93,122 +93,122 @@ export class QuantitativeEventsWorksComponent {
     return lastFiveYears;
   }
 
-  getProfessors() {
-    this.professors = [];
-    this.eventsWorks.forEach((work) => {
-      if (
-        work.nome &&
-        !this.professors.includes(work.nome) &&
-        (!work.anoDeRealizacao ||
-          this.yersToConsider.includes(work.anoDeRealizacao))
-      ) {
-        this.professors.push(work.nome);
-      }
-    });
-  }
+  // getProfessors() {
+  //   this.professors = [];
+  //   this.eventsWorks.forEach((work) => {
+  //     if (
+  //       work.nome &&
+  //       !this.professors.includes(work.nome) &&
+  //       (!work.anoDeRealizacao ||
+  //         this.yersToConsider.includes(work.anoDeRealizacao))
+  //     ) {
+  //       this.professors.push(work.nome);
+  //     }
+  //   });
+  // }
 
-  getEventsWorks() {
-    this.eventsWorks = [];
-    this.curriculums.forEach((curriculum) => {
-      this.eventsWorks = [
-        ...this.eventsWorks,
-        ...curriculum.curriculum.trabalhosEmEventos.map((work) => {
-          return {
-            anoDeRealizacao: work.anoDeRealizacao,
-            nome: curriculum.curriculum.nome,
-            lattesid: curriculum.lattesId,
-            active: curriculum.active,
-            serviceYears: curriculum.serviceYears,
-          };
-        }),
-      ];
-    });
-  }
+  // getEventsWorks() {
+  //   this.eventsWorks = [];
+  //   this.curriculums.forEach((curriculum) => {
+  //     this.eventsWorks = [
+  //       ...this.eventsWorks,
+  //       ...curriculum.curriculum.trabalhosEmEventos.map((work) => {
+  //         return {
+  //           anoDeRealizacao: work.anoDeRealizacao,
+  //           nome: curriculum.curriculum.nome,
+  //           lattesid: curriculum.lattesId,
+  //           active: curriculum.active,
+  //           serviceYears: curriculum.serviceYears,
+  //         };
+  //       }),
+  //     ];
+  //   });
+  // }
 
-  orderNow() {
-    const propKey = this.orderProp as EventsWorkKey;
+  // orderNow() {
+  //   const propKey = this.orderProp as EventsWorkKey;
 
-    this.eventsWorks.sort((a, b) => {
-      const propA = a[propKey];
-      const propB = b[propKey];
-      if (propA === undefined || propB === undefined) {
-        return 0;
-      }
+  //   this.eventsWorks.sort((a, b) => {
+  //     const propA = a[propKey];
+  //     const propB = b[propKey];
+  //     if (propA === undefined || propB === undefined) {
+  //       return 0;
+  //     }
 
-      let comparison = 0;
-      if (propA < propB) {
-        comparison = -1;
-      } else if (propA > propB) {
-        comparison = 1;
-      }
+  //     let comparison = 0;
+  //     if (propA < propB) {
+  //       comparison = -1;
+  //     } else if (propA > propB) {
+  //       comparison = 1;
+  //     }
 
-      if (!this.ascending) {
-        comparison *= -1;
-      }
+  //     if (!this.ascending) {
+  //       comparison *= -1;
+  //     }
 
-      return comparison;
-    });
-    this.atualPage = 1;
-    this.getProfessors();
-    this.getProfessorsToShow();
-  }
+  //     return comparison;
+  //   });
+  //   this.atualPage = 1;
+  //   this.getProfessors();
+  //   this.getProfessorsToShow();
+  // }
 
-  filterNow() {
-    this.getEventsWorks();
+  // filterNow() {
+  //   this.getEventsWorks();
 
-    for (const prop of this.eventProps) {
-      if (prop.filterObject.text.length === 0) {
-        continue;
-      }
-      if (prop.filterObject.disjunctive) {
-        this.eventsWorks = this.eventsWorks.filter((work) => {
-          const workValue = this.stringToLower(work[prop.key]);
-          for (const text of prop.filterObject.text) {
-            if (workValue.includes(this.stringToLower(text))) {
-              return true;
-            }
-          }
-          return false;
-        });
-      } else {
-        this.eventsWorks = this.eventsWorks.filter((work) => {
-          const workValue = this.stringToLower(work[prop.key]);
-          return prop.filterObject.text.every((text) =>
-            workValue.includes(this.stringToLower(text))
-          );
-        });
-      }
-    }
+  //   for (const prop of this.eventProps) {
+  //     if (prop.filterObject.text.length === 0) {
+  //       continue;
+  //     }
+  //     if (prop.filterObject.disjunctive) {
+  //       this.eventsWorks = this.eventsWorks.filter((work) => {
+  //         const workValue = this.stringToLower(work[prop.key]);
+  //         for (const text of prop.filterObject.text) {
+  //           if (workValue.includes(this.stringToLower(text))) {
+  //             return true;
+  //           }
+  //         }
+  //         return false;
+  //       });
+  //     } else {
+  //       this.eventsWorks = this.eventsWorks.filter((work) => {
+  //         const workValue = this.stringToLower(work[prop.key]);
+  //         return prop.filterObject.text.every((text) =>
+  //           workValue.includes(this.stringToLower(text))
+  //         );
+  //       });
+  //     }
+  //   }
 
-    if (this.onlyActives) {
-      this.eventsWorks = this.eventsWorks.filter((work) => {
-        return work.active;
-      });
-    }
+  //   if (this.onlyActives) {
+  //     this.eventsWorks = this.eventsWorks.filter((work) => {
+  //       return work.active;
+  //     });
+  //   }
 
-    if (this.onlyServiceYears) {
-      this.eventsWorks = this.eventsWorks.filter((work) => {
-        return (
-          work.serviceYears?.includes(
-            work.anoDeRealizacao ? work.anoDeRealizacao : '?'
-          ) &&
-          this.yersToConsider.includes(
-            work.anoDeRealizacao ? work.anoDeRealizacao : '?'
-          )
-        );
-      });
-    }
+  //   if (this.onlyServiceYears) {
+  //     this.eventsWorks = this.eventsWorks.filter((work) => {
+  //       return (
+  //         work.serviceYears?.includes(
+  //           work.anoDeRealizacao ? work.anoDeRealizacao : '?'
+  //         ) &&
+  //         this.yersToConsider.includes(
+  //           work.anoDeRealizacao ? work.anoDeRealizacao : '?'
+  //         )
+  //       );
+  //     });
+  //   }
 
-    this.orderNow();
-  }
+  //   this.orderNow();
+  // }
 
-  stringToLower(text: any) {
-    if (typeof text !== 'string') {
-      return '';
-    }
-    text = text.replace(/['"]/g, '');
-    return text.toLowerCase();
-  }
+  // stringToLower(text: any) {
+  //   if (typeof text !== 'string') {
+  //     return '';
+  //   }
+  //   text = text.replace(/['"]/g, '');
+  //   return text.toLowerCase();
+  // }
 
   getYears(text: string) {
     let newText: string[] = [];
@@ -245,61 +245,84 @@ export class QuantitativeEventsWorksComponent {
     });
 
     this.yersToConsider = newText.sort();
-    this.filterNow();
   }
 
-  countWorksByProfessorAndYear(professor: string, year: string) {
-    return this.eventsWorks.filter((work) => {
-      return work.anoDeRealizacao === year && work.nome === professor;
-    }).length;
-  }
+  eventProps: EventProps[] = [
+    {
+      name: 'Professor',
+      key: 'nome',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
 
-  countWorksByProfessor(professor: string) {
-    return this.eventsWorks.filter((work) => {
-      return (
-        (!work.anoDeRealizacao ||
-          this.yersToConsider.includes(work.anoDeRealizacao)) &&
-        work.nome === professor
-      );
-    }).length;
-  }
+    {
+      name: 'Ano de realização',
+      key: 'anoDeRealizacao',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true,
+      },
+    },
+  ];
 
-  changeAllShowFilterToFalse(key: string) {
-    const oneProp = key as EventsWorkKey;
-    for (const prop of this.eventProps) {
-      if (prop.key !== oneProp) {
-        prop.showFilter = false;
-      }
-    }
-  }
+  // countWorksByProfessorAndYear(professor: string, year: string) {
+  //   return this.eventsWorks.filter((work) => {
+  //     return work.anoDeRealizacao === year && work.nome === professor;
+  //   }).length;
+  // }
 
-  cleanFiltersData() {
-    for (const prop of this.eventProps) {
-      prop.filterObject.text = [];
-    }
+  // countWorksByProfessor(professor: string) {
+  //   return this.eventsWorks.filter((work) => {
+  //     return (
+  //       (!work.anoDeRealizacao ||
+  //         this.yersToConsider.includes(work.anoDeRealizacao)) &&
+  //       work.nome === professor
+  //     );
+  //   }).length;
+  // }
 
-    this.getEventsWorks();
-    this.orderNow();
-  }
+  // changeAllShowFilterToFalse(key: string) {
+  //   const oneProp = key as EventsWorkKey;
+  //   for (const prop of this.eventProps) {
+  //     if (prop.key !== oneProp) {
+  //       prop.showFilter = false;
+  //     }
+  //   }
+  // }
 
-  getProfessorsToShow() {
-    if (!this.resultsPerPage) {
-      return;
-    }
-    this.pagesNumber = Math.ceil(this.professors.length / this.resultsPerPage);
-    this.professorsToShow = this.professors.filter((professor) => {
-      if (
-        this.professors.indexOf(professor) >=
-          this.resultsPerPage * (this.atualPage - 1) &&
-        this.professors.indexOf(professor) <
-          this.resultsPerPage * this.atualPage
-      ) {
-        return true;
-      }
+  // cleanFiltersData() {
+  //   for (const prop of this.eventProps) {
+  //     prop.filterObject.text = [];
+  //   }
 
-      return false;
-    });
-  }
+  //   this.getEventsWorks();
+  //   this.orderNow();
+  // }
+
+  // getProfessorsToShow() {
+  //   if (!this.resultsPerPage) {
+  //     return;
+  //   }
+  //   this.pagesNumber = Math.ceil(this.professors.length / this.resultsPerPage);
+  //   this.professorsToShow = this.professors.filter((professor) => {
+  //     if (
+  //       this.professors.indexOf(professor) >=
+  //         this.resultsPerPage * (this.atualPage - 1) &&
+  //       this.professors.indexOf(professor) <
+  //         this.resultsPerPage * this.atualPage
+  //     ) {
+  //       return true;
+  //     }
+
+  //     return false;
+  //   });
+  // }
 
   getPageNumbers(): number[] {
     return Array(this.pagesNumber)
