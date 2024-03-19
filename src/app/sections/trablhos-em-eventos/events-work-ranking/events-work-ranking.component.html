@@ -1,0 +1,45 @@
+<div class="podium">
+  <ng-container *ngIf="totals.length > 2">
+    <ng-container *ngFor="let rank of ranking">
+      <div class="rank rank3" *ngIf="rank.total == totals[2]">
+        {{ rank.name }}
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="totals.length > 0">
+    <ng-container *ngFor="let rank of ranking">
+      <div class="rank rank1" *ngIf="rank.total == totals[0]">
+        {{ rank.name }}
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="totals.length > 1">
+    <ng-container *ngFor="let rank of ranking">
+      <div class="rank rank2" *ngIf="rank.total == totals[1]">
+        {{ rank.name }}
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+<div class="lasts">
+  <ng-container *ngIf="ranking.length > 9">
+    <div class="last">
+      {{ ranking[ranking.length - 4].name }}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="ranking.length > 8">
+    <div class="last">
+      {{ ranking[ranking.length - 3].name }}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="ranking.length > 7">
+    <div class="last">
+      {{ ranking[ranking.length - 2].name }}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="ranking.length > 6">
+    <div class="last">
+      {{ ranking[ranking.length - 1].name }}
+    </div>
+  </ng-container>
+</div>

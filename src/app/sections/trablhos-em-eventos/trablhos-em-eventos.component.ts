@@ -6,6 +6,7 @@ import { QualitativeAnalysesComponent } from '../../shared/qualitative-analyses/
 import { ITableElements } from '../../shared/qualitative-analyses/types';
 import { QualitativeEventsWorksComponent } from './qualitative-events-works/qualitative-events-works.component';
 import { QuantitativeEventsWorksComponent } from './quantitative-events-works/quantitative-events-works.component';
+import { EventsWorkRankingComponent } from './events-work-ranking/events-work-ranking.component';
 
 @Component({
   selector: 'app-trablhos-em-eventos',
@@ -13,6 +14,7 @@ import { QuantitativeEventsWorksComponent } from './quantitative-events-works/qu
   imports: [
     NgFor,
     NgIf,
+    EventsWorkRankingComponent,
     QualitativeEventsWorksComponent,
     QuantitativeEventsWorksComponent,
   ],

@@ -1,0 +1,52 @@
+.rank {
+  width: 320px;
+  margin: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  overflow: hidden;
+  text-wrap: wrap;
+}
+
+.rank1 {
+  height: 200px;
+
+  border: 1px solid #f00;
+}
+
+.rank2 {
+  height: 180px;
+
+  border: 1px solid #0f0;
+}
+
+.rank3 {
+  height: 160px;
+
+  border: 1px solid #00f;
+}
+
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.lasts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.last {
+  width: 320px;
+  margin: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  overflow: hidden;
+  text-wrap: wrap;
+  border: 3px solid #a4a3a340;
+}
