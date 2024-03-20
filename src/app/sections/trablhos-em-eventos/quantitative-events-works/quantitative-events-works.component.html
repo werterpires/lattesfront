@@ -3,13 +3,16 @@
 <label for=""
   >Apenas ativos<input
     type="checkbox"
-    [(ngModel)]="onlyActives"
+    [value]="onlyActives"
     name="onlyActives"
+    (input)="onlyActives = !onlyActives; getEventsWorks()"
+    checked
 /></label>
 <label for=""
   >Apenas anos com vínculo<input
     type="checkbox"
-    [(ngModel)]="onlyServiceYears"
+    [value]="onlyServiceYears"
+    (input)="onlyServiceYears = !onlyServiceYears; getEventsWorks()"
     name="onlyServiceYears"
 /></label>
 <div class="qualitativeEvents">
@@ -72,21 +75,8 @@
       </tr>
     </thead>
 
-    <app-quantitative-events-row
-      [atualPage]="atualPage"
-      [pagesNumber]="pagesNumber"
-      [resultsPerPage]="resultsPerPage"
-      [yersToConsider]="yersToConsider"
-      [quantityDesc]="quantityDesc"
-      [ascending]="ascending"
-      [curriculums]="curriculums"
-      [eventProps]="eventProps"
-      [onlyActives]="onlyActives"
-      [onlyServiceYears]="onlyServiceYears"
-      [orderProp]="orderProp"
-    ></app-quantitative-events-row>
-    <!-- <tbody>
-    <ng-container *ngFor="let professor of professorsToShow">
+    <tbody>
+      <ng-container *ngFor="let professor of professorsToShow">
         <tr class="contentRow">
           <td>{{ professor }}</td>
           <td *ngFor="let year of yersToConsider">
@@ -95,20 +85,28 @@
           <td>{{ countWorksByProfessor(professor) }}</td>
         </tr>
       </ng-container>
-		</tbody> -->
+    </tbody>
   </table>
 </div>
 
 <div>
   <div>
-    <label for=""><input type="number" [(ngModel)]="resultsPerPage" /></label>
+    <label for=""
+      ><input
+        #results
+        type="number"
+        [value]="resultsPerPage"
+        (input)="
+          resultsPerPage = +results.value > 0 ? +results.value : 1; filterNow()
+        "
+    /></label>
   </div>
   <div class="pages">
     <div
       *ngFor="let page of getPageNumbers()"
       class="pageNumber"
       [ngClass]="{ selectedPage: page === atualPage }"
-      (click)="atualPage = +page"
+      (click)="atualPage = +page; getProfessorsToShow()"
     >
       {{ page }}
     </div>

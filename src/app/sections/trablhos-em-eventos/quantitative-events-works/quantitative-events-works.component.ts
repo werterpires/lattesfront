@@ -7,7 +7,6 @@ import { TrabalhoEmEventos } from '../../../shared/services/objTypes';
 import { FormsModule } from '@angular/forms';
 import { EventProps, EventsWorkKey } from '../types';
 import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
-import { QuantitativeEventsRowComponent } from '../quantitative-events-row/quantitative-events-row.component';
 
 @Component({
   selector: 'app-quantitative-events-works',
@@ -19,7 +18,6 @@ import { QuantitativeEventsRowComponent } from '../quantitative-events-row/quant
     FailDataPipe,
     FormsModule,
     FilterInputComponent,
-    QuantitativeEventsRowComponent,
   ],
   templateUrl: './quantitative-events-works.component.html',
   styleUrl: './quantitative-events-works.component.css',
@@ -28,224 +26,21 @@ export class QuantitativeEventsWorksComponent {
   curriculums: ICurriculum[] = [];
   eventsWorks: TrabalhoEmEventos[] = [];
   professors: string[] = [];
-  // professorsToShow: string[] = [];
+
+  professorsToShow: string[] = [];
+
   atualPage: number = 1;
   resultsPerPage: number = 5;
   pagesNumber!: number;
+
   yersToConsider: string[] = this.getLastFiveYears();
 
   orderProp: string = 'nome';
   ascending: boolean = true;
+
   onlyActives: boolean = true;
   onlyServiceYears: boolean = false;
   quantityDesc = true;
-
-  // eventProps: EventProps[] = [
-  //   {
-  //     name: 'Professor',
-  //     key: 'nome',
-  //     showFilter: false,
-  //     ascending: true,
-  //     filterObject: {
-  //       text: [],
-  //       disjunctive: true,
-  //     },
-  //   },
-
-  //   {
-  //     name: 'Ano de realização',
-  //     key: 'anoDeRealizacao',
-  //     showFilter: false,
-  //     ascending: true,
-  //     filterObject: {
-  //       text: [],
-  //       disjunctive: true,
-  //     },
-  //   },
-  // ];
-
-  constructor(private curriculumnsService: CurriculumnsService) {
-    this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
-      this.curriculums = curriculumns;
-    });
-  }
-
-  // sortProfessorsByWorkQuantity() {
-  //   this.professors.sort((a, b) => {
-  //     const order =
-  //       this.countWorksByProfessor(a) - this.countWorksByProfessor(b);
-
-  //     if (this.quantityDesc) {
-  //       return -order;
-  //     } else {
-  //       return order;
-  //     }
-  //   });
-  //   this.getProfessorsToShow();
-  // }
-
-  getLastFiveYears() {
-    const currentYear = new Date().getFullYear();
-    const lastFiveYears = [];
-    for (let i = 0; i < 5; i++) {
-      lastFiveYears.unshift((currentYear - i).toString());
-    }
-    return lastFiveYears;
-  }
-
-  // getProfessors() {
-  //   this.professors = [];
-  //   this.eventsWorks.forEach((work) => {
-  //     if (
-  //       work.nome &&
-  //       !this.professors.includes(work.nome) &&
-  //       (!work.anoDeRealizacao ||
-  //         this.yersToConsider.includes(work.anoDeRealizacao))
-  //     ) {
-  //       this.professors.push(work.nome);
-  //     }
-  //   });
-  // }
-
-  // getEventsWorks() {
-  //   this.eventsWorks = [];
-  //   this.curriculums.forEach((curriculum) => {
-  //     this.eventsWorks = [
-  //       ...this.eventsWorks,
-  //       ...curriculum.curriculum.trabalhosEmEventos.map((work) => {
-  //         return {
-  //           anoDeRealizacao: work.anoDeRealizacao,
-  //           nome: curriculum.curriculum.nome,
-  //           lattesid: curriculum.lattesId,
-  //           active: curriculum.active,
-  //           serviceYears: curriculum.serviceYears,
-  //         };
-  //       }),
-  //     ];
-  //   });
-  // }
-
-  // orderNow() {
-  //   const propKey = this.orderProp as EventsWorkKey;
-
-  //   this.eventsWorks.sort((a, b) => {
-  //     const propA = a[propKey];
-  //     const propB = b[propKey];
-  //     if (propA === undefined || propB === undefined) {
-  //       return 0;
-  //     }
-
-  //     let comparison = 0;
-  //     if (propA < propB) {
-  //       comparison = -1;
-  //     } else if (propA > propB) {
-  //       comparison = 1;
-  //     }
-
-  //     if (!this.ascending) {
-  //       comparison *= -1;
-  //     }
-
-  //     return comparison;
-  //   });
-  //   this.atualPage = 1;
-  //   this.getProfessors();
-  //   this.getProfessorsToShow();
-  // }
-
-  // filterNow() {
-  //   this.getEventsWorks();
-
-  //   for (const prop of this.eventProps) {
-  //     if (prop.filterObject.text.length === 0) {
-  //       continue;
-  //     }
-  //     if (prop.filterObject.disjunctive) {
-  //       this.eventsWorks = this.eventsWorks.filter((work) => {
-  //         const workValue = this.stringToLower(work[prop.key]);
-  //         for (const text of prop.filterObject.text) {
-  //           if (workValue.includes(this.stringToLower(text))) {
-  //             return true;
-  //           }
-  //         }
-  //         return false;
-  //       });
-  //     } else {
-  //       this.eventsWorks = this.eventsWorks.filter((work) => {
-  //         const workValue = this.stringToLower(work[prop.key]);
-  //         return prop.filterObject.text.every((text) =>
-  //           workValue.includes(this.stringToLower(text))
-  //         );
-  //       });
-  //     }
-  //   }
-
-  //   if (this.onlyActives) {
-  //     this.eventsWorks = this.eventsWorks.filter((work) => {
-  //       return work.active;
-  //     });
-  //   }
-
-  //   if (this.onlyServiceYears) {
-  //     this.eventsWorks = this.eventsWorks.filter((work) => {
-  //       return (
-  //         work.serviceYears?.includes(
-  //           work.anoDeRealizacao ? work.anoDeRealizacao : '?'
-  //         ) &&
-  //         this.yersToConsider.includes(
-  //           work.anoDeRealizacao ? work.anoDeRealizacao : '?'
-  //         )
-  //       );
-  //     });
-  //   }
-
-  //   this.orderNow();
-  // }
-
-  // stringToLower(text: any) {
-  //   if (typeof text !== 'string') {
-  //     return '';
-  //   }
-  //   text = text.replace(/['"]/g, '');
-  //   return text.toLowerCase();
-  // }
-
-  getYears(text: string) {
-    let newText: string[] = [];
-
-    const regexIntervalo = /\b(\d+)-(\d+)\b/g;
-
-    text = text.replace(regexIntervalo, (match, inicio, fim) => {
-      const inicioNum = parseInt(inicio);
-      const fimNum = parseInt(fim);
-      if (
-        !isNaN(inicioNum) &&
-        !isNaN(fimNum) &&
-        fimNum > inicioNum &&
-        fimNum - inicioNum <= 50
-      ) {
-        for (let i = inicioNum; i <= fimNum; i++) {
-          newText.push(i.toString());
-        }
-        return '';
-      } else {
-        return match;
-      }
-    });
-
-    const trechosRestantes = text
-      .split(/\s+/)
-      .filter((trecho) => trecho.trim());
-    newText.push(...trechosRestantes);
-
-    //eliminar repetidos e tudo que não puder ser transformado em number
-    newText = [...new Set(newText)].filter((text) => {
-      const number = parseInt(text);
-      return !isNaN(number);
-    });
-
-    this.yersToConsider = newText.sort();
-  }
 
   eventProps: EventProps[] = [
     {
@@ -271,62 +66,306 @@ export class QuantitativeEventsWorksComponent {
     },
   ];
 
-  // countWorksByProfessorAndYear(professor: string, year: string) {
-  //   return this.eventsWorks.filter((work) => {
-  //     return work.anoDeRealizacao === year && work.nome === professor;
-  //   }).length;
-  // }
+  constructor(private curriculumnsService: CurriculumnsService) {
+    this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
+      this.curriculums = curriculumns;
+      this.getEventsWorks();
+    });
+  }
 
-  // countWorksByProfessor(professor: string) {
-  //   return this.eventsWorks.filter((work) => {
-  //     return (
-  //       (!work.anoDeRealizacao ||
-  //         this.yersToConsider.includes(work.anoDeRealizacao)) &&
-  //       work.nome === professor
-  //     );
-  //   }).length;
-  // }
+  /**
+   * Filters the professors to show based on the current page and the
+   * results per page. If results per page is 0, shows all professors.
+   */
+  getProfessorsToShow() {
+    if (!this.resultsPerPage) {
+      // If results per page is 0, show all professors
+      return;
+    }
+    this.pagesNumber = Math.ceil(this.professors.length / this.resultsPerPage);
 
-  // changeAllShowFilterToFalse(key: string) {
-  //   const oneProp = key as EventsWorkKey;
-  //   for (const prop of this.eventProps) {
-  //     if (prop.key !== oneProp) {
-  //       prop.showFilter = false;
-  //     }
-  //   }
-  // }
+    // Calculate start and end based on current page and results per page
+    const start = (this.atualPage - 1) * this.resultsPerPage;
+    const end = start + this.resultsPerPage;
+    // Slice the professors array with the calculated start and end indices
+    this.professorsToShow = this.professors.slice(start, end);
+  }
 
-  // cleanFiltersData() {
-  //   for (const prop of this.eventProps) {
-  //     prop.filterObject.text = [];
-  //   }
+  /**
+   * Populates the professors array with the names of professors who have
+   * participated in events
+   */
+  getProfessors() {
+    const professorsSet: Set<string> = new Set();
 
-  //   this.getEventsWorks();
-  //   this.orderNow();
-  // }
+    for (const work of this.eventsWorks) {
+      // If the professor's name is defined and the year of realization is
+      // either undefined or inside yersToConsider
+      if (
+        work.nome &&
+        (!work.anoDeRealizacao ||
+          this.yersToConsider.includes(work.anoDeRealizacao))
+      ) {
+        // Add the professor's name to the professorsSet set
+        professorsSet.add(work.nome);
+      }
+    }
 
-  // getProfessorsToShow() {
-  //   if (!this.resultsPerPage) {
-  //     return;
-  //   }
-  //   this.pagesNumber = Math.ceil(this.professors.length / this.resultsPerPage);
-  //   this.professorsToShow = this.professors.filter((professor) => {
-  //     if (
-  //       this.professors.indexOf(professor) >=
-  //         this.resultsPerPage * (this.atualPage - 1) &&
-  //       this.professors.indexOf(professor) <
-  //         this.resultsPerPage * this.atualPage
-  //     ) {
-  //       return true;
-  //     }
+    // Convert the set to an array and assign it to the professors property
+    this.professors = Array.from(professorsSet);
 
-  //     return false;
-  //   });
-  // }
+    this.getProfessorsToShow();
+  }
 
+  /**
+   * Reorders the events works based on the selected property and sort order.
+   * The property is selected via the `orderProp` property and the order
+   * is set by the `ascending` property.
+   *
+   * After reordering, the page number is reset to 1 and the professors to
+   * be displayed are recalculated.
+   */
+  orderNow() {
+    const propKey = this.orderProp as keyof TrabalhoEmEventos;
+
+    this.eventsWorks.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? this.ascending
+          ? -1
+          : 1
+        : this.ascending
+        ? 1
+        : -1
+    );
+    this.atualPage = 1;
+    this.getProfessors();
+  }
+
+  /**
+   * Filter the works based on the filters and the
+   * other filters that can be applied.
+   */
+  filterNow() {
+    // Filters with values applied
+    const filters = this.eventProps.filter(
+      (prop) => prop.filterObject.text.length > 0
+    );
+    // Values of the other filters
+    const onlyActives = this.onlyActives;
+    const onlyServiceYears = this.onlyServiceYears;
+    const yersToConsider = this.yersToConsider;
+    this.eventsWorks = this.eventsWorks.filter(
+      (work) =>
+        filters.every((prop) => {
+          // Get the value of the property of the work
+          const workValue = this.stringToLower(work[prop.key]);
+          // Check if the value meets the filter
+          if (prop.filterObject.disjunctive) {
+            return prop.filterObject.text.some((text) =>
+              workValue.includes(this.stringToLower(text))
+            );
+          } else {
+            return prop.filterObject.text.every((text) =>
+              workValue.includes(this.stringToLower(text))
+            );
+          }
+        }) &&
+        // Check if the work meets the "only actives" filter
+
+        (!onlyActives || work.active) &&
+        // Check if the work meets the "only service years" filter
+        (!onlyServiceYears ||
+          (work.serviceYears?.includes(work.anoDeRealizacao ?? '?') &&
+            yersToConsider.includes(work.anoDeRealizacao ?? '?')))
+    );
+
+    // Order the works after filtering
+    this.orderNow();
+  }
+
+  /**
+   * Generates an array of events works from the curriculums.
+   * Each event work is an object with the following properties:
+   *   - anoDeRealizacao: the year the event was held
+   *   - nome: the name of the curriculum
+   *   - lattesid: the lattes id of the curriculum
+   *   - active: whether the curriculum is active or not
+   *   - serviceYears: the number of service years of the curriculum
+   */
+  getEventsWorks() {
+    this.eventsWorks = this.curriculums.reduce(
+      (eventsWorks, curriculum) =>
+        eventsWorks.concat(
+          curriculum.curriculum.trabalhosEmEventos.map((work) => ({
+            anoDeRealizacao: work.anoDeRealizacao,
+            nome: curriculum.curriculum.nome,
+            lattesid: curriculum.lattesId,
+            active: curriculum.active,
+            serviceYears: curriculum.serviceYears,
+          }))
+        ),
+      [] as TrabalhoEmEventos[]
+    );
+    this.filterNow();
+  }
+
+  /**
+   * Sorts the professors by the quantity of works they participated in events.
+   * The sorting is based on the quantity of works of each professor.
+   */
+  sortProfessorsByWorkQuantity() {
+    // Maps each professor to the quantity of their works in events
+    const worksByProfessor: Map<string, number> = new Map();
+    this.eventsWorks.forEach((event) => {
+      const professor = event.nome?.toString();
+      if (professor) {
+        const quantity = worksByProfessor.get(professor) || 0;
+        worksByProfessor.set(professor, quantity + 1);
+      }
+    });
+
+    // Sorts the professors by the quantity of works they participated in events
+    this.professors.sort((a, b) => {
+      return (worksByProfessor.get(b) || 0) - (worksByProfessor.get(a) || 0);
+    });
+    this.getProfessorsToShow();
+  }
+
+  /**
+   * Cleans all the filters and reloads the data.
+   */
+  cleanFiltersData() {
+    // Cleans all the filters' texts
+    for (const prop of this.eventProps) {
+      prop.filterObject.text.length = 0;
+    }
+
+    // Reloads the data from the curriculums
+    this.getEventsWorks();
+  }
+
+  /**
+   * Change the showFilter property of all eventProps, setting it to false
+   * except for the one corresponding to the given key.
+   */
+  changeAllShowFilterToFalse(key: string) {
+    const index = this.eventProps.findIndex((prop) => prop.key === key);
+    this.eventProps.forEach((prop, i) => (prop.showFilter = i !== index));
+  }
+
+  /**
+   * Returns the number of events works by a professor in a year.
+   */
+  countWorksByProfessorAndYear(professor: string, year: string) {
+    // Counts the number of events works by a professor in a year.
+    return this.eventsWorks.filter(
+      (work) => work.anoDeRealizacao === year && work.nome === professor
+    ).length;
+  }
+
+  /**
+   * Counts the number of events works of a specific professor,
+   * filtering by years if necessary.
+   * @param professor The professor name.
+   * @returns The number of events works.
+   */
+  countWorksByProfessor(professor: string): number {
+    let count = 0;
+    // We need to convert the array to a Set to speed up the lookups.
+    const yersToConsiderSet = new Set(this.yersToConsider);
+    // We iterate over all the events works.
+    for (const work of this.eventsWorks) {
+      // If the event work belongs to the professor and, if there are years
+      // to consider, the year of the event work is in the set of years to
+      // consider, we increment the count.
+      if (
+        work.nome === professor &&
+        (!work.anoDeRealizacao || yersToConsiderSet.has(work.anoDeRealizacao))
+      ) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  /**
+   * Processes the years input by the user and adds them to the list of years to consider.
+   * @param text The user input containing the years.
+   */
+  getYears(text: string) {
+    // New array of strings with the years
+    let newText: string[] = [];
+
+    // Regular expression to detect year ranges (e.g., 2010-2015)
+    const regexIntervalo = /\b(\d+)-(\d+)\b/g;
+
+    // Replaces year ranges with a list of separate years
+    text = text.replace(regexIntervalo, (match, inicio, fim) => {
+      // Converts values to numbers
+      const inicioNum = parseInt(inicio);
+      const fimNum = parseInt(fim);
+      // Checks if it's a valid range and if the number of years is less than 50
+      if (
+        !isNaN(inicioNum) &&
+        !isNaN(fimNum) &&
+        fimNum > inicioNum &&
+        fimNum - inicioNum <= 50
+      ) {
+        // Adds the years to the new list
+        for (let i = inicioNum; i <= fimNum; i++) {
+          newText.push(i.toString());
+        }
+        // Removes the range from the input
+        return '';
+      } else {
+        // Otherwise, returns the range as it is
+        return match;
+      }
+    });
+
+    // Splits the input into multiple strings and removes whitespace
+    const trechosRestantes = text
+      .split(/\s+/)
+      .filter((trecho) => trecho.trim());
+
+    newText.push(...trechosRestantes);
+
+    // Removes duplicates and sorts the list
+    newText = [...new Set(newText)].sort();
+
+    this.yersToConsider = newText;
+
+    this.getEventsWorks();
+  }
+
+  getLastFiveYears(): string[] {
+    const currentYear = new Date().getFullYear();
+
+    // Creates an array with the last five years
+    return Array.from({ length: 5 }, (_, i) => String(currentYear - i));
+  }
+
+  /**
+   * Lowercases a string and removes single and double quotes from it.
+   * If the given text is not a string, an empty string is returned.
+   */
+  stringToLower(text: any): string {
+    // If the given text is not a string, return an empty string
+    if (typeof text !== 'string') {
+      return '';
+    }
+
+    // Lowercase the text and remove single and double quotes
+    return text.toLowerCase().replace(/['"]/g, '');
+  }
+
+  /**
+   * Returns an array with the page numbers to be displayed.
+   */
   getPageNumbers(): number[] {
-    return Array(this.pagesNumber)
-      .fill(0)
-      .map((_, index) => index + 1);
+    // Returns an array with the page numbers to be displayed. The length of
+    // the array is equal to the number of pages (pagesNumber), and the values
+    // are the page numbers, starting from 1.
+    return Array.from({ length: this.pagesNumber }, (_, i) => i + 1);
   }
 }
