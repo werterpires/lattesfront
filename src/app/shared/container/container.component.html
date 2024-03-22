@@ -1,16 +1,53 @@
 <header>
-  <div class="headsup">Projeto Lattes</div>
+  <div class="headsup">
+    <div>
+      <img id="logo" src="assets/img/faamaLogo.png" alt="Logo Faama" />
+    </div>
+    <div id="appName">
+      <p>Latte<em>Score</em></p>
+    </div>
+    <div id="userAndLogout">
+      <div *ngIf="user && user.name">{{ user.name }}</div>
+      <div id="logoutDiv" (click)="logout()">
+        <img src="assets/icons/outIcon.svg" alt="" />
+      </div>
+    </div>
+  </div>
   <div class="headsub">
     <div></div>
     <nav>
-      <ul>
-        <li (click)="redirect('home')">Página Inicial</li>
-        <li (click)="redirect('professors')">Professores</li>
-        <li (click)="redirect('sections')">Objetos</li>
+      <ul id="menu">
+        <li
+          [ngClass]="{
+            selectedMenu: router.url.includes('home'),
+            notSelectedMenu: !router.url.includes('home')
+          }"
+          (click)="redirect('home')"
+        >
+          Página Inicial
+        </li>
+        <li
+          [ngClass]="{
+            selectedMenu: router.url.includes('professors'),
+            notSelectedMenu: !router.url.includes('professors')
+          }"
+          (click)="redirect('professors')"
+        >
+          Professores
+        </li>
+        <li
+          [ngClass]="{
+            selectedMenu: router.url.includes('sections'),
+            notSelectedMenu: !router.url.includes('sections')
+          }"
+          (click)="redirect('sections')"
+        >
+          Seções Lattes
+        </li>
       </ul>
     </nav>
 
-    <p (click)="add = true">+Adicionar Currículos</p>
+    <p id="addCurriculum" (click)="add = true">+Adicionar Currículos</p>
   </div>
 </header>
 <ng-content></ng-content>

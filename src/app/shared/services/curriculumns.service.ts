@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { ICurriculum } from './types';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,12 @@ export class CurriculumnsService {
   >([]);
 
   curriculumns$ = this.curriculumnsObject.asObservable();
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   getAllCurriculumns(): Observable<ICurriculum[]> {
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
-      return throwError(() => new Error('Access Token not found'));
+      this.redirectToLogin();
     }
     return this.httpClient
       .get<ICurriculum[]>('http://localhost:3000/curriculum', {
@@ -27,6 +28,9 @@ export class CurriculumnsService {
       })
       .pipe(
         catchError((error) => {
+          if (error.status === 401) {
+            this.redirectToLogin();
+          }
           return throwError(() => new Error(error.error.message));
         }),
         map((curriculumns) => {
@@ -54,5 +58,9 @@ export class CurriculumnsService {
       return curr;
     });
     return curriculumns;
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['login']);
   }
 }
