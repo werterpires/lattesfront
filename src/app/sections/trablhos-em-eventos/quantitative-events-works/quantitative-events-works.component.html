@@ -1,4 +1,10 @@
-<input #years type="text" (input)="getYears(years.value)" />
+<input
+  #years
+  type="text"
+  (input)="
+    yersToConsider = utilsService.getYears(years.value); getEventsWorks()
+  "
+/>
 <button>Limpar filtros</button>
 <label for=""
   >Apenas ativos<input
@@ -80,9 +86,23 @@
         <tr class="contentRow">
           <td>{{ professor }}</td>
           <td *ngFor="let year of yersToConsider">
-            {{ countWorksByProfessorAndYear(professor, year) }}
+            {{
+              eventsWorksService.countWorksByProfessorAndYear(
+                professor,
+                year,
+                eventsWorks
+              )
+            }}
           </td>
-          <td>{{ countWorksByProfessor(professor) }}</td>
+          <td>
+            {{
+              eventsWorksService.countWorksByProfessor(
+                professor,
+                yersToConsider,
+                eventsWorks
+              )
+            }}
+          </td>
         </tr>
       </ng-container>
     </tbody>

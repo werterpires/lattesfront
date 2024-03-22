@@ -11,6 +11,9 @@
 <ng-container *ngIf="professorCurriculum.length === 1">
   <button (click)="navigateTo('')">Voltar</button>
 
+  <app-quantitative-professors [curriculums]="professorCurriculum">
+  </app-quantitative-professors>
+
   <app-qualitative-events-works
     [onlyActives]="false"
     [curriculumns]="professorCurriculum"

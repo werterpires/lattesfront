@@ -20,3 +20,20 @@ li {
 .hidden {
   display: none;
 }
+
+.arrowIcon {
+  width: 25px;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: all 0.3s ease;
+}
+
+.notRotate {
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+}

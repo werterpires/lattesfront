@@ -7,6 +7,8 @@ import { TrabalhoEmEventos } from '../../../shared/services/objTypes';
 import { FormsModule } from '@angular/forms';
 import { EventProps, EventsWorkKey } from '../types';
 import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
+import { EventsWorksService } from '../../../shared/services/eventWorksService';
+import { UtilsService } from '../../../shared/services/util.service';
 
 @Component({
   selector: 'app-quantitative-events-works',
@@ -33,7 +35,7 @@ export class QuantitativeEventsWorksComponent {
   resultsPerPage: number = 5;
   pagesNumber!: number;
 
-  yersToConsider: string[] = this.getLastFiveYears();
+  yersToConsider: string[] = this.utilsService.getLastFiveYears();
 
   orderProp: string = 'nome';
   ascending: boolean = true;
@@ -66,7 +68,11 @@ export class QuantitativeEventsWorksComponent {
     },
   ];
 
-  constructor(private curriculumnsService: CurriculumnsService) {
+  constructor(
+    private curriculumnsService: CurriculumnsService,
+    public readonly utilsService: UtilsService,
+    public readonly eventsWorksService: EventsWorksService
+  ) {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
       this.curriculums = curriculumns;
       this.getEventsWorks();
@@ -251,98 +257,6 @@ export class QuantitativeEventsWorksComponent {
   changeAllShowFilterToFalse(key: string) {
     const index = this.eventProps.findIndex((prop) => prop.key === key);
     this.eventProps.forEach((prop, i) => (prop.showFilter = i !== index));
-  }
-
-  /**
-   * Returns the number of events works by a professor in a year.
-   */
-  countWorksByProfessorAndYear(professor: string, year: string) {
-    // Counts the number of events works by a professor in a year.
-    return this.eventsWorks.filter(
-      (work) => work.anoDeRealizacao === year && work.nome === professor
-    ).length;
-  }
-
-  /**
-   * Counts the number of events works of a specific professor,
-   * filtering by years if necessary.
-   * @param professor The professor name.
-   * @returns The number of events works.
-   */
-  countWorksByProfessor(professor: string): number {
-    let count = 0;
-    // We need to convert the array to a Set to speed up the lookups.
-    const yersToConsiderSet = new Set(this.yersToConsider);
-    // We iterate over all the events works.
-    for (const work of this.eventsWorks) {
-      // If the event work belongs to the professor and, if there are years
-      // to consider, the year of the event work is in the set of years to
-      // consider, we increment the count.
-      if (
-        work.nome === professor &&
-        (!work.anoDeRealizacao || yersToConsiderSet.has(work.anoDeRealizacao))
-      ) {
-        count++;
-      }
-    }
-    return count;
-  }
-
-  /**
-   * Processes the years input by the user and adds them to the list of years to consider.
-   * @param text The user input containing the years.
-   */
-  getYears(text: string) {
-    // New array of strings with the years
-    let newText: string[] = [];
-
-    // Regular expression to detect year ranges (e.g., 2010-2015)
-    const regexIntervalo = /\b(\d+)-(\d+)\b/g;
-
-    // Replaces year ranges with a list of separate years
-    text = text.replace(regexIntervalo, (match, inicio, fim) => {
-      // Converts values to numbers
-      const inicioNum = parseInt(inicio);
-      const fimNum = parseInt(fim);
-      // Checks if it's a valid range and if the number of years is less than 50
-      if (
-        !isNaN(inicioNum) &&
-        !isNaN(fimNum) &&
-        fimNum > inicioNum &&
-        fimNum - inicioNum <= 50
-      ) {
-        // Adds the years to the new list
-        for (let i = inicioNum; i <= fimNum; i++) {
-          newText.push(i.toString());
-        }
-        // Removes the range from the input
-        return '';
-      } else {
-        // Otherwise, returns the range as it is
-        return match;
-      }
-    });
-
-    // Splits the input into multiple strings and removes whitespace
-    const trechosRestantes = text
-      .split(/\s+/)
-      .filter((trecho) => trecho.trim());
-
-    newText.push(...trechosRestantes);
-
-    // Removes duplicates and sorts the list
-    newText = [...new Set(newText)].sort();
-
-    this.yersToConsider = newText;
-
-    this.getEventsWorks();
-  }
-
-  getLastFiveYears(): string[] {
-    const currentYear = new Date().getFullYear();
-
-    // Creates an array with the last five years
-    return Array.from({ length: 5 }, (_, i) => String(currentYear - i));
   }
 
   /**

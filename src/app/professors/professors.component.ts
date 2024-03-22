@@ -7,6 +7,7 @@ import { AccordionComponent } from '../shared/accordion/accordion.component';
 import { NgFor, NgIf } from '@angular/common';
 import { ContainerComponent } from '../shared/container/container.component';
 import { filter } from 'rxjs/operators';
+import { QuantitativeProfessorsComponent } from './quantitative-professors/quantitative-professors.component';
 
 @Component({
   selector: 'app-professors',
@@ -17,6 +18,7 @@ import { filter } from 'rxjs/operators';
     ContainerComponent,
     AccordionComponent,
     QualitativeEventsWorksComponent,
+    QuantitativeProfessorsComponent,
   ],
   templateUrl: './professors.component.html',
   styleUrl: './professors.component.css',
@@ -42,13 +44,9 @@ export class ProfessorsComponent {
   }
 
   getProfessorCurriculum() {
-    const currentNavigation = this.router.getCurrentNavigation();
-    let professorId: string | null | undefined = null;
-    if (currentNavigation) {
-      const url = currentNavigation.finalUrl?.toString();
-      const parts = url?.split('/');
-      professorId = parts?.pop();
-    }
+    const url = window.location.href;
+    const parts = url.split('/');
+    const professorId = parts.pop();
 
     if (professorId) {
       this.professorCurriculum = this.curriculums.filter(

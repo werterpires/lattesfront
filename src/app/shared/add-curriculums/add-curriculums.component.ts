@@ -3,7 +3,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { Observable, map, of } from 'rxjs';
 import { ICreateCurriculum, ICreateCurriculums } from '../services/types';
 import X2JS from 'x2js';
-import { UtilsService } from '../services/utils';
+import { EventsWorksService } from '../services/eventWorksService';
 import { TrabalhoEmEventos } from '../services/objTypes';
 import { LoaderService } from '../loader/loader.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,7 +23,7 @@ export class AddCurriculumsComponent {
   @Output() closeEmitter = new EventEmitter();
 
   constructor(
-    private utilsService: UtilsService,
+    private utilsService: EventsWorksService,
     private loader: LoaderService,
     private addCurriculumService: AddCurriculumsService,
     private alertService: AlertsService,

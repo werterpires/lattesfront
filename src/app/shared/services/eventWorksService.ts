@@ -4,7 +4,7 @@ import { AreasDoConhecimento, TrabalhoEmEventos } from './objTypes';
 @Injectable({
   providedIn: 'root',
 })
-export class UtilsService {
+export class EventsWorksService {
   makeTrabalhoEmEvento(data: any[]): TrabalhoEmEventos[] {
     const works: TrabalhoEmEventos[] = [];
     data.forEach((element) => {
@@ -80,6 +80,50 @@ export class UtilsService {
     });
 
     return works;
+  }
+
+  /**
+   * Returns the number of events works by a professor in a year.
+   */
+  countWorksByProfessorAndYear(
+    professor: string,
+    year: string,
+    eventsWorks: TrabalhoEmEventos[]
+  ): number {
+    // Counts the number of events works by a professor in a year.
+    return eventsWorks.filter((work) => {
+      return (
+        work.anoDeRealizacao === year && (work.nome === professor || !work.nome)
+      );
+    }).length;
+  }
+
+  /**
+   * Counts the number of events works of a specific professor,
+   * filtering by years if necessary.
+   */
+
+  countWorksByProfessor(
+    professor: string,
+    yersToConsider: string[],
+    eventsWorks: TrabalhoEmEventos[]
+  ): number {
+    let count = 0;
+    // We need to convert the array to a Set to speed up the lookups.
+    const yersToConsiderSet = new Set(yersToConsider);
+    // We iterate over all the events works.
+    for (const work of eventsWorks) {
+      // If the event work belongs to the professor and, if there are years
+      // to consider, the year of the event work is in the set of years to
+      // consider, we increment the count.
+      if (
+        (work.nome === professor || !work.nome) &&
+        (!work.anoDeRealizacao || yersToConsiderSet.has(work.anoDeRealizacao))
+      ) {
+        count++;
+      }
+    }
+    return count;
   }
 
   makePalavrasChave(data: any) {
