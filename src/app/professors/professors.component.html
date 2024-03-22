@@ -1,17 +1,35 @@
-<app-container> Professores </app-container>
-<app-professor-data [Curriculums]="professorCurriculum"> </app-professor-data>
+<app-container *ngIf="professorsPage"> Professores </app-container>
+
 <ng-container *ngIf="professorCurriculum.length === 0">
-  <input type="text" />
-  <div>
-    <p *ngFor="let curr of curriculums" (click)="navigateTo(curr.lattesId)">
-      {{ curr.curriculum.nome }}
-    </p>
+  <input
+    #filter
+    type="text"
+    (input)="filterString = filter.value; filterCurriculums()"
+  />
+  <label for="">
+    Apenas ativos
+    <input
+      type="checkbox"
+      (input)="onlyActives = !onlyActives; filterCurriculums()"
+  /></label>
+
+  <div class="cards">
+    <ng-container *ngFor="let curriculum of professorsToShow">
+      <div class="teacherCard" (click)="navigateTo(curriculum.lattesId)">
+        <p>{{ curriculum.curriculum.nome }}</p>
+        <p>Anos de vínculo: {{ curriculum.serviceYears }}</p>
+        <p>Status: {{ curriculum.active ? "Ativo" : "Inativo" }}</p>
+        <div>
+          <p>ID Lattes: {{ curriculum.lattesId }}</p>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </ng-container>
 
 <ng-container *ngIf="professorCurriculum.length === 1">
   <button (click)="navigateTo('')">Voltar</button>
-
+  <app-professor-data [Curriculums]="professorCurriculum"> </app-professor-data>
   <app-quantitative-professors [curriculums]="professorCurriculum">
   </app-quantitative-professors>
 

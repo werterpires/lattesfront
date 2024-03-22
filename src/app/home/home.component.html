@@ -1,10 +1,6 @@
-<app-container>
-  Professores
-  <div class="cards">
-    <ng-container *ngFor="let curriculum of curriculumns">
-      <div class="teacherCard">
-        <p>{{ curriculum.curriculum.nome }}</p>
-      </div>
-    </ng-container>
-  </div>
-</app-container>
+<app-container> </app-container>
+
+<app-accordion [title]="'Professores'">
+  <app-professors [professorsPage]="false"></app-professors>
+</app-accordion>
+almoço de sábado

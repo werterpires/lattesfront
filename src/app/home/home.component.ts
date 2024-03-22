@@ -3,11 +3,13 @@ import { ContainerComponent } from '../shared/container/container.component';
 import { CurriculumnsService } from '../shared/services/curriculumns.service';
 import { ICurriculum } from '../shared/services/types';
 import { NgFor } from '@angular/common';
+import { AccordionComponent } from '../shared/accordion/accordion.component';
+import { ProfessorsComponent } from '../professors/professors.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ContainerComponent, NgFor],
+  imports: [ContainerComponent, AccordionComponent, ProfessorsComponent, NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
