@@ -74,3 +74,8 @@ ul {
   line-height: 21.6px;
   color: var(--primary);
 }
+
+#container {
+  width: 83.2vw;
+  margin: 0 auto;
+}

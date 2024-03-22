@@ -1,9 +1,9 @@
-<app-container> </app-container>
+<app-container>
+  <app-accordion [title]="'Professores'">
+    <app-professors [professorsPage]="false"></app-professors>
+  </app-accordion>
 
-<app-accordion [title]="'Professores'">
-  <app-professors [professorsPage]="false"></app-professors>
-</app-accordion>
-
-<app-accordion [title]="'Seções Lattes'">
-  <app-lattes-section [sectionsPage]="false"></app-lattes-section>
-</app-accordion>
+  <app-accordion [title]="'Seções Lattes'">
+    <app-lattes-section [sectionsPage]="false"></app-lattes-section>
+  </app-accordion>
+</app-container>

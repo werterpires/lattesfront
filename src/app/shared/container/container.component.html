@@ -50,7 +50,10 @@
     <p id="addCurriculum" (click)="add = true">+Adicionar Currículos</p>
   </div>
 </header>
-<ng-content></ng-content>
+<div id="container">
+  <ng-content></ng-content>
+</div>
+
 <app-add-curriculums
   *ngIf="add"
   (closeEmitter)="add = false"
