@@ -8,6 +8,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ContainerComponent } from '../shared/container/container.component';
 import { filter } from 'rxjs/operators';
 import { QuantitativeProfessorsComponent } from './quantitative-professors/quantitative-professors.component';
+import { ProfessorDataComponent } from './professor-data/professor-data.component';
 
 @Component({
   selector: 'app-professors',
@@ -19,6 +20,7 @@ import { QuantitativeProfessorsComponent } from './quantitative-professors/quant
     AccordionComponent,
     QualitativeEventsWorksComponent,
     QuantitativeProfessorsComponent,
+    ProfessorDataComponent,
   ],
   templateUrl: './professors.component.html',
   styleUrl: './professors.component.css',
