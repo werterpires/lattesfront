@@ -1,15 +1,26 @@
-<app-container> Seçao do Lattes </app-container>
-<ng-container>
-  <input type="text" />
-  <div>
-    <p *ngFor="let section of sectionsToShow">
-      <a
-        [routerLink]="section.route"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >{{ section.name }}</a
-      >
-    </p>
+<app-container *ngIf="sectionsPage"> Seçao do Lattes </app-container>
+
+<ng-container *ngIf="!outlet">
+  <input
+    #filter
+    type="text"
+    (input)="filterString = filter.value; filterObjects()"
+  />
+  <div class="sectionsCards">
+    <div
+      class="sectionCard"
+      *ngFor="let section of sectionsToShow"
+      (click)="outlet = true; router.navigate(['/sections', section.route])"
+    >
+      <p>
+        {{ section.name }}
+      </p>
+    </div>
   </div>
 </ng-container>
-<router-outlet></router-outlet>
+<ng-container *ngIf="outlet">
+  <button (click)="outlet = false; router.navigate(['/sections'])">
+    Voltar
+  </button>
+  <router-outlet></router-outlet>
+</ng-container>

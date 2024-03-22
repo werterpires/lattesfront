@@ -5,11 +5,18 @@ import { ICurriculum } from '../shared/services/types';
 import { NgFor } from '@angular/common';
 import { AccordionComponent } from '../shared/accordion/accordion.component';
 import { ProfessorsComponent } from '../professors/professors.component';
+import { LattesSectionComponent } from '../lattes-section/lattes-section.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ContainerComponent, AccordionComponent, ProfessorsComponent, NgFor],
+  imports: [
+    ContainerComponent,
+    AccordionComponent,
+    ProfessorsComponent,
+    LattesSectionComponent,
+    NgFor,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

@@ -1,0 +1,21 @@
+.sectionsCards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.sectionCard {
+  width: 200px;
+  height: 150px;
+  background-color: #003b71;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
