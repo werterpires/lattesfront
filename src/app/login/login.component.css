@@ -1,0 +1,107 @@
+#loginContent {
+  padding: 0 114px 90px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  max-width: 480px;
+}
+.separator {
+  height: 110px;
+}
+
+#capContainer {
+  width: 170px;
+  height: 170px;
+  position: absolute;
+  padding: 20px;
+  border-radius: 50%;
+  /* translate: 0 -61px; */
+  top: -61px;
+  background-color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#capIcon {
+  width: 45px;
+}
+
+#appName {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28.8px;
+
+  color: var(--primary);
+}
+
+#loginTitle {
+  margin-bottom: 55px;
+
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21.6px;
+
+  color: var(--primary);
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 47px;
+}
+
+label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.45px;
+
+  color: var(--terciary);
+}
+
+input {
+  width: 290px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--fadeBlack);
+  background-color: var(--secondary);
+  padding: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.45px;
+  color: var(--fadeBlack);
+}
+
+#enterButton {
+  width: 290px;
+  height: 46px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 26px;
+  letter-spacing: 0.46;
+  text-transform: uppercase;
+}
+
+.inputLoginIcon {
+  width: 22px;
+  position: absolute;
+  right: 5px;
+  top: 27px;
+}
+
+.loginLabel {
+  margin-left: 8px;
+}

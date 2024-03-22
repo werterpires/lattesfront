@@ -1,16 +1,41 @@
 <app-modal [login]="true">
-  <p>Login</p>
+  <div id="loginContent">
+    <div id="capContainer">
+      <img id="capIcon" src="assets/icons/capIcon.svg" />
+      <p id="appName">
+        Latte<b><em>Score</em></b>
+      </p>
+    </div>
+    <div class="separator"></div>
 
-  <form>
-    <label>
-      Email: <input name="email" type="text" [(ngModel)]="loginDto.email"
-    /></label>
-    <label>
-      Senha:<input
-        name="password"
-        type="password"
-        [(ngModel)]="loginDto.password"
-    /></label>
-    <button type="button" (click)="login()">Entrar</button>
-  </form>
+    <p id="loginTitle">Login</p>
+
+    <form id="loginForm">
+      <label>
+        <p class="loginLabel">Email</p>
+        <input name="email" type="text" [(ngModel)]="loginDto.email" />
+        <img class="inputLoginIcon" src="assets/icons/userIcon.svg" alt=""
+      /></label>
+      <label>
+        <p class="loginLabel">Senha</p>
+        <input
+          #passInput
+          name="password"
+          type="password"
+          [(ngModel)]="loginDto.password"
+        />
+        <img
+          (click)="
+            passInput.type === 'password'
+              ? (passInput.type = 'text')
+              : (passInput.type = 'password')
+          "
+          class="inputLoginIcon"
+          src="assets/icons/seePassIcon.svg"
+          alt=""
+        />
+      </label>
+      <button id="enterButton" type="button" (click)="login()">Entrar</button>
+    </form>
+  </div>
 </app-modal>
