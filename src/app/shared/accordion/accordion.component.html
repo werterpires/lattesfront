@@ -1,14 +1,16 @@
-<div (click)="open = !open" class="accordionTitle">
-  <img
-    class="triangle"
-    [ngClass]="{ down: open, right: !open }"
-    src="assets/icons/accordeonIcon.svg"
-    alt="Triângulo azul"
-  />
-  <h1>{{ title }}</h1>
-  <p *ngIf="quantity">{{ quantity }}</p>
-</div>
+<div class="accordion">
+  <div (click)="open = !open" class="accordionTitle">
+    <img
+      class="triangle"
+      [ngClass]="{ down: open, right: !open }"
+      src="assets/icons/accordeonIcon.svg"
+      alt="Triângulo azul"
+    />
+    <h1 class="title">{{ title }}</h1>
+    <p *ngIf="quantity">{{ quantity }}</p>
+  </div>
 
-<div class="accordionContent" [ngClass]="open ? 'open' : 'closed'">
-  <ng-content></ng-content>
+  <div class="accordionContent" [ngClass]="open ? 'open' : 'closed'">
+    <ng-content></ng-content>
+  </div>
 </div>
