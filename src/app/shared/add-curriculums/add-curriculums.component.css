@@ -73,20 +73,6 @@ label {
   transform: translate(-50%, -50%);
 }
 
-#addCurriculumButton {
-  width: 150px;
-  height: 48px;
-  margin-top: 36px;
-  border: 1px solid var(--primary);
-  border-radius: 8px;
-  background-color: var(--primary);
-  color: white;
-
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18.75px;
-}
-
 #addFileText {
   font-weight: 400;
   font-size: 12px;

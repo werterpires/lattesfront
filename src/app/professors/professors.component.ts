@@ -4,7 +4,7 @@ import { CurriculumnsService } from '../shared/services/curriculumns.service';
 import { ICurriculum } from '../shared/services/types';
 import { NavigationEnd, Router } from '@angular/router';
 import { AccordionComponent } from '../shared/accordion/accordion.component';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ContainerComponent } from '../shared/container/container.component';
 import { filter } from 'rxjs/operators';
 import { QuantitativeProfessorsComponent } from './quantitative-professors/quantitative-professors.component';
@@ -16,6 +16,7 @@ import { ProfessorDataComponent } from './professor-data/professor-data.componen
   imports: [
     NgIf,
     NgFor,
+    NgClass,
     ContainerComponent,
     AccordionComponent,
     QualitativeEventsWorksComponent,

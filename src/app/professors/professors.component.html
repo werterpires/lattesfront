@@ -1,26 +1,50 @@
-<app-container *ngIf="professorsPage"> Professores </app-container>
-
+<app-container *ngIf="professorsPage"></app-container>
 <ng-container *ngIf="professorCurriculum.length === 0">
-  <input
-    #filter
-    type="text"
-    (input)="filterString = filter.value; filterCurriculums()"
-  />
-  <label for="">
-    Apenas ativos
-    <input
-      type="checkbox"
-      (input)="onlyActives = !onlyActives; filterCurriculums()"
-  /></label>
+  <div class="searchPlace">
+    <div class="searchInputPlace">
+      <p id="searchTitle">Resultados da busca: {{ professorsToShow.length }}</p>
+      <input
+        class="seachInput"
+        #filter
+        type="text"
+        (input)="filterString = filter.value; filterCurriculums()"
+        placeholder="Pesquisar"
+      />
+    </div>
+
+    <label class="onlyAcivesLabel" for="">
+      Apenas ativos
+      <input
+        type="checkbox"
+        (input)="onlyActives = !onlyActives; filterCurriculums()"
+    /></label>
+  </div>
 
   <div class="cards">
     <ng-container *ngFor="let curriculum of professorsToShow">
       <div class="teacherCard" (click)="navigateTo(curriculum.lattesId)">
-        <p>{{ curriculum.curriculum.nome }}</p>
-        <p>Anos de vínculo: {{ curriculum.serviceYears }}</p>
-        <p>Status: {{ curriculum.active ? "Ativo" : "Inativo" }}</p>
-        <div>
-          <p>ID Lattes: {{ curriculum.lattesId }}</p>
+        <div
+          class="teacherData"
+          [ngClass]="{
+            activeData: curriculum.active,
+            inactiveData: !curriculum.active
+          }"
+        >
+          <p class="teacherName">{{ curriculum.curriculum.nome }}</p>
+          <div class="teacherSecondaryData">
+            <p>Anos de vínculo: {{ curriculum.serviceYears }}</p>
+            <p>{{ curriculum.active ? "Ativo" : "Inativo" }}</p>
+          </div>
+        </div>
+
+        <div
+          class="lattesId"
+          [ngClass]="{
+            activeId: curriculum.active,
+            inactiveId: !curriculum.active
+          }"
+        >
+          <p>{{ curriculum.lattesId }}</p>
         </div>
       </div>
     </ng-container>
@@ -28,7 +52,7 @@
 </ng-container>
 
 <ng-container *ngIf="professorCurriculum.length === 1">
-  <button (click)="navigateTo('')">Voltar</button>
+  <button class="defaultButton" (click)="navigateTo('')">Voltar</button>
   <app-professor-data [Curriculums]="professorCurriculum"> </app-professor-data>
   <app-quantitative-professors [curriculums]="professorCurriculum">
   </app-quantitative-professors>
