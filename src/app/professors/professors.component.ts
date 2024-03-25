@@ -33,6 +33,7 @@ export class ProfessorsComponent {
   filterString: string = '';
   onlyActives: boolean = false;
   @Input() professorsPage: boolean = true;
+  @Input() head: boolean = true;
   constructor(
     private curriculumnsService: CurriculumnsService,
     private router: Router

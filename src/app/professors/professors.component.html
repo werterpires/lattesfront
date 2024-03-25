@@ -1,65 +1,73 @@
-<app-container *ngIf="professorsPage"></app-container>
-<ng-container *ngIf="professorCurriculum.length === 0">
-  <div class="searchPlace">
-    <div class="searchInputPlace">
-      <p id="searchTitle">Resultados da busca: {{ professorsToShow.length }}</p>
-      <input
-        class="seachInput"
-        #filter
-        type="text"
-        (input)="filterString = filter.value; filterCurriculums()"
-        placeholder="Pesquisar"
-      />
+<app-container [head]="head">
+  <ng-container *ngIf="professorCurriculum.length === 0">
+    <div class="searchPlace">
+      <div class="searchInputPlace">
+        <p id="searchTitle">
+          Resultados da busca: {{ professorsToShow.length }}
+        </p>
+        <input
+          class="seachInput"
+          #filter
+          type="text"
+          (input)="filterString = filter.value; filterCurriculums()"
+          placeholder="Pesquisar"
+        />
+      </div>
+
+      <label class="onlyAcivesLabel" for="">
+        Apenas ativos
+        <input
+          type="checkbox"
+          (input)="onlyActives = !onlyActives; filterCurriculums()"
+      /></label>
     </div>
 
-    <label class="onlyAcivesLabel" for="">
-      Apenas ativos
-      <input
-        type="checkbox"
-        (input)="onlyActives = !onlyActives; filterCurriculums()"
-    /></label>
-  </div>
+    <div class="cards">
+      <ng-container *ngFor="let curriculum of professorsToShow">
+        <div class="teacherCard" (click)="navigateTo(curriculum.lattesId)">
+          <div
+            class="teacherData"
+            [ngClass]="{
+              activeData: curriculum.active,
+              inactiveData: !curriculum.active
+            }"
+          >
+            <p class="teacherName">{{ curriculum.curriculum.nome }}</p>
+            <div class="teacherSecondaryData">
+              <p>Anos de vínculo: {{ curriculum.serviceYears }}</p>
+              <p>{{ curriculum.active ? "Ativo" : "Inativo" }}</p>
+            </div>
+          </div>
 
-  <div class="cards">
-    <ng-container *ngFor="let curriculum of professorsToShow">
-      <div class="teacherCard" (click)="navigateTo(curriculum.lattesId)">
-        <div
-          class="teacherData"
-          [ngClass]="{
-            activeData: curriculum.active,
-            inactiveData: !curriculum.active
-          }"
-        >
-          <p class="teacherName">{{ curriculum.curriculum.nome }}</p>
-          <div class="teacherSecondaryData">
-            <p>Anos de vínculo: {{ curriculum.serviceYears }}</p>
-            <p>{{ curriculum.active ? "Ativo" : "Inativo" }}</p>
+          <div
+            class="lattesId"
+            [ngClass]="{
+              activeId: curriculum.active,
+              inactiveId: !curriculum.active
+            }"
+          >
+            <p>{{ curriculum.lattesId }}</p>
           </div>
         </div>
+      </ng-container>
+    </div>
+  </ng-container>
 
-        <div
-          class="lattesId"
-          [ngClass]="{
-            activeId: curriculum.active,
-            inactiveId: !curriculum.active
-          }"
-        >
-          <p>{{ curriculum.lattesId }}</p>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-</ng-container>
+  <ng-container *ngIf="professorCurriculum.length === 1">
+    <div class="buttonLine">
+      <div></div>
+      <button class="defaultButton" (click)="navigateTo('')">Voltar</button>
+    </div>
 
-<ng-container *ngIf="professorCurriculum.length === 1">
-  <button class="defaultButton" (click)="navigateTo('')">Voltar</button>
-  <app-professor-data [Curriculums]="professorCurriculum"> </app-professor-data>
-  <app-quantitative-professors [curriculums]="professorCurriculum">
-  </app-quantitative-professors>
+    <app-professor-data [Curriculums]="professorCurriculum">
+    </app-professor-data>
+    <app-quantitative-professors [curriculums]="professorCurriculum">
+    </app-quantitative-professors>
 
-  <app-qualitative-events-works
-    [onlyActives]="false"
-    [curriculumns]="professorCurriculum"
-    [title]="'Trabalhos em eventos'"
-  ></app-qualitative-events-works>
-</ng-container>
+    <app-qualitative-events-works
+      [onlyActives]="false"
+      [curriculumns]="professorCurriculum"
+      [title]="'Trabalhos em eventos'"
+    ></app-qualitative-events-works>
+  </ng-container>
+</app-container>

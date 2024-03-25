@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CurriculumnsService } from '../services/curriculumns.service';
 import { AddCurriculumsComponent } from '../add-curriculums/add-curriculums.component';
 import { NgClass, NgIf } from '@angular/common';
@@ -15,6 +15,7 @@ import { IUserFromJwt } from './types';
 export class ContainerComponent {
   add = false;
   user!: IUserFromJwt;
+  @Input() head = true;
 
   constructor(
     private curriculumService: CurriculumnsService,
