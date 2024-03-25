@@ -10,18 +10,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddCurriculumsService } from './add-curriculums.service';
 import { AlertsService } from '../alerts/alerts.service';
 import { CurriculumnsService } from '../services/curriculumns.service';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-add-curriculums',
   standalone: true,
-  imports: [ModalComponent, HttpClientModule],
+  imports: [ModalComponent, HttpClientModule, NgFor, NgIf, NgStyle],
   providers: [AddCurriculumsService],
   templateUrl: './add-curriculums.component.html',
   styleUrl: './add-curriculums.component.css',
 })
 export class AddCurriculumsComponent {
   @Output() closeEmitter = new EventEmitter();
-
+  buttonContent: string = 'Clique para selecionar arquivos ou solte-os aqui.';
   constructor(
     private utilsService: EventsWorksService,
     private loader: LoaderService,

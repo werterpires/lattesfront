@@ -1,5 +1,42 @@
 <app-modal>
-  <input type="file" (change)="onFileSelected($event)" multiple />
-  <button type="button" (click)="addCurriculum()">Adicionar</button>
-  <button (click)="closeEmitter.emit()" type="button">Cancelar</button>
+  <div id="addCurriculumcontent">
+    <div id="title">
+      <p>Buscar arquivos</p>
+      <img
+        src="assets/icons/closeIcon.svg"
+        alt="Símbolo de X"
+        (click)="closeEmitter.emit()"
+      />
+    </div>
+
+    <div id="content">
+      <!-- com o ngStyle, o input deve controlar se ele tem o before ou o after. se o lenght de currículos for igual a zero, ele deve ter o before -->
+      <label for="">
+        Arquivos<input
+          id="addFileInput"
+          type="file"
+          (change)="onFileSelected($event)"
+          multiple
+          [ngStyle]="{ '::before': curriculumsData.curriculums.length === 0 }"
+      /></label>
+
+      <p id="addFileText" *ngIf="curriculumsData.curriculums.length > 0">
+        {{ curriculumsData.curriculums.length }} arquivos selecionado<span
+          *ngIf="curriculumsData.curriculums.length > 1"
+          >s</span
+        >.
+      </p>
+
+      <div id="buttonLine">
+        <div></div>
+        <button
+          id="addCurriculumButton"
+          type="button"
+          (click)="addCurriculum()"
+        >
+          Cadastrar
+        </button>
+      </div>
+    </div>
+  </div>
 </app-modal>

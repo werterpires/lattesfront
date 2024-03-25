@@ -1,0 +1,100 @@
+#addCurriculumcontent {
+  display: flex;
+  flex-direction: column;
+  border-radius: 9.72px;
+}
+#title {
+  padding: 20px;
+
+  border: 1px solid var(--primary);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: var(--primary);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+
+  color: white;
+}
+
+#content {
+  position: relative;
+  padding: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16.8px;
+
+  color: var(--lightBlack);
+}
+
+#addFileInput {
+  width: 407px;
+  height: 90px;
+  position: relative;
+  border: 1px solid #cccccc;
+  outline: none;
+  border-radius: 8px;
+  color: transparent;
+}
+
+#addFileInput::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+#addFileInput::before {
+  content: "Selecione arquivos ou solte-os aqui";
+  display: inline-block;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.4px;
+  color: var(--fadeBlack);
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#addCurriculumButton {
+  width: 150px;
+  height: 48px;
+  margin-top: 36px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18.75px;
+}
+
+#addFileText {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.4px;
+  color: var(--fadeBlack);
+}
+
+#buttonLine {
+  display: flex;
+  justify-content: space-between;
+}
