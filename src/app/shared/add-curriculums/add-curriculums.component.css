@@ -81,6 +81,7 @@ label {
 }
 
 #buttonLine {
+  margin-top: 36px;
   display: flex;
   justify-content: space-between;
 }

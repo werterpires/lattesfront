@@ -1,0 +1,25 @@
+.professorData {
+  margin-bottom: 30px;
+}
+.professorName {
+  margin-bottom: 16px;
+
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28.8px;
+  color: var(--primary);
+}
+
+.propName {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: var(--terciary);
+}
+
+.propValue {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: #00000099;
+}
