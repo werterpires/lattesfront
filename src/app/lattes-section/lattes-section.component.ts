@@ -30,8 +30,15 @@ export class LattesSectionComponent {
   sections: { name: string; route: string }[] = [
     { name: 'Trabalhos em eventos', route: 'eventsworks' },
     { name: 'Artigos', route: 'articles' },
+    { name: 'TCCs', route: 'tccs' },
+    { name: 'Dissertações', route: 'dissertations' },
+    { name: 'Monografias', route: 'monographs' },
+    { name: 'Trabalhos', route: 'works' },
+    { name: 'Trabalhos de Conclusão de Cursos', route: 'conclusions' },
+    { name: 'Trabalhos de Monografias', route: 'monographsworks' },
   ];
   @Input() sectionsPage: boolean = true;
+  @Input() head = true;
   sectionsToShow = this.sections;
   filterString: string = '';
   outlet: boolean = false;

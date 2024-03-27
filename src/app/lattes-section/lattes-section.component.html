@@ -1,26 +1,31 @@
-<app-container *ngIf="sectionsPage"> Seçao do Lattes </app-container>
-
-<ng-container *ngIf="!outlet">
-  <input
-    #filter
-    type="text"
-    (input)="filterString = filter.value; filterObjects()"
-  />
-  <div class="sectionsCards">
-    <div
-      class="sectionCard"
-      *ngFor="let section of sectionsToShow"
-      (click)="outlet = true; router.navigate(['/sections', section.route])"
-    >
-      <p>
-        {{ section.name }}
-      </p>
+<app-container [head]="head">
+  <ng-container *ngIf="!outlet">
+    <p class="searchTitle">Resultados da busca: {{ sectionsToShow.length }}</p>
+    <input
+      #filter
+      type="text"
+      placeholder="Pesquisar"
+      (input)="filterString = filter.value; filterObjects()"
+      class="seachInput"
+    />
+    <div class="sectionsCards">
+      <div
+        *ngFor="let section of sectionsToShow"
+        (click)="outlet = true; router.navigate(['/sections', section.route])"
+        class="cardContainer"
+      >
+        <div class="sectionCard">
+          <p class="cardTitle">
+            {{ section.name }}
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
-</ng-container>
-<ng-container *ngIf="outlet">
-  <button (click)="outlet = false; router.navigate(['/sections'])">
-    Voltar
-  </button>
-  <router-outlet></router-outlet>
-</ng-container>
+  </ng-container>
+  <ng-container *ngIf="outlet">
+    <button (click)="outlet = false; router.navigate(['/sections'])">
+      Voltar
+    </button>
+    <router-outlet></router-outlet>
+  </ng-container>
+</app-container>
