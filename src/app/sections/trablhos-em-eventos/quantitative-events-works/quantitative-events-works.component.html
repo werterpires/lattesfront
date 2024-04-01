@@ -27,11 +27,11 @@
     /></label>
   </div>
 
-  <div class="qualitativeEvents">
-    <table>
-      <thead>
+  <div class="tableContainer">
+    <table class="table">
+      <thead class="thead">
         <tr class="headRow">
-          <th>
+          <th class="th">
             <app-filter-input
               *ngIf="eventProps[0].showFilter"
               [filter]="eventProps[0].filterObject"
@@ -63,8 +63,8 @@
             </div>
           </th>
 
-          <th *ngFor="let year of yersToConsider">{{ year }}</th>
-          <th>
+          <th *ngFor="let year of yersToConsider" class="th">{{ year }}</th>
+          <th class="th">
             <div
               class="tableHead"
               (mouseenter)="ascDes.classList.remove('hidden')"
@@ -90,8 +90,8 @@
       <tbody>
         <ng-container *ngFor="let professor of professorsToShow">
           <tr class="contentRow">
-            <td>{{ professor }}</td>
-            <td *ngFor="let year of yersToConsider">
+            <td class="td">{{ professor }}</td>
+            <td class="td" *ngFor="let year of yersToConsider">
               {{
                 eventsWorksService.countWorksByProfessorAndYear(
                   professor,
@@ -100,7 +100,7 @@
                 )
               }}
             </td>
-            <td>
+            <td class="td">
               {{
                 eventsWorksService.countWorksByProfessor(
                   professor,

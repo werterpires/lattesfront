@@ -158,3 +158,67 @@ li {
   display: flex;
   justify-content: space-between;
 }
+
+.tableContainer {
+  position: relative;
+  width: 80vw;
+  height: 70vh;
+  padding: 0px 16px 29px;
+  overflow: auto;
+  margin: 0 auto;
+  box-shadow: 0px 5px 4px 0px #a4a3a33d;
+}
+
+.table {
+  width: 100%;
+  overflow-y: auto;
+  border-collapse: collapse;
+}
+
+.tableHead {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  gap: 3px;
+}
+
+.thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.headRow {
+  box-shadow: 0px 5px 2px 0px #a4a3a340;
+  border-radius: 8px;
+}
+
+.th {
+  width: auto;
+  max-width: 320px;
+  word-wrap: break-word;
+  padding: 8px 8px 8px 14px;
+  cursor: default;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+
+  background-color: #ffffff;
+}
+
+.contentRow {
+  box-shadow: 0px 5px 2px 0px #a4a3a340;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.td {
+  overflow: hidden;
+  padding: 8px 8px 8px 14px;
+
+  min-height: 60px;
+  font-size: 14px;
+  line-height: 19.2px;
+  font-weight: 400;
+}

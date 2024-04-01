@@ -1,97 +1,104 @@
 <ng-container *ngIf="curriculums.length > 0">
   <app-accordion [title]="'Análise quantitativa'">
-    <input
-      #years
-      type="text"
-      (input)="
-        yersToConsider = utilsService.getYears(years.value);
-        filterServiceYears()
-      "
-    />
-    <label for=""
-      >Apenas anos com vínculo<input
-        type="checkbox"
-        [value]="onlyServiceYears"
+    <div class="filters">
+      <input
+        #years
+        type="text"
         (input)="
-          onlyServiceYears = !onlyServiceYears;
           yersToConsider = utilsService.getYears(years.value);
           filterServiceYears()
         "
-        name="onlyServiceYears"
-    /></label>
-    <table>
-      <thead>
-        <tr class="headRow">
-          <th>
-            <div
-              class="tableHead"
-              (mouseenter)="ascDesc.classList.remove('hidden')"
-              (mouseleave)="ascDesc.classList.add('hidden')"
-            >
-              <p (click)="sectionFilter = !sectionFilter">Seção Lattes</p>
-              <img
-                #ascDesc
-                class="arrowIcon hidden"
-                src="assets/icons/arrowIcon.svg"
-                alt="Desenho de uma seta"
-                (click)="sectionAscending = !sectionAscending"
-                [ngClass]="{
-                  rotate: !sectionAscending,
-                  notRotate: sectionAscending
-                }"
-              />
-            </div>
-          </th>
+        class="seachInput"
+        placeholder="Digite os anos a serem considerados."
+      />
+      <label for="" class="onlyAcivesLabel"
+        >Apenas anos com vínculo<input
+          type="checkbox"
+          [value]="onlyServiceYears"
+          (input)="
+            onlyServiceYears = !onlyServiceYears;
+            yersToConsider = utilsService.getYears(years.value);
+            filterServiceYears()
+          "
+          name="onlyServiceYears"
+      /></label>
+    </div>
 
-          <th *ngFor="let year of yersToConsider">{{ year }}</th>
-          <th>
-            <div
-              class="tableHead"
-              (mouseenter)="ascDes.classList.remove('hidden')"
-              (mouseleave)="ascDes.classList.add('hidden')"
-            >
-              <p>Total</p>
-              <img
-                #ascDes
-                class="arrowIcon hidden"
-                src="assets/icons/arrowIcon.svg"
-                alt="Desenho de uma seta"
-                (click)="quantityDesc = !quantityDesc"
-                [ngClass]="{
-                  rotate: quantityDesc,
-                  notRotate: !quantityDesc
-                }"
-              />
-            </div>
-          </th>
-        </tr>
-      </thead>
+    <div class="tableContainer">
+      <table class="table">
+        <thead class="thead">
+          <tr class="headRow">
+            <th class="th">
+              <div
+                class="tableHead"
+                (mouseenter)="ascDesc.classList.remove('hidden')"
+                (mouseleave)="ascDesc.classList.add('hidden')"
+              >
+                <p (click)="sectionFilter = !sectionFilter">Seção Lattes</p>
+                <img
+                  #ascDesc
+                  class="arrowIcon hidden"
+                  src="assets/icons/arrowIcon.svg"
+                  alt="Desenho de uma seta"
+                  (click)="sectionAscending = !sectionAscending"
+                  [ngClass]="{
+                    rotate: !sectionAscending,
+                    notRotate: sectionAscending
+                  }"
+                />
+              </div>
+            </th>
 
-      <tbody>
-        <ng-container *ngFor="let prop of currProp">
-          <tr class="contentRow">
-            <td>{{ prop.name }}</td>
-            <td *ngFor="let year of yersToConsider">
-              {{
-                eventsWorksService.countWorksByProfessorAndYear(
-                  curriculums[0].curriculum.nome,
-                  year,
-                  curriculums[0].curriculum.trabalhosEmEventos
-                )
-              }}
-            </td>
-            <td>
-              {{
-                eventsWorksService.countWorksByProfessor(
-                  curriculums[0].curriculum.nome,
-                  yersToConsider,
-                  curriculums[0].curriculum.trabalhosEmEventos
-                )
-              }}
-            </td>
+            <th *ngFor="let year of yersToConsider" class="th">{{ year }}</th>
+            <th class="th">
+              <div
+                class="tableHead"
+                (mouseenter)="ascDes.classList.remove('hidden')"
+                (mouseleave)="ascDes.classList.add('hidden')"
+              >
+                <p>Total</p>
+                <img
+                  #ascDes
+                  class="arrowIcon hidden"
+                  src="assets/icons/arrowIcon.svg"
+                  alt="Desenho de uma seta"
+                  (click)="quantityDesc = !quantityDesc"
+                  [ngClass]="{
+                    rotate: quantityDesc,
+                    notRotate: !quantityDesc
+                  }"
+                />
+              </div>
+            </th>
           </tr>
-        </ng-container>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <ng-container *ngFor="let prop of currProp">
+            <tr class="contentRow">
+              <td class="td">{{ prop.name }}</td>
+              <td class="td" *ngFor="let year of yersToConsider">
+                {{
+                  eventsWorksService.countWorksByProfessorAndYear(
+                    curriculums[0].curriculum.nome,
+                    year,
+                    curriculums[0].curriculum.trabalhosEmEventos
+                  )
+                }}
+              </td>
+              <td class="td">
+                {{
+                  eventsWorksService.countWorksByProfessor(
+                    curriculums[0].curriculum.nome,
+                    yersToConsider,
+                    curriculums[0].curriculum.trabalhosEmEventos
+                  )
+                }}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
   </app-accordion>
 </ng-container>

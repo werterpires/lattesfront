@@ -19,11 +19,11 @@
     /></label>
   </div>
 
-  <div class="qualitativeEvents">
-    <table>
-      <thead>
+  <div class="tableContainer">
+    <table class="table">
+      <thead class="thead">
         <tr class="headRow">
-          <th *ngFor="let prop of eventProps">
+          <th class="th" *ngFor="let prop of eventProps">
             <app-filter-input
               *ngIf="prop.showFilter"
               [filter]="prop.filterObject"
@@ -61,20 +61,20 @@
             </div>
           </th>
 
-          <th>Autores</th>
-          <th>Palavras-chave</th>
+          <th class="th">Autores</th>
+          <th class="th">Palavras-chave</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let work of eventsWorksToShow">
           <tr class="contentRow">
-            <td *ngFor="let prop of eventProps">
+            <td class="td" *ngFor="let prop of eventProps">
               <div class="td" [style]="{ width: prop.width }">
                 <p>{{ work[prop.key] ? work[prop.key] : ("" | failData) }}</p>
               </div>
             </td>
 
-            <td>
+            <td class="td">
               <div class="w320 autors">
                 <ng-container *ngFor="let autor of work.autores"
                   ><p>
@@ -85,7 +85,7 @@
                 </ng-container>
               </div>
             </td>
-            <td>
+            <td class="td">
               <div class="w240">
                 <span>{{ work.palavrasChave | failData }}</span>
               </div>
