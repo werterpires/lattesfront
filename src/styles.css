@@ -86,9 +86,35 @@ li {
   line-height: 18.75px;
 }
 
+.smallButton {
+  width: 113px;
+  height: 34px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 400px;
+  font-size: 14px;
+  line-height: 16.41px;
+}
+
 .searchTitle {
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
   margin-bottom: 12px;
+}
+
+.w320 {
+  width: 320px;
+}
+
+.w240 {
+  width: 240px;
+}
+
+.autors {
+  max-height: 90px;
+  overflow: auto;
 }

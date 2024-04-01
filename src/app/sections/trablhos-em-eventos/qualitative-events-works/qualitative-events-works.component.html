@@ -1,19 +1,24 @@
 <app-accordion [title]="title" [quantity]="eventsWorks.length">
-  <button (click)="cleanFiltersData()">Limpar filtros</button>
-  <label for=""
-    >Apenas ativos<input
-      type="checkbox"
-      [(ngModel)]="onlyActives"
-      name="onlyActives"
-      (change)="filterNow()"
-  /></label>
-  <label for=""
-    >Apenas anos com vínculo<input
-      type="checkbox"
-      [(ngModel)]="onlyServiceYears"
-      name="onlyServiceYears"
-      (change)="filterNow()"
-  /></label>
+  <div class="filters">
+    <button (click)="cleanFiltersData()" class="smallButton">
+      Limpar filtros
+    </button>
+    <label for="" class="onlyAcivesLabel"
+      >Apenas ativos<input
+        type="checkbox"
+        [(ngModel)]="onlyActives"
+        name="onlyActives"
+        (change)="filterNow()"
+    /></label>
+    <label for="" class="onlyAcivesLabel"
+      >Apenas anos com vínculo<input
+        type="checkbox"
+        [(ngModel)]="onlyServiceYears"
+        name="onlyServiceYears"
+        (change)="filterNow()"
+    /></label>
+  </div>
+
   <div class="qualitativeEvents">
     <table>
       <thead>
@@ -64,20 +69,26 @@
         <ng-container *ngFor="let work of eventsWorksToShow">
           <tr class="contentRow">
             <td *ngFor="let prop of eventProps">
-              {{ work[prop.key] ? work[prop.key] : ("" | failData) }}
+              <div class="td" [style]="{ width: prop.width }">
+                <p>{{ work[prop.key] ? work[prop.key] : ("" | failData) }}</p>
+              </div>
             </td>
 
             <td>
-              <ng-container *ngFor="let autor of work.autores"
-                ><p>
-                  <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
-                    autor.nomeParaCitacao
-                  }}), autor/a número {{ autor.ordemDeAutoria }}
-                </p>
-              </ng-container>
+              <div class="w320 autors">
+                <ng-container *ngFor="let autor of work.autores"
+                  ><p>
+                    <b>{{ autor.nomeCompletoDoAutor }}</b> ({{
+                      autor.nomeParaCitacao
+                    }}), autor/a número {{ autor.ordemDeAutoria }}
+                  </p>
+                </ng-container>
+              </div>
             </td>
             <td>
-              <span>{{ work.palavrasChave | failData }}</span>
+              <div class="w240">
+                <span>{{ work.palavrasChave | failData }}</span>
+              </div>
             </td>
           </tr>
         </ng-container>
@@ -85,14 +96,9 @@
     </table>
   </div>
 
-  <div>
+  <div class="navigation">
     <div>
-      <label for=""
-        ><input
-          type="number"
-          [(ngModel)]="resultsPerPage"
-          (input)="getWorksToShow()"
-      /></label>
+      <button class="smallButton">Baixar Relatório</button>
     </div>
     <div class="pages">
       <div
@@ -104,6 +110,14 @@
         {{ page }}
       </div>
     </div>
-    <div></div>
+    <div>
+      <label for=""
+        ><input
+          type="number"
+          [(ngModel)]="resultsPerPage"
+          (input)="getWorksToShow(); atualPage = 1"
+          id="resultsPerPage"
+      /></label>
+    </div>
   </div>
 </app-accordion>

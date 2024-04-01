@@ -9,4 +9,11 @@ export interface EventProps {
   showFilter: boolean;
   ascending: boolean;
   filterObject: FilterObject;
+  width: string;
+}
+
+export interface Pessoa {
+  nome: string;
+  idade: number;
+  cor: string;
 }

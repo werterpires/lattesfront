@@ -58,6 +58,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '240px',
     },
     {
       name: 'Título do trabalho',
@@ -68,6 +69,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '320px',
     },
     {
       name: 'Natureza',
@@ -78,6 +80,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
     {
       name: 'Ano do trabalho',
@@ -88,9 +91,10 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
     {
-      name: 'Pais do evento',
+      name: 'País do evento',
       key: 'paisDoEvento',
       showFilter: false,
       ascending: true,
@@ -98,6 +102,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
 
     {
@@ -109,6 +114,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
     {
       name: 'Meio de divulgacão',
@@ -119,6 +125,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
     {
       name: 'DOI',
@@ -129,6 +136,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
     {
       name: 'URL',
@@ -139,6 +147,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '240px',
     },
 
     {
@@ -150,6 +159,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -161,6 +171,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '240px',
     },
 
     {
@@ -172,6 +183,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -183,6 +195,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '240px',
     },
 
     {
@@ -194,6 +207,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
 
     {
@@ -205,6 +219,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
 
     {
@@ -216,6 +231,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
 
     {
@@ -227,6 +243,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '240px',
     },
 
     {
@@ -238,6 +255,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -249,6 +267,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -260,6 +279,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -271,6 +291,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -282,6 +303,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -293,6 +315,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '80px',
     },
 
     {
@@ -304,6 +327,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '160px',
     },
 
     {
@@ -315,6 +339,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '120px',
     },
 
     {
@@ -326,6 +351,7 @@ export class QualitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '240px',
     },
   ];
 

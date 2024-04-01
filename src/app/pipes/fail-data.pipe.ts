@@ -10,7 +10,11 @@ export class FailDataPipe implements PipeTransform {
       return 'Não informado';
     }
     if (Array.isArray(value)) {
-      return value.join(', ');
+      //transforma em string separada por vírgula e espaço, mas deve eliminar os espaços extras
+      return value
+        .map((value) => value.trim())
+        .filter((value) => value.length > 0)
+        .join(', ');
     }
 
     return value;

@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 .open {
-  max-height: 90vh;
+  max-height: 93vh;
   overflow-y: auto;
   padding-bottom: 5px;
 }

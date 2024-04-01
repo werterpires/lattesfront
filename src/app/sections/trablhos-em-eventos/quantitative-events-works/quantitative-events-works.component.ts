@@ -54,6 +54,7 @@ export class QuantitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '320px',
     },
 
     {
@@ -65,6 +66,7 @@ export class QuantitativeEventsWorksComponent {
         text: [],
         disjunctive: true,
       },
+      width: '40px',
     },
   ];
 
