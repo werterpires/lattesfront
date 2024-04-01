@@ -23,9 +23,16 @@
     </div>
   </ng-container>
   <ng-container *ngIf="outlet">
-    <button (click)="outlet = false; router.navigate(['/sections'])">
-      Voltar
-    </button>
+    <div id="buttonLine">
+      <div></div>
+      <button
+        (click)="outlet = false; router.navigate(['/sections'])"
+        class="smallButton"
+      >
+        Voltar
+      </button>
+    </div>
+
     <router-outlet></router-outlet>
   </ng-container>
 </app-container>

@@ -52,7 +52,6 @@ export class LattesSectionComponent {
   }
 
   ngOnInit() {
-    console.log(this.router.url.endsWith('/sections'), this.sectionsPage);
     if (this.router.url.endsWith('/sections') || !this.sectionsPage) {
       this.outlet = false;
     } else {

@@ -79,9 +79,3 @@ label {
   line-height: 14.4px;
   color: var(--fadeBlack);
 }
-
-#buttonLine {
-  margin-top: 36px;
-  display: flex;
-  justify-content: space-between;
-}
