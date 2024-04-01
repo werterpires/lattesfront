@@ -1,135 +1,145 @@
-<input
-  #years
-  type="text"
-  (input)="
-    yersToConsider = utilsService.getYears(years.value); getEventsWorks()
-  "
-/>
-<button>Limpar filtros</button>
-<label for=""
-  >Apenas ativos<input
-    type="checkbox"
-    [value]="onlyActives"
-    name="onlyActives"
-    (input)="onlyActives = !onlyActives; getEventsWorks()"
-    checked
-/></label>
-<label for=""
-  >Apenas anos com vínculo<input
-    type="checkbox"
-    [value]="onlyServiceYears"
-    (input)="onlyServiceYears = !onlyServiceYears; getEventsWorks()"
-    name="onlyServiceYears"
-/></label>
-<div class="qualitativeEvents">
-  <table>
-    <thead>
-      <tr class="headRow">
-        <th>
-          <app-filter-input
-            *ngIf="eventProps[0].showFilter"
-            [filter]="eventProps[0].filterObject"
-            (filterEvent)="eventProps[0].filterObject = $event"
-          ></app-filter-input>
-          <div
-            class="tableHead"
-            (mouseenter)="ascDesc.classList.remove('hidden')"
-            (mouseleave)="ascDesc.classList.add('hidden')"
-          >
-            <p (click)="eventProps[0].showFilter = !eventProps[0].showFilter">
-              Professor
-            </p>
-            <img
-              #ascDesc
-              class="arrowIcon hidden"
-              src="assets/icons/arrowIcon.svg"
-              alt="Desenho de uma seta"
-              (click)="
-                eventProps[0].ascending = !ascending;
-                ascending = eventProps[0].ascending;
-                orderProp = eventProps[0].key
-              "
-              [ngClass]="{
-                rotate: !eventProps[0].ascending,
-                notRotate: eventProps[0].ascending
-              }"
-            />
-          </div>
-        </th>
-
-        <th *ngFor="let year of yersToConsider">{{ year }}</th>
-        <th>
-          <div
-            class="tableHead"
-            (mouseenter)="ascDes.classList.remove('hidden')"
-            (mouseleave)="ascDes.classList.add('hidden')"
-          >
-            <p>Total</p>
-            <img
-              #ascDes
-              class="arrowIcon hidden"
-              src="assets/icons/arrowIcon.svg"
-              alt="Desenho de uma seta"
-              (click)="quantityDesc = !quantityDesc"
-              [ngClass]="{
-                rotate: quantityDesc,
-                notRotate: !quantityDesc
-              }"
-            />
-          </div>
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <ng-container *ngFor="let professor of professorsToShow">
-        <tr class="contentRow">
-          <td>{{ professor }}</td>
-          <td *ngFor="let year of yersToConsider">
-            {{
-              eventsWorksService.countWorksByProfessorAndYear(
-                professor,
-                year,
-                eventsWorks
-              )
-            }}
-          </td>
-          <td>
-            {{
-              eventsWorksService.countWorksByProfessor(
-                professor,
-                yersToConsider,
-                eventsWorks
-              )
-            }}
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
-</div>
-
-<div>
-  <div>
-    <label for=""
-      ><input
-        #results
-        type="number"
-        [value]="resultsPerPage"
-        (input)="
-          resultsPerPage = +results.value > 0 ? +results.value : 1; filterNow()
-        "
+<app-accordion [title]="'Análise Quantitativa'" [quantity]="eventsWorks.length">
+  <div class="filters">
+    <input
+      #years
+      type="text"
+      (input)="
+        yersToConsider = utilsService.getYears(years.value); getEventsWorks()
+      "
+      class="seachInput"
+      placeholder="Digite os anos a serem considerados."
+    />
+    <button class="smallButton">Limpar filtros</button>
+    <label for="" class="onlyAcivesLabel"
+      >Apenas ativos<input
+        type="checkbox"
+        [value]="onlyActives"
+        name="onlyActives"
+        (input)="onlyActives = !onlyActives; getEventsWorks()"
+        checked
+    /></label>
+    <label for="" class="onlyAcivesLabel"
+      >Apenas anos com vínculo<input
+        type="checkbox"
+        [value]="onlyServiceYears"
+        (input)="onlyServiceYears = !onlyServiceYears; getEventsWorks()"
+        name="onlyServiceYears"
     /></label>
   </div>
-  <div class="pages">
-    <div
-      *ngFor="let page of getPageNumbers()"
-      class="pageNumber"
-      [ngClass]="{ selectedPage: page === atualPage }"
-      (click)="atualPage = +page; getProfessorsToShow()"
-    >
-      {{ page }}
+
+  <div class="qualitativeEvents">
+    <table>
+      <thead>
+        <tr class="headRow">
+          <th>
+            <app-filter-input
+              *ngIf="eventProps[0].showFilter"
+              [filter]="eventProps[0].filterObject"
+              (filterEvent)="eventProps[0].filterObject = $event"
+            ></app-filter-input>
+            <div
+              class="tableHead"
+              (mouseenter)="ascDesc.classList.remove('hidden')"
+              (mouseleave)="ascDesc.classList.add('hidden')"
+            >
+              <p (click)="eventProps[0].showFilter = !eventProps[0].showFilter">
+                Professor
+              </p>
+              <img
+                #ascDesc
+                class="arrowIcon hidden"
+                src="assets/icons/arrowIcon.svg"
+                alt="Desenho de uma seta"
+                (click)="
+                  eventProps[0].ascending = !ascending;
+                  ascending = eventProps[0].ascending;
+                  orderProp = eventProps[0].key
+                "
+                [ngClass]="{
+                  rotate: !eventProps[0].ascending,
+                  notRotate: eventProps[0].ascending
+                }"
+              />
+            </div>
+          </th>
+
+          <th *ngFor="let year of yersToConsider">{{ year }}</th>
+          <th>
+            <div
+              class="tableHead"
+              (mouseenter)="ascDes.classList.remove('hidden')"
+              (mouseleave)="ascDes.classList.add('hidden')"
+            >
+              <p>Total</p>
+              <img
+                #ascDes
+                class="arrowIcon hidden"
+                src="assets/icons/arrowIcon.svg"
+                alt="Desenho de uma seta"
+                (click)="quantityDesc = !quantityDesc"
+                [ngClass]="{
+                  rotate: quantityDesc,
+                  notRotate: !quantityDesc
+                }"
+              />
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngFor="let professor of professorsToShow">
+          <tr class="contentRow">
+            <td>{{ professor }}</td>
+            <td *ngFor="let year of yersToConsider">
+              {{
+                eventsWorksService.countWorksByProfessorAndYear(
+                  professor,
+                  year,
+                  eventsWorks
+                )
+              }}
+            </td>
+            <td>
+              {{
+                eventsWorksService.countWorksByProfessor(
+                  professor,
+                  yersToConsider,
+                  eventsWorks
+                )
+              }}
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="navigation">
+    <div><button class="smallButton">Baixar Relatório</button></div>
+
+    <div class="pages">
+      <div
+        *ngFor="let page of getPageNumbers()"
+        class="pageNumber"
+        [ngClass]="{ selectedPage: page === atualPage }"
+        (click)="atualPage = +page; getProfessorsToShow()"
+      >
+        {{ page }}
+      </div>
+    </div>
+    <div>
+      <label for=""
+        ><input
+          #results
+          type="number"
+          [value]="resultsPerPage"
+          (input)="
+            resultsPerPage = +results.value > 0 ? +results.value : 1;
+            filterNow()
+          "
+          id="resultsPerPage"
+      /></label>
     </div>
   </div>
-  <div></div>
-</div>
+</app-accordion>

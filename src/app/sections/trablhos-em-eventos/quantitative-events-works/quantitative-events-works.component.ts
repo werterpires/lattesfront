@@ -9,6 +9,7 @@ import { EventProps, EventsWorkKey } from '../types';
 import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
 import { EventsWorksService } from '../../../shared/services/eventWorksService';
 import { UtilsService } from '../../../shared/services/util.service';
+import { AccordionComponent } from '../../../shared/accordion/accordion.component';
 
 @Component({
   selector: 'app-quantitative-events-works',
@@ -20,6 +21,7 @@ import { UtilsService } from '../../../shared/services/util.service';
     FailDataPipe,
     FormsModule,
     FilterInputComponent,
+    AccordionComponent,
   ],
   templateUrl: './quantitative-events-works.component.html',
   styleUrl: './quantitative-events-works.component.css',

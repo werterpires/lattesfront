@@ -42,6 +42,13 @@ li {
   transition: all 0.3s ease;
 }
 
+.filters {
+  margin: 30px 0px 24px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .seachInput {
   width: 316px;
   height: 45px;
@@ -94,7 +101,7 @@ li {
   background-color: var(--primary);
   color: white;
 
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 14px;
   line-height: 16.41px;
 }
@@ -117,4 +124,31 @@ li {
 .autors {
   max-height: 90px;
   overflow: auto;
+}
+
+.navigation {
+  margin: 17px auto 0;
+  max-width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#resultsPerPage {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  border: 1px solid #dddddd;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+
+  text-align: center;
+}
+
+#resultsPerPage::-webkit-inner-spin-button,
+#resultsPerPage::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
