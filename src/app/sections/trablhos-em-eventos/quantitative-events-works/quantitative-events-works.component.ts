@@ -35,7 +35,7 @@ export class QuantitativeEventsWorksComponent {
   professorsToShow: string[] = [];
 
   atualPage: number = 1;
-  resultsPerPage: number = 5;
+  resultsPerPage: number = 8;
   pagesNumber!: number;
 
   yersToConsider: string[] = this.utilsService.getLastFiveYears();
@@ -82,6 +82,60 @@ export class QuantitativeEventsWorksComponent {
       this.curriculums = curriculumns;
       this.getEventsWorks();
     });
+  }
+
+  createSheet() {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Trabalhos em eventos');
+
+    worksheet.addRow(this.makeHeaders());
+    this.professors.forEach((professor) => {
+      const row = this.makeRow(professor);
+      worksheet.addRow(row);
+    });
+
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      this.saveAsExcelFile(buffer, 'data');
+    });
+  }
+
+  makeHeaders() {
+    const headers = ['Professor'];
+
+    for (const year of this.yersToConsider) {
+      headers.push(year);
+    }
+    headers.push('Total');
+
+    return headers;
+  }
+
+  makeRow(professor: string) {
+    const row = [professor];
+    for (const year of this.yersToConsider) {
+      row.push(
+        this.eventsWorksService
+          .countWorksByProfessorAndYear(professor, year, this.eventsWorks)
+          .toString()
+      );
+    }
+
+    row.push(
+      this.eventsWorksService
+        .countWorksByProfessor(professor, this.yersToConsider, this.eventsWorks)
+        .toString()
+    );
+    return row;
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+    const a: HTMLAnchorElement = document.createElement('a');
+    a.href = URL.createObjectURL(data);
+    a.download = fileName + '.xlsx';
+    a.click();
   }
 
   /**
