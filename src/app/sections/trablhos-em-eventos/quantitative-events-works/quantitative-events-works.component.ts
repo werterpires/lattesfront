@@ -10,6 +10,7 @@ import { FilterInputComponent } from '../../../shared/filter-input/filter-input.
 import { EventsWorksService } from '../../../shared/services/eventWorksService';
 import { UtilsService } from '../../../shared/services/util.service';
 import { AccordionComponent } from '../../../shared/accordion/accordion.component';
+import * as ExcelJS from 'exceljs';
 
 @Component({
   selector: 'app-quantitative-events-works',

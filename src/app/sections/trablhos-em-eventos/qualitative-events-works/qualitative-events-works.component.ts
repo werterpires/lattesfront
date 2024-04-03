@@ -9,6 +9,8 @@ import { EventProps, EventsWorkKey } from '../types';
 import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
 import { AccordionComponent } from '../../../shared/accordion/accordion.component';
 
+import * as ExcelJS from 'exceljs';
+
 @Component({
   selector: 'app-qualitative-events-works',
   standalone: true,
@@ -368,6 +370,71 @@ export class QualitativeEventsWorksComponent {
     // }
   }
 
+  createSheet() {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Trabalhos em eventos');
+
+    worksheet.addRow(this.makeHeaders());
+    this.eventsWorks.forEach((work) => {
+      const row = this.makeRow(work);
+      worksheet.addRow(row);
+    });
+
+    const options = {
+      filename: './streamed-workbook.xlsx',
+      useStyles: true,
+      useSharedStrings: true,
+    };
+
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      this.saveAsExcelFile(buffer, 'data');
+    });
+  }
+
+  makeHeaders() {
+    const headers = [];
+    for (const prop of this.eventProps) {
+      headers.push(prop.name);
+    }
+    headers.push('Autores');
+    headers.push('Palavras-chave');
+    return headers;
+  }
+
+  makeRow(work: TrabalhoEmEventos) {
+    const row = [];
+
+    for (const prop of this.eventProps) {
+      row.push(work[prop.key]);
+    }
+
+    //pega o array de objetos autores e transforma em uma string
+    let autores = '';
+
+    work.autores?.forEach((autor) => {
+      autores =
+        autores +
+        `${autor.nomeCompletoDoAutor} (${autor.nomeParaCitacao}), autor número ${autor.ordemDeAutoria}.\n `;
+    });
+
+    row.push(autores);
+    //pega o array de palavras-chave e transforma em uma string
+    const palavrasChave = work.palavrasChave?.join(', ');
+    row.push(palavrasChave);
+
+    return row;
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+    const a: HTMLAnchorElement = document.createElement('a');
+    a.href = URL.createObjectURL(data);
+    a.download = fileName + '.xlsx';
+    a.click();
+  }
+
   getEventsWorks() {
     this.eventsWorks = [];
     this._curriculumns.forEach((curriculum) => {
@@ -473,36 +540,46 @@ export class QualitativeEventsWorksComponent {
     }
   }
 
+  /**
+   * Cleans all the filters' texts and reloads the events works.
+   * This function is called by the "Limpar" button in the filter section.
+   */
   cleanFiltersData() {
     for (const prop of this.eventProps) {
-      prop.filterObject.text = [];
+      // Cleans the text of the filter
+      prop.filterObject.text.length = 0;
     }
-
+    // Reloads the events works from the curriculums
     this.getEventsWorks();
+    // Orders the events works based on the current order
     this.orderNow();
   }
 
+  /**
+   * Updates the eventsWorksToShow array based on the current page and
+   * resultsPerPage properties. If resultsPerPage is 0, shows all events works.
+   */
   getWorksToShow() {
     if (!this.resultsPerPage) {
+      // If results per page is 0, show all events works
+      this.eventsWorksToShow = this.eventsWorks;
       return;
     }
-    this.pagesNumber = Math.ceil(this.eventsWorks.length / this.resultsPerPage);
-    this.eventsWorksToShow = this.eventsWorks.filter((work) => {
-      if (
-        this.eventsWorks.indexOf(work) >=
-          this.resultsPerPage * (this.atualPage - 1) &&
-        this.eventsWorks.indexOf(work) < this.resultsPerPage * this.atualPage
-      ) {
-        return true;
-      }
 
-      return false;
-    });
+    const start = (this.atualPage - 1) * this.resultsPerPage;
+    const end = start + this.resultsPerPage;
+
+    // Slice the events works array with the calculated start and end indices
+    this.eventsWorksToShow = this.eventsWorks.slice(start, end);
   }
 
+  /**
+   * Returns an array with the page numbers to be displayed.
+   */
   getPageNumbers(): number[] {
-    return Array(this.pagesNumber)
-      .fill(0)
-      .map((_, index) => index + 1);
+    // Returns an array with the page numbers to be displayed. The length of
+    // the array is equal to the number of pages (pagesNumber), and the values
+    // are the page numbers, starting from 1.
+    return Array.from({ length: this.pagesNumber }, (_, i) => i + 1);
   }
 }
