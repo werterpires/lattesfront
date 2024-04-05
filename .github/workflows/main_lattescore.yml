@@ -33,4 +33,4 @@ jobs:
           app-name: "lattescore"
           slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E0CF3053B8844533A7408CCDB009950A }}
-          package: dist/lates-project-front
+          package: .

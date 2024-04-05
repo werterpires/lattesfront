@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICreateCurriculums, ICurriculum } from '../services/types';
 import { Observable, throwError } from 'rxjs';
+import { environment } from 'src/enviroments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class AddCurriculumsService {
     }
 
     return this.httpClient.post<ICurriculum[]>(
-      'http://localhost:3000/curriculum',
+      environment.API + '/curriculum',
       curriculumsData,
       {
         headers: {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { ICurriculum } from './types';
 import { Router } from '@angular/router';
+import { environment } from 'src/enviroments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class CurriculumnsService {
       this.redirectToLogin();
     }
     return this.httpClient
-      .get<ICurriculum[]>('http://localhost:3000/curriculum', {
+      .get<ICurriculum[]>(environment.API + '/curriculum', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
