@@ -39,10 +39,7 @@ export class QualitativeEventsWorksComponent {
   eventsWorksToShow: TrabalhoEmEventos[] = [];
   atualPage: number = 1;
   resultsPerPage: number = 5;
-  //arredondado pra cima
-  pagesNumber: number = Math.ceil(
-    this.eventsWorks.length / this.resultsPerPage
-  );
+  pagesNumber: number = 1;
   orderProp: string = 'nome';
   ascending: boolean = true;
   @Input() onlyActives: boolean = true;
@@ -520,6 +517,8 @@ export class QualitativeEventsWorksComponent {
       });
     }
 
+    this.pagesNumber = Math.ceil(this.eventsWorks.length / this.resultsPerPage);
+
     this.orderNow();
   }
 
@@ -580,6 +579,8 @@ export class QualitativeEventsWorksComponent {
     // Returns an array with the page numbers to be displayed. The length of
     // the array is equal to the number of pages (pagesNumber), and the values
     // are the page numbers, starting from 1.
+    console.log(this.pagesNumber);
+    console.log(Array.from({ length: this.pagesNumber }, (_, i) => i + 1));
     return Array.from({ length: this.pagesNumber }, (_, i) => i + 1);
   }
 }
