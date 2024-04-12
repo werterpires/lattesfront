@@ -3,9 +3,7 @@
     <input
       #years
       type="text"
-      (input)="
-        yersToConsider = utilsService.getYears(years.value); getEventsWorks()
-      "
+      (input)="yersToConsider = utilsService.getYears(years.value); getEventsWorks()"
       class="seachInput"
       placeholder="Digite os anos a serem considerados."
     />
@@ -25,125 +23,187 @@
         (input)="onlyServiceYears = !onlyServiceYears; getEventsWorks()"
         name="onlyServiceYears"
     /></label>
+
+    <label for="" class="onlyAcivesLabel">
+      Ver como gráfico
+      <input
+        type="checkbox"
+        [(ngModel)]="graph"
+        (input)="graph = !graph; getEventsWorks()"
+        name="graph"
+      />
+    </label>
   </div>
+  <div class="dataShower">
+    <div class="dataContainer" [ngStyle]="{ translate: graph ? '-50%' : '0' }">
+      <div class="tableShower">
+        <div class="tableContainer">
+          <table class="table">
+            <thead class="thead">
+              <tr class="headRow">
+                <th class="th">
+                  <app-filter-input
+                    *ngIf="eventProps[0].showFilter"
+                    [filter]="eventProps[0].filterObject"
+                    (filterEvent)="eventProps[0].filterObject = $event"
+                  ></app-filter-input>
+                  <div
+                    class="tableHead"
+                    (mouseenter)="ascDesc.classList.remove('hidden')"
+                    (mouseleave)="ascDesc.classList.add('hidden')"
+                  >
+                    <p (click)="eventProps[0].showFilter = !eventProps[0].showFilter">Professor</p>
+                    <img
+                      #ascDesc
+                      class="arrowIcon hidden"
+                      src="assets/icons/arrowIcon.svg"
+                      alt="Desenho de uma seta"
+                      (click)="
+                        eventProps[0].ascending = !ascending;
+                        ascending = eventProps[0].ascending;
+                        orderProp = eventProps[0].key
+                      "
+                      [ngClass]="{
+                        rotate: !eventProps[0].ascending,
+                        notRotate: eventProps[0].ascending
+                      }"
+                    />
+                  </div>
+                </th>
 
-  <div class="tableContainer">
-    <table class="table">
-      <thead class="thead">
-        <tr class="headRow">
-          <th class="th">
-            <app-filter-input
-              *ngIf="eventProps[0].showFilter"
-              [filter]="eventProps[0].filterObject"
-              (filterEvent)="eventProps[0].filterObject = $event"
-            ></app-filter-input>
+                <th *ngFor="let year of yersToConsider" class="th">{{ year }}</th>
+                <th class="th">
+                  <div
+                    class="tableHead"
+                    (mouseenter)="ascDes.classList.remove('hidden')"
+                    (mouseleave)="ascDes.classList.add('hidden')"
+                  >
+                    <p>Total</p>
+                    <img
+                      #ascDes
+                      class="arrowIcon hidden"
+                      src="assets/icons/arrowIcon.svg"
+                      alt="Desenho de uma seta"
+                      (click)="quantityDesc = !quantityDesc"
+                      [ngClass]="{
+                        rotate: quantityDesc,
+                        notRotate: !quantityDesc
+                      }"
+                    />
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <ng-container *ngFor="let professor of professorsToShow">
+                <tr class="contentRow">
+                  <td class="td">{{ professor }}</td>
+                  <td class="td" *ngFor="let year of yersToConsider">
+                    {{
+                      eventsWorksService.countWorksByProfessorAndYear(professor, year, eventsWorks)
+                    }}
+                  </td>
+                  <td class="td">
+                    {{
+                      eventsWorksService.countWorksByProfessor(
+                        professor,
+                        yersToConsider,
+                        eventsWorks
+                      )
+                    }}
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="navigation">
+          <div>
+            <button (click)="createSheet()" class="smallButton">Baixar Relatório</button>
+          </div>
+
+          <div class="pages">
             <div
-              class="tableHead"
-              (mouseenter)="ascDesc.classList.remove('hidden')"
-              (mouseleave)="ascDesc.classList.add('hidden')"
+              *ngFor="let page of getPageNumbers()"
+              class="pageNumber"
+              [ngClass]="{ selectedPage: page === atualPage }"
+              (click)="atualPage = +page; getProfessorsToShow()"
             >
-              <p (click)="eventProps[0].showFilter = !eventProps[0].showFilter">
-                Professor
-              </p>
-              <img
-                #ascDesc
-                class="arrowIcon hidden"
-                src="assets/icons/arrowIcon.svg"
-                alt="Desenho de uma seta"
-                (click)="
-                  eventProps[0].ascending = !ascending;
-                  ascending = eventProps[0].ascending;
-                  orderProp = eventProps[0].key
-                "
-                [ngClass]="{
-                  rotate: !eventProps[0].ascending,
-                  notRotate: eventProps[0].ascending
-                }"
-              />
+              {{ page }}
             </div>
-          </th>
-
-          <th *ngFor="let year of yersToConsider" class="th">{{ year }}</th>
-          <th class="th">
-            <div
-              class="tableHead"
-              (mouseenter)="ascDes.classList.remove('hidden')"
-              (mouseleave)="ascDes.classList.add('hidden')"
-            >
-              <p>Total</p>
-              <img
-                #ascDes
-                class="arrowIcon hidden"
-                src="assets/icons/arrowIcon.svg"
-                alt="Desenho de uma seta"
-                (click)="quantityDesc = !quantityDesc"
-                [ngClass]="{
-                  rotate: quantityDesc,
-                  notRotate: !quantityDesc
-                }"
-              />
-            </div>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <ng-container *ngFor="let professor of professorsToShow">
-          <tr class="contentRow">
-            <td class="td">{{ professor }}</td>
-            <td class="td" *ngFor="let year of yersToConsider">
-              {{
-                eventsWorksService.countWorksByProfessorAndYear(
-                  professor,
-                  year,
-                  eventsWorks
-                )
-              }}
-            </td>
-            <td class="td">
-              {{
-                eventsWorksService.countWorksByProfessor(
-                  professor,
-                  yersToConsider,
-                  eventsWorks
-                )
-              }}
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="navigation">
-    <div>
-      <button (click)="createSheet()" class="smallButton">
-        Baixar Relatório
-      </button>
-    </div>
-
-    <div class="pages">
-      <div
-        *ngFor="let page of getPageNumbers()"
-        class="pageNumber"
-        [ngClass]="{ selectedPage: page === atualPage }"
-        (click)="atualPage = +page; getProfessorsToShow()"
-      >
-        {{ page }}
+          </div>
+          <div>
+            <label for=""
+              ><input
+                #results
+                type="number"
+                [value]="resultsPerPage"
+                (input)="resultsPerPage = +results.value > 0 ? +results.value : 1; filterNow()"
+                id="resultsPerPage"
+            /></label>
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-      <label for=""
-        ><input
-          #results
-          type="number"
-          [value]="resultsPerPage"
-          (input)="
-            resultsPerPage = +results.value > 0 ? +results.value : 1;
-            filterNow()
-          "
-          id="resultsPerPage"
-      /></label>
+
+      <div class="chartShower">
+        <app-quantity
+          [multi]="multi"
+          [multi2]="multi2"
+          [totals]="totals"
+          [totals2]="totals2"
+          [multiTotal]="multiTotal"
+          [dataTypes]="dataTypes"
+          [graphTypes]="chartTypes"
+        ></app-quantity>
+        <form>
+          <label for="professor">Por professor</label>
+          <input
+            type="radio"
+            id="professor"
+            name="dataTypes"
+            (change)="dataTypes.professor = true; dataTypes.year = false"
+            [value]="dataTypes.professor"
+          />
+
+          <label for="year">Por ano</label>
+          <input
+            type="radio"
+            id="year"
+            name="dataTypes"
+            (change)="dataTypes.professor = false; dataTypes.year = true"
+            [value]="dataTypes.year"
+          />
+        </form>
+        <form action="">
+          <label for="bar">Gráfico de barra</label>
+          <input
+            type="radio"
+            id="bar"
+            name="chartTypes"
+            (change)="chartTypes.bar = true; chartTypes.pie = false; chartTypes.line = false"
+            [value]="chartTypes.bar"
+          />
+
+          <label for="pie">Gráfico de pizza</label>
+          <input
+            type="radio"
+            id="pie"
+            name="chartTypes"
+            (change)="chartTypes.bar = false; chartTypes.pie = true; chartTypes.line = false"
+            [value]="chartTypes.pie"
+          />
+          <label for="line">Gráfico de linha</label>
+          <input
+            type="radio"
+            id="line"
+            name="chartTypes"
+            (change)="chartTypes.bar = false; chartTypes.pie = false; chartTypes.line = true"
+            [value]="chartTypes.line"
+          />
+        </form>
+      </div>
     </div>
   </div>
 </app-accordion>

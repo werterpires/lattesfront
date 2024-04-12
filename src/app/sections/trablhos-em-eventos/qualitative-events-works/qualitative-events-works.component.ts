@@ -579,8 +579,7 @@ export class QualitativeEventsWorksComponent {
     // Returns an array with the page numbers to be displayed. The length of
     // the array is equal to the number of pages (pagesNumber), and the values
     // are the page numbers, starting from 1.
-    console.log(this.pagesNumber);
-    console.log(Array.from({ length: this.pagesNumber }, (_, i) => i + 1));
+
     return Array.from({ length: this.pagesNumber }, (_, i) => i + 1);
   }
 }

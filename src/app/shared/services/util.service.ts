@@ -8,7 +8,7 @@ export class UtilsService {
     const currentYear = new Date().getFullYear();
 
     // Creates an array with the last five years
-    return Array.from({ length: 5 }, (_, i) => String(currentYear - i));
+    return Array.from({ length: 5 }, (_, i) => String(currentYear - i)).reverse();
   }
 
   /**
