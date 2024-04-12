@@ -1,87 +1,94 @@
-<ng-container *ngIf="graphTypes.bar">
-  <ng-container *ngIf="dataTypes.year">
-    <ngx-charts-bar-vertical-2d
+<div>
+  <ng-container *ngIf="chartType === 'bar'">
+    <ng-container *ngIf="dataType === 'year'">
+      <ngx-charts-bar-vertical-2d
+        [showYAxisLabel]="showYAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxisLabel]="xAxisLabel"
+        [legendTitle]="legendTitle"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        (select)="onSelect($event)"
+        [scheme]="colorScheme"
+        [legendPosition]="legendPosition"
+        [noBarWhenZero]="false"
+        [barPadding]="0"
+        [groupPadding]="8"
+      >
+      </ngx-charts-bar-vertical-2d>
+    </ng-container>
+
+    <ng-container *ngIf="dataType === 'professor'">
+      <ngx-charts-bar-vertical-2d
+        [showYAxisLabel]="showYAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [results]="multi2"
+        [gradient]="gradient"
+        [xAxisLabel]="xAxisLabel2"
+        [legendTitle]="legendTitle2"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        (select)="onSelect($event)"
+        [scheme]="colorScheme"
+        [legendPosition]="legendPosition"
+        [noBarWhenZero]="false"
+        [barPadding]="0"
+        [groupPadding]="8"
+      >
+      </ngx-charts-bar-vertical-2d>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="chartType === 'pie'">
+    <ng-container *ngIf="dataType === 'year'">
+      <ngx-charts-pie-chart
+        [results]="totals"
+        [scheme]="colorScheme"
+        [legend]="showLegend"
+        [legendPosition]="legendPosition"
+        [legendTitle]="legendTitle2"
+        [labels]="true"
+        [doughnut]="false"
+      ></ngx-charts-pie-chart>
+    </ng-container>
+
+    <ng-container *ngIf="dataType === 'professor'">
+      <ngx-charts-pie-chart
+        [results]="totals2"
+        [scheme]="colorScheme"
+        [legend]="showLegend"
+        [legendPosition]="legendPosition"
+        [legendTitle]="legendTitle"
+        [labels]="true"
+        [doughnut]="false"
+      ></ngx-charts-pie-chart>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="chartType === 'line'">
+    <ngx-charts-line-chart
+      [scheme]="colorScheme"
+      [legend]="true"
+      [showXAxisLabel]="showXAxisLabel"
       [showYAxisLabel]="showYAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      [results]="multi"
-      [gradient]="gradient"
+      [xAxis]="true"
+      [yAxis]="true"
       [xAxisLabel]="xAxisLabel"
-      [legendTitle]="legendTitle"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      (select)="onSelect($event)"
-      [scheme]="colorScheme"
-      [legendPosition]="legendPosition"
-      [noBarWhenZero]="false"
-      [barPadding]="0"
-      [groupPadding]="8"
-    >
-    </ngx-charts-bar-vertical-2d>
-  </ng-container>
-
-  <ng-container *ngIf="dataTypes.professor">
-    <ngx-charts-bar-vertical-2d
-      [showYAxisLabel]="showYAxisLabel"
       [yAxisLabel]="yAxisLabel"
+      [timeline]="true"
       [results]="multi2"
-      [gradient]="gradient"
-      [xAxisLabel]="xAxisLabel2"
-      [legendTitle]="legendTitle2"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      (select)="onSelect($event)"
-      [scheme]="colorScheme"
-      [legendPosition]="legendPosition"
-      [noBarWhenZero]="false"
-      [barPadding]="0"
-      [groupPadding]="8"
     >
-    </ngx-charts-bar-vertical-2d>
+    </ngx-charts-line-chart>
   </ng-container>
-</ng-container>
+</div>
 
-<ng-container *ngIf="graphTypes.pie">
-  <ng-container *ngIf="dataTypes.year">
-    <ngx-charts-pie-chart
-      [results]="totals"
-      [scheme]="colorScheme"
-      [legend]="showLegend"
-      [legendPosition]="legendPosition"
-      [legendTitle]="legendTitle2"
-      [labels]="true"
-      [doughnut]="false"
-    ></ngx-charts-pie-chart>
-  </ng-container>
-
-  <ng-container *ngIf="dataTypes.professor">
-    <ngx-charts-pie-chart
-      [results]="totals2"
-      [scheme]="colorScheme"
-      [legend]="showLegend"
-      [legendPosition]="legendPosition"
-      [legendTitle]="legendTitle"
-      [labels]="true"
-      [doughnut]="false"
-    ></ngx-charts-pie-chart>
-  </ng-container>
-</ng-container>
-
-<ng-container *ngIf="graphTypes.line">
-  <ngx-charts-line-chart
-    [scheme]="colorScheme"
-    [legend]="true"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxis]="true"
-    [yAxis]="true"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [timeline]="true"
-    [results]="multi2"
-  >
-  </ngx-charts-line-chart>
-</ng-container>
+<app-charts-controls
+  (chartTypesEmitter)="chartType = $event"
+  (dataTypesEmitter)="dataType = $event"
+></app-charts-controls>

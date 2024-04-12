@@ -85,17 +85,6 @@ export class QuantitativeEventsWorksComponent {
     }
   ]
 
-  dataTypes = {
-    professor: true,
-    year: false
-  }
-
-  chartTypes = {
-    line: false,
-    bar: true,
-    pie: false
-  }
-
   constructor(
     private readonly curriculumnsService: CurriculumnsService,
     public readonly utilsService: UtilsService,

@@ -1,0 +1,25 @@
+<div id="controlsContainer">
+  <form action="" id="chartsControls">
+    <select
+      name="chartType"
+      id="chartType"
+      [(ngModel)]="chartType"
+      (change)="chartTypesEmitter.emit(chartType)"
+    >
+      <option value="bar" [selected]>Gráfico de Barras</option>
+      <option value="pie">Gráfico de Pizza</option>
+      <option value="line">Gráfico de Linha</option>
+    </select>
+
+    <select
+      *ngIf="chartType !== 'line'"
+      name="dataType"
+      id="dataType"
+      [(ngModel)]="dataType"
+      (change)="dataTypesEmitter.emit(dataType)"
+    >
+      <option value="professor" [selected]>Por professor</option>
+      <option value="year">Por ano</option>
+    </select>
+  </form>
+</div>

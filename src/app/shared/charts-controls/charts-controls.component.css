@@ -1,0 +1,33 @@
+#controlsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#chartsControls {
+  display: flex;
+  gap: 15px;
+}
+
+select {
+  position: relative;
+  height: 40px;
+  margin-top: 30px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  padding: 8px 12px 8px 12px;
+  outline: none;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+  color: var(--terciary);
+  text-align: center;
+
+  -webkit-appearance: none; /* Safari e Chrome */
+  -moz-appearance: none; /* Firefox */
+  appearance: none;
+}
+
+option {
+  text-align: left;
+}

@@ -154,55 +154,7 @@
           [totals]="totals"
           [totals2]="totals2"
           [multiTotal]="multiTotal"
-          [dataTypes]="dataTypes"
-          [graphTypes]="chartTypes"
         ></app-quantity>
-        <form>
-          <label for="professor">Por professor</label>
-          <input
-            type="radio"
-            id="professor"
-            name="dataTypes"
-            (change)="dataTypes.professor = true; dataTypes.year = false"
-            [value]="dataTypes.professor"
-          />
-
-          <label for="year">Por ano</label>
-          <input
-            type="radio"
-            id="year"
-            name="dataTypes"
-            (change)="dataTypes.professor = false; dataTypes.year = true"
-            [value]="dataTypes.year"
-          />
-        </form>
-        <form action="">
-          <label for="bar">Gráfico de barra</label>
-          <input
-            type="radio"
-            id="bar"
-            name="chartTypes"
-            (change)="chartTypes.bar = true; chartTypes.pie = false; chartTypes.line = false"
-            [value]="chartTypes.bar"
-          />
-
-          <label for="pie">Gráfico de pizza</label>
-          <input
-            type="radio"
-            id="pie"
-            name="chartTypes"
-            (change)="chartTypes.bar = false; chartTypes.pie = true; chartTypes.line = false"
-            [value]="chartTypes.pie"
-          />
-          <label for="line">Gráfico de linha</label>
-          <input
-            type="radio"
-            id="line"
-            name="chartTypes"
-            (change)="chartTypes.bar = false; chartTypes.pie = false; chartTypes.line = true"
-            [value]="chartTypes.line"
-          />
-        </form>
       </div>
     </div>
   </div>

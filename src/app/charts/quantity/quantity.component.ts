@@ -3,11 +3,12 @@ import { Component, Input } from '@angular/core'
 import { type Color, LegendPosition, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts'
 import { type ChartSerie, type ChartData } from './types'
 import { FormsModule } from '@angular/forms'
+import { ChartsControlsComponent } from 'src/app/shared/charts-controls/charts-controls.component'
 
 @Component({
   selector: 'app-quantity',
   standalone: true,
-  imports: [NgxChartsModule, FormsModule],
+  imports: [NgxChartsModule, FormsModule, ChartsControlsComponent],
   templateUrl: './quantity.component.html',
   styleUrl: './quantity.component.css',
   animations: []
@@ -66,16 +67,9 @@ export class QuantityComponent {
     ]
   }
 
-  @Input() graphTypes = {
-    line: false,
-    bar: true,
-    pie: false
-  }
+  @Input() chartType = 'bar'
 
-  @Input() dataTypes = {
-    year: false,
-    professor: true
-  }
+  @Input() dataType = 'professor'
 
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)))
