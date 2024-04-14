@@ -116,6 +116,37 @@ export interface ParticipacaoEmEncontros extends dadosBaiscosSecoes {
   participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
 }
 
+export interface ParticipacaoEmSimposio extends dadosBaiscosSecoes {
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza?: string
+  titulo?: string
+  ano?: string
+  pais?: string
+  idioma?: string
+  meioDeDivulgacao?: string
+  homePageDoTrabalho?: string
+  flagRelevancia?: string
+  tipoParticipacao?: string
+  formaParticipacao?: string
+  doi?: string
+  tituloIngles?: string
+  flagDivulgacaoCientifica?: string
+
+  nomeDoEvento?: string
+  codigoInstituicao?: string
+  nomeInstituicao?: string
+  localDoEvento?: string
+  cidadeDoEvento?: string
+  nomeDoEventoIngles?: string
+
+  participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string

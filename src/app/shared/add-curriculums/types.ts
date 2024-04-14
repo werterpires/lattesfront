@@ -16,6 +16,7 @@ export interface IXml {
     'PARTICIPACAO-EM-EVENTOS-CONGRESSOS': {
       'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray': any[]
       'PARTICIPACAO-EM-ENCONTRO_asArray': any[]
+      'PARTICIPACAO-EM-SIMPOSIO_asArray': any[]
     }
   }
 }

@@ -6,6 +6,7 @@ import { EventsWorksService } from '../services/eventWorksService'
 import {
   OutrasParticipacoesEmEventosCongressos,
   ParticipacaoEmEncontros,
+  ParticipacaoEmSimposio,
   TrabalhoEmEventos
 } from '../services/objTypes'
 import { LoaderService } from '../loader/loader.service'
@@ -17,6 +18,7 @@ import { NgFor, NgIf, NgStyle } from '@angular/common'
 import { IXml } from './types'
 import { OtherParticipationsInEventsConferencesService } from '../services/otherParticipationsInEventsConferencesService'
 import { ParticipationInMeetingService } from '../services/participationInMeetingService'
+import { ParticipationInSymposiumService } from '../services/participationInSymposiumService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -33,6 +35,7 @@ export class AddCurriculumsComponent {
     private readonly eventsWorksService: EventsWorksService,
     private readonly otherParticipationsInEventsConferencesService: OtherParticipationsInEventsConferencesService,
     private readonly participationInMeetingService: ParticipationInMeetingService,
+    private readonly participationInSimposiumService: ParticipationInSymposiumService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -126,6 +129,8 @@ export class AddCurriculumsComponent {
       []
     let participacoesEmEncontros: ParticipacaoEmEncontros[] = []
 
+    let participacoesEmSimposios: ParticipacaoEmSimposio[] = []
+
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
         producaoBibliografica['TRABALHOS-EM-EVENTOS'][
@@ -154,14 +159,22 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (participacaoEmEventosCongressos?.['PARTICIPACAO-EM-SIMPOSIO_asArray']) {
+      participacoesEmSimposios =
+        this.participationInSimposiumService.makeParticipacoesEmSimposios(
+          participacaoEmEventosCongressos['PARTICIPACAO-EM-SIMPOSIO_asArray']
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
       outrasParticipacoesEmEventosCongressos,
-      participacoesEmEncontros
+      participacoesEmEncontros,
+      participacoesEmSimposios
     }
 
-    console.log('participacoesEmEncontros', participacoesEmEncontros)
+    console.log('participacoesEmSimposios', participacoesEmSimposios)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
