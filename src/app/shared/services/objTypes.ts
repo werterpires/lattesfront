@@ -1,8 +1,11 @@
-export interface TrabalhoEmEventos {
+interface dadosBaiscosSecoes {
   lattesid?: string
   nome?: string
   active?: boolean
   serviceYears?: string
+}
+
+export interface TrabalhoEmEventos extends dadosBaiscosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
@@ -48,6 +51,77 @@ export interface TrabalhoEmEventos {
   nomeDaEditora?: string
   cidadeDaEditora?: string
   nomeDoEventoIngles?: string
+}
+
+export interface OutrasParticipacoesEmEventosCongressos
+  extends dadosBaiscosSecoes {
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza?: string
+  titulo?: string
+  ano?: string
+  pais?: string
+  idioma?: string
+  meioDeDivulgacao?: string
+  homePageDoTrabalho?: string
+  flagRelevancia?: string
+  tipoParticipacao?: string
+  formaParticipacao?: string
+  doi?: string
+  tituloIngles?: string
+  flagDivulgacaoCientifica?: string
+
+  nomeDoEvento?: string
+  codigoInstituicao?: string
+  nomeInstituicao?: string
+  localDoEvento?: string
+  cidadeDoEvento?: string
+  nomeDoEventoIngles?: string
+
+  participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
+}
+
+export interface ParticipacaoEmEncontros extends dadosBaiscosSecoes {
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza?: string
+  titulo?: string
+  ano?: string
+  pais?: string
+  idioma?: string
+  meioDeDivulgacao?: string
+  homePageDoTrabalho?: string
+  flagRelevancia?: string
+  tipoParticipacao?: string
+  formaParticipacao?: string
+  doi?: string
+  tituloIngles?: string
+  flagDivulgacaoCientifica?: string
+
+  nomeDoEvento?: string
+  codigoInstituicao?: string
+  nomeInstituicao?: string
+  localDoEvento?: string
+  cidadeDoEvento?: string
+  nomeDoEventoIngles?: string
+
+  participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
+}
+
+export interface ParticipanteDeEventosCongressos {
+  nomeCompletoDoParticipanteDeEventosCongressos?: string
+  nomeParaCitacaoDoParticipanteDeEventosCongressos?: string
+  ordemParticipante?: string
+  cpfDoParticipanteParticipanteDeEventosCongressos?: string
+  nroIdCNPQ?: string
 }
 
 interface Autor {

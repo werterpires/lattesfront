@@ -1,27 +1,27 @@
-import { TrabalhoEmEventos } from './objTypes';
+import { TrabalhoEmEventos } from './objTypes'
 
 export interface ICurriculum {
-  _id: string;
-  lattesId: string;
-  active: boolean;
-  serviceYears: string;
-  curriculum: ILattesCurriculum;
-  updatedDate: string;
+  _id: string
+  lattesId: string
+  active: boolean
+  serviceYears: string
+  curriculum: ILattesCurriculum
+  updatedDate: string
 }
 
 export interface ICreateCurriculums {
-  curriculums: ICreateCurriculum[];
+  curriculums: ICreateCurriculum[]
 }
 
 export interface ICreateCurriculum {
-  lattesId: string;
-  active: boolean;
-  serviceYears: string;
-  curriculum: string;
-  updatedDate: string;
+  lattesId: string
+  active: boolean
+  serviceYears: string
+  curriculum: string
+  updatedDate: string
 }
 
 export interface ILattesCurriculum {
-  nome: string;
-  trabalhosEmEventos: TrabalhoEmEventos[];
+  nome: string
+  trabalhosEmEventos: TrabalhoEmEventos[]
 }

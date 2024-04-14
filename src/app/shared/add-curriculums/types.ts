@@ -12,4 +12,10 @@ export interface IXml {
       }>
     }
   }
+  'DADOS-COMPLEMENTARES': {
+    'PARTICIPACAO-EM-EVENTOS-CONGRESSOS': {
+      'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray': any[]
+      'PARTICIPACAO-EM-ENCONTRO_asArray': any[]
+    }
+  }
 }

@@ -3,7 +3,11 @@ import { ModalComponent } from '../modal/modal.component'
 import { ICreateCurriculum, ICreateCurriculums } from '../services/types'
 import X2JS from 'x2js'
 import { EventsWorksService } from '../services/eventWorksService'
-import { TrabalhoEmEventos } from '../services/objTypes'
+import {
+  OutrasParticipacoesEmEventosCongressos,
+  ParticipacaoEmEncontros,
+  TrabalhoEmEventos
+} from '../services/objTypes'
 import { LoaderService } from '../loader/loader.service'
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http'
 import { AddCurriculumsService } from './add-curriculums.service'
@@ -11,6 +15,8 @@ import { AlertsService } from '../alerts/alerts.service'
 import { CurriculumnsService } from '../services/curriculumns.service'
 import { NgFor, NgIf, NgStyle } from '@angular/common'
 import { IXml } from './types'
+import { OtherParticipationsInEventsConferencesService } from '../services/otherParticipationsInEventsConferencesService'
+import { ParticipationInMeetingService } from '../services/participationInMeetingService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -24,7 +30,9 @@ export class AddCurriculumsComponent {
   @Output() closeEmitter = new EventEmitter()
   buttonContent: string = 'Clique para selecionar arquivos ou solte-os aqui.'
   constructor(
-    private readonly utilsService: EventsWorksService,
+    private readonly eventsWorksService: EventsWorksService,
+    private readonly otherParticipationsInEventsConferencesService: OtherParticipationsInEventsConferencesService,
+    private readonly participationInMeetingService: ParticipationInMeetingService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -87,6 +95,10 @@ export class AddCurriculumsComponent {
 
   makeCreateCurriculumDto(curr: any): ICreateCurriculum | null {
     const value: IXml = curr.value
+    console.log(
+      'objeto pronto:',
+      value['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-EVENTOS-CONGRESSOS']
+    )
     if (
       !value['_NUMERO-IDENTIFICADOR'] ||
       !value['_DATA-ATUALIZACAO'] ||
@@ -105,20 +117,51 @@ export class AddCurriculumsComponent {
 
     const producaoBibliografica = value['PRODUCAO-BIBLIOGRAFICA']
 
+    const dadosComplementares = value['DADOS-COMPLEMENTARES']
+    const participacaoEmEventosCongressos =
+      dadosComplementares['PARTICIPACAO-EM-EVENTOS-CONGRESSOS']
+
     let trabalhosEmEventos: TrabalhoEmEventos[] = []
+    let outrasParticipacoesEmEventosCongressos: OutrasParticipacoesEmEventosCongressos[] =
+      []
+    let participacoesEmEncontros: ParticipacaoEmEncontros[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
-      trabalhosEmEventos = this.utilsService.makeTrabalhoEmEvento(
+      trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
         producaoBibliografica['TRABALHOS-EM-EVENTOS'][
           'TRABALHO-EM-EVENTOS_asArray'
         ]
       )
     }
 
+    if (
+      participacaoEmEventosCongressos?.[
+        'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray'
+      ]
+    ) {
+      outrasParticipacoesEmEventosCongressos =
+        this.otherParticipationsInEventsConferencesService.makeOutrasParticipacoesEmEventosCongressos(
+          participacaoEmEventosCongressos[
+            'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray'
+          ]
+        )
+    }
+
+    if (participacaoEmEventosCongressos?.['PARTICIPACAO-EM-ENCONTRO_asArray']) {
+      participacoesEmEncontros =
+        this.participationInMeetingService.makeParticipacoesEmEncontros(
+          participacaoEmEventosCongressos['PARTICIPACAO-EM-ENCONTRO_asArray']
+        )
+    }
+
     const lattesObj = {
       nome,
-      trabalhosEmEventos
+      trabalhosEmEventos,
+      outrasParticipacoesEmEventosCongressos,
+      participacoesEmEncontros
     }
+
+    console.log('participacoesEmEncontros', participacoesEmEncontros)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
