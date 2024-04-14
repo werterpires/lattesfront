@@ -6,6 +6,7 @@ import { EventsWorksService } from '../services/eventWorksService'
 import {
   OutrasParticipacoesEmEventosCongressos,
   ParticipacaoEmEncontros,
+  ParticipacaoEmSeminario,
   ParticipacaoEmSimposio,
   TrabalhoEmEventos
 } from '../services/objTypes'
@@ -19,6 +20,7 @@ import { IXml } from './types'
 import { OtherParticipationsInEventsConferencesService } from '../services/otherParticipationsInEventsConferencesService'
 import { ParticipationInMeetingService } from '../services/participationInMeetingService'
 import { ParticipationInSymposiumService } from '../services/participationInSymposiumService'
+import { ParticipationInSeminaryService } from '../services/participationInSeminaryService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -36,6 +38,7 @@ export class AddCurriculumsComponent {
     private readonly otherParticipationsInEventsConferencesService: OtherParticipationsInEventsConferencesService,
     private readonly participationInMeetingService: ParticipationInMeetingService,
     private readonly participationInSimposiumService: ParticipationInSymposiumService,
+    private readonly participationInSeminaryService: ParticipationInSeminaryService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -128,8 +131,8 @@ export class AddCurriculumsComponent {
     let outrasParticipacoesEmEventosCongressos: OutrasParticipacoesEmEventosCongressos[] =
       []
     let participacoesEmEncontros: ParticipacaoEmEncontros[] = []
-
     let participacoesEmSimposios: ParticipacaoEmSimposio[] = []
+    let participacoesEmSeminarios: ParticipacaoEmSeminario[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -166,15 +169,25 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (
+      participacaoEmEventosCongressos?.['PARTICIPACAO-EM-SEMINARIO_asArray']
+    ) {
+      participacoesEmSeminarios =
+        this.participationInSeminaryService.makeParticipacoesEmSeminarios(
+          participacaoEmEventosCongressos['PARTICIPACAO-EM-SEMINARIO_asArray']
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
       outrasParticipacoesEmEventosCongressos,
       participacoesEmEncontros,
-      participacoesEmSimposios
+      participacoesEmSimposios,
+      participacoesEmSeminarios
     }
 
-    console.log('participacoesEmSimposios', participacoesEmSimposios)
+    console.log('participacoesEmSeminarios', participacoesEmSeminarios)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
