@@ -26,6 +26,7 @@ export interface IXml {
       'OUTRA-PRODUCAO-TECNICA_asArray': any[]
       'MIDIA-SOCIAL-WEBSITE-BLOG_asArray': any[]
       'PROGRAMA-DE-RADIO-OU-TV_asArray': any[]
+      'ORGANIZACAO-DE-EVENTO_asArray': any[]
     }
   }
 }

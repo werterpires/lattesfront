@@ -288,6 +288,49 @@ export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
   veiculoDeDivulgacao?: string
 }
 
+export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  tipo:
+    | 'CONCERTO'
+    | 'CONCURSO'
+    | 'CONGRESSO'
+    | 'EXPOSICAO'
+    | 'FESTIVAL'
+    | 'FEIRA'
+    | 'OLIMPIADA'
+    | 'OUTRO'
+    | 'NAO_INFORMADO'
+  natureza:
+    | 'CURADORIA'
+    | 'MONTAGEM'
+    | 'MUSEOLOGIA'
+    | 'ORGANIZACAO'
+    | 'NAO_INFORMADO'
+  titulo: string
+  ano: string
+  pais: string
+  idioma: string
+  meioDeDivulgacao: string
+  homePageDoTrabalho?: string
+  flagRelevancia: boolean
+  doi?: string
+  tituloIngles?: string
+  flagDivulgacaoCientifica: boolean
+
+  instituicaoPromotora?: string
+  duracaoEmSemanas?: number
+  flagEventoItinerante: boolean
+  flagCatalogo: boolean
+  local: string
+  cidade: string
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string
