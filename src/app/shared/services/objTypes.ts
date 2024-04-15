@@ -1,11 +1,11 @@
-interface dadosBaiscosSecoes {
+interface dadosBasicosSecoes {
   lattesid?: string
   nome?: string
   active?: boolean
   serviceYears?: string
 }
 
-export interface TrabalhoEmEventos extends dadosBaiscosSecoes {
+export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
@@ -54,7 +54,7 @@ export interface TrabalhoEmEventos extends dadosBaiscosSecoes {
 }
 
 export interface OutrasParticipacoesEmEventosCongressos
-  extends dadosBaiscosSecoes {
+  extends dadosBasicosSecoes {
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
   setoresDeAtividade?: string
@@ -85,7 +85,7 @@ export interface OutrasParticipacoesEmEventosCongressos
   participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
 }
 
-export interface ParticipacaoEmEncontros extends dadosBaiscosSecoes {
+export interface ParticipacaoEmEncontros extends dadosBasicosSecoes {
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
   setoresDeAtividade?: string
@@ -116,7 +116,7 @@ export interface ParticipacaoEmEncontros extends dadosBaiscosSecoes {
   participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
 }
 
-export interface ParticipacaoEmSimposio extends dadosBaiscosSecoes {
+export interface ParticipacaoEmSimposio extends dadosBasicosSecoes {
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
   setoresDeAtividade?: string
@@ -147,7 +147,7 @@ export interface ParticipacaoEmSimposio extends dadosBaiscosSecoes {
   participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
 }
 
-export interface ParticipacaoEmSeminario extends dadosBaiscosSecoes {
+export interface ParticipacaoEmSeminario extends dadosBasicosSecoes {
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
   setoresDeAtividade?: string
@@ -178,7 +178,7 @@ export interface ParticipacaoEmSeminario extends dadosBaiscosSecoes {
   participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
 }
 
-export interface ParticipacaoEmCongresso extends dadosBaiscosSecoes {
+export interface ParticipacaoEmCongresso extends dadosBasicosSecoes {
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
   setoresDeAtividade?: string
@@ -207,6 +207,34 @@ export interface ParticipacaoEmCongresso extends dadosBaiscosSecoes {
   nomeDoEventoIngles?: string
 
   participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
+}
+
+export interface OutraProducaoTecnica extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza?: string
+  titulo: string
+  ano: string
+  pais: string
+  meioDeDivulgacao: string
+  idioma: string
+  homePageDoTrabalho?: string
+  flagRelevancia: boolean
+  doi?: string
+  tituloIngles?: string
+  naturezaIngles?: string
+  flagDivulgacaoCientifica: boolean
+
+  finalidade?: string
+  instituicaoPromotora?: string
+  local?: string
+  cidade?: string
+  finalidadeIngles?: string
 }
 
 export interface ParticipanteDeEventosCongressos {
@@ -217,7 +245,7 @@ export interface ParticipanteDeEventosCongressos {
   nroIdCNPQ?: string
 }
 
-interface Autor {
+export interface Autor {
   nomeCompletoDoAutor?: string
   nomeParaCitacao?: string
   ordemDeAutoria?: string

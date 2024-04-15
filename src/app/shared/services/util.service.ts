@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import {
   AreasDoConhecimento,
+  Autor,
   ParticipanteDeEventosCongressos
 } from './objTypes'
 
@@ -165,5 +166,22 @@ export class UtilsService {
     })
 
     return participantes
+  }
+
+  makeAutores(data: any): Autor[] | undefined {
+    if (!data.AUTORES_asArray) {
+      return undefined
+    }
+    const autors = data.AUTORES_asArray.map((autor: any) => {
+      return {
+        nomeCompletoDoAutor: autor['_NOME-COMPLETO-DO-AUTOR'],
+        nomeParaCitacao: autor['_NOME-PARA-CITACAO'],
+        ordemDeAutoria: autor['_ORDEM-DE-AUTORIA'],
+        cpf: autor._CPF,
+        numeroIdCNPQ: autor['_NUMERO-ID-CNPQ']
+      }
+    })
+
+    return autors
   }
 }

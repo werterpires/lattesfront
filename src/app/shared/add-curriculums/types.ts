@@ -21,4 +21,9 @@ export interface IXml {
       'PARTICIPACAO-EM-CONGRESSO_asArray': any[]
     }
   }
+  'PRODUCAO-TECNICA': {
+    'DEMAIS-TIPOS-DE-PRODUCAO-TECNICA': {
+      'OUTRA-PRODUCAO-TECNICA_asArray': any[]
+    }
+  }
 }

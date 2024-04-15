@@ -4,6 +4,7 @@ import { ICreateCurriculum, ICreateCurriculums } from '../services/types'
 import X2JS from 'x2js'
 import { EventsWorksService } from '../services/eventWorksService'
 import {
+  OutraProducaoTecnica,
   OutrasParticipacoesEmEventosCongressos,
   ParticipacaoEmCongresso,
   ParticipacaoEmEncontros,
@@ -23,6 +24,7 @@ import { ParticipationInMeetingService } from '../services/participationInMeetin
 import { ParticipationInSymposiumService } from '../services/participationInSymposiumService'
 import { ParticipationInSeminaryService } from '../services/participationInSeminaryService'
 import { ParticipationInCongressService } from '../services/participationInCongressService'
+import { OtherTechnicalProductionService } from '../services/otherTechnicalProductionService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -42,6 +44,7 @@ export class AddCurriculumsComponent {
     private readonly participationInSimposiumService: ParticipationInSymposiumService,
     private readonly participationInSeminaryService: ParticipationInSeminaryService,
     private readonly participationInCongressService: ParticipationInCongressService,
+    private readonly otherTechnicalProductionService: OtherTechnicalProductionService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -106,7 +109,7 @@ export class AddCurriculumsComponent {
     const value: IXml = curr.value
     console.log(
       'objeto pronto:',
-      value['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-EVENTOS-CONGRESSOS']
+      value['PRODUCAO-TECNICA']['DEMAIS-TIPOS-DE-PRODUCAO-TECNICA']
     )
     if (
       !value['_NUMERO-IDENTIFICADOR'] ||
@@ -130,6 +133,10 @@ export class AddCurriculumsComponent {
     const participacaoEmEventosCongressos =
       dadosComplementares['PARTICIPACAO-EM-EVENTOS-CONGRESSOS']
 
+    const producaoTecnica = value['PRODUCAO-TECNICA']
+    const demaisTiposProducaoTecnica =
+      producaoTecnica['DEMAIS-TIPOS-DE-PRODUCAO-TECNICA']
+
     let trabalhosEmEventos: TrabalhoEmEventos[] = []
     let outrasParticipacoesEmEventosCongressos: OutrasParticipacoesEmEventosCongressos[] =
       []
@@ -137,6 +144,7 @@ export class AddCurriculumsComponent {
     let participacoesEmSimposios: ParticipacaoEmSimposio[] = []
     let participacoesEmSeminarios: ParticipacaoEmSeminario[] = []
     let participacoesEmCongressos: ParticipacaoEmCongresso[] = []
+    let outrasProducoesTecnicas: OutraProducaoTecnica[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -191,6 +199,13 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (demaisTiposProducaoTecnica?.['OUTRA-PRODUCAO-TECNICA_asArray']) {
+      outrasProducoesTecnicas =
+        this.otherTechnicalProductionService.makeOutraProducaoTecnica(
+          demaisTiposProducaoTecnica['OUTRA-PRODUCAO-TECNICA_asArray']
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -198,10 +213,11 @@ export class AddCurriculumsComponent {
       participacoesEmEncontros,
       participacoesEmSimposios,
       participacoesEmSeminarios,
-      participacoesEmCongressos
+      participacoesEmCongressos,
+      outrasProducoestecnicas: outrasProducoesTecnicas
     }
 
-    console.log('participacoesEmCongressos', participacoesEmCongressos)
+    console.log('outrasProducoesTecnicas', outrasProducoesTecnicas)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
