@@ -237,6 +237,57 @@ export interface OutraProducaoTecnica extends dadosBasicosSecoes {
   finalidadeIngles?: string
 }
 
+export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza: 'REDE_SOCIAL' | 'FORUM' | 'BLOG' | 'SITE'
+  naturezaIngles?: string
+  titulo: string
+  tituloIngles?: string
+  ano: string
+  pais: string
+  idioma: string
+  homePage?: string
+  flagRelevancia: boolean
+  flagDivulgacaoCientifica: boolean
+
+  tema?: string
+}
+
+export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string
+  areasDoConhecimento?: string
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza: string
+  titulo: string
+  ano: number
+  pais: string
+  idioma: string
+  flagRelevancia: boolean
+  doi?: string
+  tituloIngles?: string
+  homePage?: string
+  meioDeDivulgacao: string
+  flagDivulgacaoCientifica: boolean
+
+  emissora?: string
+  tema?: string
+  formatoDataDaApresentacao: string
+  dataDaApresentacao?: string
+  duracaoEmMinutos?: number
+  cidade?: string
+  veiculoDeDivulgacao?: string
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string

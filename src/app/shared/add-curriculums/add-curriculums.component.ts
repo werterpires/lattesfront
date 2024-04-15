@@ -4,6 +4,7 @@ import { ICreateCurriculum, ICreateCurriculums } from '../services/types'
 import X2JS from 'x2js'
 import { EventsWorksService } from '../services/eventWorksService'
 import {
+  MidiaSocialWebsiteBlog,
   OutraProducaoTecnica,
   OutrasParticipacoesEmEventosCongressos,
   ParticipacaoEmCongresso,
@@ -25,6 +26,7 @@ import { ParticipationInSymposiumService } from '../services/participationInSymp
 import { ParticipationInSeminaryService } from '../services/participationInSeminaryService'
 import { ParticipationInCongressService } from '../services/participationInCongressService'
 import { OtherTechnicalProductionService } from '../services/otherTechnicalProductionService'
+import { SocialMediaWebsiteBlogService } from '../services/socialMediaWebsiteBlogService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -45,6 +47,7 @@ export class AddCurriculumsComponent {
     private readonly participationInSeminaryService: ParticipationInSeminaryService,
     private readonly participationInCongressService: ParticipationInCongressService,
     private readonly otherTechnicalProductionService: OtherTechnicalProductionService,
+    private readonly socialMediaWebsiteBlogService: SocialMediaWebsiteBlogService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -145,6 +148,7 @@ export class AddCurriculumsComponent {
     let participacoesEmSeminarios: ParticipacaoEmSeminario[] = []
     let participacoesEmCongressos: ParticipacaoEmCongresso[] = []
     let outrasProducoesTecnicas: OutraProducaoTecnica[] = []
+    let midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -206,6 +210,13 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (demaisTiposProducaoTecnica?.['MIDIA-SOCIAL-WEBSITE-BLOG_asArray']) {
+      midiasSociaisWebsitesBlogs =
+        this.socialMediaWebsiteBlogService.makeMidiaSocialWebsiteBlog(
+          demaisTiposProducaoTecnica['MIDIA-SOCIAL-WEBSITE-BLOG_asArray']
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -214,10 +225,11 @@ export class AddCurriculumsComponent {
       participacoesEmSimposios,
       participacoesEmSeminarios,
       participacoesEmCongressos,
-      outrasProducoestecnicas: outrasProducoesTecnicas
+      outrasProducoesTecnicas,
+      midiasSociaisWebsitesBlogs
     }
 
-    console.log('outrasProducoesTecnicas', outrasProducoesTecnicas)
+    console.log('midiasSociaisWebsitesBlogs', midiasSociaisWebsitesBlogs)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
