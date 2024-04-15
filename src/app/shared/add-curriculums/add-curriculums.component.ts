@@ -11,6 +11,7 @@ import {
   ParticipacaoEmEncontros,
   ParticipacaoEmSeminario,
   ParticipacaoEmSimposio,
+  ProgramaDeRadioOuTV,
   TrabalhoEmEventos
 } from '../services/objTypes'
 import { LoaderService } from '../loader/loader.service'
@@ -27,6 +28,7 @@ import { ParticipationInSeminaryService } from '../services/participationInSemin
 import { ParticipationInCongressService } from '../services/participationInCongressService'
 import { OtherTechnicalProductionService } from '../services/otherTechnicalProductionService'
 import { SocialMediaWebsiteBlogService } from '../services/socialMediaWebsiteBlogService'
+import { RadioOrTVProgramService } from '../services/radioOrTVProgramService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -48,6 +50,7 @@ export class AddCurriculumsComponent {
     private readonly participationInCongressService: ParticipationInCongressService,
     private readonly otherTechnicalProductionService: OtherTechnicalProductionService,
     private readonly socialMediaWebsiteBlogService: SocialMediaWebsiteBlogService,
+    private readonly radioOrTvProgramService: RadioOrTVProgramService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -149,6 +152,7 @@ export class AddCurriculumsComponent {
     let participacoesEmCongressos: ParticipacaoEmCongresso[] = []
     let outrasProducoesTecnicas: OutraProducaoTecnica[] = []
     let midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[] = []
+    let programasDeRadioOuTV: ProgramaDeRadioOuTV[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -217,6 +221,13 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (demaisTiposProducaoTecnica?.['PROGRAMA-DE-RADIO-OU-TV_asArray']) {
+      programasDeRadioOuTV =
+        this.radioOrTvProgramService.makeProgramaDeRadioOuTV(
+          demaisTiposProducaoTecnica['PROGRAMA-DE-RADIO-OU-TV_asArray']
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -226,10 +237,11 @@ export class AddCurriculumsComponent {
       participacoesEmSeminarios,
       participacoesEmCongressos,
       outrasProducoesTecnicas,
-      midiasSociaisWebsitesBlogs
+      midiasSociaisWebsitesBlogs,
+      programasDeRadioOuTV
     }
 
-    console.log('midiasSociaisWebsitesBlogs', midiasSociaisWebsitesBlogs)
+    console.log('programasDeRadioOuTV', programasDeRadioOuTV)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],

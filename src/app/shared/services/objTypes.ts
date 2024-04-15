@@ -261,15 +261,15 @@ export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
 
 export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string
-  areasDoConhecimento?: string
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
   setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
 
   natureza: string
   titulo: string
-  ano: number
+  ano: string
   pais: string
   idioma: string
   flagRelevancia: boolean

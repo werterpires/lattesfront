@@ -25,6 +25,7 @@ export interface IXml {
     'DEMAIS-TIPOS-DE-PRODUCAO-TECNICA': {
       'OUTRA-PRODUCAO-TECNICA_asArray': any[]
       'MIDIA-SOCIAL-WEBSITE-BLOG_asArray': any[]
+      'PROGRAMA-DE-RADIO-OU-TV_asArray': any[]
     }
   }
 }
