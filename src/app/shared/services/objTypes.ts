@@ -391,6 +391,49 @@ export interface DesenvolvimentoDeMaterialDidaticoOuInstrucional
   finalidadeIngles?: string
 }
 
+export interface CursoDeCurtaDuracaoMinistrado extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  nivelDoCurso?:
+    | 'EXTENSAO'
+    | 'APERFEICOAMENTO'
+    | 'ESPECIALIZACAO'
+    | 'OUTRA'
+    | 'NAO_INFORMADO'
+  titulo?: string
+  ano?: string
+  pais?: string
+  idioma?: string
+  meioDeDivulgacao?:
+    | 'IMPRESSO'
+    | 'WEB'
+    | 'MEIO_MAGNETICO'
+    | 'MEIO_DIGITAL'
+    | 'FILME'
+    | 'HIPERTEXTO'
+    | 'OUTRO'
+    | 'VARIOS'
+    | 'NAO_INFORMADO'
+  homePageDoTrabalho?: string
+  flagRelevancia?: 'SIM' | 'NAO'
+  doi?: string
+  tituloIngles?: string
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+
+  participacaoDosAutores?: 'DOCENTE' | 'ORGANIZADOR' | 'OUTRA' | 'NAO_INFORMADO'
+  instituicaoPromotoraDoCurso?: string
+  localDoCurso?: string
+  cidade?: string
+  duracao?: string
+  unidade?: string
+  unidadeIngles?: string
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string

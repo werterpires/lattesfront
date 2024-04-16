@@ -4,6 +4,7 @@ import { ICreateCurriculum, ICreateCurriculums } from '../services/types'
 import X2JS from 'x2js'
 import { EventsWorksService } from '../services/eventWorksService'
 import {
+  CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
   MidiaSocialWebsiteBlog,
@@ -35,6 +36,7 @@ import { RadioOrTVProgramService } from '../services/radioOrTVProgramService'
 import { EventOrganizationService } from '../services/EventOrganizationService'
 import { EditorialWorkService } from '../services/editorialWorkService'
 import { DevelopmentOfEducationalOrInstructionalMaterialService } from '../services/DevelopmentOfEducationalOrInstructionalMaterialService'
+import { ShortTermCourseDeliveredService } from '../services/ShortTermCourseDeliveredService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -60,6 +62,7 @@ export class AddCurriculumsComponent {
     private readonly eventOrganizationService: EventOrganizationService,
     private readonly developmentOfEducationalOrInstructionalMaterialService: DevelopmentOfEducationalOrInstructionalMaterialService,
     private readonly editorialWorkService: EditorialWorkService,
+    private readonly shortTermCourseDeliveredService: ShortTermCourseDeliveredService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -166,6 +169,7 @@ export class AddCurriculumsComponent {
     let editoracoes: Editoracao[] = []
     let desenvolvimentosDeMaterialDidáticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[] =
       []
+    let cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -267,6 +271,17 @@ export class AddCurriculumsComponent {
       )
     }
 
+    if (
+      demaisTiposProducaoTecnica?.['CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray']
+    ) {
+      cursosDeCurtaDuracaoMinistrados =
+        this.shortTermCourseDeliveredService.makeCursosCurtosMinistrados(
+          demaisTiposProducaoTecnica[
+            'CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray'
+          ]
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -280,12 +295,13 @@ export class AddCurriculumsComponent {
       programasDeRadioOuTV,
       organizacoesDeEventos,
       editoracoes,
-      desenvolvimentosDeMaterialDidáticoOuInstrucional
+      desenvolvimentosDeMaterialDidáticoOuInstrucional,
+      cursosDeCurtaDuracaoMinistrados
     }
 
     console.log(
-      'desenvolvimentosDeMaterialDidáticoOuInstrucional',
-      desenvolvimentosDeMaterialDidáticoOuInstrucional
+      'cursosDeCurtaDuracaoMinistrados',
+      cursosDeCurtaDuracaoMinistrados
     )
 
     const createCurriculumDto = {

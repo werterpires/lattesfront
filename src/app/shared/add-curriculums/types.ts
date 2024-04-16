@@ -29,6 +29,7 @@ export interface IXml {
       'ORGANIZACAO-DE-EVENTO_asArray': any[]
       EDITORACAO_asArray: any[]
       'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray': any[]
+      'CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray': any[]
     }
   }
 }
