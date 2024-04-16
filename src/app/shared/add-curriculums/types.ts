@@ -11,6 +11,9 @@ export interface IXml {
         'TRABALHO-EM-EVENTOS_asArray': any[]
       }>
     }
+    'DEMAIS-TIPOS-DE-PRODUCAO-BIBLIOGRAFICA': {
+      'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray': any[]
+    }
   }
   'DADOS-COMPLEMENTARES': {
     'PARTICIPACAO-EM-EVENTOS-CONGRESSOS': {

@@ -10,6 +10,7 @@ import {
   Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
+  OutraProducaoBibliografica,
   OutraProducaoTecnica,
   OutrasParticipacoesEmEventosCongressos,
   ParticipacaoEmCongresso,
@@ -39,6 +40,7 @@ import { EditorialWorkService } from '../services/editorialWorkService'
 import { DevelopmentOfEducationalOrInstructionalMaterialService } from '../services/DevelopmentOfEducationalOrInstructionalMaterialService'
 import { ShortTermCourseDeliveredService } from '../services/shortTermCourseDeliveredService'
 import { PresentationOfWorkService } from '../services/presentationOfWorkService'
+import { OtherBibliographicWorkService } from '../services/otherBibliographicWorkService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -66,6 +68,7 @@ export class AddCurriculumsComponent {
     private readonly editorialWorkService: EditorialWorkService,
     private readonly shortTermCourseDeliveredService: ShortTermCourseDeliveredService,
     private readonly presentationOfWorkService: PresentationOfWorkService,
+    private readonly otherBibliographicWorkService: OtherBibliographicWorkService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -128,10 +131,7 @@ export class AddCurriculumsComponent {
 
   makeCreateCurriculumDto(curr: any): ICreateCurriculum | null {
     const value: IXml = curr.value
-    console.log(
-      'objeto pronto:',
-      value['PRODUCAO-TECNICA']['DEMAIS-TIPOS-DE-PRODUCAO-TECNICA']
-    )
+    console.log('objeto pronto:', value['PRODUCAO-BIBLIOGRAFICA'])
     if (
       !value['_NUMERO-IDENTIFICADOR'] ||
       !value['_DATA-ATUALIZACAO'] ||
@@ -149,6 +149,8 @@ export class AddCurriculumsComponent {
     const nome = value['DADOS-GERAIS']['_NOME-COMPLETO']
 
     const producaoBibliografica = value['PRODUCAO-BIBLIOGRAFICA']
+    const demaistiposDeProducaoBibliografica =
+      producaoBibliografica['DEMAIS-TIPOS-DE-PRODUCAO-BIBLIOGRAFICA']
 
     const dadosComplementares = value['DADOS-COMPLEMENTARES']
     const participacaoEmEventosCongressos =
@@ -174,6 +176,7 @@ export class AddCurriculumsComponent {
       []
     let cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[] = []
     let apresentacoesDeTrabalho: ApresentacaoDeTrabalho[] = []
+    let outrasProducoesBibliograficas: OutraProducaoBibliografica[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -293,6 +296,19 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (
+      demaistiposDeProducaoBibliografica?.[
+        'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray'
+      ]
+    ) {
+      outrasProducoesBibliograficas =
+        this.otherBibliographicWorkService.makeApresentacoesDeTrabalho(
+          demaistiposDeProducaoBibliografica[
+            'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray'
+          ]
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -308,10 +324,11 @@ export class AddCurriculumsComponent {
       editoracoes,
       desenvolvimentosDeMaterialDidáticoOuInstrucional,
       cursosDeCurtaDuracaoMinistrados,
-      apresentacoesDeTrabalho
+      apresentacoesDeTrabalho,
+      outrasProducoesBibliograficas
     }
 
-    console.log('apresentacoesDeTrabalho', apresentacoesDeTrabalho)
+    console.log('outrasProducoesBibliograficas', outrasProducoesBibliograficas)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],

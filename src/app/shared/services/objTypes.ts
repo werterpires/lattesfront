@@ -466,6 +466,38 @@ export interface ApresentacaoDeTrabalho extends dadosBasicosSecoes {
   nomeDoEventoIngles?: string
 }
 
+export interface OutraProducaoBibliografica extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: InformacoesAdicionais
+  sequenciaProducao?: string
+
+  natureza?: string
+  titulo?: string
+  ano?: string
+  paisDePublicacao?: string
+  idioma?: string
+  meioDeDivulgacao?: string
+  homePageDoTrabalho?: string
+  flagRelevancia?: string
+  doi?: string
+  tituloIngles?: string
+  naturezaIngles?: string
+  flagDivulgacaoCientifica?: string
+
+  editora?: string
+  cidadeDaEditora?: string
+  numeroDePaginas?: string
+  issnIsbn?: string
+}
+
+interface InformacoesAdicionais {
+  descricaoInformacoesAdicionais?: string
+  descricaoInformacoesAdicionaisIngles?: string
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string
