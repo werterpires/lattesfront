@@ -331,6 +331,31 @@ export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
   cidade: string
 }
 
+export interface Editoracao extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza: string
+  titulo: string
+  ano: string
+  pais: string
+  idioma: string
+  meioDeDivulgacao: string
+  homePageDoTrabalho?: string
+  flagRelevancia: boolean
+  doi?: string
+  tituloIngles?: string
+
+  numeroDePaginas?: number
+  instituicaoPromotora?: string
+  editora?: string
+  cidade?: string
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string

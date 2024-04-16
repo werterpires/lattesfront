@@ -27,6 +27,7 @@ export interface IXml {
       'MIDIA-SOCIAL-WEBSITE-BLOG_asArray': any[]
       'PROGRAMA-DE-RADIO-OU-TV_asArray': any[]
       'ORGANIZACAO-DE-EVENTO_asArray': any[]
+      EDITORACAO_asArray: any[]
     }
   }
 }

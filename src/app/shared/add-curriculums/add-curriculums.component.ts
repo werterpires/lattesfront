@@ -4,6 +4,7 @@ import { ICreateCurriculum, ICreateCurriculums } from '../services/types'
 import X2JS from 'x2js'
 import { EventsWorksService } from '../services/eventWorksService'
 import {
+  Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
   OutraProducaoTecnica,
@@ -31,6 +32,7 @@ import { OtherTechnicalProductionService } from '../services/otherTechnicalProdu
 import { SocialMediaWebsiteBlogService } from '../services/socialMediaWebsiteBlogService'
 import { RadioOrTVProgramService } from '../services/radioOrTVProgramService'
 import { EventOrganizationService } from '../services/EventOrganizationService'
+import { EditorialWorkService } from '../services/editorialWorkService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -54,6 +56,7 @@ export class AddCurriculumsComponent {
     private readonly socialMediaWebsiteBlogService: SocialMediaWebsiteBlogService,
     private readonly radioOrTvProgramService: RadioOrTVProgramService,
     private readonly eventOrganizationService: EventOrganizationService,
+    private readonly editorialWorkService: EditorialWorkService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -157,6 +160,7 @@ export class AddCurriculumsComponent {
     let midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[] = []
     let programasDeRadioOuTV: ProgramaDeRadioOuTV[] = []
     let organizacoesDeEventos: OrganizacaoDeEvento[] = []
+    let editoracoes: Editoracao[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -239,6 +243,12 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (demaisTiposProducaoTecnica?.EDITORACAO_asArray) {
+      editoracoes = this.editorialWorkService.makeEditoracao(
+        demaisTiposProducaoTecnica.EDITORACAO_asArray
+      )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -250,10 +260,11 @@ export class AddCurriculumsComponent {
       outrasProducoesTecnicas,
       midiasSociaisWebsitesBlogs,
       programasDeRadioOuTV,
-      organizacoesDeEventos
+      organizacoesDeEventos,
+      editoracoes
     }
 
-    console.log('organizacoesDeEventos', organizacoesDeEventos)
+    console.log('editoracoes', editoracoes)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
