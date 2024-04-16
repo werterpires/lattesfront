@@ -4,6 +4,7 @@ import { ICreateCurriculum, ICreateCurriculums } from '../services/types'
 import X2JS from 'x2js'
 import { EventsWorksService } from '../services/eventWorksService'
 import {
+  DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
@@ -33,6 +34,7 @@ import { SocialMediaWebsiteBlogService } from '../services/socialMediaWebsiteBlo
 import { RadioOrTVProgramService } from '../services/radioOrTVProgramService'
 import { EventOrganizationService } from '../services/EventOrganizationService'
 import { EditorialWorkService } from '../services/editorialWorkService'
+import { DevelopmentOfEducationalOrInstructionalMaterialService } from '../services/DevelopmentOfEducationalOrInstructionalMaterialService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -56,6 +58,7 @@ export class AddCurriculumsComponent {
     private readonly socialMediaWebsiteBlogService: SocialMediaWebsiteBlogService,
     private readonly radioOrTvProgramService: RadioOrTVProgramService,
     private readonly eventOrganizationService: EventOrganizationService,
+    private readonly developmentOfEducationalOrInstructionalMaterialService: DevelopmentOfEducationalOrInstructionalMaterialService,
     private readonly editorialWorkService: EditorialWorkService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
@@ -161,6 +164,8 @@ export class AddCurriculumsComponent {
     let programasDeRadioOuTV: ProgramaDeRadioOuTV[] = []
     let organizacoesDeEventos: OrganizacaoDeEvento[] = []
     let editoracoes: Editoracao[] = []
+    let desenvolvimentosDeMaterialDidáticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[] =
+      []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -243,6 +248,19 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (
+      demaisTiposProducaoTecnica?.[
+        'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray'
+      ]
+    ) {
+      desenvolvimentosDeMaterialDidáticoOuInstrucional =
+        this.developmentOfEducationalOrInstructionalMaterialService.makeDesenvolvimentosDeMateriais(
+          demaisTiposProducaoTecnica[
+            'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray'
+          ]
+        )
+    }
+
     if (demaisTiposProducaoTecnica?.EDITORACAO_asArray) {
       editoracoes = this.editorialWorkService.makeEditoracao(
         demaisTiposProducaoTecnica.EDITORACAO_asArray
@@ -261,10 +279,14 @@ export class AddCurriculumsComponent {
       midiasSociaisWebsitesBlogs,
       programasDeRadioOuTV,
       organizacoesDeEventos,
-      editoracoes
+      editoracoes,
+      desenvolvimentosDeMaterialDidáticoOuInstrucional
     }
 
-    console.log('editoracoes', editoracoes)
+    console.log(
+      'desenvolvimentosDeMaterialDidáticoOuInstrucional',
+      desenvolvimentosDeMaterialDidáticoOuInstrucional
+    )
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],

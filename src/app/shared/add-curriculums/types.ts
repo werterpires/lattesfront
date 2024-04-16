@@ -28,6 +28,7 @@ export interface IXml {
       'PROGRAMA-DE-RADIO-OU-TV_asArray': any[]
       'ORGANIZACAO-DE-EVENTO_asArray': any[]
       EDITORACAO_asArray: any[]
+      'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray': any[]
     }
   }
 }

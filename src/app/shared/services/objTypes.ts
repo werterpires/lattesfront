@@ -356,6 +356,41 @@ export interface Editoracao extends dadosBasicosSecoes {
   cidade?: string
 }
 
+export interface DesenvolvimentoDeMaterialDidaticoOuInstrucional
+  extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza?: string
+  titulo?: string
+  ano?: string
+  pais?: string
+  idioma?: string
+  meioDeDivulgacao?:
+    | 'IMPRESSO'
+    | 'WEB'
+    | 'MEIO_MAGNETICO'
+    | 'MEIO_DIGITAL'
+    | 'FILME'
+    | 'HIPERTEXTO'
+    | 'OUTRO'
+    | 'VARIOS'
+    | 'NAO_INFORMADO'
+  homePageDoTrabalho?: string
+  flagRelevancia?: 'SIM' | 'NAO'
+  doi?: string
+  tituloIngles?: string
+  naturezaIngles?: string
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+
+  finalidade?: string
+  finalidadeIngles?: string
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string
