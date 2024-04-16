@@ -434,6 +434,38 @@ export interface CursoDeCurtaDuracaoMinistrado extends dadosBasicosSecoes {
   unidadeIngles?: string
 }
 
+export interface ApresentacaoDeTrabalho extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  natureza?:
+    | 'COMUNICACAO'
+    | 'CONFERENCIA'
+    | 'CONGRESSO'
+    | 'SEMINARIO'
+    | 'SIMPOSIO'
+    | 'OUTRA'
+    | 'NAO_INFORMADO'
+  titulo?: string
+  ano?: string
+  pais?: string
+  idioma?: string
+  flagRelevancia?: 'SIM' | 'NAO'
+  doi?: string
+  tituloIngles?: string
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+
+  nomeDoEvento?: string
+  instituicaoPromotora?: string
+  localDaApresentacao?: string
+  cidadeDaApresentacao?: string
+  nomeDoEventoIngles?: string
+}
+
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string
   nomeParaCitacaoDoParticipanteDeEventosCongressos?: string

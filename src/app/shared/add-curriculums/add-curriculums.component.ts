@@ -4,6 +4,7 @@ import { ICreateCurriculum, ICreateCurriculums } from '../services/types'
 import X2JS from 'x2js'
 import { EventsWorksService } from '../services/eventWorksService'
 import {
+  ApresentacaoDeTrabalho,
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
@@ -36,7 +37,8 @@ import { RadioOrTVProgramService } from '../services/radioOrTVProgramService'
 import { EventOrganizationService } from '../services/EventOrganizationService'
 import { EditorialWorkService } from '../services/editorialWorkService'
 import { DevelopmentOfEducationalOrInstructionalMaterialService } from '../services/DevelopmentOfEducationalOrInstructionalMaterialService'
-import { ShortTermCourseDeliveredService } from '../services/ShortTermCourseDeliveredService'
+import { ShortTermCourseDeliveredService } from '../services/shortTermCourseDeliveredService'
+import { PresentationOfWorkService } from '../services/presentationOfWorkService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -63,6 +65,7 @@ export class AddCurriculumsComponent {
     private readonly developmentOfEducationalOrInstructionalMaterialService: DevelopmentOfEducationalOrInstructionalMaterialService,
     private readonly editorialWorkService: EditorialWorkService,
     private readonly shortTermCourseDeliveredService: ShortTermCourseDeliveredService,
+    private readonly presentationOfWorkService: PresentationOfWorkService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -170,6 +173,7 @@ export class AddCurriculumsComponent {
     let desenvolvimentosDeMaterialDidáticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[] =
       []
     let cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[] = []
+    let apresentacoesDeTrabalho: ApresentacaoDeTrabalho[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -282,6 +286,13 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (demaisTiposProducaoTecnica?.['APRESENTACAO-DE-TRABALHO_asArray']) {
+      apresentacoesDeTrabalho =
+        this.presentationOfWorkService.makeApresentacoesDeTrabalho(
+          demaisTiposProducaoTecnica['APRESENTACAO-DE-TRABALHO_asArray']
+        )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -296,13 +307,11 @@ export class AddCurriculumsComponent {
       organizacoesDeEventos,
       editoracoes,
       desenvolvimentosDeMaterialDidáticoOuInstrucional,
-      cursosDeCurtaDuracaoMinistrados
+      cursosDeCurtaDuracaoMinistrados,
+      apresentacoesDeTrabalho
     }
 
-    console.log(
-      'cursosDeCurtaDuracaoMinistrados',
-      cursosDeCurtaDuracaoMinistrados
-    )
+    console.log('apresentacoesDeTrabalho', apresentacoesDeTrabalho)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],

@@ -30,6 +30,7 @@ export interface IXml {
       EDITORACAO_asArray: any[]
       'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray': any[]
       'CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray': any[]
+      'APRESENTACAO-DE-TRABALHO_asArray': any[]
     }
   }
 }
