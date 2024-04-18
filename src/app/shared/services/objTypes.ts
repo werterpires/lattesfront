@@ -493,6 +493,45 @@ export interface OutraProducaoBibliografica extends dadosBasicosSecoes {
   issnIsbn?: string
 }
 
+export interface TextoEmJornalOuRevista extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: InformacoesAdicionais
+  sequenciaProducao?: string
+
+  natureza?: 'JORNAL_DE_NOTICIAS' | 'REVISTA_MAGAZINE' | 'NAO_INFORMADO'
+  tituloDoTexto?: string
+  anoDoTexto?: string
+  paisDePublicacao?: string
+  idioma?: string
+  meioDeDivulgacao?:
+    | 'IMPRESSO'
+    | 'WEB'
+    | 'MEIO_MAGNETICO'
+    | 'MEIO_DIGITAL'
+    | 'FILME'
+    | 'HIPERTEXTO'
+    | 'OUTRO'
+    | 'VARIOS'
+    | 'NAO_INFORMADO'
+  homePageDoTrabalho?: string
+  flagRelevancia?: 'SIM' | 'NAO'
+  doi?: string
+  tituloDoTextoIngles?: string
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+
+  tituloDoJornalOuRevista?: string
+  issn?: string
+  formatoDataDePublicacao?: 'DDMMAAAA'
+  dataDePublicacao?: string
+  volume?: string
+  paginaInicial?: string
+  paginaFinal?: string
+  localDePublicacao?: string
+}
+
 interface InformacoesAdicionais {
   descricaoInformacoesAdicionais?: string
   descricaoInformacoesAdicionaisIngles?: string
