@@ -6,6 +6,12 @@ export interface IXml {
     '_NOME-COMPLETO': string
   }
   'PRODUCAO-BIBLIOGRAFICA': {
+    'ARTIGOS-PUBLICADOS': {
+      'ARTIGO-PUBLICADO_asArray': any[]
+    }
+    'ARTIGOS-ACEITOS-PARA-PUBLICACAO': {
+      'ARTIGO-ACEITO-PARA-PUBLICACAO_asArray': any[]
+    }
     'TRABALHOS-EM-EVENTOS': {
       'TRABALHO-EM-EVENTOS_asArray': any[]
     }

@@ -613,6 +613,46 @@ export interface LivroPublicadoOuOrganizado extends dadosBasicosSecoes {
   nomeDaEditora?: string
 }
 
+export interface Artigo extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+  ordemImportancia?: string
+
+  natureza?: 'COMPLETO' | 'RESUMO' | 'NAO_INFORMADO'
+  tituloDoArtigo?: string
+  anoDoArtigo?: string
+  paisDePublicacao?: string
+  idioma?: string
+  meioDeDivulgacao?:
+    | 'IMPRESSO'
+    | 'WEB'
+    | 'MEIO_MAGNETICO'
+    | 'MEIO_DIGITAL'
+    | 'FILME'
+    | 'HIPERTEXTO'
+    | 'OUTRO'
+    | 'VARIOS'
+    | 'NAO_INFORMADO'
+  homePageDoTrabalho?: string
+  flagRelevancia?: 'SIM' | 'NAO'
+  doi?: string
+  tituloDoArtigoIngles?: string
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+
+  tituloDoPeriodicoOuRevista?: string
+  issn?: string
+  volume?: string
+  fasciculo?: string
+  serie?: string
+  paginaInicial?: string
+  paginaFinal?: string
+  localDePublicacao?: string
+}
+
 interface InformacoesAdicionais {
   descricaoInformacoesAdicionais?: string
   descricaoInformacoesAdicionaisIngles?: string

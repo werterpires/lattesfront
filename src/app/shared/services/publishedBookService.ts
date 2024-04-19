@@ -45,9 +45,7 @@ export class PublishedBookService {
         flagRelevancia: element['DADOS-BASICOS-DO-LIVRO']['_FLAG-RELEVANCIA'],
         doi: element['DADOS-BASICOS-DO-LIVRO']._DOI,
         tituloDoLivroIngles:
-          element['DADOS-BASICOS-DO-LIVRO'][
-            '_TITULO-DO-CAPITULO-DO-LIVRO-INGLES'
-          ],
+          element['DADOS-BASICOS-DO-LIVRO']['_TITULO-DO-LIVRO-INGLES'],
         flagDivulgacaoCientifica:
           element['DADOS-BASICOS-DO-LIVRO']['_FLAG-DIVULGACAO-CIENTIFICA'],
 
