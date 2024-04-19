@@ -19,6 +19,9 @@ export interface IXml {
       'CAPITULOS-DE-LIVROS-PUBLICADOS'?: {
         'CAPITULO-DE-LIVRO-PUBLICADO_asArray': any[]
       }
+      'LIVROS-PUBLICADOS-OU-ORGANIZADOS'?: {
+        'LIVRO-PUBLICADO-OU-ORGANIZADO_asArray': any[]
+      }
     }
   }
   'DADOS-COMPLEMENTARES': {

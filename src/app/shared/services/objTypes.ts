@@ -564,6 +564,55 @@ export interface CapituloDeLivroPublicado extends dadosBasicosSecoes {
   nomeDaEditora?: string
 }
 
+export interface LivroPublicadoOuOrganizado extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string
+  informacoesAdicionais?: string
+  sequenciaProducao?: string
+
+  tipo?: 'LIVRO_PUBLICADO' | 'LIVRO_ORGANIZADO_OU_EDICAO' | 'NAO_INFORMADO'
+  natureza?:
+    | 'COLETANEA'
+    | 'TEXTO_INTEGRAL'
+    | 'VERBETE'
+    | 'ANAIS'
+    | 'CATALOGO'
+    | 'ENCICLOPEDIA'
+    | 'LIVRO'
+    | 'OUTRA'
+    | 'PERIODICO'
+    | 'NAO_INFORMADO'
+  tituloDoLivro?: string
+  ano?: string
+  paisDePublicacao?: string
+  idioma?: string
+  meioDeDivulgacao?:
+    | 'IMPRESSO'
+    | 'WEB'
+    | 'MEIO_MAGNETICO'
+    | 'MEIO_DIGITAL'
+    | 'FILME'
+    | 'HIPERTEXTO'
+    | 'OUTRO'
+    | 'VARIOS'
+    | 'NAO_INFORMADO'
+  homePageDoTrabalho?: string
+  flagRelevancia?: 'SIM' | 'NAO'
+  doi?: string
+  tituloDoLivroIngles?: string
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+
+  numeroDeVolumes?: string
+  numeroDePaginas?: string
+  isbn?: string
+  numeroDaEdicaoRevisao?: string
+  numeroDaSerie?: string
+  cidadeDaEditora?: string
+  nomeDaEditora?: string
+}
+
 interface InformacoesAdicionais {
   descricaoInformacoesAdicionais?: string
   descricaoInformacoesAdicionaisIngles?: string

@@ -9,6 +9,7 @@ import {
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
+  LivroPublicadoOuOrganizado,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
   OutraProducaoBibliografica,
@@ -45,6 +46,7 @@ import { PresentationOfWorkService } from '../services/presentationOfWorkService
 import { OtherBibliographicWorkService } from '../services/otherBibliographicWorkService'
 import { TextInNewspaperOrMagazineService } from '../services/textInNewspaperOrMagazineService'
 import { PublishedBookChapterService } from '../services/publishedBookChapterService'
+import { PublishedBookService } from '../services/publishedBookService'
 
 @Component({
   selector: 'app-add-curriculums',
@@ -75,6 +77,7 @@ export class AddCurriculumsComponent {
     private readonly otherBibliographicWorkService: OtherBibliographicWorkService,
     private readonly textInNewspaperOrMagazineService: TextInNewspaperOrMagazineService,
     private readonly publishedBookChapterService: PublishedBookChapterService,
+    private readonly pubblishedBookService: PublishedBookService,
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
@@ -161,6 +164,7 @@ export class AddCurriculumsComponent {
     const livrosECapitulos = producaoBibliografica['LIVROS-E-CAPITULOS']
     const capitulosDeLivros =
       livrosECapitulos?.['CAPITULOS-DE-LIVROS-PUBLICADOS']
+    const livros = livrosECapitulos?.['LIVROS-PUBLICADOS-OU-ORGANIZADOS']
 
     const dadosComplementares = value['DADOS-COMPLEMENTARES']
     const participacaoEmEventosCongressos =
@@ -189,6 +193,7 @@ export class AddCurriculumsComponent {
     let outrasProducoesBibliograficas: OutraProducaoBibliografica[] = []
     let textosEmRevistasOuJornais: TextoEmJornalOuRevista[] = []
     let capitulosDeLivrosPublicados: CapituloDeLivroPublicado[] = []
+    let livrosPublicadosOuOrganizados: LivroPublicadoOuOrganizado[] = []
 
     if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
       trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
@@ -334,6 +339,12 @@ export class AddCurriculumsComponent {
         )
     }
 
+    if (livros?.['LIVRO-PUBLICADO-OU-ORGANIZADO_asArray']) {
+      livrosPublicadosOuOrganizados = this.pubblishedBookService.makeLivros(
+        livros['LIVRO-PUBLICADO-OU-ORGANIZADO_asArray']
+      )
+    }
+
     const lattesObj = {
       nome,
       trabalhosEmEventos,
@@ -352,10 +363,11 @@ export class AddCurriculumsComponent {
       apresentacoesDeTrabalho,
       outrasProducoesBibliograficas,
       textosEmRevistasOuJornais,
-      capitulosDeLivrosPublicados
+      capitulosDeLivrosPublicados,
+      livrosPublicadosOuOrganizados
     }
 
-    console.log('capitulosDeLivrosPublicados', capitulosDeLivrosPublicados)
+    console.log('livrosPublicadosOuOrganizados', livrosPublicadosOuOrganizados)
 
     const createCurriculumDto = {
       lattesId: value['_NUMERO-IDENTIFICADOR'],
