@@ -7,15 +7,18 @@ export interface IXml {
   }
   'PRODUCAO-BIBLIOGRAFICA': {
     'TRABALHOS-EM-EVENTOS': {
-      'TRABALHO-EM-EVENTOS_asArray': Array<{
-        'TRABALHO-EM-EVENTOS_asArray': any[]
-      }>
+      'TRABALHO-EM-EVENTOS_asArray': any[]
     }
     'DEMAIS-TIPOS-DE-PRODUCAO-BIBLIOGRAFICA': {
       'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray': any[]
     }
     'TEXTOS-EM-JORNAIS-OU-REVISTAS': {
       'TEXTO-EM-JORNAL-OU-REVISTA_asArray': any[]
+    }
+    'LIVROS-E-CAPITULOS'?: {
+      'CAPITULOS-DE-LIVROS-PUBLICADOS'?: {
+        'CAPITULO-DE-LIVRO-PUBLICADO_asArray': any[]
+      }
     }
   }
   'DADOS-COMPLEMENTARES': {

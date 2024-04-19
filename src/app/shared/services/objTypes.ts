@@ -532,6 +532,38 @@ export interface TextoEmJornalOuRevista extends dadosBasicosSecoes {
   localDePublicacao?: string
 }
 
+export interface CapituloDeLivroPublicado extends dadosBasicosSecoes {
+  autores?: Autor[]
+  palavrasChave?: string[]
+  areasDoConhecimento?: AreasDoConhecimento
+  setoresDeAtividade?: string[]
+  informacoesAdicionais?: InformacoesAdicionais
+  sequenciaProducao?: string
+
+  tipo?: string
+  tituloDoCapituloDoLivro?: string
+  ano?: string
+  paisDePublicacao?: string
+  idioma?: string
+  meioDeDivulgacao?: string
+  homePageDoTrabalho?: string
+  flagRelevancia?: 'SIM' | 'NAO'
+  doi?: string
+  tituloDoCapituloDoLivroIngles?: string
+  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+
+  tituloDoLivro?: string
+  numeroDeVolumes?: string
+  paginaInicial?: string
+  paginaFinal?: string
+  isbn?: string
+  organizadores?: string
+  numeroDaEdicaoRevisao?: string
+  numeroDaSerie?: string
+  cidadeDaEditora?: string
+  nomeDaEditora?: string
+}
+
 interface InformacoesAdicionais {
   descricaoInformacoesAdicionais?: string
   descricaoInformacoesAdicionaisIngles?: string
