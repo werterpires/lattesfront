@@ -99,3 +99,9 @@
   color: var(--primary);
   font-size: 11px;
 }
+
+.pageResults {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.41px;
+}
