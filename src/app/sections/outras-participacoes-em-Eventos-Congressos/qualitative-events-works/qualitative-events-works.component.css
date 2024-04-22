@@ -1,0 +1,27 @@
+.pages {
+  display: flex;
+  justify-content: center;
+}
+
+.pageNumber {
+  border: 1px solid #a4a3a340;
+  width: 30px;
+  height: 34px;
+
+  padding: 5px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--primary);
+}
+
+.selectedPage {
+  border: 1px solid var(--primary);
+}
+
+.w22 {
+  width: 22px;
+}

@@ -1,0 +1,67 @@
+.dataShower{
+  width: 80vw;
+  overflow: hidden;
+}
+
+.dataContainer{
+  width: 160vw;
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+.tableShower{
+  width: 80vw;
+}
+
+.chartShower{
+  width: 80vw;
+
+}
+
+.arrowIcon {
+  width: 25px;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: all 0.3s ease;
+}
+
+.notRotate {
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+}
+
+.tableHead {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  gap: 3px;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+}
+
+.pageNumber {
+  border: 1px solid #a4a3a340;
+  width: 30px;
+  height: 34px;
+
+  padding: 5px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--primary);
+}
+
+.selectedPage {
+  border: 1px solid var(--primary);
+}
