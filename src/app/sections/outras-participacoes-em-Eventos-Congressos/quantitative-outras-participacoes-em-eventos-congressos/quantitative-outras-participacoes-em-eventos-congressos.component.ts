@@ -73,6 +73,8 @@ export class QuantitativeOthersEventsComponent {
   resultsPerPage: number = 8
   pagesNumber!: number
 
+  info: boolean = false
+
   yersToConsider: string[] = this.utilsService.getLastFiveYears()
 
   orderProp: string = 'nome'
