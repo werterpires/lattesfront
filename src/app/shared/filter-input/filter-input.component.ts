@@ -1,35 +1,38 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FilterObject } from './types';
-import { FormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { FilterObject } from './types'
+import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-filter-input',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './filter-input.component.html',
-  styleUrl: './filter-input.component.css',
+  styleUrl: './filter-input.component.css'
 })
 export class FilterInputComponent {
-  @Output() filterEvent = new EventEmitter<FilterObject>();
+  @Output() filterEvent = new EventEmitter<FilterObject>()
 
   @Input() filter: FilterObject = {
     text: [],
-    disjunctive: true,
-  };
+    disjunctive: true
+  }
 
-  getText(text: string) {
-    const newText: string[] = [];
+  getText(text: string): void {
+    const newText: string[] = []
 
-    const regex = /"([^"]*)"/g;
-    const regexIntervalo = /\b(\d+)-(\d+)\b/g;
+    const regex = /"([^"]*)"/g
+    const regexIntervalo = /\b(\d+)-(\d+)\b/g
 
-    const trechosAspas = text.match(regex);
-    text = text.replace(regex, '');
-    if (trechosAspas) newText.push(...trechosAspas);
+    const trechosAspas = text.match(regex)
+    text = text.replace(regex, '')
+    if (trechosAspas) newText.push(...trechosAspas)
 
     text = text.replace(regexIntervalo, (match, inicio, fim) => {
-      const inicioNum = parseInt(inicio);
-      const fimNum = parseInt(fim);
+      if (typeof inicio !== 'string' || typeof fim !== 'string') {
+        return ''
+      }
+      const inicioNum = parseInt(inicio)
+      const fimNum = parseInt(fim)
       if (
         !isNaN(inicioNum) &&
         !isNaN(fimNum) &&
@@ -37,19 +40,17 @@ export class FilterInputComponent {
         fimNum - inicioNum <= 50
       ) {
         for (let i = inicioNum; i <= fimNum; i++) {
-          newText.push(i.toString());
+          newText.push(i.toString())
         }
-        return '';
+        return ''
       } else {
-        return match;
+        return match
       }
-    });
+    })
 
-    const trechosRestantes = text
-      .split(/\s+/)
-      .filter((trecho) => trecho.trim());
-    newText.push(...trechosRestantes);
+    const trechosRestantes = text.split(/\s+/).filter((trecho) => trecho.trim())
+    newText.push(...trechosRestantes)
 
-    this.filter.text = newText;
+    this.filter.text = newText
   }
 }

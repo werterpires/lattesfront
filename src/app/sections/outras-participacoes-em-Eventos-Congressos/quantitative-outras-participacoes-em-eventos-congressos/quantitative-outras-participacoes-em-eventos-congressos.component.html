@@ -77,7 +77,10 @@
                   <app-filter-input
                     *ngIf="participationProps[0].showFilter"
                     [filter]="participationProps[0].filterObject"
-                    (filterEvent)="participationProps[0].filterObject = $event"
+                    (filterEvent)="
+                      participationProps[0].filterObject = $event;
+                      getParticipations()
+                    "
                   ></app-filter-input>
                   <div
                     class="tableHead"

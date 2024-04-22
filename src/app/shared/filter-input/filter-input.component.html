@@ -6,9 +6,24 @@
     [value]="filter.text.join(' ')"
     class="seachInput"
   />
-  <label for="" class="onlyAcivesLabel"
-    >Pesquisa disjuntiva<input type="checkbox" [(ngModel)]="filter.disjunctive"
-  /></label>
+
+  <p for="" class="onlyAcivesLabel">
+    Combinar termos usando:
+    <label for="" class="onlyAcivesLabel"
+      >Ou<input
+        type="radio"
+        name="combination"
+        checked
+        (change)="filter.disjunctive = true"
+    /></label>
+    <label for="" class="onlyAcivesLabel"
+      >E<input
+        type="radio"
+        name="combination"
+        (change)="filter.disjunctive = false"
+    /></label>
+  </p>
+
   <button class="smallButton" (click)="filterEvent.emit(filter)">
     Aplicar
   </button>
