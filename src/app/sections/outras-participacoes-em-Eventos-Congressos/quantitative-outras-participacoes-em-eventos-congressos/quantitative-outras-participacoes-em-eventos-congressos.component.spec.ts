@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { QuantitativeEventsWorksComponent } from './quantitative-events-works.component'
+import { QuantitativeOthersEventsComponent } from './quantitative-outras-participacoes-em-eventos-congressos.component'
 
 describe('QualitativeEventsWorksComponent', () => {
-  let component: QuantitativeEventsWorksComponent
-  let fixture: ComponentFixture<QuantitativeEventsWorksComponent>
+  let component: QuantitativeOthersEventsComponent
+  let fixture: ComponentFixture<QuantitativeOthersEventsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [QuantitativeEventsWorksComponent]
+      imports: [QuantitativeOthersEventsComponent]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(QuantitativeEventsWorksComponent)
+    fixture = TestBed.createComponent(QuantitativeOthersEventsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

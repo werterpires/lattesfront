@@ -1,9 +1,14 @@
-<app-accordion [title]="'Análise Quantitativa'" [quantity]="eventsWorks.length">
+<app-accordion
+  [title]="'Análise Quantitativa'"
+  [quantity]="participations.length"
+>
   <div class="filters">
     <input
       #years
       type="text"
-      (input)="yersToConsider = utilsService.getYears(years.value); getEventsWorks()"
+      (input)="
+        yersToConsider = utilsService.getYears(years.value); getParticipations()
+      "
       class="seachInput"
       placeholder="Digite os anos a serem considerados."
     />
@@ -13,14 +18,14 @@
         type="checkbox"
         [value]="onlyActives"
         name="onlyActives"
-        (input)="onlyActives = !onlyActives; getEventsWorks()"
+        (input)="onlyActives = !onlyActives; getParticipations()"
         checked
     /></label>
     <label for="" class="onlyAcivesLabel"
       >Apenas anos com vínculo<input
         type="checkbox"
         [value]="onlyServiceYears"
-        (input)="onlyServiceYears = !onlyServiceYears; getEventsWorks()"
+        (input)="onlyServiceYears = !onlyServiceYears; getParticipations()"
         name="onlyServiceYears"
     /></label>
 
@@ -29,7 +34,7 @@
       <input
         type="checkbox"
         [(ngModel)]="graph"
-        (input)="graph = !graph; getEventsWorks()"
+        (input)="graph = !graph; getParticipations()"
         name="graph"
       />
     </label>
@@ -43,35 +48,44 @@
               <tr class="headRow">
                 <th class="th">
                   <app-filter-input
-                    *ngIf="eventProps[0].showFilter"
-                    [filter]="eventProps[0].filterObject"
-                    (filterEvent)="eventProps[0].filterObject = $event"
+                    *ngIf="participationProps[0].showFilter"
+                    [filter]="participationProps[0].filterObject"
+                    (filterEvent)="participationProps[0].filterObject = $event"
                   ></app-filter-input>
                   <div
                     class="tableHead"
                     (mouseenter)="ascDesc.classList.remove('hidden')"
                     (mouseleave)="ascDesc.classList.add('hidden')"
                   >
-                    <p (click)="eventProps[0].showFilter = !eventProps[0].showFilter">Professor</p>
+                    <p
+                      (click)="
+                        participationProps[0].showFilter =
+                          !participationProps[0].showFilter
+                      "
+                    >
+                      Professor
+                    </p>
                     <img
                       #ascDesc
                       class="arrowIcon hidden"
                       src="assets/icons/arrowIcon.svg"
                       alt="Desenho de uma seta"
                       (click)="
-                        eventProps[0].ascending = !ascending;
-                        ascending = eventProps[0].ascending;
-                        orderProp = eventProps[0].key
+                        participationProps[0].ascending = !ascending;
+                        ascending = participationProps[0].ascending;
+                        orderProp = participationProps[0].key
                       "
                       [ngClass]="{
-                        rotate: !eventProps[0].ascending,
-                        notRotate: eventProps[0].ascending
+                        rotate: !participationProps[0].ascending,
+                        notRotate: participationProps[0].ascending
                       }"
                     />
                   </div>
                 </th>
 
-                <th *ngFor="let year of yersToConsider" class="th">{{ year }}</th>
+                <th *ngFor="let year of yersToConsider" class="th">
+                  {{ year }}
+                </th>
                 <th class="th">
                   <div
                     class="tableHead"
@@ -101,15 +115,19 @@
                   <td class="td">{{ professor }}</td>
                   <td class="td" *ngFor="let year of yersToConsider">
                     {{
-                      eventsWorksService.countWorksByProfessorAndYear(professor, year, eventsWorks)
+                      otherEventsService.countParticipationsByProfessorAndYear(
+                        professor,
+                        year,
+                        participations
+                      )
                     }}
                   </td>
                   <td class="td">
                     {{
-                      eventsWorksService.countWorksByProfessor(
+                      otherEventsService.countParticipationsByProfessor(
                         professor,
                         yersToConsider,
-                        eventsWorks
+                        participations
                       )
                     }}
                   </td>
@@ -121,7 +139,9 @@
 
         <div class="navigation">
           <div>
-            <button (click)="createSheet()" class="smallButton">Baixar Relatório</button>
+            <button (click)="createSheet()" class="smallButton">
+              Baixar Relatório
+            </button>
           </div>
 
           <div class="pages">
@@ -140,7 +160,10 @@
                 #results
                 type="number"
                 [value]="resultsPerPage"
-                (input)="resultsPerPage = +results.value > 0 ? +results.value : 1; filterNow()"
+                (input)="
+                  resultsPerPage = +results.value > 0 ? +results.value : 1;
+                  filterNow()
+                "
                 id="resultsPerPage"
             /></label>
           </div>
