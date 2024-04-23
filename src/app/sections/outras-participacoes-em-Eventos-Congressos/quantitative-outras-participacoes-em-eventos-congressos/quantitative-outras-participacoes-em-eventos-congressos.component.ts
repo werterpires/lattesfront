@@ -260,19 +260,23 @@ export class QuantitativeOthersEventsComponent {
   sortProfessorsByParticipationQuantity(): void {
     // Maps each professor to the quantity of their works in events
     const participationsByProfessor = new Map<string, number>()
-    this.participations.forEach((participation) => {
-      const professor = participation.nome?.toString()
-      if (professor) {
-        const quantity = participationsByProfessor.get(professor) || 0
-        participationsByProfessor.set(professor, quantity + 1)
-      }
+    this.professors.forEach((professor) => {
+      const professorName = professor.toString()
+      const quantity = this.otherEventsService.countParticipationsByProfessor(
+        professorName,
+        this.yersToConsider,
+        this.participations
+      )
+
+      participationsByProfessor.set(professorName, quantity)
     })
 
     // Sorts the professors by the quantity of works they participated in events
     this.professors.sort((a, b) => {
       return (
-        (participationsByProfessor.get(b) || 0) -
-        (participationsByProfessor.get(a) || 0)
+        ((participationsByProfessor.get(b) || 0) -
+          (participationsByProfessor.get(a) || 0)) *
+        (this.quantityDesc ? 1 : -1)
       )
     })
     this.getProfessorsToShow()

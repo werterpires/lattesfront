@@ -103,7 +103,8 @@
                       (click)="
                         participationProps[0].ascending = !ascending;
                         ascending = participationProps[0].ascending;
-                        orderProp = participationProps[0].key
+                        orderProp = participationProps[0].key;
+                        orderNow()
                       "
                       [ngClass]="{
                         rotate: !participationProps[0].ascending,
@@ -128,7 +129,11 @@
                       class="arrowIcon hidden"
                       src="assets/icons/arrowIcon.svg"
                       alt="Desenho de uma seta"
-                      (click)="quantityDesc = !quantityDesc"
+                      (click)="
+                        orderProp = participationProps[1].key;
+                        quantityDesc = !quantityDesc;
+                        sortProfessorsByParticipationQuantity()
+                      "
                       [ngClass]="{
                         rotate: quantityDesc,
                         notRotate: !quantityDesc
