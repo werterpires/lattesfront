@@ -25,6 +25,14 @@
   position: relative;
 }
 
+.sectionName {
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28.8px;
+  color: var(--primary);
+}
+
 .cardContainer::before {
   width: 16px;
   height: 176px;
@@ -33,7 +41,7 @@
   position: absolute;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  content: " .  ";
+  content: ' .  ';
   color: transparent;
   background-color: var(--primary);
   z-index: 0;

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core'
 import { ContainerComponent } from '../shared/container/container.component'
 import {
+  NavigationEnd,
   Router,
   RouterLink,
   RouterLinkActive,
@@ -28,11 +29,12 @@ import { NgFor, NgIf } from '@angular/common'
 export class LattesSectionComponent {
   curriculums: ICurriculum[] = []
   sections: Array<{ name: string; route: string }> = [
-    { name: 'Trabalhos em eventos', route: 'eventsworks' },
     {
       name: 'Outras participações em eventos e congressos',
       route: 'otherevents'
     },
+    { name: 'Trabalhos em eventos', route: 'eventsworks' },
+
     { name: 'TCCs', route: 'tccs' },
     { name: 'Dissertações', route: 'dissertations' },
     { name: 'Monografias', route: 'monographs' },
@@ -46,6 +48,8 @@ export class LattesSectionComponent {
   sectionsToShow = this.sections
   filterString: string = ''
   outlet: boolean = false
+
+  title = ''
   constructor(
     private readonly curriculumService: CurriculumnsService,
     public router: Router
@@ -53,6 +57,8 @@ export class LattesSectionComponent {
     this.curriculumService.curriculumns$.subscribe((curriculumns) => {
       this.curriculums = curriculumns
     })
+
+    this.changeTitleWheRouteChange()
   }
 
   ngOnInit(): void {
@@ -60,6 +66,10 @@ export class LattesSectionComponent {
       this.outlet = false
     } else {
       this.outlet = true
+      this.title =
+        this.sections.find(
+          (section) => section.route === this.router.url.split('/')[2]
+        )?.name || ''
     }
   }
 
@@ -69,6 +79,18 @@ export class LattesSectionComponent {
       return filter.some((fil) => {
         return section.name.toLowerCase().includes(fil)
       })
+    })
+  }
+
+  changeTitleWheRouteChange(): void {
+    // criar um escutador para as alterações de rota
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.title =
+          this.sections.find(
+            (section) => section.route === this.router.url.split('/')[2]
+          )?.name || ''
+      }
     })
   }
 }

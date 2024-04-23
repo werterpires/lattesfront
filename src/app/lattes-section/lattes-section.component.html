@@ -11,7 +11,11 @@
     <div class="sectionsCards">
       <div
         *ngFor="let section of sectionsToShow"
-        (click)="outlet = true; router.navigate(['/sections', section.route])"
+        (click)="
+          title = section.name;
+          outlet = true;
+          router.navigate(['/sections', section.route])
+        "
         class="cardContainer"
       >
         <div class="sectionCard">
@@ -24,7 +28,7 @@
   </ng-container>
   <ng-container *ngIf="outlet">
     <div id="buttonLine">
-      <div></div>
+      <p class="sectionName">{{ title }}</p>
       <button
         (click)="outlet = false; router.navigate(['/sections'])"
         class="smallButton"
