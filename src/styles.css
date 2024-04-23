@@ -27,10 +27,15 @@ li {
 }
 
 .arrowIcon {
-  width: 25px;
-  position: absolute;
-  left: -10px;
-  top: -10px;
+  width: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  top: -1px;
+  opacity: 0.5;
+}
+
+.arrowIcon:hover {
+  opacity: 1;
 }
 
 .rotate {

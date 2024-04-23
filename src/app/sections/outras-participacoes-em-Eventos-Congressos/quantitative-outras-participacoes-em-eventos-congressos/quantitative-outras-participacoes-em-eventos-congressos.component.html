@@ -82,22 +82,11 @@
                       getParticipations()
                     "
                   ></app-filter-input>
-                  <div
-                    class="tableHead"
-                    (mouseenter)="ascDesc.classList.remove('hidden')"
-                    (mouseleave)="ascDesc.classList.add('hidden')"
-                  >
-                    <p
-                      (click)="
-                        participationProps[0].showFilter =
-                          !participationProps[0].showFilter
-                      "
-                    >
-                      Professor
-                    </p>
+                  <div class="tableHead">
+                    <p>Professor</p>
                     <img
                       #ascDesc
-                      class="arrowIcon hidden"
+                      class="arrowIcon"
                       src="assets/icons/arrowIcon.svg"
                       alt="Desenho de uma seta"
                       (click)="
@@ -110,6 +99,15 @@
                         rotate: !participationProps[0].ascending,
                         notRotate: participationProps[0].ascending
                       }"
+                    />
+                    <img
+                      class="arrowIcon"
+                      src="assets/icons/filterIcon.svg"
+                      alt="Desenho de um filtro"
+                      (click)="
+                        participationProps[0].showFilter =
+                          !participationProps[0].showFilter
+                      "
                     />
                   </div>
                 </th>
