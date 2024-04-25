@@ -1,3 +1,5 @@
+const { off } = require('process')
+
 module.exports = {
   env: {
     browser: true,
@@ -25,6 +27,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
-    '@typescript-eslint/indent': 'off'
+    '@typescript-eslint/indent': 'off',
+    '@accessor-pairs': 'off'
   }
 }

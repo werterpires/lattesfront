@@ -9,7 +9,7 @@ export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
   natureza?: 'COMPLETO' | 'RESUMO' | 'RESUMO_EXPANDIDO' | 'NAO_INFORMADO'
@@ -213,7 +213,7 @@ export interface OutraProducaoTecnica extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
 
@@ -241,7 +241,7 @@ export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
 
@@ -361,7 +361,7 @@ export interface DesenvolvimentoDeMaterialDidaticoOuInstrucional
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
 
@@ -395,7 +395,7 @@ export interface CursoDeCurtaDuracaoMinistrado extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
 
@@ -438,7 +438,7 @@ export interface ApresentacaoDeTrabalho extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
 
@@ -470,7 +470,7 @@ export interface OutraProducaoBibliografica extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: InformacoesAdicionais
   sequenciaProducao?: string
 
@@ -497,7 +497,7 @@ export interface TextoEmJornalOuRevista extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: InformacoesAdicionais
   sequenciaProducao?: string
 
@@ -536,7 +536,7 @@ export interface CapituloDeLivroPublicado extends dadosBasicosSecoes {
   autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string[]
+  setoresDeAtividade?: string
   informacoesAdicionais?: InformacoesAdicionais
   sequenciaProducao?: string
 

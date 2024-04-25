@@ -390,7 +390,6 @@ export class QuantitativeOthersEventsComponent {
    * results per page. If results per page is 0, shows all professors.
    */
   getProfessorsToShow(): void {
-    console.log('inicio getProfessorsToShow')
     if (!this.resultsPerPage) {
       // If results per page is 0, show all professors
       return
@@ -402,10 +401,8 @@ export class QuantitativeOthersEventsComponent {
     const end = start + this.resultsPerPage
     // Slice the professors array with the calculated start and end indices
     this.professorsToShow = this.professors.slice(start, end)
-    console.log('meio getProfessorsToShow')
 
     this.makeChartSerie()
-    console.log('fim getProfessorsToShow')
   }
 
   /**
