@@ -16,6 +16,7 @@ import { OrderService } from './order.service'
 import { ProfessorsService } from './professors.Service'
 import { CountService } from './counts.service'
 import { ChartData, ChartSerie } from 'src/app/charts/quantity/types'
+import { ReportService } from './report.service'
 
 @Component({
   selector: 'app-quantitative-section',
@@ -76,7 +77,8 @@ export class QuantitativeSectionComponent {
     private readonly filtersService: FiltersService,
     private readonly orderService: OrderService,
     private readonly professorsService: ProfessorsService,
-    public readonly countService: CountService
+    public readonly countService: CountService,
+    private readonly reportService: ReportService
   ) {}
 
   @Input() set allSectionObjects(
@@ -224,5 +226,14 @@ export class QuantitativeSectionComponent {
     )
 
     this.getProfessorsToShow()
+  }
+
+  async exportReport(): Promise<void> {
+    await this.reportService.createSheet(
+      this.yersToConsider,
+      this.professors,
+      this.sectionObjects,
+      this.sectionType
+    )
   }
 }
