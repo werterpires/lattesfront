@@ -7,14 +7,24 @@ import {
 } from '../services/objTypes'
 import { ICurriculum, ILattesCurriculum } from '../services/types'
 import { UtilsService } from '../services/util.service'
-import { NgIf } from '@angular/common'
+import { NgClass, NgIf, NgStyle } from '@angular/common'
 import { Props } from './tpes'
 import { FiltersService } from './filters.service'
+import { FormsModule } from '@angular/forms'
+import { FilterInputComponent } from '../filter-input/filter-input.component'
+import { OrderService } from './order.service'
 
 @Component({
   selector: 'app-quantitative-section',
   standalone: true,
-  imports: [AccordionComponent, NgIf],
+  imports: [
+    AccordionComponent,
+    NgIf,
+    NgStyle,
+    NgClass,
+    FormsModule,
+    FilterInputComponent
+  ],
   templateUrl: './quantitative-section.component.html',
   styleUrl: './quantitative-section.component.css'
 })
@@ -39,10 +49,17 @@ export class QuantitativeSectionComponent {
   onlyServiceYears: boolean = false
 
   info: boolean = false
+  ascending: boolean = true
+  orderProp: string = 'nome'
+
+  graph = false
+
+  atualPage: number = 1
 
   constructor(
     public utilsService: UtilsService,
-    private readonly filtersService: FiltersService
+    private readonly filtersService: FiltersService,
+    private readonly orderService: OrderService
   ) {}
 
   @Input() set allSectionObjects(
@@ -70,6 +87,12 @@ export class QuantitativeSectionComponent {
       this.sectionObjects,
       this.sectionType
     )
+  }
+
+  orderNow(): void {
+    this.orderService.orderNow(
+      this.orderProp, this.sectionObjects, this.sectionType, this.ascending)
+    this.atualPage = 1
   }
 
   stringToLower(text: any): string {

@@ -51,5 +51,66 @@
         (input)="onlyServiceYears = !onlyServiceYears; getSectionObjects()"
         name="onlyServiceYears"
     /></label>
+
+    <label for="" class="onlyAcivesLabel">
+      Ver como gráfico
+      <input
+        type="checkbox"
+        [(ngModel)]="graph"
+        (input)="graph = !graph; getSectionObjects()"
+        name="graph"
+      />
+    </label>
+  </div>
+  <div class="dataShower">
+    <div class="dataContainer" [ngStyle]="{ translate: graph ? '-50%' : '0' }">
+      <div class="tableShower">
+        <div class="tableContainer">
+          <table class="table">
+            <thead class="thead">
+              <tr class="headRow">
+                <th class="th">
+                  <app-filter-input
+                    *ngIf="sectionProps[0].showFilter"
+                    [filter]="sectionProps[0].filterObject"
+                    (filterEvent)="
+                      sectionProps[0].filterObject = $event; getSectionObjects()
+                    "
+                  ></app-filter-input>
+                  <div class="tableHead">
+                    <p>Professor</p>
+                    <img
+                      #ascDesc
+                      class="arrowIcon"
+                      src="assets/icons/arrowIcon.svg"
+                      alt="Desenho de uma seta"
+                      (click)="
+                        sectionProps[0].ascending = !ascending;
+                        ascending = sectionProps[0].ascending;
+                        orderProp = sectionProps[0].key;
+                        orderNow()
+                      "
+                      [ngClass]="{
+                        rotate: !sectionProps[0].ascending,
+                        notRotate: sectionProps[0].ascending
+                      }"
+                    />
+                    <img
+                      class="arrowIcon"
+                      src="assets/icons/filterIcon.svg"
+                      alt="Desenho de um filtro"
+                      (click)="
+                        sectionProps[0].showFilter =
+                          !sectionProps[0].showFilter
+                      "
+                    />
+                  </div>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </app-accordion>
