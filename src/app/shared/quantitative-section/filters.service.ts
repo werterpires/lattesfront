@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Props } from './tpes'
-import {
-  OutrasParticipacoesEmEventosCongressos,
-  TrabalhoEmEventos
-} from '../services/objTypes'
+import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
 
 @Injectable({ providedIn: 'root' })
 export class FiltersService {
@@ -12,11 +9,9 @@ export class FiltersService {
     onlyActives: boolean,
     onlyServiceYears: boolean,
     yersToConsider: string[],
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[] = [],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[] = [],
     sectionType: string
-  ): OutrasParticipacoesEmEventosCongressos[] | TrabalhoEmEventos[] {
+  ): Participacao[] | TrabalhoEmEventos[] {
     // Filters with values applied
     const filters = sectionProps.filter(
       (prop) => prop.filterObject.text.length > 0
@@ -39,15 +34,13 @@ export class FiltersService {
   }
 
   filterAny(
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     filters: Props[],
     onlyActives: boolean,
     onlyServiceYears: boolean,
     yersToConsider: string[],
     sectionType: string
-  ): OutrasParticipacoesEmEventosCongressos[] | TrabalhoEmEventos[] {
+  ): Participacao[] | TrabalhoEmEventos[] {
     switch (sectionType) {
       case 'outrasParticipacoesEmEventosCongressos':
         sectionObjects = this.filterParticipacoes(
@@ -67,18 +60,18 @@ export class FiltersService {
   }
 
   filterParticipacoes(
-    sectionObjects: OutrasParticipacoesEmEventosCongressos[],
+    sectionObjects: Participacao[],
     filters: Props[],
     onlyActives: boolean,
     onlyServiceYears: boolean,
     yersToConsider: string[]
-  ): OutrasParticipacoesEmEventosCongressos[] {
+  ): Participacao[] {
     sectionObjects = sectionObjects.filter((section) => {
       const sec = section
 
       return (
         (filters.every((prop) => {
-          const key = prop.key as keyof OutrasParticipacoesEmEventosCongressos
+          const key = prop.key as keyof Participacao
           // Get the value of the property of the work
           const workValue = this.stringToLower(sec[key])
           // Check if the value meets the filter

@@ -1,10 +1,7 @@
 /* eslint-disable accessor-pairs */
 import { Component, Input } from '@angular/core'
 import { AccordionComponent } from '../accordion/accordion.component'
-import {
-  OutrasParticipacoesEmEventosCongressos,
-  TrabalhoEmEventos
-} from '../services/objTypes'
+import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
 import { ICurriculum, ILattesCurriculum } from '../services/types'
 import { UtilsService } from '../services/util.service'
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common'
@@ -38,13 +35,9 @@ import { QuantityComponent } from 'src/app/charts/quantity/quantity.component'
 export class QuantitativeSectionComponent {
   @Input() accordionTitle: string = ''
   @Input() sectionType!: keyof ILattesCurriculum
-  @Input() _allSectionObjects:
-    | OutrasParticipacoesEmEventosCongressos[]
-    | TrabalhoEmEventos[] = []
+  @Input() _allSectionObjects: Participacao[] | TrabalhoEmEventos[] = []
 
-  sectionObjects:
-    | OutrasParticipacoesEmEventosCongressos[]
-    | TrabalhoEmEventos[] = []
+  sectionObjects: Participacao[] | TrabalhoEmEventos[] = []
 
   @Input() sectionProps!: Props[]
 
@@ -84,9 +77,7 @@ export class QuantitativeSectionComponent {
   ) {}
 
   @Input() set allSectionObjects(
-    allSectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[]
+    allSectionObjects: Participacao[] | TrabalhoEmEventos[]
   ) {
     this._allSectionObjects = allSectionObjects
     this.sectionObjects = allSectionObjects

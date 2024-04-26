@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Injectable } from '@angular/core'
-import { AreasDoConhecimento, ParticipacaoEmSimposio } from './objTypes'
+import { AreasDoConhecimento, Participacao } from './objTypes'
 import { UtilsService } from './util.service'
 
 @Injectable({
@@ -8,8 +8,8 @@ import { UtilsService } from './util.service'
 })
 export class ParticipationInSymposiumService {
   constructor(private readonly utilsService: UtilsService) {}
-  makeParticipacoesEmSimposios(data: any[]): ParticipacaoEmSimposio[] {
-    const participations: ParticipacaoEmSimposio[] = []
+  makeParticipacoesEmSimposios(data: any[]): Participacao[] {
+    const participations: Participacao[] = []
     data.forEach((element) => {
       const palavrasChave = this.utilsService.makePalavrasChave(element)
 
@@ -21,7 +21,7 @@ export class ParticipationInSymposiumService {
         )
       }
 
-      const participation: ParticipacaoEmSimposio = {
+      const participation: Participacao = {
         palavrasChave,
         areasDoConhecimento,
         setoresDeAtividade: element['SETORES-DE-ATIVIDADE'],
@@ -103,7 +103,7 @@ export class ParticipationInSymposiumService {
   countParticipationsByProfessorAndYear(
     professor: string,
     year: string,
-    participations: ParticipacaoEmSimposio[]
+    participations: Participacao[]
   ): number {
     // Counts the number of events works by a professor in a year.
     return participations.filter((participation) => {
@@ -122,7 +122,7 @@ export class ParticipationInSymposiumService {
   countParticipationsByProfessor(
     professor: string,
     yersToConsider: string[],
-    participations: ParticipacaoEmSimposio[]
+    participations: Participacao[]
   ): number {
     let count = 0
     // We need to convert the array to a Set to speed up the lookups.
@@ -144,7 +144,7 @@ export class ParticipationInSymposiumService {
 
   countParticipationsByYear(
     year: string,
-    participations: ParticipacaoEmSimposio[]
+    participations: Participacao[]
   ): number {
     let count = 0
     participations.forEach((participation) => {

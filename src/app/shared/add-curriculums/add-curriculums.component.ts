@@ -15,11 +15,7 @@ import {
   OrganizacaoDeEvento,
   OutraProducaoBibliografica,
   OutraProducaoTecnica,
-  OutrasParticipacoesEmEventosCongressos,
-  ParticipacaoEmCongresso,
-  ParticipacaoEmEncontros,
-  ParticipacaoEmSeminario,
-  ParticipacaoEmSimposio,
+  Participacao,
   ProgramaDeRadioOuTV,
   TextoEmJornalOuRevista,
   TrabalhoEmEventos
@@ -182,12 +178,11 @@ export class AddCurriculumsComponent {
       producaoTecnica['DEMAIS-TIPOS-DE-PRODUCAO-TECNICA']
 
     let trabalhosEmEventos: TrabalhoEmEventos[] = []
-    let outrasParticipacoesEmEventosCongressos: OutrasParticipacoesEmEventosCongressos[] =
-      []
-    let participacoesEmEncontros: ParticipacaoEmEncontros[] = []
-    let participacoesEmSimposios: ParticipacaoEmSimposio[] = []
-    let participacoesEmSeminarios: ParticipacaoEmSeminario[] = []
-    let participacoesEmCongressos: ParticipacaoEmCongresso[] = []
+    let outrasParticipacoesEmEventosCongressos: Participacao[] = []
+    let participacoesEmEncontros: Participacao[] = []
+    let participacoesEmSimposios: Participacao[] = []
+    let participacoesEmSeminarios: Participacao[] = []
+    let participacoesEmCongressos: Participacao[] = []
     let outrasProducoesTecnicas: OutraProducaoTecnica[] = []
     let midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[] = []
     let programasDeRadioOuTV: ProgramaDeRadioOuTV[] = []

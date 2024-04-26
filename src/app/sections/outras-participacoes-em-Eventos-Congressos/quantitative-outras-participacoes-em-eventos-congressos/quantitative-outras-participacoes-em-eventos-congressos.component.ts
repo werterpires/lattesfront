@@ -3,7 +3,7 @@ import { ICurriculum } from '../../../shared/services/types'
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common'
 import { FailDataPipe } from '../../../pipes/fail-data.pipe'
 import { CurriculumnsService } from '../../../shared/services/curriculumns.service'
-import { OutrasParticipacoesEmEventosCongressos } from '../../../shared/services/objTypes'
+import { Participacao } from '../../../shared/services/objTypes'
 import { FormsModule } from '@angular/forms'
 import { ParticipationProps } from '../types'
 import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component'
@@ -36,7 +36,7 @@ import { OtherParticipationsInEventsConferencesService } from 'src/app/shared/se
 })
 export class QuantitativeOthersEventsComponent {
   // itens que mudam para cada seção
-  participations: OutrasParticipacoesEmEventosCongressos[] = []
+  participations: Participacao[] = []
 
   participationProps: ParticipationProps[] = [
     {
@@ -205,8 +205,7 @@ export class QuantitativeOthersEventsComponent {
    * be displayed are recalculated.
    */
   orderNow(): void {
-    const propKey = this
-      .orderProp as keyof OutrasParticipacoesEmEventosCongressos
+    const propKey = this.orderProp as keyof Participacao
 
     this.participations.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')
@@ -232,9 +231,7 @@ export class QuantitativeOthersEventsComponent {
    *   - serviceYears: the number of service years of the curriculum
    */
   getParticipations(): void {
-    this.participations = this.curriculums.reduce<
-      OutrasParticipacoesEmEventosCongressos[]
-    >(
+    this.participations = this.curriculums.reduce<Participacao[]>(
       (participations, curriculum) =>
         participations.concat(
           curriculum.curriculum.outrasParticipacoesEmEventosCongressos.map(

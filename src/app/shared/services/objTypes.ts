@@ -3,15 +3,17 @@ interface dadosBasicosSecoes {
   nome?: string
   active?: boolean
   serviceYears?: string
-}
 
-export interface TrabalhoEmEventos extends dadosBasicosSecoes {
-  autores?: Autor[]
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
   setoresDeAtividade?: string
   informacoesAdicionais?: string
   sequenciaProducao?: string
+}
+
+export interface TrabalhoEmEventos extends dadosBasicosSecoes {
+  autores?: Autor[]
+
   natureza?: 'COMPLETO' | 'RESUMO' | 'RESUMO_EXPANDIDO' | 'NAO_INFORMADO'
   tituloDoTrabalho?: string
   anoDoTrabalho?: string
@@ -53,138 +55,7 @@ export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   nomeDoEventoIngles?: string
 }
 
-export interface OutrasParticipacoesEmEventosCongressos
-  extends dadosBasicosSecoes {
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
-
-  natureza?: string
-  titulo?: string
-  ano?: string
-  pais?: string
-  idioma?: string
-  meioDeDivulgacao?: string
-  homePageDoTrabalho?: string
-  flagRelevancia?: string
-  tipoParticipacao?: string
-  formaParticipacao?: string
-  doi?: string
-  tituloIngles?: string
-  flagDivulgacaoCientifica?: string
-
-  nomeDoEvento?: string
-  codigoInstituicao?: string
-  nomeInstituicao?: string
-  localDoEvento?: string
-  cidadeDoEvento?: string
-  nomeDoEventoIngles?: string
-
-  participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
-}
-
-export interface ParticipacaoEmEncontros extends dadosBasicosSecoes {
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
-
-  natureza?: string
-  titulo?: string
-  ano?: string
-  pais?: string
-  idioma?: string
-  meioDeDivulgacao?: string
-  homePageDoTrabalho?: string
-  flagRelevancia?: string
-  tipoParticipacao?: string
-  formaParticipacao?: string
-  doi?: string
-  tituloIngles?: string
-  flagDivulgacaoCientifica?: string
-
-  nomeDoEvento?: string
-  codigoInstituicao?: string
-  nomeInstituicao?: string
-  localDoEvento?: string
-  cidadeDoEvento?: string
-  nomeDoEventoIngles?: string
-
-  participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
-}
-
-export interface ParticipacaoEmSimposio extends dadosBasicosSecoes {
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
-
-  natureza?: string
-  titulo?: string
-  ano?: string
-  pais?: string
-  idioma?: string
-  meioDeDivulgacao?: string
-  homePageDoTrabalho?: string
-  flagRelevancia?: string
-  tipoParticipacao?: string
-  formaParticipacao?: string
-  doi?: string
-  tituloIngles?: string
-  flagDivulgacaoCientifica?: string
-
-  nomeDoEvento?: string
-  codigoInstituicao?: string
-  nomeInstituicao?: string
-  localDoEvento?: string
-  cidadeDoEvento?: string
-  nomeDoEventoIngles?: string
-
-  participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
-}
-
-export interface ParticipacaoEmSeminario extends dadosBasicosSecoes {
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
-
-  natureza?: string
-  titulo?: string
-  ano?: string
-  pais?: string
-  idioma?: string
-  meioDeDivulgacao?: string
-  homePageDoTrabalho?: string
-  flagRelevancia?: string
-  tipoParticipacao?: string
-  formaParticipacao?: string
-  doi?: string
-  tituloIngles?: string
-  flagDivulgacaoCientifica?: string
-
-  nomeDoEvento?: string
-  codigoInstituicao?: string
-  nomeInstituicao?: string
-  localDoEvento?: string
-  cidadeDoEvento?: string
-  nomeDoEventoIngles?: string
-
-  participanteDeEventosCongressos?: ParticipanteDeEventosCongressos[]
-}
-
-export interface ParticipacaoEmCongresso extends dadosBasicosSecoes {
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
-
+export interface Participacao extends dadosBasicosSecoes {
   natureza?: string
   titulo?: string
   ano?: string
@@ -211,11 +82,6 @@ export interface ParticipacaoEmCongresso extends dadosBasicosSecoes {
 
 export interface OutraProducaoTecnica extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   natureza?: string
   titulo: string
@@ -239,11 +105,6 @@ export interface OutraProducaoTecnica extends dadosBasicosSecoes {
 
 export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   natureza: 'REDE_SOCIAL' | 'FORUM' | 'BLOG' | 'SITE'
   naturezaIngles?: string
@@ -261,11 +122,6 @@ export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
 
 export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   natureza: string
   titulo: string
@@ -290,11 +146,6 @@ export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
 
 export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   tipo:
     | 'CONCERTO'
@@ -333,11 +184,6 @@ export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
 
 export interface Editoracao extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   natureza: string
   titulo: string
@@ -359,11 +205,6 @@ export interface Editoracao extends dadosBasicosSecoes {
 export interface DesenvolvimentoDeMaterialDidaticoOuInstrucional
   extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   natureza?: string
   titulo?: string
@@ -393,11 +234,6 @@ export interface DesenvolvimentoDeMaterialDidaticoOuInstrucional
 
 export interface CursoDeCurtaDuracaoMinistrado extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   nivelDoCurso?:
     | 'EXTENSAO'
@@ -436,11 +272,6 @@ export interface CursoDeCurtaDuracaoMinistrado extends dadosBasicosSecoes {
 
 export interface ApresentacaoDeTrabalho extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   natureza?:
     | 'COMUNICACAO'
@@ -468,11 +299,6 @@ export interface ApresentacaoDeTrabalho extends dadosBasicosSecoes {
 
 export interface OutraProducaoBibliografica extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: InformacoesAdicionais
-  sequenciaProducao?: string
 
   natureza?: string
   titulo?: string
@@ -495,11 +321,6 @@ export interface OutraProducaoBibliografica extends dadosBasicosSecoes {
 
 export interface TextoEmJornalOuRevista extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: InformacoesAdicionais
-  sequenciaProducao?: string
 
   natureza?: 'JORNAL_DE_NOTICIAS' | 'REVISTA_MAGAZINE' | 'NAO_INFORMADO'
   tituloDoTexto?: string
@@ -534,11 +355,6 @@ export interface TextoEmJornalOuRevista extends dadosBasicosSecoes {
 
 export interface CapituloDeLivroPublicado extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: InformacoesAdicionais
-  sequenciaProducao?: string
 
   tipo?: string
   tituloDoCapituloDoLivro?: string
@@ -566,11 +382,6 @@ export interface CapituloDeLivroPublicado extends dadosBasicosSecoes {
 
 export interface LivroPublicadoOuOrganizado extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
 
   tipo?: 'LIVRO_PUBLICADO' | 'LIVRO_ORGANIZADO_OU_EDICAO' | 'NAO_INFORMADO'
   natureza?:
@@ -615,11 +426,7 @@ export interface LivroPublicadoOuOrganizado extends dadosBasicosSecoes {
 
 export interface Artigo extends dadosBasicosSecoes {
   autores?: Autor[]
-  palavrasChave?: string[]
-  areasDoConhecimento?: AreasDoConhecimento
-  setoresDeAtividade?: string
-  informacoesAdicionais?: string
-  sequenciaProducao?: string
+
   ordemImportancia?: string
 
   natureza?: 'COMPLETO' | 'RESUMO' | 'NAO_INFORMADO'
@@ -653,10 +460,10 @@ export interface Artigo extends dadosBasicosSecoes {
   localDePublicacao?: string
 }
 
-interface InformacoesAdicionais {
-  descricaoInformacoesAdicionais?: string
-  descricaoInformacoesAdicionaisIngles?: string
-}
+// interface InformacoesAdicionais {
+//   descricaoInformacoesAdicionais?: string
+//   descricaoInformacoesAdicionaisIngles?: string
+// }
 
 export interface ParticipanteDeEventosCongressos {
   nomeCompletoDoParticipanteDeEventosCongressos?: string

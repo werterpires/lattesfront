@@ -7,7 +7,7 @@ import { ITableElements } from '../../shared/qualitative-analyses/types'
 import { AccordionComponent } from '../../shared/accordion/accordion.component'
 import { QuantitativeOthersEventsComponent } from './quantitative-outras-participacoes-em-eventos-congressos/quantitative-outras-participacoes-em-eventos-congressos.component'
 import { QuantitativeSectionComponent } from 'src/app/shared/quantitative-section/quantitative-section.component'
-import { OutrasParticipacoesEmEventosCongressos } from 'src/app/shared/services/objTypes'
+import { Participacao } from 'src/app/shared/services/objTypes'
 import { ParticipationProps } from './types'
 
 @Component({
@@ -27,7 +27,7 @@ import { ParticipationProps } from './types'
 })
 export class OutrasParticipacoesEmEventosCongressosComponent {
   curriculumns: ICurriculum[] = []
-  participations: OutrasParticipacoesEmEventosCongressos[] = []
+  participations: Participacao[] = []
   tableElements: ITableElements[] = [
     {
       title: 'Outras participações em eventos e congressos',
@@ -73,9 +73,7 @@ export class OutrasParticipacoesEmEventosCongressosComponent {
   }
 
   getParticipations(): void {
-    this.participations = this.curriculumns.reduce<
-      OutrasParticipacoesEmEventosCongressos[]
-    >(
+    this.participations = this.curriculumns.reduce<Participacao[]>(
       (participations, curriculum) =>
         participations.concat(
           curriculum.curriculum.outrasParticipacoesEmEventosCongressos.map(

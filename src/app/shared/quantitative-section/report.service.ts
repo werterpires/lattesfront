@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core'
 
 import * as ExcelJS from 'exceljs'
 import { CountService } from './counts.service'
-import {
-  OutrasParticipacoesEmEventosCongressos,
-  TrabalhoEmEventos
-} from '../services/objTypes'
+import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
 
 @Injectable({ providedIn: 'root' })
 export class ReportService {
@@ -13,9 +10,7 @@ export class ReportService {
   async createSheet(
     yersToConsider: string[],
     professors: string[],
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): Promise<void> {
     const workbook = new ExcelJS.Workbook()
@@ -52,9 +47,7 @@ export class ReportService {
   makeRow(
     professor: string,
     yersToConsider: string[],
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): string[] {
     const row = [professor]

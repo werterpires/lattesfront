@@ -1,7 +1,4 @@
-import {
-  OutrasParticipacoesEmEventosCongressos,
-  TrabalhoEmEventos
-} from './objTypes'
+import { Participacao, TrabalhoEmEventos } from './objTypes'
 
 export interface ICurriculum {
   _id: string
@@ -27,5 +24,5 @@ export interface ICreateCurriculum {
 export interface ILattesCurriculum {
   nome: string
   trabalhosEmEventos: TrabalhoEmEventos[]
-  outrasParticipacoesEmEventosCongressos: OutrasParticipacoesEmEventosCongressos[]
+  outrasParticipacoesEmEventosCongressos: Participacao[]
 }

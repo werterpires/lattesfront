@@ -1,7 +1,7 @@
 import { FilterObject } from '../../shared/filter-input/types'
-import { OutrasParticipacoesEmEventosCongressos } from '../../shared/services/objTypes'
+import { Participacao } from '../../shared/services/objTypes'
 
-export type ParticipationsWorkKey = keyof OutrasParticipacoesEmEventosCongressos
+export type ParticipationsWorkKey = keyof Participacao
 
 export interface ParticipationProps {
   name: string

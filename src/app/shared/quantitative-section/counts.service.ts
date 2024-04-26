@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core'
-import {
-  OutrasParticipacoesEmEventosCongressos,
-  TrabalhoEmEventos
-} from '../services/objTypes'
+import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
 
 @Injectable({ providedIn: 'root' })
 export class CountService {
@@ -10,9 +7,7 @@ export class CountService {
   countSectionsByProfessorUsingAny(
     professor: string,
     yersToConsider: string[],
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): number {
     switch (sectionType) {
@@ -31,7 +26,7 @@ export class CountService {
   countSectionsByProfessorUsingYear(
     professor: string,
     yersToConsider: string[],
-    sectionObjects: OutrasParticipacoesEmEventosCongressos[]
+    sectionObjects: Participacao[]
   ): number {
     let count = 0
     // We need to convert the array to a Set to speed up the lookups.
@@ -55,9 +50,7 @@ export class CountService {
   countSectionsByProfessorAndYearUsingAny(
     professor: string,
     year: string,
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): number {
     switch (sectionType) {
@@ -76,7 +69,7 @@ export class CountService {
   countSectionsByProfessorAndYearUsingYear(
     professor: string,
     year: string,
-    participations: OutrasParticipacoesEmEventosCongressos[]
+    participations: Participacao[]
   ): number {
     // Counts the number of events works by a professor in a year.
     return participations.filter((participation) => {
@@ -90,9 +83,7 @@ export class CountService {
   // ---------- Contar seções por ano ---------------
   countSectionsByYearUsingAny(
     year: string,
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): number {
     switch (sectionType) {
@@ -106,7 +97,7 @@ export class CountService {
 
   countSectionsByYearUsingYear(
     year: string,
-    participations: OutrasParticipacoesEmEventosCongressos[]
+    participations: Participacao[]
   ): number {
     let count = 0
     participations.forEach((participation) => {

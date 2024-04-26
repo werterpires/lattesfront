@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core'
-import {
-  OutrasParticipacoesEmEventosCongressos,
-  TrabalhoEmEventos
-} from '../services/objTypes'
+import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
 
 @Injectable({ providedIn: 'root' })
 export class ProfessorsService {
   getProfessors(
-    sectionObjects:
-      | TrabalhoEmEventos[]
-      | OutrasParticipacoesEmEventosCongressos[],
+    sectionObjects: TrabalhoEmEventos[] | Participacao[],
     professors: string[],
     yersToConsider: string[],
     sectionType: string
@@ -19,7 +14,7 @@ export class ProfessorsService {
     switch (sectionType) {
       case 'outrasParticipacoesEmEventosCongressos':
         this.getProfessorsWithAno(
-          sectionObjects as OutrasParticipacoesEmEventosCongressos[],
+          sectionObjects as Participacao[],
           yersToConsider,
           professorsSet
         )
@@ -35,7 +30,7 @@ export class ProfessorsService {
   }
 
   getProfessorsWithAno(
-    sectionObjects: OutrasParticipacoesEmEventosCongressos[],
+    sectionObjects: Participacao[],
     yersToConsider: string[],
     professorsSet: Set<string>
   ): Set<string> {

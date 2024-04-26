@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core'
-import {
-  OutrasParticipacoesEmEventosCongressos,
-  TrabalhoEmEventos
-} from '../services/objTypes'
+import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
 import { CountService } from './counts.service'
 
 @Injectable({ providedIn: 'root' })
@@ -10,12 +7,10 @@ export class OrderService {
   constructor(private readonly countService: CountService) {}
   orderNow(
     orderProp: string,
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string,
     ascending: boolean
-  ): OutrasParticipacoesEmEventosCongressos[] | TrabalhoEmEventos[] {
+  ): Participacao[] | TrabalhoEmEventos[] {
     // Filters with values applied
 
     switch (sectionType) {
@@ -34,11 +29,11 @@ export class OrderService {
   }
 
   orderParticipacoes(
-    sectionObjects: OutrasParticipacoesEmEventosCongressos[],
+    sectionObjects: Participacao[],
     orderProp: string,
     ascending: boolean
   ): void {
-    const propKey = orderProp as keyof OutrasParticipacoesEmEventosCongressos
+    const propKey = orderProp as keyof Participacao
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')
@@ -55,9 +50,7 @@ export class OrderService {
     sectionType: string,
     professors: string[],
     yersToConsider: string[],
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[],
+    sectionObjects: Participacao[] | TrabalhoEmEventos[],
     quantityDesc: boolean
   ): void {
     // Maps each professor to the quantity of their works in events
@@ -82,9 +75,7 @@ export class OrderService {
     sectionType: string,
     professors: string[],
     yersToConsider: string[],
-    sectionObjects:
-      | OutrasParticipacoesEmEventosCongressos[]
-      | TrabalhoEmEventos[]
+    sectionObjects: Participacao[] | TrabalhoEmEventos[]
   ): Map<string, number> {
     const sectionsByProfessor = new Map<string, number>()
 
