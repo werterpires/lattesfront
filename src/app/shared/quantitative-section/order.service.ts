@@ -3,9 +3,11 @@ import {
   OutrasParticipacoesEmEventosCongressos,
   TrabalhoEmEventos
 } from '../services/objTypes'
+import { CountService } from './counts.service'
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
+  constructor(private readonly countService: CountService) {}
   orderNow(
     orderProp: string,
     sectionObjects:
@@ -92,7 +94,7 @@ export class OrderService {
 
       switch (sectionType) {
         case 'outrasParticipacoesEmEventosCongressos':
-          quantity = this.countSectionsByProfessorUsingYear(
+          quantity = this.countService.countSectionsByProfessorUsingYear(
             professorName,
             yersToConsider,
             sectionObjects
@@ -105,28 +107,5 @@ export class OrderService {
     })
 
     return sectionsByProfessor
-  }
-
-  countSectionsByProfessorUsingYear(
-    professor: string,
-    yersToConsider: string[],
-    participations: OutrasParticipacoesEmEventosCongressos[]
-  ): number {
-    let count = 0
-    // We need to convert the array to a Set to speed up the lookups.
-    const yersToConsiderSet = new Set(yersToConsider)
-    // We iterate over all the events works.
-    for (const participation of participations) {
-      // If the event work belongs to the professor and, if there are years
-      // to consider, the year of the event work is in the set of years to
-      // consider, we increment the count.
-      if (
-        (participation.nome === professor || !participation.nome) &&
-        (!participation.ano || yersToConsiderSet.has(participation.ano))
-      ) {
-        count++
-      }
-    }
-    return count
   }
 }

@@ -13,7 +13,9 @@ import { FiltersService } from './filters.service'
 import { FormsModule } from '@angular/forms'
 import { FilterInputComponent } from '../filter-input/filter-input.component'
 import { OrderService } from './order.service'
-import { ProfessorsService } from './professorsService'
+import { ProfessorsService } from './professors.Service'
+import { CountService } from './counts.service'
+import { ChartData, ChartSerie } from 'src/app/charts/quantity/types'
 
 @Component({
   selector: 'app-quantitative-section',
@@ -59,6 +61,11 @@ export class QuantitativeSectionComponent {
   quantityDesc = true
 
   graph = false
+  multi: ChartSerie[] = []
+  multi2: ChartSerie[] = []
+  totals: ChartData[] = []
+  totals2: ChartData[] = []
+  multiTotal: ChartSerie[] = []
 
   atualPage: number = 1
   resultsPerPage: number = 8
@@ -68,7 +75,8 @@ export class QuantitativeSectionComponent {
     public utilsService: UtilsService,
     private readonly filtersService: FiltersService,
     private readonly orderService: OrderService,
-    private readonly professorsService: ProfessorsService
+    private readonly professorsService: ProfessorsService,
+    private readonly countService: CountService
   ) {}
 
   @Input() set allSectionObjects(
@@ -137,7 +145,86 @@ export class QuantitativeSectionComponent {
     // Slice the professors array with the calculated start and end indices
     this.professorsToShow = this.professors.slice(start, end)
 
-    // this.makeChartSerie()
+    this.makeChartSerie()
+  }
+
+  makeChartSerie(): void {
+    this.multi = this.yersToConsider.map((year) => {
+      return {
+        name: year.toString(),
+        series: this.professors.map((professor) => {
+          return {
+            name: professor,
+            value: this.countService.countSectionsByProfessorAndYearUsingAny(
+              professor,
+              year,
+              this.sectionObjects,
+              this.sectionType
+            )
+          }
+        })
+      }
+    })
+
+    this.multi2 = this.professors.map((professor) => {
+      return {
+        name: professor,
+        series: this.yersToConsider.map((year) => {
+          return {
+            name: year.toString(),
+            value: this.countService.countSectionsByProfessorAndYearUsingAny(
+              professor,
+              year,
+              this.sectionObjects,
+              this.sectionType
+            )
+          }
+        })
+      }
+    })
+
+    this.totals = this.yersToConsider.map((year) => {
+      return {
+        name: year.toString(),
+        value: this.countService.countSectionsByYearUsingAny(
+          year,
+          this.sectionObjects,
+          this.sectionType
+        )
+      }
+    })
+
+    this.totals2 = this.professors.map((professor) => {
+      return {
+        name: professor,
+        value: this.countService.countSectionsByProfessorUsingAny(
+          professor,
+          this.yersToConsider,
+          this.sectionObjects,
+          this.sectionType
+        )
+      }
+    })
+
+    this.multiTotal = [
+      {
+        name: 'Total',
+        series: this.totals
+      }
+    ]
+
+    console.log(
+      'multi',
+      this.multi,
+      'multi2',
+      this.multi2,
+      'totals',
+      this.totals,
+      'totals2',
+      this.totals2,
+      'multiTotal',
+      this.multiTotal
+    )
   }
 
   sortProfessorsByParticipationQuantity(): void {
