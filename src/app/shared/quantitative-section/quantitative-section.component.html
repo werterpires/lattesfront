@@ -100,9 +100,31 @@
                       src="assets/icons/filterIcon.svg"
                       alt="Desenho de um filtro"
                       (click)="
-                        sectionProps[0].showFilter =
-                          !sectionProps[0].showFilter
+                        sectionProps[0].showFilter = !sectionProps[0].showFilter
                       "
+                    />
+                  </div>
+                </th>
+                <th *ngFor="let year of yersToConsider" class="th">
+                  {{ year }}
+                </th>
+                <th class="th">
+                  <div class="tableHead">
+                    <p>Total</p>
+                    <img
+                      #ascDes
+                      class="arrowIcon"
+                      src="assets/icons/arrowIcon.svg"
+                      alt="Desenho de uma seta"
+                      (click)="
+                        orderProp = sectionProps[1].key;
+                        quantityDesc = !quantityDesc;
+                        sortProfessorsByParticipationQuantity()
+                      "
+                      [ngClass]="{
+                        rotate: quantityDesc,
+                        notRotate: !quantityDesc
+                      }"
                     />
                   </div>
                 </th>

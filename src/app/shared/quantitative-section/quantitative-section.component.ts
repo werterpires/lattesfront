@@ -7,12 +7,13 @@ import {
 } from '../services/objTypes'
 import { ICurriculum, ILattesCurriculum } from '../services/types'
 import { UtilsService } from '../services/util.service'
-import { NgClass, NgIf, NgStyle } from '@angular/common'
+import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common'
 import { Props } from './tpes'
 import { FiltersService } from './filters.service'
 import { FormsModule } from '@angular/forms'
 import { FilterInputComponent } from '../filter-input/filter-input.component'
 import { OrderService } from './order.service'
+import { ProfessorsService } from './professorsService'
 
 @Component({
   selector: 'app-quantitative-section',
@@ -20,6 +21,7 @@ import { OrderService } from './order.service'
   imports: [
     AccordionComponent,
     NgIf,
+    NgFor,
     NgStyle,
     NgClass,
     FormsModule,
@@ -42,6 +44,8 @@ export class QuantitativeSectionComponent {
   @Input() sectionProps!: Props[]
 
   curriculums: ICurriculum[] = []
+  professors: string[] = []
+  professorsToShow: string[] = []
 
   yersToConsider: string[] = this.utilsService.getLastFiveYears()
 
@@ -52,14 +56,19 @@ export class QuantitativeSectionComponent {
   ascending: boolean = true
   orderProp: string = 'nome'
 
+  quantityDesc = true
+
   graph = false
 
   atualPage: number = 1
+  resultsPerPage: number = 8
+  pagesNumber!: number
 
   constructor(
     public utilsService: UtilsService,
     private readonly filtersService: FiltersService,
-    private readonly orderService: OrderService
+    private readonly orderService: OrderService,
+    private readonly professorsService: ProfessorsService
   ) {}
 
   @Input() set allSectionObjects(
@@ -78,7 +87,10 @@ export class QuantitativeSectionComponent {
   }
 
   filterNow(): void {
-    // Filters with values applied
+    if (!this.sectionProps) {
+      return
+    }
+
     this.sectionObjects = this.filtersService.filterNow(
       this.sectionProps,
       this.onlyActives,
@@ -87,21 +99,56 @@ export class QuantitativeSectionComponent {
       this.sectionObjects,
       this.sectionType
     )
+    this.orderNow()
   }
 
   orderNow(): void {
     this.orderService.orderNow(
-      this.orderProp, this.sectionObjects, this.sectionType, this.ascending)
+      this.orderProp,
+      this.sectionObjects,
+      this.sectionType,
+      this.ascending
+    )
     this.atualPage = 1
+    this.getProfessors()
   }
 
-  stringToLower(text: any): string {
-    // If the given text is not a string, return an empty string
-    if (typeof text !== 'string') {
-      return ''
-    }
+  getProfessors(): void {
+    this.professors = this.professorsService.getProfessors(
+      this.sectionObjects,
+      this.professors,
+      this.yersToConsider,
+      this.sectionType
+    )
 
-    // Lowercase the text and remove single and double quotes
-    return text.toLowerCase().replace(/['"]/g, '')
+    this.getProfessorsToShow()
+  }
+
+  getProfessorsToShow(): void {
+    if (!this.resultsPerPage) {
+      // If results per page is 0, show all professors
+      return
+    }
+    this.pagesNumber = Math.ceil(this.professors.length / this.resultsPerPage)
+
+    // Calculate start and end based on current page and results per page
+    const start = (this.atualPage - 1) * this.resultsPerPage
+    const end = start + this.resultsPerPage
+    // Slice the professors array with the calculated start and end indices
+    this.professorsToShow = this.professors.slice(start, end)
+
+    // this.makeChartSerie()
+  }
+
+  sortProfessorsByParticipationQuantity(): void {
+    this.orderService.sortProfessorsByParticipationQuantity(
+      this.sectionType,
+      this.professors,
+      this.yersToConsider,
+      this.sectionObjects,
+      this.quantityDesc
+    )
+
+    console.log('professores', this.professors)
   }
 }
