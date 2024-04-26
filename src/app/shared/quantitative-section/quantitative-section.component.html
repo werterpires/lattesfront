@@ -166,9 +166,42 @@
               Baixar Relatório
             </button>
           </div>
-          <div></div>
-          <div></div>
+          <div class="pages">
+            <div
+              *ngFor="let page of getPageNumbers()"
+              class="pageNumber"
+              [ngClass]="{ selectedPage: page === atualPage }"
+              (click)="atualPage = +page; getProfessorsToShow()"
+            >
+              {{ page }}
+            </div>
+          </div>
+          <div>
+            <label class="pageResults" for="">
+              Resultados por página
+              <input
+                #results
+                type="number"
+                [value]="resultsPerPage"
+                (input)="
+                  resultsPerPage = +results.value > 0 ? +results.value : 1;
+                  filterNow()
+                "
+                id="resultsPerPage"
+              />
+            </label>
+          </div>
         </div>
+      </div>
+
+      <div class="chartShower">
+        <app-quantity
+          [multi]="multi"
+          [multi2]="multi2"
+          [totals]="totals"
+          [totals2]="totals2"
+          [multiTotal]="multiTotal"
+        ></app-quantity>
       </div>
     </div>
   </div>

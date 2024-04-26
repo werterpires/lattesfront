@@ -229,3 +229,23 @@ li {
   line-height: 19.2px;
   font-weight: 400;
 }
+
+.pages {
+  display: flex;
+  justify-content: center;
+}
+
+.pageNumber {
+  border: 1px solid #a4a3a340;
+  width: 30px;
+  height: 34px;
+
+  padding: 5px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--primary);
+}

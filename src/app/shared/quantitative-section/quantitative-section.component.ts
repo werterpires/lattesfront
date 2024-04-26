@@ -17,12 +17,14 @@ import { ProfessorsService } from './professors.Service'
 import { CountService } from './counts.service'
 import { ChartData, ChartSerie } from 'src/app/charts/quantity/types'
 import { ReportService } from './report.service'
+import { QuantityComponent } from 'src/app/charts/quantity/quantity.component'
 
 @Component({
   selector: 'app-quantitative-section',
   standalone: true,
   imports: [
     AccordionComponent,
+    QuantityComponent,
     NgIf,
     NgFor,
     NgStyle,
@@ -140,6 +142,7 @@ export class QuantitativeSectionComponent {
       return
     }
     this.pagesNumber = Math.ceil(this.professors.length / this.resultsPerPage)
+    console.log(this.pagesNumber)
 
     // Calculate start and end based on current page and results per page
     const start = (this.atualPage - 1) * this.resultsPerPage
@@ -235,5 +238,16 @@ export class QuantitativeSectionComponent {
       this.sectionObjects,
       this.sectionType
     )
+  }
+
+  getPageNumbers(): number[] {
+    // Returns an array with the page numbers to be displayed. The length of
+    // the array is equal to the number of pages (pagesNumber), and the values
+    // are the page numbers, starting from 1.
+    const aaa = Array.from({ length: this.pagesNumber }, (_, i) => i + 1)
+
+    console.log(aaa)
+
+    return aaa
   }
 }

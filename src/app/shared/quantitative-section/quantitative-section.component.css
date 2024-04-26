@@ -32,3 +32,22 @@
   color: var(--primary);
   font-size: 11px;
 }
+
+.dataShower {
+  width: 80vw;
+  overflow: hidden;
+}
+
+.dataContainer {
+  width: 160vw;
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+.tableShower {
+  width: 80vw;
+}
+
+.chartShower {
+  width: 80vw;
+}
