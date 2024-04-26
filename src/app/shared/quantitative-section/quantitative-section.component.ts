@@ -76,7 +76,7 @@ export class QuantitativeSectionComponent {
     private readonly filtersService: FiltersService,
     private readonly orderService: OrderService,
     private readonly professorsService: ProfessorsService,
-    private readonly countService: CountService
+    public readonly countService: CountService
   ) {}
 
   @Input() set allSectionObjects(
@@ -212,19 +212,6 @@ export class QuantitativeSectionComponent {
         series: this.totals
       }
     ]
-
-    console.log(
-      'multi',
-      this.multi,
-      'multi2',
-      this.multi2,
-      'totals',
-      this.totals,
-      'totals2',
-      this.totals2,
-      'multiTotal',
-      this.multiTotal
-    )
   }
 
   sortProfessorsByParticipationQuantity(): void {
@@ -236,6 +223,6 @@ export class QuantitativeSectionComponent {
       this.quantityDesc
     )
 
-    console.log('professores', this.professors)
+    this.getProfessorsToShow()
   }
 }

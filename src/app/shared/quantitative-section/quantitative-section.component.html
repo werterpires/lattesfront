@@ -130,6 +130,33 @@
                 </th>
               </tr>
             </thead>
+            <tbody>
+              <ng-container *ngFor="let professor of professorsToShow">
+                <tr class="contentRow">
+                  <td class="td">{{ professor }}</td>
+                  <td class="td" *ngFor="let year of yersToConsider">
+                    {{
+                      countService.countSectionsByProfessorAndYearUsingAny(
+                        professor,
+                        year,
+                        sectionObjects,
+                        sectionType
+                      )
+                    }}
+                  </td>
+                  <td class="td">
+                    {{
+                      countService.countSectionsByProfessorUsingAny(
+                        professor,
+                        yersToConsider,
+                        sectionObjects,
+                        sectionType
+                      )
+                    }}
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
           </table>
         </div>
       </div>
