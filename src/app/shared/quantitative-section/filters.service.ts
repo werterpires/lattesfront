@@ -41,20 +41,13 @@ export class FiltersService {
     yersToConsider: string[],
     sectionType: string
   ): Participacao[] | TrabalhoEmEventos[] {
-    switch (sectionType) {
-      case 'outrasParticipacoesEmEventosCongressos':
-        sectionObjects = this.filterParticipacoes(
-          sectionObjects,
-          filters,
-          onlyActives,
-          onlyServiceYears,
-          yersToConsider
-        )
-
-        break
-      default:
-        throw new Error('Invalid section type')
-    }
+    sectionObjects = this.filterParticipacoes(
+      sectionObjects,
+      filters,
+      onlyActives,
+      onlyServiceYears,
+      yersToConsider
+    )
 
     return sectionObjects
   }

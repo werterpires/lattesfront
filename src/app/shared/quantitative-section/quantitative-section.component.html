@@ -10,6 +10,7 @@
         "
         class="seachInput"
         placeholder="Digite os anos a serem considerados."
+        [value]="yersToConsider.join(' ')"
       />
       <img
         class="infoIcon"
@@ -35,7 +36,7 @@
         </p>
       </div>
     </div>
-    <button class="smallButton">Limpar filtros</button>
+    <button class="smallButton" (click)="cleanFilters()">Limpar filtros</button>
     <label for="" class="onlyAcivesLabel"
       >Apenas ativos<input
         type="checkbox"
@@ -134,7 +135,7 @@
               <ng-container *ngFor="let professor of professorsToShow">
                 <tr class="contentRow">
                   <td class="td">{{ professor }}</td>
-                  <td class="td" *ngFor="let year of yersToConsider">
+                  <!-- <td class="td" *ngFor="let year of yersToConsider">
                     {{
                       countService.countSectionsByProfessorAndYearUsingAny(
                         professor,
@@ -143,7 +144,17 @@
                         sectionType
                       )
                     }}
+                  </td> -->
+                  <ng-container *ngIf> </ng-container>
+                  <td
+                    *ngFor="
+                      let serie of filterMulti2ByProfessor(professor)?.series
+                    "
+                    class="td"
+                  >
+                    {{ serie.value }}
                   </td>
+
                   <td class="td">
                     {{
                       countService.countSectionsByProfessorUsingAny(

@@ -10,17 +10,11 @@ export class CountService {
     sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): number {
-    switch (sectionType) {
-      case 'outrasParticipacoesEmEventosCongressos':
-        return this.countSectionsByProfessorUsingYear(
-          professor,
-          yersToConsider,
-          sectionObjects
-        )
-
-      default:
-        throw new Error('Tipo de seção inválida')
-    }
+    return this.countSectionsByProfessorUsingYear(
+      professor,
+      yersToConsider,
+      sectionObjects
+    )
   }
 
   countSectionsByProfessorUsingYear(
@@ -36,6 +30,7 @@ export class CountService {
       // If the event work belongs to the professor and, if there are years
       // to consider, the year of the event work is in the set of years to
       // consider, we increment the count.
+
       if (
         (participation.nome === professor || !participation.nome) &&
         (!participation.ano || yersToConsiderSet.has(participation.ano))
@@ -53,17 +48,11 @@ export class CountService {
     sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): number {
-    switch (sectionType) {
-      case 'outrasParticipacoesEmEventosCongressos':
-        return this.countSectionsByProfessorAndYearUsingYear(
-          professor,
-          year,
-          sectionObjects
-        )
-
-      default:
-        throw new Error('Tipo de seção inválida')
-    }
+    return this.countSectionsByProfessorAndYearUsingYear(
+      professor,
+      year,
+      sectionObjects
+    )
   }
 
   countSectionsByProfessorAndYearUsingYear(
@@ -86,13 +75,7 @@ export class CountService {
     sectionObjects: Participacao[] | TrabalhoEmEventos[],
     sectionType: string
   ): number {
-    switch (sectionType) {
-      case 'outrasParticipacoesEmEventosCongressos':
-        return this.countSectionsByYearUsingYear(year, sectionObjects)
-
-      default:
-        throw new Error('Tipo de seção inválida')
-    }
+    return this.countSectionsByYearUsingYear(year, sectionObjects)
   }
 
   countSectionsByYearUsingYear(

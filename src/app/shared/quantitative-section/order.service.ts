@@ -12,10 +12,14 @@ export class OrderService {
     ascending: boolean
   ): Participacao[] | TrabalhoEmEventos[] {
     // Filters with values applied
-
+    console.log('sectiontype', sectionType)
     switch (sectionType) {
       case 'outrasParticipacoesEmEventosCongressos':
         this.orderParticipacoes(sectionObjects, orderProp, ascending)
+        break
+
+      case 'trabalhosEmEventos':
+        this.orderEventsWorks(sectionObjects, orderProp, ascending)
 
         break
       default:
@@ -34,6 +38,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof Participacao
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderEventsWorks(
+    sectionObjects: TrabalhoEmEventos[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof TrabalhoEmEventos
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')
@@ -81,19 +103,13 @@ export class OrderService {
 
     professors.forEach((professor) => {
       const professorName = professor.toString()
-      let quantity: number
 
-      switch (sectionType) {
-        case 'outrasParticipacoesEmEventosCongressos':
-          quantity = this.countService.countSectionsByProfessorUsingYear(
-            professorName,
-            yersToConsider,
-            sectionObjects
-          )
-          break
-        default:
-          throw new Error('Invalid section type')
-      }
+      const quantity = this.countService.countSectionsByProfessorUsingYear(
+        professorName,
+        yersToConsider,
+        sectionObjects
+      )
+
       sectionsByProfessor.set(professorName, quantity)
     })
 
