@@ -67,6 +67,8 @@ export class QuantitativeSectionComponent {
   resultsPerPage: number = 8
   pagesNumber!: number
 
+  tableData: Array<Record<string, number[]>> = []
+
   constructor(
     public utilsService: UtilsService,
     private readonly filtersService: FiltersService,
@@ -75,6 +77,10 @@ export class QuantitativeSectionComponent {
     public readonly countService: CountService,
     private readonly reportService: ReportService
   ) {}
+
+  ngOnInit(): void {
+    this.getSectionObjects()
+  }
 
   @Input() set allSectionObjects(
     allSectionObjects: Participacao[] | TrabalhoEmEventos[]
@@ -133,7 +139,6 @@ export class QuantitativeSectionComponent {
       return
     }
     this.pagesNumber = Math.ceil(this.professors.length / this.resultsPerPage)
-    console.log(this.pagesNumber)
 
     // Calculate start and end based on current page and results per page
     const start = (this.atualPage - 1) * this.resultsPerPage
@@ -210,6 +215,10 @@ export class QuantitativeSectionComponent {
     ]
   }
 
+  filterMulti2ByProfessor(professor: string): ChartSerie | undefined {
+    return this.multi2.find((serie) => serie.name === professor)
+  }
+
   sortProfessorsByParticipationQuantity(): void {
     this.orderService.sortProfessorsByParticipationQuantity(
       this.sectionType,
@@ -237,8 +246,33 @@ export class QuantitativeSectionComponent {
     // are the page numbers, starting from 1.
     const aaa = Array.from({ length: this.pagesNumber }, (_, i) => i + 1)
 
-    console.log(aaa)
-
     return aaa
+  }
+
+  makeTableData(): void {
+    this.professors.forEach((professor) => {
+      const resultsByYear = this.yersToConsider.map((year) => {
+        return this.countService.countSectionsByProfessorAndYearUsingAny(
+          professor,
+          year,
+          this.sectionObjects,
+          this.sectionType
+        )
+      })
+
+      this.tableData.push({
+        professor: resultsByYear
+      })
+    })
+  }
+
+  cleanFilters(): void {
+    this.yersToConsider = this.utilsService.getLastFiveYears()
+    this.onlyActives = true
+    this.onlyServiceYears = false
+    this.sectionProps.forEach((sectionProp) => {
+      sectionProp.filterObject.text = []
+    })
+    this.getSectionObjects()
   }
 }

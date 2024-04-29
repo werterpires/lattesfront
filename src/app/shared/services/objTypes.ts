@@ -3,6 +3,7 @@ interface dadosBasicosSecoes {
   nome?: string
   active?: boolean
   serviceYears?: string
+  ano?: string
 
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
@@ -14,32 +15,18 @@ interface dadosBasicosSecoes {
 export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  natureza?: 'COMPLETO' | 'RESUMO' | 'RESUMO_EXPANDIDO' | 'NAO_INFORMADO'
+  natureza?: string
   tituloDoTrabalho?: string
   anoDoTrabalho?: string
   paisDoEvento?: string
   idioma?: string
-  meioDeDivulgacao?:
-    | 'IMPRESSO'
-    | 'WEB'
-    | 'MEIO_MAGNETICO'
-    | 'MEIO_DIGITAL'
-    | 'FILME'
-    | 'HIPERTEXTO'
-    | 'OUTRO'
-    | 'VARIOS'
-    | 'NAO_INFORMADO'
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloDoTrabalhoIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
-  classificacaoDoEvento?:
-    | 'INTERNACIONAL'
-    | 'NACIONAL'
-    | 'REGIONAL'
-    | 'LOCAL'
-    | 'NAO_INFORMADO'
+  flagDivulgacaoCientifica?: string
+  classificacaoDoEvento?: string
   nomeDoEvento?: string
   cidadeDoEvento?: string
   anoDeRealizacao?: string

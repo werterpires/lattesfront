@@ -11,17 +11,11 @@ export class ProfessorsService {
   ): string[] {
     const professorsSet = new Set<string>()
 
-    switch (sectionType) {
-      case 'outrasParticipacoesEmEventosCongressos':
-        this.getProfessorsWithAno(
-          sectionObjects as Participacao[],
-          yersToConsider,
-          professorsSet
-        )
-        break
-      default:
-        throw new Error('Invalid section type')
-    }
+    this.getProfessorsWithAno(
+      sectionObjects as Participacao[],
+      yersToConsider,
+      professorsSet
+    )
 
     // Convert the set to an array and assign it to the professors property
     professors = Array.from(professorsSet)
