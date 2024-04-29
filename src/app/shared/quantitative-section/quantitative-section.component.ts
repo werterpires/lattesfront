@@ -35,7 +35,7 @@ import { QuantityComponent } from 'src/app/charts/quantity/quantity.component'
 export class QuantitativeSectionComponent {
   @Input() accordionTitle: string = ''
   @Input() sectionType!: keyof ILattesCurriculum
-  @Input() _allSectionObjects: Participacao[] | TrabalhoEmEventos[] = []
+  _allSectionObjects: Participacao[] | TrabalhoEmEventos[] = []
 
   sectionObjects: Participacao[] | TrabalhoEmEventos[] = []
 
@@ -238,15 +238,6 @@ export class QuantitativeSectionComponent {
       this.sectionObjects,
       this.sectionType
     )
-  }
-
-  getPageNumbers(): number[] {
-    // Returns an array with the page numbers to be displayed. The length of
-    // the array is equal to the number of pages (pagesNumber), and the values
-    // are the page numbers, starting from 1.
-    const aaa = Array.from({ length: this.pagesNumber }, (_, i) => i + 1)
-
-    return aaa
   }
 
   makeTableData(): void {

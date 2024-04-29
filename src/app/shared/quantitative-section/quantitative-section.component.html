@@ -179,7 +179,7 @@
           </div>
           <div class="pages">
             <div
-              *ngFor="let page of getPageNumbers()"
+              *ngFor="let page of utilsService.getPageNumbers(pagesNumber)"
               class="pageNumber"
               [ngClass]="{ selectedPage: page === atualPage }"
               (click)="atualPage = +page; getProfessorsToShow()"

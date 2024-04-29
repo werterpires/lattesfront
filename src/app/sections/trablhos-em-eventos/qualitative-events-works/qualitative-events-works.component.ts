@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { ICurriculum } from '../../../shared/services/types';
-import { NgClass, NgFor, NgIf } from '@angular/common';
-import { FailDataPipe } from '../../../pipes/fail-data.pipe';
-import { CurriculumnsService } from '../../../shared/services/curriculumns.service';
-import { TrabalhoEmEventos } from '../../../shared/services/objTypes';
-import { FormsModule } from '@angular/forms';
-import { EventProps, EventsWorkKey } from '../types';
-import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component';
-import { AccordionComponent } from '../../../shared/accordion/accordion.component';
+/* eslint-disable accessor-pairs */
+import { Component, Input } from '@angular/core'
+import { ICurriculum } from '../../../shared/services/types'
+import { NgClass, NgFor, NgIf } from '@angular/common'
+import { FailDataPipe } from '../../../pipes/fail-data.pipe'
+import { CurriculumnsService } from '../../../shared/services/curriculumns.service'
+import { TrabalhoEmEventos } from '../../../shared/services/objTypes'
+import { FormsModule } from '@angular/forms'
+import { EventProps, EventsWorkKey } from '../types'
+import { FilterInputComponent } from '../../../shared/filter-input/filter-input.component'
+import { AccordionComponent } from '../../../shared/accordion/accordion.component'
 
-import * as ExcelJS from 'exceljs';
+import * as ExcelJS from 'exceljs'
 
 @Component({
   selector: 'app-qualitative-events-works',
@@ -21,31 +22,30 @@ import * as ExcelJS from 'exceljs';
     FailDataPipe,
     FormsModule,
     FilterInputComponent,
-    AccordionComponent,
+    AccordionComponent
   ],
   templateUrl: './qualitative-events-works.component.html',
-  styleUrl: './qualitative-events-works.component.css',
+  styleUrl: './qualitative-events-works.component.css'
 })
 export class QualitativeEventsWorksComponent {
-  _curriculumns: ICurriculum[] = [];
-  @Input()
-  set curriculumns(value: ICurriculum[]) {
-    this._curriculumns = value;
-    this.getEventsWorks();
-    this.filterNow();
+  _curriculumns: ICurriculum[] = []
+  @Input() set curriculumns(value: ICurriculum[]) {
+    this._curriculumns = value
+    this.getEventsWorks()
+    this.filterNow()
   }
 
-  eventsWorks: TrabalhoEmEventos[] = [];
-  eventsWorksToShow: TrabalhoEmEventos[] = [];
-  atualPage: number = 1;
-  resultsPerPage: number = 5;
-  pagesNumber: number = 1;
-  orderProp: string = 'nome';
-  ascending: boolean = true;
-  @Input() onlyActives: boolean = true;
-  onlyServiceYears: boolean = false;
+  eventsWorks: TrabalhoEmEventos[] = []
+  eventsWorksToShow: TrabalhoEmEventos[] = []
+  atualPage: number = 1
+  resultsPerPage: number = 5
+  pagesNumber: number = 1
+  orderProp: string = 'nome'
+  ascending: boolean = true
+  @Input() onlyActives: boolean = true
+  onlyServiceYears: boolean = false
 
-  @Input() title: string = 'Análise Qualitativa';
+  @Input() title: string = 'Análise Qualitativa'
 
   eventProps: EventProps[] = [
     {
@@ -55,9 +55,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '240px',
+      width: '240px'
     },
     {
       name: 'Título do trabalho',
@@ -66,9 +66,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '320px',
+      width: '320px'
     },
     {
       name: 'Natureza',
@@ -77,9 +77,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
     {
       name: 'Ano do trabalho',
@@ -88,9 +88,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
     {
       name: 'País do evento',
@@ -99,9 +99,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
 
     {
@@ -111,9 +111,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
     {
       name: 'Meio de divulgacão',
@@ -122,9 +122,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
     {
       name: 'DOI',
@@ -133,9 +133,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
     {
       name: 'URL',
@@ -144,9 +144,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '240px',
+      width: '240px'
     },
 
     {
@@ -156,9 +156,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -168,9 +168,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '240px',
+      width: '240px'
     },
 
     {
@@ -180,9 +180,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -192,9 +192,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '240px',
+      width: '240px'
     },
 
     {
@@ -204,9 +204,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
 
     {
@@ -216,9 +216,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
 
     {
@@ -228,9 +228,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
 
     {
@@ -240,9 +240,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '240px',
+      width: '240px'
     },
 
     {
@@ -252,9 +252,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -264,9 +264,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -276,9 +276,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -288,9 +288,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -300,9 +300,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -312,9 +312,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '80px',
+      width: '80px'
     },
 
     {
@@ -324,9 +324,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '160px',
+      width: '160px'
     },
 
     {
@@ -336,9 +336,9 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '120px',
+      width: '120px'
     },
 
     {
@@ -348,13 +348,13 @@ export class QualitativeEventsWorksComponent {
       ascending: true,
       filterObject: {
         text: [],
-        disjunctive: true,
+        disjunctive: true
       },
-      width: '240px',
-    },
-  ];
+      width: '240px'
+    }
+  ]
 
-  constructor(private curriculumnsService: CurriculumnsService) {
+  constructor(private readonly curriculumnsService: CurriculumnsService) {
     // if (this.curriculums.length === 0) {
     //   this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
     //     this.curriculums = curriculumns;
@@ -367,73 +367,67 @@ export class QualitativeEventsWorksComponent {
     // }
   }
 
-  createSheet() {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Trabalhos em eventos');
+  createSheet(): void {
+    const workbook = new ExcelJS.Workbook()
+    const worksheet = workbook.addWorksheet('Trabalhos em eventos')
 
-    worksheet.addRow(this.makeHeaders());
+    worksheet.addRow(this.makeHeaders())
     this.eventsWorks.forEach((work) => {
-      const row = this.makeRow(work);
-      worksheet.addRow(row);
-    });
-
-    const options = {
-      filename: './streamed-workbook.xlsx',
-      useStyles: true,
-      useSharedStrings: true,
-    };
+      const row = this.makeRow(work)
+      worksheet.addRow(row)
+    })
 
     workbook.xlsx.writeBuffer().then((buffer) => {
-      this.saveAsExcelFile(buffer, 'data');
-    });
+      this.saveAsExcelFile(buffer, 'data')
+    })
   }
 
-  makeHeaders() {
-    const headers = [];
+  makeHeaders(): string[] {
+    const headers = []
     for (const prop of this.eventProps) {
-      headers.push(prop.name);
+      headers.push(prop.name)
     }
-    headers.push('Autores');
-    headers.push('Palavras-chave');
-    return headers;
+    headers.push('Autores')
+    headers.push('Palavras-chave')
+    return headers
   }
 
-  makeRow(work: TrabalhoEmEventos) {
-    const row = [];
+  makeRow(work: TrabalhoEmEventos): any[] {
+    const row = []
 
     for (const prop of this.eventProps) {
-      row.push(work[prop.key]);
+      row.push(work[prop.key])
     }
 
-    //pega o array de objetos autores e transforma em uma string
-    let autores = '';
+    // pega o array de objetos autores e transforma em uma string
+    let autores = ''
 
     work.autores?.forEach((autor) => {
       autores =
         autores +
-        `${autor.nomeCompletoDoAutor} (${autor.nomeParaCitacao}), autor número ${autor.ordemDeAutoria}.\n `;
-    });
+        `${autor.nomeCompletoDoAutor} (${autor.nomeParaCitacao}), autor número ${autor.ordemDeAutoria}.\n `
+    })
 
-    row.push(autores);
-    //pega o array de palavras-chave e transforma em uma string
-    const palavrasChave = work.palavrasChave?.join(', ');
-    row.push(palavrasChave);
+    row.push(autores)
+    // pega o array de palavras-chave e transforma em uma string
+    const palavrasChave = work.palavrasChave?.join(', ')
+    row.push(palavrasChave)
 
-    return row;
+    return row
   }
 
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    });
-    const a: HTMLAnchorElement = document.createElement('a');
-    a.href = URL.createObjectURL(data);
-    a.download = fileName + '.xlsx';
-    a.click();
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    })
+    const a: HTMLAnchorElement = document.createElement('a')
+    a.href = URL.createObjectURL(data)
+    a.download = fileName + '.xlsx'
+    a.click()
   }
 
-  getEventsWorks() {
-    this.eventsWorks = [];
+  getEventsWorks(): void {
+    this.eventsWorks = []
     this._curriculumns.forEach((curriculum) => {
       this.eventsWorks = [
         ...this.eventsWorks,
@@ -443,98 +437,98 @@ export class QualitativeEventsWorksComponent {
             nome: curriculum.curriculum.nome,
             lattesid: curriculum.lattesId,
             active: curriculum.active,
-            serviceYears: curriculum.serviceYears,
-          };
-        }),
-      ];
-    });
+            serviceYears: curriculum.serviceYears
+          }
+        })
+      ]
+    })
   }
 
-  orderNow() {
-    const propKey = this.orderProp as EventsWorkKey;
+  orderNow(): void {
+    const propKey = this.orderProp as EventsWorkKey
 
     this.eventsWorks.sort((a, b) => {
-      const propA = a[propKey];
-      const propB = b[propKey];
+      const propA = a[propKey]
+      const propB = b[propKey]
       if (propA === undefined || propB === undefined) {
-        return 0;
+        return 0
       }
 
-      let comparison = 0;
+      let comparison = 0
       if (propA < propB) {
-        comparison = -1;
+        comparison = -1
       } else if (propA > propB) {
-        comparison = 1;
+        comparison = 1
       }
 
       if (!this.ascending) {
-        comparison *= -1;
+        comparison *= -1
       }
 
-      return comparison;
-    });
-    this.getWorksToShow();
+      return comparison
+    })
+    this.getWorksToShow()
   }
 
-  filterNow() {
-    this.getEventsWorks();
+  filterNow(): void {
+    this.getEventsWorks()
 
     for (const prop of this.eventProps) {
       if (prop.filterObject.text.length === 0) {
-        continue;
+        continue
       }
       if (prop.filterObject.disjunctive) {
         this.eventsWorks = this.eventsWorks.filter((work) => {
-          const workValue = this.stringToLower(work[prop.key]);
+          const workValue = this.stringToLower(work[prop.key])
           for (const text of prop.filterObject.text) {
             if (workValue.includes(this.stringToLower(text))) {
-              return true;
+              return true
             }
           }
-          return false;
-        });
+          return false
+        })
       } else {
         this.eventsWorks = this.eventsWorks.filter((work) => {
-          const workValue = this.stringToLower(work[prop.key]);
+          const workValue = this.stringToLower(work[prop.key])
           return prop.filterObject.text.every((text) =>
             workValue.includes(this.stringToLower(text))
-          );
-        });
+          )
+        })
       }
     }
 
     if (this.onlyActives) {
       this.eventsWorks = this.eventsWorks.filter((work) => {
-        return work.active;
-      });
+        return work.active
+      })
     }
 
     if (this.onlyServiceYears) {
       this.eventsWorks = this.eventsWorks.filter((work) => {
         return work.serviceYears?.includes(
           work.anoDeRealizacao ? work.anoDeRealizacao : '?'
-        );
-      });
+        )
+      })
     }
 
-    this.pagesNumber = Math.ceil(this.eventsWorks.length / this.resultsPerPage);
+    this.pagesNumber = Math.ceil(this.eventsWorks.length / this.resultsPerPage)
 
-    this.orderNow();
+    this.orderNow()
   }
 
-  stringToLower(text: any) {
+  stringToLower(text: any): string {
     if (typeof text !== 'string') {
-      return '';
+      return ''
     }
-    text = text.replace(/['"]/g, '');
-    return text.toLowerCase();
+    text = text.replace(/['"]/g, '')
+    return text.toLowerCase()
   }
 
-  changeAllShowFilterToFalse(key: string) {
-    const oneProp = key as EventsWorkKey;
+  changeAllShowFilterToFalse(key: string): void {
+    const oneProp = key as EventsWorkKey
     for (const prop of this.eventProps) {
       if (prop.key !== oneProp) {
-        prop.showFilter = false;
+        prop.showFilter = false
       }
     }
   }
@@ -543,33 +537,33 @@ export class QualitativeEventsWorksComponent {
    * Cleans all the filters' texts and reloads the events works.
    * This function is called by the "Limpar" button in the filter section.
    */
-  cleanFiltersData() {
+  cleanFiltersData(): void {
     for (const prop of this.eventProps) {
       // Cleans the text of the filter
-      prop.filterObject.text.length = 0;
+      prop.filterObject.text.length = 0
     }
     // Reloads the events works from the curriculums
-    this.getEventsWorks();
+    this.getEventsWorks()
     // Orders the events works based on the current order
-    this.orderNow();
+    this.orderNow()
   }
 
   /**
    * Updates the eventsWorksToShow array based on the current page and
    * resultsPerPage properties. If resultsPerPage is 0, shows all events works.
    */
-  getWorksToShow() {
+  getWorksToShow(): void {
     if (!this.resultsPerPage) {
       // If results per page is 0, show all events works
-      this.eventsWorksToShow = this.eventsWorks;
-      return;
+      this.eventsWorksToShow = this.eventsWorks
+      return
     }
 
-    const start = (this.atualPage - 1) * this.resultsPerPage;
-    const end = start + this.resultsPerPage;
+    const start = (this.atualPage - 1) * this.resultsPerPage
+    const end = start + this.resultsPerPage
 
     // Slice the events works array with the calculated start and end indices
-    this.eventsWorksToShow = this.eventsWorks.slice(start, end);
+    this.eventsWorksToShow = this.eventsWorks.slice(start, end)
   }
 
   /**
@@ -580,6 +574,6 @@ export class QualitativeEventsWorksComponent {
     // the array is equal to the number of pages (pagesNumber), and the values
     // are the page numbers, starting from 1.
 
-    return Array.from({ length: this.pagesNumber }, (_, i) => i + 1);
+    return Array.from({ length: this.pagesNumber }, (_, i) => i + 1)
   }
 }

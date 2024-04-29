@@ -77,11 +77,11 @@ export interface OutraProducaoTecnica extends dadosBasicosSecoes {
   meioDeDivulgacao: string
   idioma: string
   homePageDoTrabalho?: string
-  flagRelevancia: boolean
+  flagRelevancia: string
   doi?: string
   tituloIngles?: string
   naturezaIngles?: string
-  flagDivulgacaoCientifica: boolean
+  flagDivulgacaoCientifica: string
 
   finalidade?: string
   instituicaoPromotora?: string
@@ -101,8 +101,8 @@ export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
   pais: string
   idioma: string
   homePage?: string
-  flagRelevancia: boolean
-  flagDivulgacaoCientifica: boolean
+  flagRelevancia: string
+  flagDivulgacaoCientifica: string
 
   tema?: string
 }
@@ -115,12 +115,12 @@ export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
   ano: string
   pais: string
   idioma: string
-  flagRelevancia: boolean
+  flagRelevancia: string
   doi?: string
   tituloIngles?: string
   homePage?: string
   meioDeDivulgacao: string
-  flagDivulgacaoCientifica: boolean
+  flagDivulgacaoCientifica: string
 
   emissora?: string
   tema?: string
@@ -156,15 +156,15 @@ export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
   idioma: string
   meioDeDivulgacao: string
   homePageDoTrabalho?: string
-  flagRelevancia: boolean
+  flagRelevancia: string
   doi?: string
   tituloIngles?: string
-  flagDivulgacaoCientifica: boolean
+  flagDivulgacaoCientifica: string
 
   instituicaoPromotora?: string
   duracaoEmSemanas?: number
-  flagEventoItinerante: boolean
-  flagCatalogo: boolean
+  flagEventoItinerante: string
+  flagCatalogo: string
   local: string
   cidade: string
 }
@@ -179,7 +179,7 @@ export interface Editoracao extends dadosBasicosSecoes {
   idioma: string
   meioDeDivulgacao: string
   homePageDoTrabalho?: string
-  flagRelevancia: boolean
+  flagRelevancia: string
   doi?: string
   tituloIngles?: string
 

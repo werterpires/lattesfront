@@ -1,1 +1,111 @@
-<p>qualitative-section works!</p>
+<app-accordion>
+  <div class="filters">
+    <button (click)="cleanFiltersData()" class="smallButton">
+      Limpar filtros
+    </button>
+    <label for="" class="onlyAcivesLabel">
+      Apenas ativos
+      <input
+        type="checkbox"
+        [(ngModel)]="onlyActives"
+        name="onlyActives"
+        (change)="getSectionObjects()"
+      />
+    </label>
+    <label for="" class="onlyAcivesLabel">
+      Apenas anos com vínculo
+      <input
+        type="checkbox"
+        [(ngModel)]="onlyServiceYears"
+        name="onlyServiceYears"
+        (change)="getSectionObjects()"
+      />
+    </label>
+  </div>
+  <div class="tableContainer">
+    <table class="table">
+      <thead class="thead">
+        <tr class="headRow">
+          <th class="th" *ngFor="let prop of sectionProps">
+            <div class="tableHead">
+              <app-filter-input
+                *ngIf="prop.showFilter"
+                [filter]="prop.filterObject"
+                (filterEvent)="prop.filterObject = $event; getSectionObjects()"
+              ></app-filter-input>
+              <p>{{ prop.name }}</p>
+              <img
+                #ascDesc
+                class="arrowIcon"
+                src="assets/icons/arrowIcon.svg"
+                alt="Desenho de uma seta"
+                (click)="
+                  prop.ascending = !ascending;
+                  ascending = prop.ascending;
+                  orderProp = prop.key;
+                  orderNow()
+                "
+                [ngClass]="{
+                  rotate: !prop.ascending,
+                  notRotate: prop.ascending
+                }"
+              />
+
+              <img
+                class="arrowIcon"
+                src="assets/icons/filterIcon.svg"
+                alt="Desenho de um filtro"
+                (click)="prop.showFilter = !prop.showFilter"
+              />
+            </div>
+          </th>
+          <th class="th">Participantes</th>
+          <th class="th">Palavras-chave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let sectionObject of tableContent">
+          <tr class="contentRow">
+            <td class="td" *ngFor="let value of sectionObject">
+              <div class="td" [style]="{ width: value.width }">
+                <p>{{ value.value ? value.value : ('' | failData) }}</p>
+              </div>
+            </td>
+          </tr></ng-container
+        >
+      </tbody>
+    </table>
+  </div>
+  <div class="navigation">
+    <div>
+      <button (click)="exportReport()" class="smallButton">
+        Baixar Relatório
+      </button>
+    </div>
+    <div class="pages">
+      <div
+        *ngFor="let page of utilsService.getPageNumbers(pagesNumber)"
+        class="pageNumber"
+        [ngClass]="{ selectedPage: page === atualPage }"
+        (click)="atualPage = +page; getSectionObjectsToShow()"
+      >
+        {{ page }}
+      </div>
+    </div>
+    <div>
+      <label class="pageResults" for="">
+        Resultados por página
+        <input
+          #results
+          type="number"
+          [value]="resultsPerPage"
+          (input)="
+            resultsPerPage = +results.value > 0 ? +results.value : 1;
+            filterNow()
+          "
+          id="resultsPerPage"
+        />
+      </label>
+    </div>
+  </div>
+</app-accordion>

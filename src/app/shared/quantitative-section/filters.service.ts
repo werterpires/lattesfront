@@ -84,7 +84,8 @@ export class FiltersService {
           // Check if the work meets the "only service years" filter
           (!onlyServiceYears ||
             (sec.serviceYears?.includes(sec.ano ?? '?') &&
-              yersToConsider.includes(sec.ano ?? '?')))) ||
+              (yersToConsider.length === 0 ||
+                yersToConsider.includes(sec.ano ?? '?'))))) ||
         false
       )
     })

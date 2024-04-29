@@ -3,20 +3,24 @@
     <button (click)="cleanFiltersData()" class="smallButton">
       Limpar filtros
     </button>
-    <label for="" class="onlyAcivesLabel"
-      >Apenas ativos<input
+    <label for="" class="onlyAcivesLabel">
+      Apenas ativos
+      <input
         type="checkbox"
         [(ngModel)]="onlyActives"
         name="onlyActives"
         (change)="filterNow()"
-    /></label>
-    <label for="" class="onlyAcivesLabel"
-      >Apenas anos com vínculo<input
+      />
+    </label>
+    <label for="" class="onlyAcivesLabel">
+      Apenas anos com vínculo
+      <input
         type="checkbox"
         [(ngModel)]="onlyServiceYears"
         name="onlyServiceYears"
         (change)="filterNow()"
-    /></label>
+      />
+    </label>
   </div>
 
   <div class="tableContainer">
@@ -28,7 +32,8 @@
               *ngIf="prop.showFilter"
               [filter]="prop.filterObject"
               (filterEvent)="prop.filterObject = $event; filterNow()"
-            ></app-filter-input>
+            >
+            </app-filter-input>
             <div
               class="tableHead"
               (mouseenter)="ascDesc.classList.remove('hidden')"
@@ -70,7 +75,7 @@
           <tr class="contentRow">
             <td class="td" *ngFor="let prop of eventProps">
               <div class="td" [style]="{ width: prop.width }">
-                <p>{{ work[prop.key] ? work[prop.key] : ("" | failData) }}</p>
+                <p>{{ work[prop.key] ? work[prop.key] : ('' | failData) }}</p>
               </div>
             </td>
 

@@ -9,6 +9,8 @@ import { QuantitativeOthersEventsComponent } from './quantitative-outras-partici
 import { QuantitativeSectionComponent } from 'src/app/shared/quantitative-section/quantitative-section.component'
 import { Participacao } from 'src/app/shared/services/objTypes'
 import { ParticipationProps } from './types'
+import { QualitativeSectionComponent } from 'src/app/shared/qualitative-section/qualitative-section.component'
+import { Props } from 'src/app/shared/quantitative-section/tpes'
 
 @Component({
   selector: 'app-outras-participacoes-em-eventos-congressos',
@@ -20,7 +22,8 @@ import { ParticipationProps } from './types'
     // QualitativeEventsWorksComponent,
     QuantitativeOthersEventsComponent,
     AccordionComponent,
-    QuantitativeSectionComponent
+    QuantitativeSectionComponent,
+    QualitativeSectionComponent
   ],
   templateUrl: './outras-participacoes-em-eventos-congressos.component.html',
   styleUrl: './outras-participacoes-em-eventos-congressos.component.css'
@@ -61,6 +64,165 @@ export class OutrasParticipacoesEmEventosCongressosComponent {
     }
   ]
 
+  participationQualyProps: Props[] = [
+    {
+      name: 'Professor',
+      key: 'nome',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true
+      },
+      width: '240px'
+    },
+    {
+      name: 'Natureza',
+      key: 'natureza',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true
+      },
+      width: '240px'
+    },
+    {
+      name: 'titulo',
+      key: 'titulo',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true
+      },
+      width: '320px'
+    },
+    {
+      name: 'Ano',
+      key: 'ano',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true
+      },
+      width: '240px'
+    },
+    {
+      name: 'País',
+      key: 'pais',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true
+      },
+      width: '240px'
+    },
+    {
+      name: 'Idioma',
+      key: 'idioma',
+      showFilter: false,
+      ascending: true,
+      filterObject: {
+        text: [],
+        disjunctive: true
+      },
+      width: '240px'
+    },
+    {
+      name: 'Meio de divulgacão',
+      key: 'meioDeDivulgacao',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Homepage do trabalho',
+      key: 'homePageDoTrabalho',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Tipo de participação',
+      key: 'tipoParticipacao',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Forma de participação',
+      key: 'formaParticipacao',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+
+    {
+      name: 'DOI',
+      key: 'doi',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+
+    {
+      name: 'Título em inglês',
+      key: 'tituloIngles',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Nome do Evento',
+      key: 'nomeDoEvento',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Nome da instituição',
+      key: 'nomeInstituicao',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Local do evento',
+      key: 'localDoEvento',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Cidade do evento',
+      key: 'cidadeDoEvento',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    },
+    {
+      name: 'Nome do Evento em Inglês',
+      key: 'nomeDoEventoIngles',
+      showFilter: false,
+      ascending: true,
+      filterObject: { text: [], disjunctive: true },
+      width: '240px'
+    }
+  ]
+
   constructor(private readonly curriculumnsService: CurriculumnsService) {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
       this.curriculumns = curriculumns
@@ -82,7 +244,8 @@ export class OutrasParticipacoesEmEventosCongressosComponent {
               nome: curriculum.curriculum.nome,
               lattesid: curriculum.lattesId,
               active: curriculum.active,
-              serviceYears: curriculum.serviceYears
+              serviceYears: curriculum.serviceYears,
+              ...participation
             })
           )
         ),

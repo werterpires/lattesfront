@@ -12,7 +12,7 @@ export class OrderService {
     ascending: boolean
   ): Participacao[] | TrabalhoEmEventos[] {
     // Filters with values applied
-    console.log('sectiontype', sectionType)
+
     switch (sectionType) {
       case 'outrasParticipacoesEmEventosCongressos':
         this.orderParticipacoes(sectionObjects, orderProp, ascending)
