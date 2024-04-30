@@ -38,6 +38,8 @@ export class QualitativeSectionComponent {
 
   @Input() sectionType!: keyof ILattesCurriculum
   @Input() onlyActives: boolean = true
+  @Input() author: string = 'autor'
+  @Input() accordionTitle!: string
   onlyServiceYears: boolean = false
 
   tableContent: Array<Array<{ value: string; width: string }>> = []
@@ -138,7 +140,8 @@ export class QualitativeSectionComponent {
     await this.reportService.createSheet(
       this.sectionProps,
       this.sectionObjects,
-      this.sectionType
+      this.sectionType,
+      this.author
     )
   }
 }

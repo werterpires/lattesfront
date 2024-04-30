@@ -1,4 +1,4 @@
-<app-accordion>
+<app-accordion [title]="accordionTitle" [quantity]="sectionObjects.length">
   <div class="filters">
     <button (click)="cleanFiltersData()" class="smallButton">
       Limpar filtros
@@ -59,20 +59,21 @@
               />
             </div>
           </th>
-          <th class="th">Participantes</th>
+          <th class="th" *ngIf="author === 'participante'">Participantes</th>
+          <th class="th" *ngIf="author === 'autor'">Autores</th>
           <th class="th">Palavras-chave</th>
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let sectionObject of tableContent">
+        <ng-container *ngFor="let sectionObject of tableContent; let i = index">
           <tr class="contentRow">
             <td class="td" *ngFor="let value of sectionObject">
               <div class="td" [style]="{ width: value.width }">
                 <p>{{ value.value ? value.value : ('' | failData) }}</p>
               </div>
             </td>
-          </tr></ng-container
-        >
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>

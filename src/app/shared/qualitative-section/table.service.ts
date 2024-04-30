@@ -28,12 +28,49 @@ export class TableService {
     secttionProps: Props[]
   ): any[][] {
     const tableContent: any[][] = sectionObjectsToShow.map((sectionObject) => {
-      return secttionProps.map((prop) => {
+      const row = secttionProps.map((prop) => {
         const property = prop.key as keyof Participacao
         return { value: sectionObject[property] ?? '', width: prop.width }
       })
+
+      row.push({
+        value: this.getParticipantes(sectionObject),
+        width: '240px'
+      })
+
+      row.push({
+        value: this.makePalavrasChave(sectionObject),
+        width: '240px'
+      })
+
+      return row
     })
 
     return tableContent
+  }
+
+  getParticipantes(participation: Participacao): string {
+    let participantes = ''
+    if (!participation.participanteDeEventosCongressos) {
+      return participantes
+    }
+    participation.participanteDeEventosCongressos.forEach((participante) => {
+      participantes =
+        participantes +
+        `${participante.nomeParaCitacaoDoParticipanteDeEventosCongressos}.\n `
+    })
+
+    return participantes
+  }
+
+  makePalavrasChave(sectionObject: TrabalhoEmEventos | Participacao): string {
+    const value = sectionObject.palavrasChave
+    if (!value) {
+      return ''
+    }
+    return value
+      .map((value) => value.trim())
+      .filter((value) => value.length > 0)
+      .join(', ')
   }
 }
