@@ -5,7 +5,41 @@
     (blur)="getText(filterInputs.value)"
     [value]="filter.text.join(' ')"
     class="seachInput"
+    placeholder="Digite os trechos a serem considerados."
   />
+  <img
+    class="infoIcon"
+    src="assets/icons/informationIcon.svg"
+    alt="uma letra 'I'"
+    (mouseover)="info = true"
+    (mouseout)="info = false"
+  />
+  <div class="infoText" *ngIf="info">
+    <p class="infoP">
+      Aqui você pode escrever os trechos a serem considerados. Pode colocar
+      palavras completas ou apenas trechos.
+    </p>
+    <br />
+    <p class="infoP">
+      Não fará diferença se digitar minúsculas ou maiúsculas, mas você deve usar
+      acentos corretamente.
+    </p>
+    <br />
+    <p class="infoP">
+      Caso queria especificar uma expresão, coloque entre aspas. Ex: ["na
+      escola" sucesso] (o filtro considerará 2 e não 3 expressões.)
+    </p>
+    <br />
+    <p class="infoP">
+      Para números, também é possível expecificar um intervalo usando hífen:
+      [2018-2024]
+    </p>
+    <br />
+    <p class="infoP">
+      Por fim, escolha se é necessário que os resultados contenham todas as
+      expressões (Combinação com 'E') ou apenas uma (Combinação com 'Ou').
+    </p>
+  </div>
 
   <p for="" class="onlyAcivesLabel">
     Combinar termos usando:

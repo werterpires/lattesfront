@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { FilterObject } from './types'
 import { FormsModule } from '@angular/forms'
+import { NgIf } from '@angular/common'
 
 @Component({
   selector: 'app-filter-input',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './filter-input.component.html',
   styleUrl: './filter-input.component.css'
 })
@@ -16,6 +17,8 @@ export class FilterInputComponent {
     text: [],
     disjunctive: true
   }
+
+  info = false
 
   getText(text: string): void {
     const newText: string[] = []
