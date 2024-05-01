@@ -5,7 +5,6 @@ import { NgFor, NgIf } from '@angular/common'
 import { ITableElements } from '../../shared/qualitative-analyses/types'
 
 import { AccordionComponent } from '../../shared/accordion/accordion.component'
-import { QuantitativeOthersEventsComponent } from './quantitative-outras-participacoes-em-eventos-congressos/quantitative-outras-participacoes-em-eventos-congressos.component'
 import { QuantitativeSectionComponent } from 'src/app/shared/quantitative-section/quantitative-section.component'
 import { Participacao } from 'src/app/shared/services/objTypes'
 import { ParticipationProps } from './types'
@@ -19,9 +18,6 @@ import { RankingSectionComponent } from 'src/app/shared/ranking-section/ranking-
   imports: [
     NgFor,
     NgIf,
-    // EventsWorkRankingComponent,
-    // QualitativeEventsWorksComponent,
-    QuantitativeOthersEventsComponent,
     AccordionComponent,
     QuantitativeSectionComponent,
     QualitativeSectionComponent,

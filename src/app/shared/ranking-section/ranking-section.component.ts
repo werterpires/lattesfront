@@ -38,6 +38,8 @@ export class RankingSectionComponent {
       )
     })
 
+    this.ranking = []
+
     this.professores.forEach((professor) => {
       const professorSections = sections.filter((section) => {
         return section.nome === professor.name

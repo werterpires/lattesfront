@@ -3,14 +3,13 @@ import { CurriculumnsService } from '../../shared/services/curriculumns.service'
 import { ICurriculum } from '../../shared/services/types'
 import { NgFor, NgIf } from '@angular/common'
 import { ITableElements } from '../../shared/qualitative-analyses/types'
-import { QualitativeEventsWorksComponent } from './qualitative-events-works/qualitative-events-works.component'
-import { QuantitativeEventsWorksComponent } from './quantitative-events-works/quantitative-events-works.component'
-import { EventsWorkRankingComponent } from './events-work-ranking/events-work-ranking.component'
+
 import { AccordionComponent } from '../../shared/accordion/accordion.component'
 import { QuantitativeSectionComponent } from 'src/app/shared/quantitative-section/quantitative-section.component'
 import { EventProps } from './types'
 import { TrabalhoEmEventos } from 'src/app/shared/services/objTypes'
 import { QualitativeSectionComponent } from 'src/app/shared/qualitative-section/qualitative-section.component'
+import { RankingSectionComponent } from 'src/app/shared/ranking-section/ranking-section.component'
 
 @Component({
   selector: 'app-trablhos-em-eventos',
@@ -18,12 +17,10 @@ import { QualitativeSectionComponent } from 'src/app/shared/qualitative-section/
   imports: [
     NgFor,
     NgIf,
-    EventsWorkRankingComponent,
-    QualitativeEventsWorksComponent,
-    QuantitativeEventsWorksComponent,
     AccordionComponent,
     QuantitativeSectionComponent,
-    QualitativeSectionComponent
+    QualitativeSectionComponent,
+    RankingSectionComponent
   ],
   templateUrl: './trablhos-em-eventos.component.html',
   styleUrl: './trablhos-em-eventos.component.css'
@@ -34,6 +31,8 @@ export class TrablhosEmEventosComponent {
   tableElements: ITableElements[] = [
     { title: 'Trabalhos em eventos', property: 'trabalhosEmEventos' }
   ]
+
+  professors: Array<{ name: string; serviceYears: string }> = []
 
   workProps: EventProps[] = [
     {
@@ -371,8 +370,20 @@ export class TrablhosEmEventosComponent {
   constructor(private readonly curriculumnsService: CurriculumnsService) {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
       this.curriculumns = curriculumns
+      this.getProfessors()
       this.getWorks()
     })
+  }
+
+  getProfessors(): void {
+    this.professors = this.curriculumns.map((curriculo) => {
+      return {
+        name: curriculo.curriculum.nome,
+        serviceYears: curriculo.serviceYears
+      }
+    })
+
+    console.log(this.professors)
   }
 
   countTrabalhosEmEventos(curriculum: ICurriculum): number {

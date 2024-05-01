@@ -1,8 +1,9 @@
-<app-accordion [title]="'Ranking'">
-  <app-events-work-ranking></app-events-work-ranking>
-</app-accordion>
+<app-ranking-section
+  [professores]="professors"
+  [sectionObjects]="trabalhosEmEventos"
+>
+</app-ranking-section>
 
-<!-- <app-quantitative-events-works></app-quantitative-events-works> -->
 <app-quantitative-section
   [accordionTitle]="'Análise Quantitativa'"
   [sectionType]="'trabalhosEmEventos'"
@@ -18,7 +19,3 @@
   [accordionTitle]="'Análise Qualitativa'"
 >
 </app-qualitative-section>
-
-<!-- <app-qualitative-events-works
-  [curriculumns]="curriculumns"
-></app-qualitative-events-works> -->
