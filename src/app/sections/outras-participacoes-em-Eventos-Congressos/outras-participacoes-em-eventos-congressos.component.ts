@@ -11,6 +11,7 @@ import { Participacao } from 'src/app/shared/services/objTypes'
 import { ParticipationProps } from './types'
 import { QualitativeSectionComponent } from 'src/app/shared/qualitative-section/qualitative-section.component'
 import { Props } from 'src/app/shared/quantitative-section/tpes'
+import { RankingSectionComponent } from 'src/app/shared/ranking-section/ranking-section.component'
 
 @Component({
   selector: 'app-outras-participacoes-em-eventos-congressos',
@@ -23,7 +24,8 @@ import { Props } from 'src/app/shared/quantitative-section/tpes'
     QuantitativeOthersEventsComponent,
     AccordionComponent,
     QuantitativeSectionComponent,
-    QualitativeSectionComponent
+    QualitativeSectionComponent,
+    RankingSectionComponent
   ],
   templateUrl: './outras-participacoes-em-eventos-congressos.component.html',
   styleUrl: './outras-participacoes-em-eventos-congressos.component.css'
@@ -37,6 +39,8 @@ export class OutrasParticipacoesEmEventosCongressosComponent {
       property: 'outrasParticipacoesEmEventosCongressos'
     }
   ]
+
+  professors: Array<{ name: string; serviceYears: string }> = []
 
   participationProps: ParticipationProps[] = [
     {
@@ -226,7 +230,18 @@ export class OutrasParticipacoesEmEventosCongressosComponent {
   constructor(private readonly curriculumnsService: CurriculumnsService) {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
       this.curriculumns = curriculumns
+      this.getProfessors()
+
       this.getParticipations()
+    })
+  }
+
+  getProfessors(): void {
+    this.professors = this.curriculumns.map((curriculo) => {
+      return {
+        name: curriculo.curriculum.nome,
+        serviceYears: curriculo.serviceYears
+      }
     })
   }
 
