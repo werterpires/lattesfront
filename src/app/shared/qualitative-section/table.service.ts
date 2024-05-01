@@ -11,7 +11,9 @@ export class TableService {
     sectionType: string,
     sectionProps: Props[]
   ): any[][] {
+    console.log('sectionType', sectionType)
     switch (sectionType) {
+      case 'participacoesEmEncontros':
       case 'outrasParticipacoesEmEventosCongressos':
         return this.makeParticipacaoTableContent(
           sectionObjectsToShow,

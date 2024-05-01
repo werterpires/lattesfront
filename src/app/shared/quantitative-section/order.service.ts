@@ -14,6 +14,7 @@ export class OrderService {
     // Filters with values applied
 
     switch (sectionType) {
+      case 'participacoesEmEncontros':
       case 'outrasParticipacoesEmEventosCongressos':
         this.orderParticipacoes(sectionObjects, orderProp, ascending)
         break

@@ -33,6 +33,7 @@ export class LattesSectionComponent {
       name: 'Outras participações em eventos e congressos',
       route: 'otherevents'
     },
+    { name: 'Participações em encontros', route: 'meetingsparticipations' },
     { name: 'Trabalhos em eventos', route: 'eventsworks' },
 
     { name: 'TCCs', route: 'tccs' },

@@ -1,0 +1,19 @@
+<app-ranking-section
+  [professores]="professors"
+  [sectionObjects]="participations"
+></app-ranking-section>
+
+<app-quantitative-section
+  [accordionTitle]="'Análise Quantitativa'"
+  [sectionType]="'outrasParticipacoesEmEventosCongressos'"
+  [allSectionObjects]="participations"
+  [sectionProps]="participationProps"
+></app-quantitative-section>
+
+<app-qualitative-section
+  [sectionProps]="participationQualyProps"
+  [sectionType]="'participacoesEmEncontros'"
+  [allSectionObjects]="participations"
+  [author]="'participante'"
+  [accordionTitle]="'Análise Qualitativa'"
+></app-qualitative-section>

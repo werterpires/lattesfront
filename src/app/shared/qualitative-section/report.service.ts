@@ -13,9 +13,7 @@ export class ReportService {
     author: string
   ): Promise<void> {
     const workbook = new ExcelJS.Workbook()
-    const worksheet = workbook.addWorksheet(
-      'Outras participações em eventos e congressos'
-    )
+    const worksheet = workbook.addWorksheet('sectionType')
 
     worksheet.addRow(this.makeHeadersWithParticipantes(sectionProps, author))
     sectionObjects.forEach((sectionObject) => {
@@ -51,11 +49,15 @@ export class ReportService {
     sectionProps: Props[]
   ): any[] {
     switch (sectionType) {
+      case 'participacoesEmEncontros':
       case 'outrasParticipacoesEmEventosCongressos':
         return this.makeRowOfParticipation(sectionProps, sectionObject)
 
+      case 'trabalhosEmEventos':
+        return this.makeRowOfEventWork(sectionProps, sectionObject)
+
       default:
-        throw new Error('Invalid section type')
+        throw new Error('Invalid section type ' + sectionType)
     }
   }
 
@@ -79,6 +81,31 @@ export class ReportService {
     })
 
     row.push(participantes)
+
+    const palavrasChave = sectionObject.palavrasChave?.join(', ')
+    row.push(palavrasChave)
+
+    return row
+  }
+
+  makeRowOfEventWork(
+    sectionProps: Props[],
+    sectionObject: TrabalhoEmEventos
+  ): any[] {
+    const row = []
+
+    for (const prop of sectionProps) {
+      const key = prop.key as keyof TrabalhoEmEventos
+      row.push(sectionObject[key])
+    }
+
+    let autores = ''
+
+    sectionObject.autores?.forEach((autor) => {
+      autores = autores + `${autor.nomeParaCitacao}.\n `
+    })
+
+    row.push(autores)
 
     const palavrasChave = sectionObject.palavrasChave?.join(', ')
     row.push(palavrasChave)

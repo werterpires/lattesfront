@@ -5,6 +5,7 @@ import { LattesSectionComponent } from './lattes-section/lattes-section.componen
 import { TrablhosEmEventosComponent } from './sections/trablhos-em-eventos/trablhos-em-eventos.component'
 import { ProfessorsComponent } from './professors/professors.component'
 import { OutrasParticipacoesEmEventosCongressosComponent } from './sections/outras-participacoes-em-Eventos-Congressos/outras-participacoes-em-eventos-congressos.component'
+import { ParticipacoesEmEncontrosComponent } from './sections/participacoes-em-encontros/participacoes-em-encontros.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +21,10 @@ export const routes: Routes = [
       {
         path: 'otherevents',
         component: OutrasParticipacoesEmEventosCongressosComponent
+      },
+      {
+        path: 'meetingsparticipations',
+        component: ParticipacoesEmEncontrosComponent
       }
     ]
   },
