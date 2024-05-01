@@ -35,7 +35,7 @@
             <p class="teacherName">{{ curriculum.curriculum.nome }}</p>
             <div class="teacherSecondaryData">
               <p>Anos de vínculo: {{ curriculum.serviceYears }}</p>
-              <p>{{ curriculum.active ? "Ativo" : "Inativo" }}</p>
+              <p>{{ curriculum.active ? 'Ativo' : 'Inativo' }}</p>
             </div>
           </div>
 
@@ -64,10 +64,23 @@
     <app-quantitative-professors [curriculums]="professorCurriculum">
     </app-quantitative-professors>
 
-    <app-qualitative-events-works
+    <app-qualitative-section
+      [sectionProps]="eventsProps"
+      [sectionType]="'trabalhosEmEventos'"
+      [allSectionObjects]="allProfessorSections.trabalhosEmEventos"
+      [author]="'autor'"
       [onlyActives]="false"
-      [curriculumns]="professorCurriculum"
-      [title]="'Trabalhos em eventos'"
-    ></app-qualitative-events-works>
+      [accordionTitle]="'Trabalhos em eventos'"
+    ></app-qualitative-section>
+    <app-qualitative-section
+      [sectionProps]="participationsQualiProps"
+      [sectionType]="'outrasParticipacoesEmEventosCongressos'"
+      [allSectionObjects]="
+        allProfessorSections.outrasParticipacoesEmEventosCongressos
+      "
+      [author]="'participante'"
+      [onlyActives]="false"
+      [accordionTitle]="'Outras participações em eventos e Congressos'"
+    ></app-qualitative-section>
   </ng-container>
 </app-container>
