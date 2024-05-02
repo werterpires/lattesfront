@@ -26,4 +26,5 @@ export interface ILattesCurriculum {
   trabalhosEmEventos: TrabalhoEmEventos[]
   outrasParticipacoesEmEventosCongressos: Participacao[]
   participacoesEmEncontros: Participacao[]
+  participacoesEmSimposios: Participacao[]
 }

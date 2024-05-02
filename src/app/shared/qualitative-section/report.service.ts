@@ -45,20 +45,27 @@ export class ReportService {
 
   makeRow(
     sectionType: string,
-    sectionObject: Participacao | TrabalhoEmEventos,
+    sectionObj: Participacao | TrabalhoEmEventos,
     sectionProps: Props[]
-  ): any[] {
+  ): string[] {
+    let row: string[]
+
     switch (sectionType) {
+      case 'participacoesEmSimposios':
       case 'participacoesEmEncontros':
       case 'outrasParticipacoesEmEventosCongressos':
-        return this.makeRowOfParticipation(sectionProps, sectionObject)
+        row = this.makeRowOfParticipation(sectionProps, sectionObj)
+        break
 
       case 'trabalhosEmEventos':
-        return this.makeRowOfEventWork(sectionProps, sectionObject)
+        row = this.makeRowOfEventWork(sectionProps, sectionObj)
+        break
 
       default:
         throw new Error('Invalid section type ' + sectionType)
     }
+
+    return row
   }
 
   makeRowOfParticipation(

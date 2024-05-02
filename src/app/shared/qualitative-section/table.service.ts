@@ -13,6 +13,7 @@ export class TableService {
   ): any[][] {
     console.log('sectionType', sectionType)
     switch (sectionType) {
+      case 'participacoesEmSimposios':
       case 'participacoesEmEncontros':
       case 'outrasParticipacoesEmEventosCongressos':
         return this.makeParticipacaoTableContent(

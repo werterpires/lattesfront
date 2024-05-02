@@ -6,6 +6,7 @@ import { TrablhosEmEventosComponent } from './sections/trablhos-em-eventos/trabl
 import { ProfessorsComponent } from './professors/professors.component'
 import { OutrasParticipacoesEmEventosCongressosComponent } from './sections/outras-participacoes-em-Eventos-Congressos/outras-participacoes-em-eventos-congressos.component'
 import { ParticipacoesEmEncontrosComponent } from './sections/participacoes-em-encontros/participacoes-em-encontros.component'
+import { ParticipacoesEmSimposiosComponent } from './sections/participacoes-em-simposios/participacoes-em-simposios.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'meetingsparticipations',
         component: ParticipacoesEmEncontrosComponent
+      },
+      {
+        path: 'symposiumsparticipations',
+        component: ParticipacoesEmSimposiosComponent
       }
     ]
   },
