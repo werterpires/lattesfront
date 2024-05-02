@@ -51,6 +51,7 @@ export class ReportService {
     let row: string[]
 
     switch (sectionType) {
+      case 'participacoesEmCongressos':
       case 'participacoesEmSeminarios':
       case 'participacoesEmSimposios':
       case 'participacoesEmEncontros':

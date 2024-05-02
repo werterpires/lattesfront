@@ -14,6 +14,7 @@ export class OrderService {
     // Filters with values applied
 
     switch (sectionType) {
+      case 'participacoesEmCongressos':
       case 'participacoesEmSeminarios':
       case 'participacoesEmSimposios':
       case 'participacoesEmEncontros':

@@ -28,4 +28,5 @@ export interface ILattesCurriculum {
   participacoesEmEncontros: Participacao[]
   participacoesEmSimposios: Participacao[]
   participacoesEmSeminarios: Participacao[]
+  participacoesEmCongressos: Participacao[]
 }

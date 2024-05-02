@@ -33,17 +33,11 @@ export class LattesSectionComponent {
       name: 'Outras participações em eventos e congressos',
       route: 'otherevents'
     },
+    { name: 'Participações em congresos', route: 'congresssparticipations' },
     { name: 'Participações em encontros', route: 'meetingsparticipations' },
     { name: 'Participações em simpósios', route: 'symposiumsparticipations' },
     { name: 'Participações em seminarios', route: 'seminarparticipations' },
-    { name: 'Trabalhos em eventos', route: 'eventsworks' },
-
-    { name: 'TCCs', route: 'tccs' },
-    { name: 'Dissertações', route: 'dissertations' },
-    { name: 'Monografias', route: 'monographs' },
-    { name: 'Trabalhos', route: 'works' },
-    { name: 'Trabalhos de Conclusão de Cursos', route: 'conclusions' },
-    { name: 'Trabalhos de Monografias', route: 'monographsworks' }
+    { name: 'Trabalhos em eventos', route: 'eventsworks' }
   ]
 
   @Input() sectionsPage: boolean = true
