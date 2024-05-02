@@ -13,7 +13,7 @@ import { Props } from 'src/app/shared/quantitative-section/tpes'
 import { RankingSectionComponent } from 'src/app/shared/ranking-section/ranking-section.component'
 
 @Component({
-  selector: 'app-participacoes-em-simposios',
+  selector: 'app-participacoes-em-seminarios',
   standalone: true,
   imports: [
     NgFor,
@@ -23,16 +23,16 @@ import { RankingSectionComponent } from 'src/app/shared/ranking-section/ranking-
     QualitativeSectionComponent,
     RankingSectionComponent
   ],
-  templateUrl: './participacoes-em-simposios.component.html',
-  styleUrl: './participacoes-em-simposios.component.css'
+  templateUrl: './participacoes-em-seminarios.component.html',
+  styleUrl: './participacoes-em-seminarios.component.css'
 })
-export class ParticipacoesEmSimposiosComponent {
+export class ParticipacoesEmSeminariosComponent {
   curriculumns: ICurriculum[] = []
   participations: Participacao[] = []
   tableElements: ITableElements[] = [
     {
-      title: 'Participações em simposios',
-      property: 'participaçõesEmSimposios'
+      title: 'Participações em seminarios',
+      property: 'participaçõesEmSeminarios'
     }
   ]
 
@@ -241,14 +241,14 @@ export class ParticipacoesEmSimposiosComponent {
   }
 
   countOutrasParticipacoesEmEventos(curriculum: ICurriculum): number {
-    return curriculum.curriculum.participacoesEmSimposios.length
+    return curriculum.curriculum.participacoesEmSeminarios.length
   }
 
   getParticipations(): void {
     this.participations = this.curriculumns.reduce<Participacao[]>(
       (participations, curriculum) =>
         participations.concat(
-          curriculum.curriculum.participacoesEmSimposios.map(
+          curriculum.curriculum.participacoesEmSeminarios.map(
             (participation) => ({
               ano: participation.ano,
               nome: curriculum.curriculum.nome,
