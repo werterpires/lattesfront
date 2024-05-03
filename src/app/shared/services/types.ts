@@ -1,4 +1,5 @@
 import {
+  MidiaSocialWebsiteBlog,
   OutraProducaoTecnica,
   Participacao,
   TrabalhoEmEventos
@@ -28,6 +29,7 @@ export interface ICreateCurriculum {
 export interface ILattesCurriculum {
   nome: string
   trabalhosEmEventos: TrabalhoEmEventos[]
+  midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[]
   outrasParticipacoesEmEventosCongressos: Participacao[]
   outrasProducoesTecnicas: OutraProducaoTecnica[]
   participacoesEmEncontros: Participacao[]

@@ -1,0 +1,21 @@
+<app-ranking-section
+  [professores]="professors"
+  [sectionObjects]="midiasSociaisWebsitesBlogs"
+>
+</app-ranking-section>
+
+<app-quantitative-section
+  [accordionTitle]="'Análise Quantitativa'"
+  [sectionType]="'midiasSociaisWebsitesBlogs'"
+  [allSectionObjects]="midiasSociaisWebsitesBlogs"
+  [sectionProps]="quantiProps"
+></app-quantitative-section>
+
+<app-qualitative-section
+  [sectionProps]="qualiProps"
+  [sectionType]="'midiasSociaisWebsitesBlogs'"
+  [allSectionObjects]="midiasSociaisWebsitesBlogs"
+  [author]="'autor'"
+  [accordionTitle]="'Análise Qualitativa'"
+>
+</app-qualitative-section>

@@ -30,6 +30,10 @@ export class LattesSectionComponent {
   curriculums: ICurriculum[] = []
   sections: Array<{ name: string; route: string }> = [
     {
+      name: 'Mídias sociais, websites e blogs',
+      route: 'socialmediaswebsitesblogs'
+    },
+    {
       name: 'Outras participações em eventos e congressos',
       route: 'otherevents'
     },

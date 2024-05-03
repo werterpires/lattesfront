@@ -93,16 +93,16 @@ export interface OutraProducaoTecnica extends dadosBasicosSecoes {
 export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  natureza: 'REDE_SOCIAL' | 'FORUM' | 'BLOG' | 'SITE'
+  natureza?: string
   naturezaIngles?: string
   titulo?: string
   tituloIngles?: string
-  ano: string
+  ano?: string
   pais?: string
-  idioma: string
+  idioma?: string
   homePage?: string
-  flagRelevancia: string
-  flagDivulgacaoCientifica: string
+  flagRelevancia?: string
+  flagDivulgacaoCientifica?: string
 
   tema?: string
 }
