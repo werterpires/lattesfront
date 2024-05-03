@@ -22,7 +22,7 @@ export class TableService {
           sectionObjectsToShow,
           sectionProps
         )
-
+      case 'outrasProducoesTecnicas':
       case 'trabalhosEmEventos':
         return this.makeTrabalhoEmEventoTableContent(
           sectionObjectsToShow,

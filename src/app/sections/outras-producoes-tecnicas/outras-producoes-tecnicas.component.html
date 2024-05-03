@@ -1,0 +1,21 @@
+<app-ranking-section
+  [professores]="professors"
+  [sectionObjects]="outrasProducoesTecnicas"
+>
+</app-ranking-section>
+
+<app-quantitative-section
+  [accordionTitle]="'Análise Quantitativa'"
+  [sectionType]="'outrasProducoesTecnicas'"
+  [allSectionObjects]="outrasProducoesTecnicas"
+  [sectionProps]="quantiProps"
+></app-quantitative-section>
+
+<app-qualitative-section
+  [sectionProps]="qualiProps"
+  [sectionType]="'outrasProducoesTecnicas'"
+  [allSectionObjects]="outrasProducoesTecnicas"
+  [author]="'autor'"
+  [accordionTitle]="'Análise Qualitativa'"
+>
+</app-qualitative-section>

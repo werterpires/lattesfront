@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core'
-import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
+import {
+  OutraProducaoTecnica,
+  Participacao,
+  TrabalhoEmEventos
+} from '../services/objTypes'
 import { CountService } from './counts.service'
 
 @Injectable({ providedIn: 'root' })
@@ -7,10 +11,13 @@ export class OrderService {
   constructor(private readonly countService: CountService) {}
   orderNow(
     orderProp: string,
-    sectionObjects: Participacao[] | TrabalhoEmEventos[],
+    sectionObjects:
+      | Participacao[]
+      | TrabalhoEmEventos[]
+      | OutraProducaoTecnica[],
     sectionType: string,
     ascending: boolean
-  ): Participacao[] | TrabalhoEmEventos[] {
+  ): Participacao[] | TrabalhoEmEventos[] | OutraProducaoTecnica[] {
     // Filters with values applied
 
     switch (sectionType) {
@@ -24,6 +31,14 @@ export class OrderService {
 
       case 'trabalhosEmEventos':
         this.orderEventsWorks(sectionObjects, orderProp, ascending)
+
+        break
+      case 'outrasProducoesTecnicas':
+        this.orderOtherTechnicalProductions(
+          sectionObjects,
+          orderProp,
+          ascending
+        )
 
         break
       default:
@@ -60,6 +75,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof TrabalhoEmEventos
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderOtherTechnicalProductions(
+    sectionObjects: OutraProducaoTecnica[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof OutraProducaoTecnica
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')

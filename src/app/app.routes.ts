@@ -9,6 +9,7 @@ import { ParticipacoesEmEncontrosComponent } from './sections/participacoes-em-e
 import { ParticipacoesEmSimposiosComponent } from './sections/participacoes-em-simposios/participacoes-em-simposios.component'
 import { ParticipacoesEmSeminariosComponent } from './sections/participacoes-em-seminarios/participacoes-em-seminarios.component'
 import { ParticipacoesEmCongressosComponent } from './sections/participacoes-em-congressos/participacoes-em-congressos.component'
+import { OutrasProducoesTecnicasComponent } from './sections/outras-producoes-tecnicas/outras-producoes-tecnicas.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'congresssparticipations',
         component: ParticipacoesEmCongressosComponent
+      },
+      {
+        path: 'othertechnicalproductions',
+        component: OutrasProducoesTecnicasComponent
       }
     ]
   },

@@ -71,17 +71,17 @@ export interface OutraProducaoTecnica extends dadosBasicosSecoes {
   autores?: Autor[]
 
   natureza?: string
-  titulo: string
-  ano: string
-  pais: string
-  meioDeDivulgacao: string
-  idioma: string
+  titulo?: string
+  ano?: string
+  pais?: string
+  meioDeDivulgacao?: string
+  idioma?: string
   homePageDoTrabalho?: string
-  flagRelevancia: string
+  flagRelevancia?: string
   doi?: string
   tituloIngles?: string
   naturezaIngles?: string
-  flagDivulgacaoCientifica: string
+  flagDivulgacaoCientifica?: string
 
   finalidade?: string
   instituicaoPromotora?: string
@@ -95,10 +95,10 @@ export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
 
   natureza: 'REDE_SOCIAL' | 'FORUM' | 'BLOG' | 'SITE'
   naturezaIngles?: string
-  titulo: string
+  titulo?: string
   tituloIngles?: string
   ano: string
-  pais: string
+  pais?: string
   idioma: string
   homePage?: string
   flagRelevancia: string
@@ -111,9 +111,9 @@ export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
   autores?: Autor[]
 
   natureza: string
-  titulo: string
+  titulo?: string
   ano: string
-  pais: string
+  pais?: string
   idioma: string
   flagRelevancia: string
   doi?: string
@@ -150,9 +150,9 @@ export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
     | 'MUSEOLOGIA'
     | 'ORGANIZACAO'
     | 'NAO_INFORMADO'
-  titulo: string
+  titulo?: string
   ano: string
-  pais: string
+  pais?: string
   idioma: string
   meioDeDivulgacao: string
   homePageDoTrabalho?: string
@@ -173,9 +173,9 @@ export interface Editoracao extends dadosBasicosSecoes {
   autores?: Autor[]
 
   natureza: string
-  titulo: string
+  titulo?: string
   ano: string
-  pais: string
+  pais?: string
   idioma: string
   meioDeDivulgacao: string
   homePageDoTrabalho?: string

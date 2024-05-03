@@ -1,7 +1,14 @@
 import { FilterObject } from '../filter-input/types'
-import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
+import {
+  OutraProducaoTecnica,
+  Participacao,
+  TrabalhoEmEventos
+} from '../services/objTypes'
 
-export type SectionKey = keyof Participacao | keyof TrabalhoEmEventos
+export type SectionKey =
+  | keyof Participacao
+  | keyof TrabalhoEmEventos
+  | keyof OutraProducaoTecnica
 export interface Props {
   name: string
   key: SectionKey

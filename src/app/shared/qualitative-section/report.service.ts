@@ -58,7 +58,7 @@ export class ReportService {
       case 'outrasParticipacoesEmEventosCongressos':
         row = this.makeRowOfParticipation(sectionProps, sectionObj)
         break
-
+      case 'outrasProducoesTecnicas':
       case 'trabalhosEmEventos':
         row = this.makeRowOfEventWork(sectionProps, sectionObj)
         break
