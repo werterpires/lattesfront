@@ -38,6 +38,7 @@ export class LattesSectionComponent {
       route: 'otherevents'
     },
     { name: 'Outras produções técnicas', route: 'othertechnicalproductions' },
+    { name: 'Programas de Radio ou TV', route: 'radioortvprogram' },
     { name: 'Participações em congresos', route: 'congresssparticipations' },
     { name: 'Participações em encontros', route: 'meetingsparticipations' },
     { name: 'Participações em simpósios', route: 'symposiumsparticipations' },

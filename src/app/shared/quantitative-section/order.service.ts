@@ -3,6 +3,7 @@ import {
   MidiaSocialWebsiteBlog,
   OutraProducaoTecnica,
   Participacao,
+  ProgramaDeRadioOuTV,
   TrabalhoEmEventos
 } from '../services/objTypes'
 import { CountService } from './counts.service'
@@ -47,6 +48,9 @@ export class OrderService {
           orderProp,
           ascending
         )
+        break
+      case 'programasDeRadioOuTV':
+        this.orderProgramasDeRadioOuTV(sectionObjects, orderProp, ascending)
 
         break
       default:
@@ -119,6 +123,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof MidiaSocialWebsiteBlog
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderProgramasDeRadioOuTV(
+    sectionObjects: ProgramaDeRadioOuTV[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof ProgramaDeRadioOuTV
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')

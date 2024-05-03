@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core'
 
 import * as ExcelJS from 'exceljs'
-import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
+import {
+  Participacao,
+  ProgramaDeRadioOuTV,
+  TrabalhoEmEventos
+} from '../services/objTypes'
 import { Props } from '../quantitative-section/tpes'
 
 @Injectable({ providedIn: 'root' })
@@ -45,7 +49,7 @@ export class ReportService {
 
   makeRow(
     sectionType: string,
-    sectionObj: Participacao | TrabalhoEmEventos,
+    sectionObj: Participacao | TrabalhoEmEventos | ProgramaDeRadioOuTV,
     sectionProps: Props[]
   ): string[] {
     let row: string[]
@@ -64,6 +68,9 @@ export class ReportService {
         row = this.makeRowOfEventWork(sectionProps, sectionObj)
         break
 
+      case 'programasDeRadioOuTV':
+        row = this.makeRowWithNoAuthors(sectionProps, sectionObj)
+        break
       default:
         throw new Error('Invalid section type ' + sectionType)
     }
@@ -116,6 +123,29 @@ export class ReportService {
     })
 
     row.push(autores)
+
+    const palavrasChave = sectionObject.palavrasChave?.join(', ')
+    row.push(palavrasChave)
+
+    return row
+  }
+
+  makeRowWithNoAuthors(
+    sectionProps: Props[],
+    sectionObject: ProgramaDeRadioOuTV
+  ): any[] {
+    const row = []
+
+    for (const prop of sectionProps) {
+      const key = prop.key as keyof ProgramaDeRadioOuTV
+      row.push(sectionObject[key])
+    }
+
+    let autores = ''
+
+    sectionObject.autores?.forEach((autor) => {
+      autores = autores + `${autor.nomeParaCitacao}.\n `
+    })
 
     const palavrasChave = sectionObject.palavrasChave?.join(', ')
     row.push(palavrasChave)

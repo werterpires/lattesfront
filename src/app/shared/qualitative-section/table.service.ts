@@ -29,6 +29,12 @@ export class TableService {
           sectionProps
         )
 
+      case 'programasDeRadioOuTV':
+        return this.makeTableContentWithNoAuthors(
+          sectionObjectsToShow,
+          sectionProps
+        )
+
       default:
         throw new Error('Invalid section type')
     }
@@ -73,6 +79,27 @@ export class TableService {
       row.push({
         value: this.getAutores(sectionObject),
         width: '240px'
+      })
+
+      row.push({
+        value: this.makePalavrasChave(sectionObject),
+        width: '240px'
+      })
+
+      return row
+    })
+
+    return tableContent
+  }
+
+  makeTableContentWithNoAuthors(
+    sectionObjectsToShow: TrabalhoEmEventos[],
+    secttionProps: Props[]
+  ): any[][] {
+    const tableContent: any[][] = sectionObjectsToShow.map((sectionObject) => {
+      const row = secttionProps.map((prop) => {
+        const property = prop.key as keyof TrabalhoEmEventos
+        return { value: sectionObject[property] ?? '', width: prop.width }
       })
 
       row.push({

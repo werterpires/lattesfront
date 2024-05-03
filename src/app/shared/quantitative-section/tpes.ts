@@ -3,6 +3,7 @@ import {
   MidiaSocialWebsiteBlog,
   OutraProducaoTecnica,
   Participacao,
+  ProgramaDeRadioOuTV,
   TrabalhoEmEventos
 } from '../services/objTypes'
 
@@ -11,6 +12,7 @@ export type SectionKey =
   | keyof TrabalhoEmEventos
   | keyof OutraProducaoTecnica
   | keyof MidiaSocialWebsiteBlog
+  | keyof ProgramaDeRadioOuTV
 export interface Props {
   name: string
   key: SectionKey

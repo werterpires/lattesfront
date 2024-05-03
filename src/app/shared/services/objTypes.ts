@@ -110,21 +110,21 @@ export interface MidiaSocialWebsiteBlog extends dadosBasicosSecoes {
 export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  natureza: string
+  natureza?: string
   titulo?: string
-  ano: string
+  ano?: string
   pais?: string
-  idioma: string
-  flagRelevancia: string
+  idioma?: string
+  flagRelevancia?: string
   doi?: string
   tituloIngles?: string
   homePage?: string
-  meioDeDivulgacao: string
-  flagDivulgacaoCientifica: string
+  meioDeDivulgacao?: string
+  flagDivulgacaoCientifica?: string
 
   emissora?: string
   tema?: string
-  formatoDataDaApresentacao: string
+  formatoDataDaApresentacao?: string
   dataDaApresentacao?: string
   duracaoEmMinutos?: number
   cidade?: string

@@ -2,6 +2,7 @@ import {
   MidiaSocialWebsiteBlog,
   OutraProducaoTecnica,
   Participacao,
+  ProgramaDeRadioOuTV,
   TrabalhoEmEventos
 } from './objTypes'
 
@@ -36,4 +37,5 @@ export interface ILattesCurriculum {
   participacoesEmSimposios: Participacao[]
   participacoesEmSeminarios: Participacao[]
   participacoesEmCongressos: Participacao[]
+  programasDeRadioOuTV: ProgramaDeRadioOuTV[]
 }
