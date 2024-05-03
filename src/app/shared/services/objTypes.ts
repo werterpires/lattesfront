@@ -134,39 +134,25 @@ export interface ProgramaDeRadioOuTV extends dadosBasicosSecoes {
 export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  tipo:
-    | 'CONCERTO'
-    | 'CONCURSO'
-    | 'CONGRESSO'
-    | 'EXPOSICAO'
-    | 'FESTIVAL'
-    | 'FEIRA'
-    | 'OLIMPIADA'
-    | 'OUTRO'
-    | 'NAO_INFORMADO'
-  natureza:
-    | 'CURADORIA'
-    | 'MONTAGEM'
-    | 'MUSEOLOGIA'
-    | 'ORGANIZACAO'
-    | 'NAO_INFORMADO'
+  tipo?: string
+  natureza?: string
   titulo?: string
-  ano: string
+  ano?: string
   pais?: string
-  idioma: string
-  meioDeDivulgacao: string
+  idioma?: string
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia: string
+  flagRelevancia?: string
   doi?: string
   tituloIngles?: string
-  flagDivulgacaoCientifica: string
+  flagDivulgacaoCientifica?: string
 
   instituicaoPromotora?: string
   duracaoEmSemanas?: number
-  flagEventoItinerante: string
-  flagCatalogo: string
-  local: string
-  cidade: string
+  flagEventoItinerante?: string
+  flagCatalogo?: string
+  local?: string
+  cidade?: string
 }
 
 export interface Editoracao extends dadosBasicosSecoes {

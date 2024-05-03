@@ -33,6 +33,7 @@ export class LattesSectionComponent {
       name: 'Mídias sociais, websites e blogs',
       route: 'socialmediaswebsitesblogs'
     },
+    { name: 'Organizações de eventos', route: 'eventsorganizations' },
     {
       name: 'Outras participações em eventos e congressos',
       route: 'otherevents'

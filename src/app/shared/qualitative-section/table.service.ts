@@ -23,6 +23,7 @@ export class TableService {
         )
       case 'midiasSociaisWebsitesBlogs':
       case 'outrasProducoesTecnicas':
+      case 'organizacoesDeEventos':
       case 'trabalhosEmEventos':
         return this.makeTrabalhoEmEventoTableContent(
           sectionObjectsToShow,

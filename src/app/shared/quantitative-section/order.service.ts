@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import {
   MidiaSocialWebsiteBlog,
+  OrganizacaoDeEvento,
   OutraProducaoTecnica,
   Participacao,
   ProgramaDeRadioOuTV,
@@ -19,7 +20,11 @@ export class OrderService {
       | OutraProducaoTecnica[],
     sectionType: string,
     ascending: boolean
-  ): Participacao[] | TrabalhoEmEventos[] | OutraProducaoTecnica[] {
+  ):
+    | Participacao[]
+    | TrabalhoEmEventos[]
+    | OutraProducaoTecnica[]
+    | OrganizacaoDeEvento[] {
     // Filters with values applied
 
     switch (sectionType) {
@@ -52,6 +57,9 @@ export class OrderService {
       case 'programasDeRadioOuTV':
         this.orderProgramasDeRadioOuTV(sectionObjects, orderProp, ascending)
 
+        break
+      case 'organizacoesDeEventos':
+        this.orderOrganizacoesDeEventos(sectionObjects, orderProp, ascending)
         break
       default:
         throw new Error('Invalid section type')
@@ -141,6 +149,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof ProgramaDeRadioOuTV
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderOrganizacoesDeEventos(
+    sectionObjects: OrganizacaoDeEvento[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof OrganizacaoDeEvento
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')
