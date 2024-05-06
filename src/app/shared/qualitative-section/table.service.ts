@@ -28,6 +28,7 @@ export class TableService {
       case 'desenvolvimentosDeMaterialDidaticoOuInstrucional':
       case 'cursosDeCurtaDuracaoMinistrados':
       case 'apresentacoesDeTrabalho':
+      case 'artigosAceitosParaPublicacao':
       case 'trabalhosEmEventos':
         return this.makeTrabalhoEmEventoTableContent(
           sectionObjectsToShow,

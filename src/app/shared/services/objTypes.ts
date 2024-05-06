@@ -372,26 +372,17 @@ export interface Artigo extends dadosBasicosSecoes {
 
   ordemImportancia?: string
 
-  natureza?: 'COMPLETO' | 'RESUMO' | 'NAO_INFORMADO'
+  natureza?: string
   tituloDoArtigo?: string
   anoDoArtigo?: string
   paisDePublicacao?: string
   idioma?: string
-  meioDeDivulgacao?:
-    | 'IMPRESSO'
-    | 'WEB'
-    | 'MEIO_MAGNETICO'
-    | 'MEIO_DIGITAL'
-    | 'FILME'
-    | 'HIPERTEXTO'
-    | 'OUTRO'
-    | 'VARIOS'
-    | 'NAO_INFORMADO'
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloDoArtigoIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+  flagDivulgacaoCientifica?: string
 
   tituloDoPeriodicoOuRevista?: string
   issn?: string

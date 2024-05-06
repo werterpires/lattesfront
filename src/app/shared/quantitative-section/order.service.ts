@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import {
   ApresentacaoDeTrabalho,
+  Artigo,
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
@@ -83,6 +84,10 @@ export class OrderService {
           orderProp,
           ascending
         )
+        break
+
+      case 'artigosAceitosParaPublicacao':
+        this.orderArtigos(sectionObjects, orderProp, ascending)
         break
 
       case 'apresentacoesDeTrabalho':
@@ -267,6 +272,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof ApresentacaoDeTrabalho
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderArtigos(
+    sectionObjects: Artigo[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof Artigo
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')

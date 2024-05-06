@@ -1,5 +1,6 @@
 import {
   ApresentacaoDeTrabalho,
+  Artigo,
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
@@ -35,7 +36,7 @@ export interface ICreateCurriculum {
 export interface ILattesCurriculum {
   nome: string
   editoracoes: Editoracao[]
-
+  artigosAceitosParaPublicacao: Artigo[]
   midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[]
   organizacoesDeEventos: OrganizacaoDeEvento[]
   outrasParticipacoesEmEventosCongressos: Participacao[]
