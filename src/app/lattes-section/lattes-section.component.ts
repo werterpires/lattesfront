@@ -30,6 +30,10 @@ export class LattesSectionComponent {
   curriculums: ICurriculum[] = []
   sections: Array<{ name: string; route: string }> = [
     {
+      name: 'Cursos de curta duração ministrados',
+      route: 'shorttermcourses'
+    },
+    {
       name: 'Desenvolvimento de material didático ou instrucional',
       route: 'educationalmaterials'
     },

@@ -6,7 +6,7 @@ import { ITableElements } from '../../shared/qualitative-analyses/types'
 
 import { AccordionComponent } from '../../shared/accordion/accordion.component'
 import { QuantitativeSectionComponent } from 'src/app/shared/quantitative-section/quantitative-section.component'
-import { DesenvolvimentoDeMaterialDidaticoOuInstrucional } from 'src/app/shared/services/objTypes'
+import { CursoDeCurtaDuracaoMinistrado } from 'src/app/shared/services/objTypes'
 import { QualitativeSectionComponent } from 'src/app/shared/qualitative-section/qualitative-section.component'
 import { RankingSectionComponent } from 'src/app/shared/ranking-section/ranking-section.component'
 
@@ -14,7 +14,7 @@ import * as propsFiller from './props'
 import { Props } from 'src/app/shared/quantitative-section/tpes'
 
 @Component({
-  selector: 'app-desenvolvimento-de-material-didatico-ou-instrucional',
+  selector: 'app-curso-de-curta-duracao-ministrado',
   standalone: true,
   imports: [
     NgFor,
@@ -24,16 +24,16 @@ import { Props } from 'src/app/shared/quantitative-section/tpes'
     QualitativeSectionComponent,
     RankingSectionComponent
   ],
-  templateUrl: './desenvolvimento-de-material-didatico.component.html',
-  styleUrl: './desenvolvimento-de-material-didatico.component.css'
+  templateUrl: './curso-de-curta-duracao-ministrado.component.html',
+  styleUrl: './curso-de-curta-duracao-ministrado.component.css'
 })
-export class DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent {
+export class CursosDeCurtaDuracaoMinistradosComponent {
   curriculumns: ICurriculum[] = []
-  sections: DesenvolvimentoDeMaterialDidaticoOuInstrucional[] = []
+  sections: CursoDeCurtaDuracaoMinistrado[] = []
   tableElements: ITableElements[] = [
     {
-      title: 'Desenvolvimento de material didático ou instrucional',
-      property: 'desenvolvimentosDeMaterialDidáticoOuInstrucional'
+      title: 'Curso de curta duração ministrado',
+      property: 'cursoDeCurtaDuracaoMinistrado'
     }
   ]
 
@@ -59,17 +59,14 @@ export class DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent {
   }
 
   countSections(curriculum: ICurriculum): number {
-    return curriculum.curriculum
-      .desenvolvimentosDeMaterialDidaticoOuInstrucional.length
+    return curriculum.curriculum.cursosDeCurtaDuracaoMinistrados.length
   }
 
   getWorks(): void {
-    this.sections = this.curriculumns.reduce<
-      DesenvolvimentoDeMaterialDidaticoOuInstrucional[]
-    >(
+    this.sections = this.curriculumns.reduce<CursoDeCurtaDuracaoMinistrado[]>(
       (trabalhos, curriculum) =>
         trabalhos.concat(
-          curriculum.curriculum.desenvolvimentosDeMaterialDidaticoOuInstrucional.map(
+          curriculum.curriculum.cursosDeCurtaDuracaoMinistrados.map(
             (section) => ({
               ...section,
               ano: section.ano,

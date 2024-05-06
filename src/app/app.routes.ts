@@ -15,6 +15,7 @@ import { ProgramasDeRadioOuTVComponent } from './sections/programa-de-radio-ou-t
 import { OrganizacoesDeEventosComponent } from './sections/organizacao-de-eventos/organizacao-de-eventos.component'
 import { EditoracoesComponent } from './sections/editoracao/editoracao.component'
 import { DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent } from './sections/desenvolvimento-de-material-didatico/desenvolvimento-de-material-didatico.component'
+import { CursosDeCurtaDuracaoMinistradosComponent } from './sections/curso-de-curta-duracao-ministrado/curso-de-curta-duracao-ministrado.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -64,6 +65,10 @@ export const routes: Routes = [
       {
         path: 'educationalmaterials',
         component: DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent
+      },
+      {
+        path: 'shorttermcourses',
+        component: CursosDeCurtaDuracaoMinistradosComponent
       }
     ]
   },

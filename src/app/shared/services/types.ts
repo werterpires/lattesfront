@@ -1,4 +1,5 @@
 import {
+  CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
   MidiaSocialWebsiteBlog,
@@ -45,4 +46,5 @@ export interface ILattesCurriculum {
   programasDeRadioOuTV: ProgramaDeRadioOuTV[]
   trabalhosEmEventos: TrabalhoEmEventos[]
   desenvolvimentosDeMaterialDidaticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[]
+  cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[]
 }

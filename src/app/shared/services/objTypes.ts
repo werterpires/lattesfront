@@ -199,33 +199,19 @@ export interface DesenvolvimentoDeMaterialDidaticoOuInstrucional
 export interface CursoDeCurtaDuracaoMinistrado extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  nivelDoCurso?:
-    | 'EXTENSAO'
-    | 'APERFEICOAMENTO'
-    | 'ESPECIALIZACAO'
-    | 'OUTRA'
-    | 'NAO_INFORMADO'
+  nivelDoCurso?: string
   titulo?: string
   ano?: string
   pais?: string
   idioma?: string
-  meioDeDivulgacao?:
-    | 'IMPRESSO'
-    | 'WEB'
-    | 'MEIO_MAGNETICO'
-    | 'MEIO_DIGITAL'
-    | 'FILME'
-    | 'HIPERTEXTO'
-    | 'OUTRO'
-    | 'VARIOS'
-    | 'NAO_INFORMADO'
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+  flagDivulgacaoCientifica?: string
 
-  participacaoDosAutores?: 'DOCENTE' | 'ORGANIZADOR' | 'OUTRA' | 'NAO_INFORMADO'
+  participacaoDosAutores?: string
   instituicaoPromotoraDoCurso?: string
   localDoCurso?: string
   cidade?: string
