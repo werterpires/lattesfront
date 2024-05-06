@@ -14,6 +14,7 @@ import { MidiasSociaisWebsitesBlogsComponent } from './sections/midia-social-web
 import { ProgramasDeRadioOuTVComponent } from './sections/programa-de-radio-ou-tv/programa-de-radio-ou-tv.component'
 import { OrganizacoesDeEventosComponent } from './sections/organizacao-de-eventos/organizacao-de-eventos.component'
 import { EditoracoesComponent } from './sections/editoracao/editoracao.component'
+import { DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent } from './sections/desenvolvimento-de-material-didatico/desenvolvimento-de-material-didatico.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -59,7 +60,11 @@ export const routes: Routes = [
         path: 'eventsorganizations',
         component: OrganizacoesDeEventosComponent
       },
-      { path: 'editorialwork', component: EditoracoesComponent }
+      { path: 'editorialwork', component: EditoracoesComponent },
+      {
+        path: 'educationalmaterials',
+        component: DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent
+      }
     ]
   },
   { path: 'professors', component: ProfessorsComponent },

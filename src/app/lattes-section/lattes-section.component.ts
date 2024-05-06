@@ -29,6 +29,10 @@ import { NgFor, NgIf } from '@angular/common'
 export class LattesSectionComponent {
   curriculums: ICurriculum[] = []
   sections: Array<{ name: string; route: string }> = [
+    {
+      name: 'Desenvolvimento de material didático ou instrucional',
+      route: 'educationalmaterials'
+    },
     { name: 'Editorações', route: 'editorialwork' },
     {
       name: 'Mídias sociais, websites e blogs',

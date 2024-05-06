@@ -184,22 +184,13 @@ export interface DesenvolvimentoDeMaterialDidaticoOuInstrucional
   ano?: string
   pais?: string
   idioma?: string
-  meioDeDivulgacao?:
-    | 'IMPRESSO'
-    | 'WEB'
-    | 'MEIO_MAGNETICO'
-    | 'MEIO_DIGITAL'
-    | 'FILME'
-    | 'HIPERTEXTO'
-    | 'OUTRO'
-    | 'VARIOS'
-    | 'NAO_INFORMADO'
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloIngles?: string
   naturezaIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+  flagDivulgacaoCientifica?: string
 
   finalidade?: string
   finalidadeIngles?: string

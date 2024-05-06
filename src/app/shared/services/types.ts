@@ -1,4 +1,5 @@
 import {
+  DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
@@ -43,4 +44,5 @@ export interface ILattesCurriculum {
   participacoesEmCongressos: Participacao[]
   programasDeRadioOuTV: ProgramaDeRadioOuTV[]
   trabalhosEmEventos: TrabalhoEmEventos[]
+  desenvolvimentosDeMaterialDidaticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[]
 }

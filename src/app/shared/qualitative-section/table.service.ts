@@ -25,6 +25,7 @@ export class TableService {
       case 'outrasProducoesTecnicas':
       case 'organizacoesDeEventos':
       case 'editoracoes':
+      case 'desenvolvimentosDeMaterialDidaticoOuInstrucional':
       case 'trabalhosEmEventos':
         return this.makeTrabalhoEmEventoTableContent(
           sectionObjectsToShow,

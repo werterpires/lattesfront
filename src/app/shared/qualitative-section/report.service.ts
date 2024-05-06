@@ -66,6 +66,7 @@ export class ReportService {
       case 'midiasSociaisWebsitesBlogs':
       case 'organizacoesDeEventos':
       case 'editoracoes':
+      case 'desenvolvimentosDeMaterialDidaticoOuInstrucional':
       case 'trabalhosEmEventos':
         row = this.makeRowOfEventWork(sectionProps, sectionObj)
         break
