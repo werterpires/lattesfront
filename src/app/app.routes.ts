@@ -18,6 +18,7 @@ import { DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent } from './sect
 import { CursosDeCurtaDuracaoMinistradosComponent } from './sections/curso-de-curta-duracao-ministrado/curso-de-curta-duracao-ministrado.component'
 import { ApresentacoesDeTrabalhoComponent } from './sections/apresentacao-de-trabalho/apresentacao-de-trabalho.component'
 import { ArtigosAceitosParaPublicacaoComponent } from './sections/artigo-aceito-para-publicacao/apresentacao-de-trabalho.component'
+import { OutrasProducoesBibliograficasComponent } from './sections/outras-producoes-bibliograficas/outras-producoes-bibliograficas.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -79,6 +80,10 @@ export const routes: Routes = [
       {
         path: 'acceptedarticles',
         component: ArtigosAceitosParaPublicacaoComponent
+      },
+      {
+        path: 'otherbibliographicworks',
+        component: OutrasProducoesBibliograficasComponent
       }
     ]
   },

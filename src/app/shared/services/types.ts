@@ -6,6 +6,7 @@ import {
   Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
+  OutraProducaoBibliografica,
   OutraProducaoTecnica,
   Participacao,
   ProgramaDeRadioOuTV,
@@ -50,4 +51,5 @@ export interface ILattesCurriculum {
   desenvolvimentosDeMaterialDidaticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[]
   cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[]
   apresentacoesDeTrabalho: ApresentacaoDeTrabalho[]
+  outrasProducoesBibliograficas: OutraProducaoBibliografica[]
 }

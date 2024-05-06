@@ -7,6 +7,7 @@ import {
   Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
+  OutraProducaoBibliografica,
   OutraProducaoTecnica,
   Participacao,
   ProgramaDeRadioOuTV,
@@ -25,6 +26,7 @@ export type SectionKey =
   | keyof CursoDeCurtaDuracaoMinistrado
   | keyof ApresentacaoDeTrabalho
   | keyof Artigo
+  | keyof OutraProducaoBibliografica
 export interface Props {
   name: string
   key: SectionKey
