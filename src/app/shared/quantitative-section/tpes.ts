@@ -11,6 +11,7 @@ import {
   OutraProducaoTecnica,
   Participacao,
   ProgramaDeRadioOuTV,
+  TextoEmJornalOuRevista,
   TrabalhoEmEventos
 } from '../services/objTypes'
 
@@ -27,6 +28,7 @@ export type SectionKey =
   | keyof ApresentacaoDeTrabalho
   | keyof Artigo
   | keyof OutraProducaoBibliografica
+  | keyof TextoEmJornalOuRevista
 export interface Props {
   name: string
   key: SectionKey

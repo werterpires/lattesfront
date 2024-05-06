@@ -10,6 +10,7 @@ import {
   OutraProducaoTecnica,
   Participacao,
   ProgramaDeRadioOuTV,
+  TextoEmJornalOuRevista,
   TrabalhoEmEventos
 } from './objTypes'
 
@@ -52,4 +53,5 @@ export interface ILattesCurriculum {
   cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[]
   apresentacoesDeTrabalho: ApresentacaoDeTrabalho[]
   outrasProducoesBibliograficas: OutraProducaoBibliografica[]
+  textosEmRevistasOuJornais: TextoEmJornalOuRevista[]
 }

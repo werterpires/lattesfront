@@ -19,6 +19,7 @@ import { CursosDeCurtaDuracaoMinistradosComponent } from './sections/curso-de-cu
 import { ApresentacoesDeTrabalhoComponent } from './sections/apresentacao-de-trabalho/apresentacao-de-trabalho.component'
 import { ArtigosAceitosParaPublicacaoComponent } from './sections/artigo-aceito-para-publicacao/apresentacao-de-trabalho.component'
 import { OutrasProducoesBibliograficasComponent } from './sections/outras-producoes-bibliograficas/outras-producoes-bibliograficas.component'
+import { TextosEmJornaisOuRevistasComponent } from './sections/textos-em-jornais-ou-revistas/textos-em-jornais-ou-revistas.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -84,6 +85,10 @@ export const routes: Routes = [
       {
         path: 'otherbibliographicworks',
         component: OutrasProducoesBibliograficasComponent
+      },
+      {
+        path: 'textsinjournalsormagazines',
+        component: TextosEmJornaisOuRevistasComponent
       }
     ]
   },

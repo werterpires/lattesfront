@@ -265,30 +265,21 @@ export interface OutraProducaoBibliografica extends dadosBasicosSecoes {
 export interface TextoEmJornalOuRevista extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  natureza?: 'JORNAL_DE_NOTICIAS' | 'REVISTA_MAGAZINE' | 'NAO_INFORMADO'
+  natureza?: string
   tituloDoTexto?: string
   anoDoTexto?: string
   paisDePublicacao?: string
   idioma?: string
-  meioDeDivulgacao?:
-    | 'IMPRESSO'
-    | 'WEB'
-    | 'MEIO_MAGNETICO'
-    | 'MEIO_DIGITAL'
-    | 'FILME'
-    | 'HIPERTEXTO'
-    | 'OUTRO'
-    | 'VARIOS'
-    | 'NAO_INFORMADO'
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloDoTextoIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+  flagDivulgacaoCientifica?: string
 
   tituloDoJornalOuRevista?: string
   issn?: string
-  formatoDataDePublicacao?: 'DDMMAAAA'
+  formatoDataDePublicacao?: string
   dataDePublicacao?: string
   volume?: string
   paginaInicial?: string

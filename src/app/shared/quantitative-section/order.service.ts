@@ -11,6 +11,7 @@ import {
   OutraProducaoTecnica,
   Participacao,
   ProgramaDeRadioOuTV,
+  TextoEmJornalOuRevista,
   TrabalhoEmEventos
 } from '../services/objTypes'
 import { CountService } from './counts.service'
@@ -93,6 +94,14 @@ export class OrderService {
 
       case 'outrasProducoesBibliograficas':
         this.orderOutrasProducoesBibliograficas(
+          sectionObjects,
+          orderProp,
+          ascending
+        )
+        break
+
+      case 'textosEmRevistasOuJornais':
+        this.orderTextosEmJornaisOuRevistas(
           sectionObjects,
           orderProp,
           ascending
@@ -317,6 +326,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof OutraProducaoBibliografica
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderTextosEmJornaisOuRevistas(
+    sectionObjects: TextoEmJornalOuRevista[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof TextoEmJornalOuRevista
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')
