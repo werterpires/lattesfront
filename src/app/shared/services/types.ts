@@ -1,4 +1,5 @@
 import {
+  ApresentacaoDeTrabalho,
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
@@ -47,4 +48,5 @@ export interface ILattesCurriculum {
   trabalhosEmEventos: TrabalhoEmEventos[]
   desenvolvimentosDeMaterialDidaticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[]
   cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[]
+  apresentacoesDeTrabalho: ApresentacaoDeTrabalho[]
 }

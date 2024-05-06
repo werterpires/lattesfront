@@ -1,5 +1,6 @@
 import { FilterObject } from '../filter-input/types'
 import {
+  ApresentacaoDeTrabalho,
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
@@ -21,6 +22,7 @@ export type SectionKey =
   | keyof Editoracao
   | keyof DesenvolvimentoDeMaterialDidaticoOuInstrucional
   | keyof CursoDeCurtaDuracaoMinistrado
+  | keyof ApresentacaoDeTrabalho
 export interface Props {
   name: string
   key: SectionKey

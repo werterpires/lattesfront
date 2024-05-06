@@ -223,22 +223,15 @@ export interface CursoDeCurtaDuracaoMinistrado extends dadosBasicosSecoes {
 export interface ApresentacaoDeTrabalho extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  natureza?:
-    | 'COMUNICACAO'
-    | 'CONFERENCIA'
-    | 'CONGRESSO'
-    | 'SEMINARIO'
-    | 'SIMPOSIO'
-    | 'OUTRA'
-    | 'NAO_INFORMADO'
+  natureza?: string
   titulo?: string
   ano?: string
   pais?: string
   idioma?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+  flagDivulgacaoCientifica?: string
 
   nomeDoEvento?: string
   instituicaoPromotora?: string
