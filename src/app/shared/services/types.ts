@@ -1,4 +1,5 @@
 import {
+  Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
   OutraProducaoTecnica,
@@ -30,7 +31,8 @@ export interface ICreateCurriculum {
 
 export interface ILattesCurriculum {
   nome: string
-  trabalhosEmEventos: TrabalhoEmEventos[]
+  editoracoes: Editoracao[]
+
   midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[]
   organizacoesDeEventos: OrganizacaoDeEvento[]
   outrasParticipacoesEmEventosCongressos: Participacao[]
@@ -40,4 +42,5 @@ export interface ILattesCurriculum {
   participacoesEmSeminarios: Participacao[]
   participacoesEmCongressos: Participacao[]
   programasDeRadioOuTV: ProgramaDeRadioOuTV[]
+  trabalhosEmEventos: TrabalhoEmEventos[]
 }

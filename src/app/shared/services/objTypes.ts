@@ -158,14 +158,14 @@ export interface OrganizacaoDeEvento extends dadosBasicosSecoes {
 export interface Editoracao extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  natureza: string
+  natureza?: string
   titulo?: string
-  ano: string
+  ano?: string
   pais?: string
-  idioma: string
-  meioDeDivulgacao: string
+  idioma?: string
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia: string
+  flagRelevancia?: string
   doi?: string
   tituloIngles?: string
 

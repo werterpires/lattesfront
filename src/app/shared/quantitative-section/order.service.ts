@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
+  Editoracao,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
   OutraProducaoTecnica,
@@ -60,6 +61,9 @@ export class OrderService {
         break
       case 'organizacoesDeEventos':
         this.orderOrganizacoesDeEventos(sectionObjects, orderProp, ascending)
+        break
+      case 'editoracoes':
+        this.orderEditoracoes(sectionObjects, orderProp, ascending)
         break
       default:
         throw new Error('Invalid section type')
@@ -167,6 +171,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof OrganizacaoDeEvento
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderEditoracoes(
+    sectionObjects: Editoracao[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof Editoracao
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')

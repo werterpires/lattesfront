@@ -13,6 +13,7 @@ import { OutrasProducoesTecnicasComponent } from './sections/outras-producoes-te
 import { MidiasSociaisWebsitesBlogsComponent } from './sections/midia-social-website-blog/midia-social-website-blog.component'
 import { ProgramasDeRadioOuTVComponent } from './sections/programa-de-radio-ou-tv/programa-de-radio-ou-tv.component'
 import { OrganizacoesDeEventosComponent } from './sections/organizacao-de-eventos/organizacao-de-eventos.component'
+import { EditoracoesComponent } from './sections/editoracao/editoracao.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -54,7 +55,11 @@ export const routes: Routes = [
         component: MidiasSociaisWebsitesBlogsComponent
       },
       { path: 'radioortvprogram', component: ProgramasDeRadioOuTVComponent },
-      { path: 'eventsorganizations', component: OrganizacoesDeEventosComponent }
+      {
+        path: 'eventsorganizations',
+        component: OrganizacoesDeEventosComponent
+      },
+      { path: 'editorialwork', component: EditoracoesComponent }
     ]
   },
   { path: 'professors', component: ProfessorsComponent },
