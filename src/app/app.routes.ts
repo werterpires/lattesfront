@@ -17,11 +17,12 @@ import { EditoracoesComponent } from './sections/editoracao/editoracao.component
 import { DesenvolvimentoDeMaterialDidaticoOUInstrucionalComponent } from './sections/desenvolvimento-de-material-didatico/desenvolvimento-de-material-didatico.component'
 import { CursosDeCurtaDuracaoMinistradosComponent } from './sections/curso-de-curta-duracao-ministrado/curso-de-curta-duracao-ministrado.component'
 import { ApresentacoesDeTrabalhoComponent } from './sections/apresentacao-de-trabalho/apresentacao-de-trabalho.component'
-import { ArtigosAceitosParaPublicacaoComponent } from './sections/artigo-aceito-para-publicacao/apresentacao-de-trabalho.component'
+import { ArtigosAceitosParaPublicacaoComponent } from './sections/artigo-aceito-para-publicacao/artigo-aceito-para-publicacao.component'
 import { OutrasProducoesBibliograficasComponent } from './sections/outras-producoes-bibliograficas/outras-producoes-bibliograficas.component'
 import { TextosEmJornaisOuRevistasComponent } from './sections/textos-em-jornais-ou-revistas/textos-em-jornais-ou-revistas.component'
 import { CapitulosDeLivrosPublicadosComponent } from './sections/capitulos-de-livros-publicados/capitulos-de-livros-publicados.component'
 import { LivrosPublicadosOuOrganizadosComponent } from './sections/livros-publicados-ou-organizados/livros-publicados-ou-organizados.component'
+import { ArtigosComponent } from './sections/artigos/artigos.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -99,6 +100,10 @@ export const routes: Routes = [
       {
         path: 'publishedororganizedbooks',
         component: LivrosPublicadosOuOrganizadosComponent
+      },
+      {
+        path: 'publishedarticles',
+        component: ArtigosComponent
       }
     ]
   },

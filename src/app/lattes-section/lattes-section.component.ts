@@ -31,6 +31,7 @@ export class LattesSectionComponent {
   sections: Array<{ name: string; route: string }> = [
     { name: 'Apresentações de trabahos', route: 'presentationofworks' },
     { name: 'Artigos aceitos para publicação', route: 'acceptedarticles' },
+    { name: 'Artigos publicados', route: 'publishedarticles' },
     { name: 'Capítulos de livros publicados', route: 'publishedbookChapters' },
     {
       name: 'Cursos de curta duração ministrados',

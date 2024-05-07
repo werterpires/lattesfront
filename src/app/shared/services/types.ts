@@ -58,4 +58,5 @@ export interface ILattesCurriculum {
   textosEmRevistasOuJornais: TextoEmJornalOuRevista[]
   capitulosDeLivrosPublicados: CapituloDeLivroPublicado[]
   livrosPublicadosOuOrganizados: LivroPublicadoOuOrganizado[]
+  artigosPublicados: Artigo[]
 }

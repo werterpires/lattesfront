@@ -70,6 +70,7 @@ export class ReportService {
       case 'cursosDeCurtaDuracaoMinistrados':
       case 'apresentacoesDeTrabalho':
       case 'artigosAceitosParaPublicacao':
+      case 'artigosPublicados':
       case 'outrasProducoesBibliograficas':
       case 'textosEmRevistasOuJornais':
       case 'capitulosDeLivrosPublicados':

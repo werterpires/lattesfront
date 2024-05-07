@@ -90,6 +90,7 @@ export class OrderService {
         )
         break
 
+      case 'artigosPublicados':
       case 'artigosAceitosParaPublicacao':
         this.orderArtigos(sectionObjects, orderProp, ascending)
         break
