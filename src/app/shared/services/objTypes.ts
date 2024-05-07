@@ -317,37 +317,18 @@ export interface CapituloDeLivroPublicado extends dadosBasicosSecoes {
 export interface LivroPublicadoOuOrganizado extends dadosBasicosSecoes {
   autores?: Autor[]
 
-  tipo?: 'LIVRO_PUBLICADO' | 'LIVRO_ORGANIZADO_OU_EDICAO' | 'NAO_INFORMADO'
-  natureza?:
-    | 'COLETANEA'
-    | 'TEXTO_INTEGRAL'
-    | 'VERBETE'
-    | 'ANAIS'
-    | 'CATALOGO'
-    | 'ENCICLOPEDIA'
-    | 'LIVRO'
-    | 'OUTRA'
-    | 'PERIODICO'
-    | 'NAO_INFORMADO'
+  tipo?: string
+  natureza?: string
   tituloDoLivro?: string
   ano?: string
   paisDePublicacao?: string
   idioma?: string
-  meioDeDivulgacao?:
-    | 'IMPRESSO'
-    | 'WEB'
-    | 'MEIO_MAGNETICO'
-    | 'MEIO_DIGITAL'
-    | 'FILME'
-    | 'HIPERTEXTO'
-    | 'OUTRO'
-    | 'VARIOS'
-    | 'NAO_INFORMADO'
+  meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloDoLivroIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+  flagDivulgacaoCientifica?: string
 
   numeroDeVolumes?: string
   numeroDePaginas?: string

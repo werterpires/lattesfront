@@ -32,6 +32,7 @@ export class TableService {
       case 'outrasProducoesBibliograficas':
       case 'textosEmRevistasOuJornais':
       case 'capitulosDeLivrosPublicados':
+      case 'livrosPublicadosOuOrganizados':
       case 'trabalhosEmEventos':
         return this.makeTrabalhoEmEventoTableContent(
           sectionObjectsToShow,

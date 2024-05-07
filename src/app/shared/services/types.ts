@@ -5,6 +5,7 @@ import {
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
+  LivroPublicadoOuOrganizado,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
   OutraProducaoBibliografica,
@@ -56,4 +57,5 @@ export interface ILattesCurriculum {
   outrasProducoesBibliograficas: OutraProducaoBibliografica[]
   textosEmRevistasOuJornais: TextoEmJornalOuRevista[]
   capitulosDeLivrosPublicados: CapituloDeLivroPublicado[]
+  livrosPublicadosOuOrganizados: LivroPublicadoOuOrganizado[]
 }

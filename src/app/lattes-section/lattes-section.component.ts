@@ -42,6 +42,10 @@ export class LattesSectionComponent {
     },
     { name: 'Editorações', route: 'editorialwork' },
     {
+      name: 'Livros publicados ou organizados',
+      route: 'publishedororganizedbooks'
+    },
+    {
       name: 'Mídias sociais, websites e blogs',
       route: 'socialmediaswebsitesblogs'
     },

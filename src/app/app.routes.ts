@@ -21,6 +21,7 @@ import { ArtigosAceitosParaPublicacaoComponent } from './sections/artigo-aceito-
 import { OutrasProducoesBibliograficasComponent } from './sections/outras-producoes-bibliograficas/outras-producoes-bibliograficas.component'
 import { TextosEmJornaisOuRevistasComponent } from './sections/textos-em-jornais-ou-revistas/textos-em-jornais-ou-revistas.component'
 import { CapitulosDeLivrosPublicadosComponent } from './sections/capitulos-de-livros-publicados/capitulos-de-livros-publicados.component'
+import { LivrosPublicadosOuOrganizadosComponent } from './sections/livros-publicados-ou-organizados/livros-publicados-ou-organizados.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -94,6 +95,10 @@ export const routes: Routes = [
       {
         path: 'publishedbookChapters',
         component: CapitulosDeLivrosPublicadosComponent
+      },
+      {
+        path: 'publishedororganizedbooks',
+        component: LivrosPublicadosOuOrganizadosComponent
       }
     ]
   },

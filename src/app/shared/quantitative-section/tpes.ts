@@ -6,6 +6,7 @@ import {
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
+  LivroPublicadoOuOrganizado,
   MidiaSocialWebsiteBlog,
   OrganizacaoDeEvento,
   OutraProducaoBibliografica,
@@ -31,6 +32,7 @@ export type SectionKey =
   | keyof OutraProducaoBibliografica
   | keyof TextoEmJornalOuRevista
   | keyof CapituloDeLivroPublicado
+  | keyof LivroPublicadoOuOrganizado
 export interface Props {
   name: string
   key: SectionKey
