@@ -297,10 +297,10 @@ export interface CapituloDeLivroPublicado extends dadosBasicosSecoes {
   idioma?: string
   meioDeDivulgacao?: string
   homePageDoTrabalho?: string
-  flagRelevancia?: 'SIM' | 'NAO'
+  flagRelevancia?: string
   doi?: string
   tituloDoCapituloDoLivroIngles?: string
-  flagDivulgacaoCientifica?: 'SIM' | 'NAO'
+  flagDivulgacaoCientifica?: string
 
   tituloDoLivro?: string
   numeroDeVolumes?: string

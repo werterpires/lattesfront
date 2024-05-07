@@ -20,6 +20,7 @@ import { ApresentacoesDeTrabalhoComponent } from './sections/apresentacao-de-tra
 import { ArtigosAceitosParaPublicacaoComponent } from './sections/artigo-aceito-para-publicacao/apresentacao-de-trabalho.component'
 import { OutrasProducoesBibliograficasComponent } from './sections/outras-producoes-bibliograficas/outras-producoes-bibliograficas.component'
 import { TextosEmJornaisOuRevistasComponent } from './sections/textos-em-jornais-ou-revistas/textos-em-jornais-ou-revistas.component'
+import { CapitulosDeLivrosPublicadosComponent } from './sections/capitulos-de-livros-publicados/capitulos-de-livros-publicados.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -89,6 +90,10 @@ export const routes: Routes = [
       {
         path: 'textsinjournalsormagazines',
         component: TextosEmJornaisOuRevistasComponent
+      },
+      {
+        path: 'publishedbookChapters',
+        component: CapitulosDeLivrosPublicadosComponent
       }
     ]
   },

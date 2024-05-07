@@ -1,6 +1,7 @@
 import {
   ApresentacaoDeTrabalho,
   Artigo,
+  CapituloDeLivroPublicado,
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
@@ -54,4 +55,5 @@ export interface ILattesCurriculum {
   apresentacoesDeTrabalho: ApresentacaoDeTrabalho[]
   outrasProducoesBibliograficas: OutraProducaoBibliografica[]
   textosEmRevistasOuJornais: TextoEmJornalOuRevista[]
+  capitulosDeLivrosPublicados: CapituloDeLivroPublicado[]
 }

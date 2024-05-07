@@ -1,0 +1,18 @@
+<app-ranking-section [professores]="professors" [sectionObjects]="sections">
+</app-ranking-section>
+
+<app-quantitative-section
+  [accordionTitle]="'Análise Quantitativa'"
+  [sectionType]="'capitulosDeLivrosPublicados'"
+  [allSectionObjects]="sections"
+  [sectionProps]="quantiProps"
+></app-quantitative-section>
+
+<app-qualitative-section
+  [sectionProps]="qualiProps"
+  [sectionType]="'capitulosDeLivrosPublicados'"
+  [allSectionObjects]="sections"
+  [author]="'autor'"
+  [accordionTitle]="'Análise Qualitativa'"
+>
+</app-qualitative-section>

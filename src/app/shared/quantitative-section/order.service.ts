@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import {
   ApresentacaoDeTrabalho,
   Artigo,
+  CapituloDeLivroPublicado,
   CursoDeCurtaDuracaoMinistrado,
   DesenvolvimentoDeMaterialDidaticoOuInstrucional,
   Editoracao,
@@ -33,7 +34,7 @@ export class OrderService {
     | OutraProducaoTecnica[]
     | OrganizacaoDeEvento[] {
     // Filters with values applied
-    console.log(sectionType)
+
     switch (sectionType) {
       case 'participacoesEmCongressos':
       case 'participacoesEmSeminarios':
@@ -110,6 +111,13 @@ export class OrderService {
 
       case 'apresentacoesDeTrabalho':
         this.orderApresentacoesDeTrabalhos(sectionObjects, orderProp, ascending)
+        break
+      case 'capitulosDeLivrosPublicados':
+        this.orderCapitulosDeLivrosPublicados(
+          sectionObjects,
+          orderProp,
+          ascending
+        )
         break
       default:
         throw new Error('Invalid section type')
@@ -344,6 +352,24 @@ export class OrderService {
     ascending: boolean
   ): void {
     const propKey = orderProp as keyof TextoEmJornalOuRevista
+
+    sectionObjects.sort((a, b) =>
+      (a[propKey] || '') < (b[propKey] || '')
+        ? ascending
+          ? -1
+          : 1
+        : ascending
+          ? 1
+          : -1
+    )
+  }
+
+  orderCapitulosDeLivrosPublicados(
+    sectionObjects: CapituloDeLivroPublicado[],
+    orderProp: string,
+    ascending: boolean
+  ): void {
+    const propKey = orderProp as keyof CapituloDeLivroPublicado
 
     sectionObjects.sort((a, b) =>
       (a[propKey] || '') < (b[propKey] || '')
