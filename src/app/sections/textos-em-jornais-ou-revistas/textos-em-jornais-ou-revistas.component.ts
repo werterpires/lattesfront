@@ -71,7 +71,7 @@ export class TextosEmJornaisOuRevistasComponent {
         trabalhos.concat(
           curriculum.curriculum.textosEmRevistasOuJornais.map((section) => ({
             ...section,
-            ano: section.ano,
+            ano: section.anoDoTexto,
             nome: curriculum.curriculum.nome,
             lattesid: curriculum.lattesId,
             active: curriculum.active,
