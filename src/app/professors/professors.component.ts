@@ -60,7 +60,6 @@ export class ProfessorsComponent {
     this.curriculumnsService.curriculumns$.subscribe((curriculumns) => {
       this.curriculums = curriculumns
       this.filterCurriculums()
-      this.getProfessorCurriculum()
     })
 
     this.router.events
@@ -70,7 +69,16 @@ export class ProfessorsComponent {
       })
   }
 
+  ngAfterViewInit(): void {
+    this.getProfessorCurriculum()
+  }
+
   getProfessorCurriculum(): void {
+    if (typeof window === 'undefined') {
+      console.error('Window is not defined.')
+      return
+    }
+
     const url = window.location.href
     const parts = url.split('/')
     const professorId = parts.pop()

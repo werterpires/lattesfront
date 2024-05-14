@@ -1,6 +1,13 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs'
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  of,
+  throwError
+} from 'rxjs'
 import { ICurriculum } from './types'
 import { Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
@@ -20,6 +27,10 @@ export class CurriculumnsService {
   ) {}
 
   getAllCurriculumns(): Observable<ICurriculum[]> {
+    if (typeof localStorage === 'undefined') {
+      console.error('LocalStorage is not defined.')
+      return of([])
+    }
     const accessToken = localStorage.getItem('accessToken')
     if (!accessToken) {
       this.redirectToLogin()

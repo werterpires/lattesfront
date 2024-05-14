@@ -140,6 +140,8 @@ export class AddCurriculumsComponent {
   makeCreateCurriculumDto(curr: any): ICreateCurriculum | null {
     const value: IXml = curr.value
 
+    console.log(value)
+
     if (
       !value['_NUMERO-IDENTIFICADOR'] ||
       !value['_DATA-ATUALIZACAO'] ||
