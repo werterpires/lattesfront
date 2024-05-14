@@ -71,6 +71,6 @@ export class CurriculumnsService {
   }
 
   redirectToLogin(): void {
-    this.router.navigate(['login'])
+    void this.router.navigate(['login'])
   }
 }

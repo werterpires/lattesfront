@@ -109,5 +109,5 @@ export const routes: Routes = [
   },
   { path: 'professors', component: ProfessorsComponent },
   { path: 'professors/:professorId', component: ProfessorsComponent },
-  { path: '', component: LoginComponent }
+  { path: '', component: HomeComponent }
 ]
