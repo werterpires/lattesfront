@@ -4,6 +4,20 @@ export interface IXml {
   '_HORA-ATUALIZACAO': string
   'DADOS-GERAIS': {
     '_NOME-COMPLETO': string
+    'FORMACAO-ACADEMICA-TITULACAO': {
+      GRADUACAO_asArray: any[]
+      ESPECIALIZACAO_asArray: any[]
+      MESTRADO_asArray: any[]
+      DOUTORADO_asArray: any[]
+      'POS-DOUTORADO_asArray': any[]
+      'LIVRE-DOCENCIA_asArray': any[]
+      'CURSO-TECNICO-PROFISSIONALIZANTE_asArray': any[]
+      'MESTRADO-PROFISSIONALIZANTE_asArray': any[]
+      'ENSINO-FUNDAMENTAL-PRIMEIRO-GRAU_asArray': any[]
+      'ENSINO-MEDIO-SEGUNDO-GRAU_asArray': any[]
+      'RESIDENCIA-MEDICA_asArray': any[]
+      APERFEICOAMENTO_asArray: any[]
+    }
   }
   'PRODUCAO-BIBLIOGRAFICA': {
     'ARTIGOS-PUBLICADOS': {
@@ -17,6 +31,9 @@ export interface IXml {
     }
     'DEMAIS-TIPOS-DE-PRODUCAO-BIBLIOGRAFICA': {
       'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray': any[]
+      'PARTITURA-MUSICAL_asArray': any[]
+      'PREFACIO-POSFACIO_asArray': any[]
+      TRADUCAO_asArray: any[]
     }
     'TEXTOS-EM-JORNAIS-OU-REVISTAS': {
       'TEXTO-EM-JORNAL-OU-REVISTA_asArray': any[]
@@ -37,6 +54,40 @@ export interface IXml {
       'PARTICIPACAO-EM-SIMPOSIO_asArray': any[]
       'PARTICIPACAO-EM-SEMINARIO_asArray': any[]
       'PARTICIPACAO-EM-CONGRESSO_asArray': any[]
+      'PARTICIPACAO-EM-FEIRA_asArray': any[]
+      'PARTICIPACAO-EM-OFICINA_asArray': any[]
+      'PARTICIPACAO-EM-EXPOSICAO_asArray': any[]
+      'PARTICIPACAO-EM-OLIMPIADA_asArray': any[]
+    }
+    'FORMACAO-COMPLEMENTAR': {
+      'FORMACAO-COMPLEMENTAR-DE-EXTENSAO-UNIVERSITARIA_asArray': any[]
+      MBA_asArray: any[]
+      'FORMACAO-COMPLEMENTAR-CURSO-DE-CURTA-DURACAO_asArray': any[]
+      OUTROS_asArray: any[]
+    }
+    'PARTICIPACAO-EM-BANCA-TRABALOS-CONCLUSAO': {
+      'PARTICIPACAO-EM-BANCA-DE-MESTRADO_asArray': any[]
+      'PARTICIPACAO-EM-BANCA-DE-DOUTORADO_asArray': any[]
+      'PARTICIPACAO-EM-BANCA-DE-EXAME-QUALIFICACAO_asArray': any[]
+      'PARTICIPACAO-EM-BANCA-DE-APERFEICOAMENTO-ESPECIALIZACAO_asArray': any[]
+      'PARTICIPACAO-EM-BANCA-DE-GRADUACAO_asArray': any[]
+      'OUTRAS-PARTICIPACOES-EM-BANCA_asArray': any[]
+    }
+    'PARTICIPACAO-EM-BANCA-JULGADORA': {
+      'BANCA-JULGADORA-PARA-PROFESSOR-TITULAR_asArray': any[]
+      'BANCA-JULGADORA-PARA-CONCURSO-PUBLICO_asArray': any[]
+      'BANCA-JULGADORA-PARA-LIVRE-DOCENCIA_asArray': any[]
+      'BANCA-JULGADORA-PARA-AVALIACAO-CURSOS_asArray': any[]
+      'OUTRAS-BANCAS-JULGADORAS_asArray': any[]
+    }
+    'ORIENTACOES-EM-ANDAMENTO': {
+      'ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO_asArray': any[]
+      'ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO_asArray': any[]
+      'ORIENTACAO-EM-ANDAMENTO-DE-POS-DOUTORADO_asArray': any[]
+      'ORIENTACAO-EM-ANDAMENTO-DE-APERFEICOAMENTO-ESPECIALIZACAO_asArray': any[]
+      'ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO_asArray': any[]
+      'ORIENTACAO-EM-ANDAMENTO-DE-INICIACAO-CIENTIFICA_asArray': any[]
+      'OUTRAS-ORIENTACOES-EM-ANDAMENTO_asArray': any[]
     }
   }
   'PRODUCAO-TECNICA': {
@@ -49,6 +100,18 @@ export interface IXml {
       'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray': any[]
       'CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray': any[]
       'APRESENTACAO-DE-TRABALHO_asArray': any[]
+      'CARTA-MAPA-OU-SIMILAR_asArray': any[]
+      'MANUTENCAO-DE-OBRA-ARTISTICA_asArray': any[]
+      MAQUETE_asArray: any[]
+      'RELATORIO-DE-PESQUISA_asArray': any[]
+    }
+  }
+  'OUTRA-PRODUCAO': {
+    'ORIENTACOES-CONCLUIDAS': {
+      'ORIENTACOES-CONCLUIDAS-PARA-MESTRADO_asArray': any[]
+      'ORIENTACOES-CONCLUIDAS-PARA-DOUTORADO_asArray': any[]
+      'ORIENTACOES-CONCLUIDAS-PARA-POS-DOUTORADO_asArray': any[]
+      'OUTRAS-ORIENTACOES-CONCLUIDAS_asArray': any[]
     }
   }
 }

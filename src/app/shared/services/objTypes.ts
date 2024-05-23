@@ -12,6 +12,33 @@ interface dadosBasicosSecoes {
   sequenciaProducao?: string
 }
 
+export interface generalSection extends dadosBasicosSecoes {}
+
+export interface DadosGeraisArrays {
+  graduacoes: generalSection[]
+  especializacoes: generalSection[]
+  mestrados: generalSection[]
+  doutorados: generalSection[]
+  posDoutorados: generalSection[]
+  livresDocencias: generalSection[]
+  cursosTecnicosProfissionalizantes: generalSection[]
+  mestradosProfissionalizantes: generalSection[]
+  ensinosFundamentaisPrimeiroGrau: generalSection[]
+  ensinosMediosSegundoGrau: generalSection[]
+  residenciasMedicas: generalSection[]
+  aperfeicoamentos: generalSection[]
+}
+
+export interface DemaisTiposDeProducaoBibliograficaArrays {
+  outrasProducoesBibliograficas: generalSection[]
+  partiturasMusicais: generalSection[]
+  prefaciosPosfacios: generalSection[]
+}
+
+export interface generalSections
+  extends DadosGeraisArrays,
+    DemaisTiposDeProducaoBibliograficaArrays {}
+
 export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   autores?: Autor[]
 
