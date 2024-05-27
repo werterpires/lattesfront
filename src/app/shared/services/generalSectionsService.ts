@@ -8,7 +8,9 @@ import {
   TrabalhoEmEventos,
   GeneralSections,
   ParticipacoesEmBancaTrabalhosConclusaoArrays,
-  ParticipacoesEmBancasJulgadorasArrays
+  ParticipacoesEmBancasJulgadorasArrays,
+  OrientacoesEmAndamentoArrays,
+  OrientacoesConcluidasArrays
 } from './objTypes'
 import { UtilsService } from './util.service'
 import { IXml } from '../add-curriculums/types'
@@ -47,14 +49,16 @@ export class GeneralSectionsService {
         data['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-BANCA-JULGADORA']
       )
 
-    console.log(
-      'data s',
-      data['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-BANCA-JULGADORA']
+    const orientacoesEmAndamentoSubData = this.getOrientacoesEmAndamento(
+      data['DADOS-COMPLEMENTARES']['ORIENTACOES-EM-ANDAMENTO']
     )
-    console.log(
-      'participacoesEmBancasJulgadorasSubData',
-      participacoesEmBancasJulgadorasSubData
+
+    const orientacoesConcluidasSubData = this.getOrientacoesConcluidas(
+      data['OUTRA-PRODUCAO']['ORIENTACOES-CONCLUIDAS']
     )
+
+    // console.log('data s', data['OUTRA-PRODUCAO']['ORIENTACOES-CONCLUIDAS'])
+    // console.log('orientacoesConcluidasSubData', orientacoesConcluidasSubData)
 
     const generalSections: GeneralSections = {
       ...dadosGeraisSubData,
@@ -62,7 +66,9 @@ export class GeneralSectionsService {
       ...demaisTiposDeProducaoTecnicaSubData,
       ...formacoesComplementaresSubData,
       ...participacoesEmBancaTrabalhosConclusaoSubData,
-      ...participacoesEmBancasJulgadorasSubData
+      ...participacoesEmBancasJulgadorasSubData,
+      ...orientacoesEmAndamentoSubData,
+      ...orientacoesConcluidasSubData
     }
 
     return generalSections
@@ -654,6 +660,211 @@ export class GeneralSectionsService {
     }
 
     return ParticipacoesEmBancasJulgadorasArrays
+  }
+
+  getOrientacoesEmAndamento(data: any): OrientacoesEmAndamentoArrays {
+    const orientacoesEmAndamentoArrays: OrientacoesEmAndamentoArrays = {
+      orientacoesEmAndamentoDeMestrado: [],
+      orientacoesEmAndamentoDeDoutorado: [],
+      orientacoesEmAndamentoDePosDoutorado: [],
+      orientacoesEmAndamentoDeAperfeicoamentoEspecializacao: [],
+      orientacoesEmAndamentoDeGraduacao: [],
+      orientacoesEmAndamentoDeIniciacaoCientifica: [],
+      outrasOrientacoesEmAndamento: []
+    }
+
+    if (!data) return orientacoesEmAndamentoArrays
+
+    const orientacoesEmAndamentoDeMestrado =
+      data['ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO_asArray']
+    const orientacoesEmAndamentoDeDoutorado =
+      data['ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO_asArray']
+    const orientacoesEmAndamentoDePosDoutorado =
+      data['ORIENTACAO-EM-ANDAMENTO-DE-POS-DOUTORADO_asArray']
+    const orientacoesEmAndamentoDeAperfeicoamentoEspecializacao =
+      data['ORIENTACAO-EM-ANDAMENTO-DE-APERFEICOAMENTO-ESPECIALIZACAO_asArray']
+    const orientacoesEmAndamentoDeGraduacao =
+      data['ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO_asArray']
+    const orientacoesEmAndamentoDeIniciacaoCientifica =
+      data['ORIENTACAO-EM-ANDAMENTO-DE-INICIACAO-CIENTIFICA_asArray']
+    const outrasOrientacoesEmAndamento =
+      data['OUTRAS-ORIENTACOES-EM-ANDAMENTO_asArray']
+
+    if (
+      orientacoesEmAndamentoDeMestrado &&
+      orientacoesEmAndamentoDeMestrado.length > 0
+    ) {
+      orientacoesEmAndamentoArrays.orientacoesEmAndamentoDeMestrado =
+        orientacoesEmAndamentoDeMestrado.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      orientacoesEmAndamentoDeDoutorado &&
+      orientacoesEmAndamentoDeDoutorado.length > 0
+    ) {
+      orientacoesEmAndamentoArrays.orientacoesEmAndamentoDeDoutorado =
+        orientacoesEmAndamentoDeDoutorado.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      orientacoesEmAndamentoDePosDoutorado &&
+      orientacoesEmAndamentoDePosDoutorado.length > 0
+    ) {
+      orientacoesEmAndamentoArrays.orientacoesEmAndamentoDePosDoutorado =
+        orientacoesEmAndamentoDePosDoutorado.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-POS-DOUTORADO'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      orientacoesEmAndamentoDeAperfeicoamentoEspecializacao &&
+      orientacoesEmAndamentoDeAperfeicoamentoEspecializacao.length > 0
+    ) {
+      orientacoesEmAndamentoArrays.orientacoesEmAndamentoDeAperfeicoamentoEspecializacao =
+        orientacoesEmAndamentoDeAperfeicoamentoEspecializacao.map(
+          (orientacao: any) => {
+            return {
+              ano: orientacao[
+                'DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-APERFEICOAMENTO-ESPECIALIZACAO'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    if (
+      orientacoesEmAndamentoDeGraduacao &&
+      orientacoesEmAndamentoDeGraduacao.length > 0
+    ) {
+      orientacoesEmAndamentoArrays.orientacoesEmAndamentoDeGraduacao =
+        orientacoesEmAndamentoDeGraduacao.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      orientacoesEmAndamentoDeIniciacaoCientifica &&
+      orientacoesEmAndamentoDeIniciacaoCientifica.length > 0
+    ) {
+      orientacoesEmAndamentoArrays.orientacoesEmAndamentoDeIniciacaoCientifica =
+        orientacoesEmAndamentoDeIniciacaoCientifica.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-INICIACAO-CIENTIFICA'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      outrasOrientacoesEmAndamento &&
+      outrasOrientacoesEmAndamento.length > 0
+    ) {
+      orientacoesEmAndamentoArrays.outrasOrientacoesEmAndamento =
+        outrasOrientacoesEmAndamento.map((orientacao: any) => {
+          return {
+            ano: orientacao['DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO']._ANO
+          }
+        })
+    }
+
+    return orientacoesEmAndamentoArrays
+  }
+
+  getOrientacoesConcluidas(data: any): OrientacoesConcluidasArrays {
+    const orientacoesConcluidasArrays: OrientacoesConcluidasArrays = {
+      orientacoesConcluidasParaDoutorado: [],
+      orientacoesConcluidasParaMestrado: [],
+      orientacoesConcluidasParaPosDoutorado: [],
+      outrasOrientacoesConcluidas: []
+    }
+
+    if (!data) return orientacoesConcluidasArrays
+    console.log('data', data)
+
+    const orientacoesConcluidasDeMestrado =
+      data['ORIENTACOES-CONCLUIDAS-PARA-MESTRADO_asArray']
+    const orientacoesConcluidasDeDoutorado =
+      data['ORIENTACOES-CONCLUIDAS-PARA-DOUTORADO_asArray']
+    const orientacoesConcluidasDePosDoutorado =
+      data['ORIENTACOES-CONCLUIDAS-PARA-POS-DOUTORADO_asArray']
+    const outrasOrientacoesConcluidas =
+      data['OUTRAS-ORIENTACOES-CONCLUIDAS_asArray']
+
+    if (
+      orientacoesConcluidasDeMestrado &&
+      orientacoesConcluidasDeMestrado.length > 0
+    ) {
+      orientacoesConcluidasArrays.orientacoesConcluidasParaMestrado =
+        orientacoesConcluidasDeMestrado.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DE-ORIENTACOES-CONCLUIDAS-PARA-MESTRADO'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      orientacoesConcluidasDeDoutorado &&
+      orientacoesConcluidasDeDoutorado.length > 0
+    ) {
+      orientacoesConcluidasArrays.orientacoesConcluidasParaDoutorado =
+        orientacoesConcluidasDeDoutorado.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DE-ORIENTACOES-CONCLUIDAS-PARA-DOUTORADO'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      orientacoesConcluidasDePosDoutorado &&
+      orientacoesConcluidasDePosDoutorado.length > 0
+    ) {
+      orientacoesConcluidasArrays.orientacoesConcluidasParaPosDoutorado =
+        orientacoesConcluidasDePosDoutorado.map((orientacao: any) => {
+          return {
+            ano: orientacao[
+              'DADOS-BASICOS-DE-ORIENTACOES-CONCLUIDAS-PARA-POS-DOUTORADO'
+            ]._ANO
+          }
+        })
+    }
+
+    if (outrasOrientacoesConcluidas && outrasOrientacoesConcluidas.length > 0) {
+      orientacoesConcluidasArrays.outrasOrientacoesConcluidas =
+        outrasOrientacoesConcluidas.map((orientacao: any) => {
+          return {
+            ano: orientacao['DADOS-BASICOS-DE-OUTRAS-ORIENTACOES-CONCLUIDAS']
+              ._ANO
+          }
+        })
+    }
+    console.log('orientacoesConcluidasArrays', orientacoesConcluidasArrays)
+
+    return orientacoesConcluidasArrays
   }
 
   /**

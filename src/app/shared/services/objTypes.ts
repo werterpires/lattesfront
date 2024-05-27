@@ -66,13 +66,32 @@ export interface ParticipacoesEmBancasJulgadorasArrays {
   outrasBancasJulgadoras: generalSection[]
 }
 
+export interface OrientacoesEmAndamentoArrays {
+  orientacoesEmAndamentoDeMestrado: generalSection[]
+  orientacoesEmAndamentoDeDoutorado: generalSection[]
+  orientacoesEmAndamentoDePosDoutorado: generalSection[]
+  orientacoesEmAndamentoDeAperfeicoamentoEspecializacao: generalSection[]
+  orientacoesEmAndamentoDeGraduacao: generalSection[]
+  orientacoesEmAndamentoDeIniciacaoCientifica: generalSection[]
+  outrasOrientacoesEmAndamento: generalSection[]
+}
+
+export interface OrientacoesConcluidasArrays {
+  orientacoesConcluidasParaMestrado: generalSection[]
+  orientacoesConcluidasParaDoutorado: generalSection[]
+  orientacoesConcluidasParaPosDoutorado: generalSection[]
+  outrasOrientacoesConcluidas: generalSection[]
+}
+
 export interface GeneralSections
   extends DadosGeraisArrays,
     DemaisTiposDeProducaoBibliograficaArrays,
     DemaisTiposDeProducaoTecnicaArrays,
     FormacoesComplementaresArrays,
     ParticipacoesEmBancaTrabalhosConclusaoArrays,
-    ParticipacoesEmBancasJulgadorasArrays {}
+    ParticipacoesEmBancasJulgadorasArrays,
+    OrientacoesEmAndamentoArrays,
+    OrientacoesConcluidasArrays {}
 
 export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   autores?: Autor[]
