@@ -185,12 +185,15 @@ export class UtilsService {
     return autors
   }
 
-  getPageNumbers(pagesNumber: number): number[] {
-    // Returns an array with the page numbers to be displayed. The length of
-    // the array is equal to the number of pages (pagesNumber), and the values
-    // are the page numbers, starting from 1.
-    const aaa = Array.from({ length: pagesNumber }, (_, i) => i + 1)
+  getPageNumbers(atualPage: number, pagesNumber: number): number[] {
+    const start = Math.max(atualPage - 10, 1)
+    const end = Math.min(atualPage + 10, pagesNumber)
 
-    return aaa
+    const pageNumbers = Array.from(
+      { length: end - start + 1 },
+      (_, i) => start + i
+    )
+
+    return pageNumbers
   }
 }

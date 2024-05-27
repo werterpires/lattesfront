@@ -85,7 +85,7 @@
     </div>
     <div class="pages">
       <div
-        *ngFor="let page of utilsService.getPageNumbers(pagesNumber)"
+        *ngFor="let page of utilsService.getPageNumbers(atualPage, pagesNumber)"
         class="pageNumber"
         [ngClass]="{ selectedPage: page === atualPage }"
         (click)="atualPage = +page; getSectionObjectsToShow()"
