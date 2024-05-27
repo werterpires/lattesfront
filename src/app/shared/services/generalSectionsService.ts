@@ -7,7 +7,8 @@ import {
   FormacoesComplementaresArrays,
   TrabalhoEmEventos,
   GeneralSections,
-  ParticipacoesEmBancaTrabalhosConclusaoArrays
+  ParticipacoesEmBancaTrabalhosConclusaoArrays,
+  ParticipacoesEmBancasJulgadorasArrays
 } from './objTypes'
 import { UtilsService } from './util.service'
 import { IXml } from '../add-curriculums/types'
@@ -41,14 +42,18 @@ export class GeneralSectionsService {
           'PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO'
         ]
       )
+    const participacoesEmBancasJulgadorasSubData =
+      this.getParticipacoesEmBancasJulgadoras(
+        data['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-BANCA-JULGADORA']
+      )
 
     console.log(
       'data s',
-      data['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO']
+      data['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-BANCA-JULGADORA']
     )
     console.log(
-      'participacoesEmBancaTrabalhosConclusaoSubData',
-      participacoesEmBancaTrabalhosConclusaoSubData
+      'participacoesEmBancasJulgadorasSubData',
+      participacoesEmBancasJulgadorasSubData
     )
 
     const generalSections: GeneralSections = {
@@ -56,7 +61,8 @@ export class GeneralSectionsService {
       ...demaisTiposDeProducaoBibliograficaSubData,
       ...demaisTiposDeProducaoTecnicaSubData,
       ...formacoesComplementaresSubData,
-      ...participacoesEmBancaTrabalhosConclusaoSubData
+      ...participacoesEmBancaTrabalhosConclusaoSubData,
+      ...participacoesEmBancasJulgadorasSubData
     }
 
     return generalSections
@@ -559,14 +565,95 @@ export class GeneralSectionsService {
     }
 
     return participacoesEmBancaTrabalhosConclusaoArrays
+  }
 
-    // PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO': {
-    //   'PARTICIPACAO-EM-BANCA-DE-MESTRADO_asArray': any[]
-    //   'PARTICIPACAO-EM-BANCA-DE-DOUTORADO_asArray': any[]
-    //   'PARTICIPACAO-EM-BANCA-DE-EXAME-QUALIFICACAO_asArray': any[]
-    //   'PARTICIPACAO-EM-BANCA-DE-APERFEICOAMENTO-ESPECIALIZACAO_asArray': any[]
-    //   'PARTICIPACAO-EM-BANCA-DE-GRADUACAO_asArray': any[]
-    //   'OUTRAS-PARTICIPACOES-EM-BANCA_asArray': any[]
+  getParticipacoesEmBancasJulgadoras(
+    data: any
+  ): ParticipacoesEmBancasJulgadorasArrays {
+    const ParticipacoesEmBancasJulgadorasArrays: ParticipacoesEmBancasJulgadorasArrays =
+      {
+        bancasJulgadorasParaProfessorTitular: [],
+        bancasJulgadorasParaConcursoPublico: [],
+        bancasJulgadorasParaLivreDocencia: [],
+        bancasJulgadorasParaAvaliacaoCursos: [],
+        outrasBancasJulgadoras: []
+      }
+
+    if (!data) return ParticipacoesEmBancasJulgadorasArrays
+
+    const bancasJulgadorasParaProfessorTitular =
+      data['BANCA-JULGADORA-PARA-PROFESSOR-TITULAR_asArray']
+    const bancasJulgadorasParaConcursoPublico =
+      data['BANCA-JULGADORA-PARA-CONCURSO-PUBLICO_asArray']
+    const bancasJulgadorasParaLivreDocencia =
+      data['BANCA-JULGADORA-PARA-LIVRE-DOCENCIA_asArray']
+    const bancasJulgadorasParaAvaliacaoCursos =
+      data['BANCA-JULGADORA-PARA-AVALIACAO-CURSOS_asArray']
+    const outrasBancasJulgadoras = data['OUTRAS-BANCAS-JULGADORAS_asArray']
+
+    if (
+      bancasJulgadorasParaProfessorTitular &&
+      bancasJulgadorasParaProfessorTitular.length > 0
+    ) {
+      ParticipacoesEmBancasJulgadorasArrays.bancasJulgadorasParaProfessorTitular =
+        bancasJulgadorasParaProfessorTitular.map((banca: any) => {
+          return {
+            ano: banca[
+              'DADOS-BASICOS-DA-BANCA-JULGADORA-PARA-PROFESSOR-TITULAR'
+            ]._ANO
+          }
+        })
+    }
+
+    if (
+      bancasJulgadorasParaConcursoPublico &&
+      bancasJulgadorasParaConcursoPublico.length > 0
+    ) {
+      ParticipacoesEmBancasJulgadorasArrays.bancasJulgadorasParaConcursoPublico =
+        bancasJulgadorasParaConcursoPublico.map((banca: any) => {
+          return {
+            ano: banca['DADOS-BASICOS-DA-BANCA-JULGADORA-PARA-CONCURSO-PUBLICO']
+              ._ANO
+          }
+        })
+    }
+
+    if (
+      bancasJulgadorasParaLivreDocencia &&
+      bancasJulgadorasParaLivreDocencia.length > 0
+    ) {
+      ParticipacoesEmBancasJulgadorasArrays.bancasJulgadorasParaLivreDocencia =
+        bancasJulgadorasParaLivreDocencia.map((banca: any) => {
+          return {
+            ano: banca['DADOS-BASICOS-DA-BANCA-JULGADORA-PARA-LIVRE-DOCENCIA']
+              ._ANO
+          }
+        })
+    }
+
+    if (
+      bancasJulgadorasParaAvaliacaoCursos &&
+      bancasJulgadorasParaAvaliacaoCursos.length > 0
+    ) {
+      ParticipacoesEmBancasJulgadorasArrays.bancasJulgadorasParaAvaliacaoCursos =
+        bancasJulgadorasParaAvaliacaoCursos.map((banca: any) => {
+          return {
+            ano: banca['DADOS-BASICOS-DA-BANCA-JULGADORA-PARA-AVALIACAO-CURSOS']
+              ._ANO
+          }
+        })
+    }
+
+    if (outrasBancasJulgadoras && outrasBancasJulgadoras.length > 0) {
+      ParticipacoesEmBancasJulgadorasArrays.outrasBancasJulgadoras =
+        outrasBancasJulgadoras.map((banca: any) => {
+          return {
+            ano: banca['DADOS-BASICOS-DE-OUTRAS-BANCAS-JULGADORAS']._ANO
+          }
+        })
+    }
+
+    return ParticipacoesEmBancasJulgadorasArrays
   }
 
   /**

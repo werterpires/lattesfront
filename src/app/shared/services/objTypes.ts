@@ -58,12 +58,21 @@ export interface ParticipacoesEmBancaTrabalhosConclusaoArrays {
   outrasParticipacoesEmBancas: generalSection[]
 }
 
+export interface ParticipacoesEmBancasJulgadorasArrays {
+  bancasJulgadorasParaProfessorTitular: generalSection[]
+  bancasJulgadorasParaConcursoPublico: generalSection[]
+  bancasJulgadorasParaLivreDocencia: generalSection[]
+  bancasJulgadorasParaAvaliacaoCursos: generalSection[]
+  outrasBancasJulgadoras: generalSection[]
+}
+
 export interface GeneralSections
   extends DadosGeraisArrays,
     DemaisTiposDeProducaoBibliograficaArrays,
     DemaisTiposDeProducaoTecnicaArrays,
     FormacoesComplementaresArrays,
-    ParticipacoesEmBancaTrabalhosConclusaoArrays {}
+    ParticipacoesEmBancaTrabalhosConclusaoArrays,
+    ParticipacoesEmBancasJulgadorasArrays {}
 
 export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   autores?: Autor[]
