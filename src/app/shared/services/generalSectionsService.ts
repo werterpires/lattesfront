@@ -3,8 +3,11 @@ import { Injectable } from '@angular/core'
 import {
   DadosGeraisArrays,
   DemaisTiposDeProducaoBibliograficaArrays,
+  DemaisTiposDeProducaoTecnicaArrays,
+  FormacoesComplementaresArrays,
   TrabalhoEmEventos,
-  generalSections
+  GeneralSections,
+  ParticipacoesEmBancaTrabalhosConclusaoArrays
 } from './objTypes'
 import { UtilsService } from './util.service'
 import { IXml } from '../add-curriculums/types'
@@ -15,7 +18,7 @@ import { IXml } from '../add-curriculums/types'
 export class GeneralSectionsService {
   constructor(private readonly utilsService: UtilsService) {}
 
-  makeGeneralSections(data: IXml): generalSections {
+  makeGeneralSections(data: IXml): GeneralSections {
     const dadosGerais = data['DADOS-GERAIS']
     const demaisTiposDeProducaoBibliografica =
       data['PRODUCAO-BIBLIOGRAFICA']['DEMAIS-TIPOS-DE-PRODUCAO-BIBLIOGRAFICA']
@@ -25,16 +28,35 @@ export class GeneralSectionsService {
       this.getDemaisTiposDeProducaoBibliografica(
         demaisTiposDeProducaoBibliografica
       )
+    const demaisTiposDeProducaoTecnicaSubData =
+      this.getDemaisTiposDeProducaoTecnica(
+        data['PRODUCAO-TECNICA']['DEMAIS-TIPOS-DE-PRODUCAO-TECNICA']
+      )
+    const formacoesComplementaresSubData = this.getFormacaoComplementar(
+      data['DADOS-COMPLEMENTARES']['FORMACAO-COMPLEMENTAR']
+    )
+    const participacoesEmBancaTrabalhosConclusaoSubData =
+      this.getParticipacoesEmBancaTrabalhosConclusao(
+        data['DADOS-COMPLEMENTARES'][
+          'PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO'
+        ]
+      )
+
     console.log(
-      'demaisTiposDeProducaoBibliograficaSubData',
-      demaisTiposDeProducaoBibliograficaSubData
+      'data s',
+      data['DADOS-COMPLEMENTARES']['PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO']
+    )
+    console.log(
+      'participacoesEmBancaTrabalhosConclusaoSubData',
+      participacoesEmBancaTrabalhosConclusaoSubData
     )
 
-    // console.log('data s', data)
-
-    const generalSections: generalSections = {
+    const generalSections: GeneralSections = {
       ...dadosGeraisSubData,
-      ...demaisTiposDeProducaoBibliograficaSubData
+      ...demaisTiposDeProducaoBibliograficaSubData,
+      ...demaisTiposDeProducaoTecnicaSubData,
+      ...formacoesComplementaresSubData,
+      ...participacoesEmBancaTrabalhosConclusaoSubData
     }
 
     return generalSections
@@ -266,6 +288,285 @@ export class GeneralSectionsService {
     }
 
     return dadosGeraisArrays
+  }
+
+  getDemaisTiposDeProducaoTecnica(
+    demaisTiposDeProducaoTecnica: any
+  ): DemaisTiposDeProducaoTecnicaArrays {
+    const demaisTiposDeProducaoTecnicaArrays: DemaisTiposDeProducaoTecnicaArrays =
+      {
+        cartasMapasOuSimilares: [],
+        manutencoesDeObrasArtisticas: [],
+        maquetes: [],
+        relatoriosDePesquisas: []
+      }
+
+    if (!demaisTiposDeProducaoTecnica) return demaisTiposDeProducaoTecnicaArrays
+
+    const cartasMapasOuSimilaresArray =
+      demaisTiposDeProducaoTecnica['CARTA-MAPA-OU-SIMILAR_asArray']
+    const manutencoesDeObrasArtisticasArray =
+      demaisTiposDeProducaoTecnica['MANUTENCAO-DE-OBRA-ARTISTICA_asArray']
+    const maquetesArray = demaisTiposDeProducaoTecnica.MAQUETE_asArray
+    const relatoriosDePesquisasArray =
+      demaisTiposDeProducaoTecnica['RELATORIO-DE-PESQUISA_asArray']
+
+    if (cartasMapasOuSimilaresArray && cartasMapasOuSimilaresArray.length > 0) {
+      demaisTiposDeProducaoTecnicaArrays.cartasMapasOuSimilares =
+        cartasMapasOuSimilaresArray.map((cartaMapaOuSimilar: any) => {
+          return {
+            ano: cartaMapaOuSimilar['DADOS-BASICOS-DE-CARTA-MAPA-OU-SIMILAR']
+              ._ANO
+          }
+        })
+    }
+
+    if (
+      manutencoesDeObrasArtisticasArray &&
+      manutencoesDeObrasArtisticasArray.length > 0
+    ) {
+      demaisTiposDeProducaoTecnicaArrays.manutencoesDeObrasArtisticas =
+        manutencoesDeObrasArtisticasArray.map(
+          (manutencaoDeObraArtistica: any) => {
+            return {
+              ano: manutencaoDeObraArtistica[
+                'DADOS-BASICOS-DE-MANUTENCAO-DE-OBRA-ARTISTICA'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    if (maquetesArray && maquetesArray.length > 0) {
+      demaisTiposDeProducaoTecnicaArrays.maquetes = maquetesArray.map(
+        (maquete: any) => {
+          return {
+            ano: maquete['DADOS-BASICOS-DA-MAQUETE']._ANO
+          }
+        }
+      )
+    }
+
+    if (relatoriosDePesquisasArray && relatoriosDePesquisasArray.length > 0) {
+      demaisTiposDeProducaoTecnicaArrays.relatoriosDePesquisas =
+        relatoriosDePesquisasArray.map((relatorioDePesquisa: any) => {
+          return {
+            ano: relatorioDePesquisa['DADOS-BASICOS-DO-RELATORIO-DE-PESQUISA']
+              ._ANO
+          }
+        })
+    }
+
+    return demaisTiposDeProducaoTecnicaArrays
+  }
+
+  getFormacaoComplementar(
+    formacoesComplementares: any
+  ): FormacoesComplementaresArrays {
+    const formacoesComplementaresArrays: FormacoesComplementaresArrays = {
+      formacoesComplementaresDeExtensaoUniversitaria: [],
+      mbas: [],
+      formacoesComplementaresCursosDeCurtaDuracao: [],
+      outros: []
+    }
+
+    if (!formacoesComplementares) return formacoesComplementaresArrays
+
+    const formacoesComplementaresDeExtensaoUniversitariaArray =
+      formacoesComplementares[
+        'FORMACAO-COMPLEMENTAR-DE-EXTENSAO-UNIVERSITARIA_asArray'
+      ]
+    const mbasArray = formacoesComplementares.MBA_asArray
+    const formacoesComplementaresCursosDeCurtaDuracaoArray =
+      formacoesComplementares[
+        'FORMACAO-COMPLEMENTAR-CURSO-DE-CURTA-DURACAO_asArray'
+      ]
+    const outrosArray = formacoesComplementares.OUTROS_asArray
+
+    if (
+      formacoesComplementaresDeExtensaoUniversitariaArray &&
+      formacoesComplementaresDeExtensaoUniversitariaArray.length > 0
+    ) {
+      formacoesComplementaresArrays.formacoesComplementaresDeExtensaoUniversitaria =
+        formacoesComplementaresDeExtensaoUniversitariaArray.map(
+          (formacaoComplementarDeExtensaoUniversitaria: any) => {
+            return {
+              ano: formacaoComplementarDeExtensaoUniversitaria[
+                '_ANO-DE-CONCLUSAO'
+              ]
+            }
+          }
+        )
+    }
+
+    if (mbasArray && mbasArray.length > 0) {
+      formacoesComplementaresArrays.mbas = mbasArray.map((mba: any) => {
+        return {
+          ano: mba['_ANO-DE-CONCLUSAO']
+        }
+      })
+    }
+
+    if (
+      formacoesComplementaresCursosDeCurtaDuracaoArray &&
+      formacoesComplementaresCursosDeCurtaDuracaoArray.length > 0
+    ) {
+      formacoesComplementaresArrays.formacoesComplementaresCursosDeCurtaDuracao =
+        formacoesComplementaresCursosDeCurtaDuracaoArray.map(
+          (formacaoComplementarCursosDeCurtaDuracao: any) => {
+            return {
+              ano: formacaoComplementarCursosDeCurtaDuracao['_ANO-DE-CONCLUSAO']
+            }
+          }
+        )
+    }
+
+    if (outrosArray && outrosArray.length > 0) {
+      formacoesComplementaresArrays.outros = outrosArray.map((outro: any) => {
+        return {
+          ano: outro['_ANO-DE-CONCLUSAO']
+        }
+      })
+    }
+
+    return formacoesComplementaresArrays
+  }
+
+  getParticipacoesEmBancaTrabalhosConclusao(
+    data: any
+  ): ParticipacoesEmBancaTrabalhosConclusaoArrays {
+    const participacoesEmBancaTrabalhosConclusaoArrays: ParticipacoesEmBancaTrabalhosConclusaoArrays =
+      {
+        participacoesEmBancasDeMestrado: [],
+        participacoesEmBancasDeDoutorado: [],
+        participacoesEmBancasDeExameQualificacao: [],
+        participacoesEmBancasDeAperfeicoamentoEspecializacao: [],
+        participacoesEmBancasDeGraduacao: [],
+        outrasParticipacoesEmBancas: []
+      }
+
+    if (!data) {
+      return participacoesEmBancaTrabalhosConclusaoArrays
+    }
+
+    const participacoesEmBancasDeMestradoArray =
+      data['PARTICIPACAO-EM-BANCA-DE-MESTRADO_asArray']
+    const participacoesEmBancasDeDoutoradoArray =
+      data['PARTICIPACAO-EM-BANCA-DE-DOUTORADO_asArray']
+    const participacoesEmBancasDeExameQualificacaoArray =
+      data['PARTICIPACAO-EM-BANCA-DE-EXAME-QUALIFICACAO_asArray']
+    const participacoesEmBancasDeAperfeicoamentoEspecializacaoArray =
+      data['PARTICIPACAO-EM-BANCA-DE-APERFEICOAMENTO-ESPECIALIZACAO_asArray']
+    const participacoesEmBancasDeGraduacaoArray =
+      data['PARTICIPACAO-EM-BANCA-DE-GRADUACAO_asArray']
+    const outrasParticipacoesEmBancasArray =
+      data['OUTRAS-PARTICIPACOES-EM-BANCA_asArray']
+
+    if (
+      participacoesEmBancasDeMestradoArray &&
+      participacoesEmBancasDeMestradoArray.length > 0
+    ) {
+      participacoesEmBancaTrabalhosConclusaoArrays.participacoesEmBancasDeMestrado =
+        participacoesEmBancasDeMestradoArray.map(
+          (participacaoEmBancasDeMestrado: any) => {
+            return {
+              ano: participacaoEmBancasDeMestrado[
+                'DADOS-BASICOS-DA-PARTICIPACAO-EM-BANCA-DE-MESTRADO'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    if (
+      participacoesEmBancasDeDoutoradoArray &&
+      participacoesEmBancasDeDoutoradoArray.length > 0
+    ) {
+      participacoesEmBancaTrabalhosConclusaoArrays.participacoesEmBancasDeDoutorado =
+        participacoesEmBancasDeDoutoradoArray.map(
+          (participacaoEmBancasDeDoutorado: any) => {
+            return {
+              ano: participacaoEmBancasDeDoutorado[
+                'DADOS-BASICOS-DA-PARTICIPACAO-EM-BANCA-DE-DOUTORADO'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    if (
+      participacoesEmBancasDeExameQualificacaoArray &&
+      participacoesEmBancasDeExameQualificacaoArray.length > 0
+    ) {
+      participacoesEmBancaTrabalhosConclusaoArrays.participacoesEmBancasDeExameQualificacao =
+        participacoesEmBancasDeExameQualificacaoArray.map(
+          (participacaoEmBancasDeExameQualificacao: any) => {
+            return {
+              ano: participacaoEmBancasDeExameQualificacao[
+                'DADOS-BASICOS-DA-PARTICIPACAO-EM-BANCA-DE-EXAME-QUALIFICACAO'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    if (
+      participacoesEmBancasDeAperfeicoamentoEspecializacaoArray &&
+      participacoesEmBancasDeAperfeicoamentoEspecializacaoArray.length > 0
+    ) {
+      participacoesEmBancaTrabalhosConclusaoArrays.participacoesEmBancasDeAperfeicoamentoEspecializacao =
+        participacoesEmBancasDeAperfeicoamentoEspecializacaoArray.map(
+          (participacaoEmBancasDeAperfeicoamentoEspecializacao: any) => {
+            return {
+              ano: participacaoEmBancasDeAperfeicoamentoEspecializacao[
+                'DADOS-BASICOS-DA-PARTICIPACAO-EM-BANCA-DE-APERFEICOAMENTO-ESPECIALIZACAO'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    if (
+      participacoesEmBancasDeGraduacaoArray &&
+      participacoesEmBancasDeGraduacaoArray.length > 0
+    ) {
+      participacoesEmBancaTrabalhosConclusaoArrays.participacoesEmBancasDeGraduacao =
+        participacoesEmBancasDeGraduacaoArray.map(
+          (participacaoEmBancasDeGraduacao: any) => {
+            return {
+              ano: participacaoEmBancasDeGraduacao[
+                'DADOS-BASICOS-DA-PARTICIPACAO-EM-BANCA-DE-GRADUACAO'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    if (
+      outrasParticipacoesEmBancasArray &&
+      outrasParticipacoesEmBancasArray.length > 0
+    ) {
+      participacoesEmBancaTrabalhosConclusaoArrays.outrasParticipacoesEmBancas =
+        outrasParticipacoesEmBancasArray.map(
+          (outrasParticipacoesEmBancas: any) => {
+            return {
+              ano: outrasParticipacoesEmBancas[
+                'DADOS-BASICOS-DE-OUTRAS-PARTICIPACOES-EM-BANCA'
+              ]._ANO
+            }
+          }
+        )
+    }
+
+    return participacoesEmBancaTrabalhosConclusaoArrays
+
+    // PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO': {
+    //   'PARTICIPACAO-EM-BANCA-DE-MESTRADO_asArray': any[]
+    //   'PARTICIPACAO-EM-BANCA-DE-DOUTORADO_asArray': any[]
+    //   'PARTICIPACAO-EM-BANCA-DE-EXAME-QUALIFICACAO_asArray': any[]
+    //   'PARTICIPACAO-EM-BANCA-DE-APERFEICOAMENTO-ESPECIALIZACAO_asArray': any[]
+    //   'PARTICIPACAO-EM-BANCA-DE-GRADUACAO_asArray': any[]
+    //   'OUTRAS-PARTICIPACOES-EM-BANCA_asArray': any[]
   }
 
   /**

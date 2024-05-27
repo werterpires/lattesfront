@@ -366,7 +366,7 @@ export class AddCurriculumsComponent {
     const generalSections =
       this.generalSectionsService.makeGeneralSections(value)
 
-    console.log('generalSections', generalSections)
+    // console.log('generalSections', generalSections)
 
     const lattesObj = {
       nome,

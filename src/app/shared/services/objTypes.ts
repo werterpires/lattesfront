@@ -35,9 +35,35 @@ export interface DemaisTiposDeProducaoBibliograficaArrays {
   prefaciosPosfacios: generalSection[]
 }
 
-export interface generalSections
+export interface FormacoesComplementaresArrays {
+  formacoesComplementaresDeExtensaoUniversitaria: generalSection[]
+  mbas: generalSection[]
+  formacoesComplementaresCursosDeCurtaDuracao: generalSection[]
+  outros: generalSection[]
+}
+
+export interface DemaisTiposDeProducaoTecnicaArrays {
+  cartasMapasOuSimilares: generalSection[]
+  manutencoesDeObrasArtisticas: generalSection[]
+  maquetes: generalSection[]
+  relatoriosDePesquisas: generalSection[]
+}
+
+export interface ParticipacoesEmBancaTrabalhosConclusaoArrays {
+  participacoesEmBancasDeMestrado: generalSection[]
+  participacoesEmBancasDeDoutorado: generalSection[]
+  participacoesEmBancasDeExameQualificacao: generalSection[]
+  participacoesEmBancasDeAperfeicoamentoEspecializacao: generalSection[]
+  participacoesEmBancasDeGraduacao: generalSection[]
+  outrasParticipacoesEmBancas: generalSection[]
+}
+
+export interface GeneralSections
   extends DadosGeraisArrays,
-    DemaisTiposDeProducaoBibliograficaArrays {}
+    DemaisTiposDeProducaoBibliograficaArrays,
+    DemaisTiposDeProducaoTecnicaArrays,
+    FormacoesComplementaresArrays,
+    ParticipacoesEmBancaTrabalhosConclusaoArrays {}
 
 export interface TrabalhoEmEventos extends dadosBasicosSecoes {
   autores?: Autor[]
