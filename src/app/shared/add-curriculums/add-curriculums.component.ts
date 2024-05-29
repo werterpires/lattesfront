@@ -89,6 +89,8 @@ export class AddCurriculumsComponent {
     curriculums: []
   }
 
+  filesNames: string[] = []
+
   addCurriculum(): void {
     this.loader.showLoader()
     this.addCurriculumService.addCurriculum(this.curriculumsData).subscribe({
@@ -122,13 +124,23 @@ export class AddCurriculumsComponent {
   }
 
   parseXml(xmlString: string): any {
-    const parser = new X2JS({
-      arrayAccessForm: 'property',
-      skipEmptyTextNodesForObj: false
-    })
-    const jsonObj = parser.xml2js(xmlString)
+    try {
+      const parser = new X2JS({
+        arrayAccessForm: 'property',
+        skipEmptyTextNodesForObj: false
+      })
+      if (!xmlString.startsWith('<')) {
+        return
+      }
+      const jsonObj = parser.xml2js(xmlString)
 
-    return jsonObj
+      return jsonObj
+    } catch (error) {
+      console.error('error', error)
+      this.alertService.showAlerts('error', 'Erro ao adicionar currículo', [
+        'Ocorreu um erro ao tentar cadastrar o currículo.'
+      ])
+    }
   }
 
   convertArrayBufferToString(buffer: ArrayBuffer): string {
@@ -179,194 +191,192 @@ export class AddCurriculumsComponent {
     const demaisTiposProducaoTecnica =
       producaoTecnica['DEMAIS-TIPOS-DE-PRODUCAO-TECNICA']
 
-    const trabalhosEmEventos: TrabalhoEmEventos[] = []
-    const outrasParticipacoesEmEventosCongressos: Participacao[] = []
-    const participacoesEmEncontros: Participacao[] = []
-    const participacoesEmSimposios: Participacao[] = []
-    const participacoesEmSeminarios: Participacao[] = []
-    const participacoesEmCongressos: Participacao[] = []
-    const outrasProducoesTecnicas: OutraProducaoTecnica[] = []
-    const midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[] = []
-    const programasDeRadioOuTV: ProgramaDeRadioOuTV[] = []
-    const organizacoesDeEventos: OrganizacaoDeEvento[] = []
-    const editoracoes: Editoracao[] = []
-    const desenvolvimentosDeMaterialDidáticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[] =
+    let trabalhosEmEventos: TrabalhoEmEventos[] = []
+    let outrasParticipacoesEmEventosCongressos: Participacao[] = []
+    let participacoesEmEncontros: Participacao[] = []
+    let participacoesEmSimposios: Participacao[] = []
+    let participacoesEmSeminarios: Participacao[] = []
+    let participacoesEmCongressos: Participacao[] = []
+    let outrasProducoesTecnicas: OutraProducaoTecnica[] = []
+    let midiasSociaisWebsitesBlogs: MidiaSocialWebsiteBlog[] = []
+    let programasDeRadioOuTV: ProgramaDeRadioOuTV[] = []
+    let organizacoesDeEventos: OrganizacaoDeEvento[] = []
+    let editoracoes: Editoracao[] = []
+    let desenvolvimentosDeMaterialDidáticoOuInstrucional: DesenvolvimentoDeMaterialDidaticoOuInstrucional[] =
       []
-    const cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[] = []
-    const apresentacoesDeTrabalho: ApresentacaoDeTrabalho[] = []
-    const outrasProducoesBibliograficas: OutraProducaoBibliografica[] = []
-    const textosEmRevistasOuJornais: TextoEmJornalOuRevista[] = []
-    const capitulosDeLivrosPublicados: CapituloDeLivroPublicado[] = []
-    const livrosPublicadosOuOrganizados: LivroPublicadoOuOrganizado[] = []
-    const artigosPublicados: Artigo[] = []
-    const artigosAceitosParaPublicacao: Artigo[] = []
+    let cursosDeCurtaDuracaoMinistrados: CursoDeCurtaDuracaoMinistrado[] = []
+    let apresentacoesDeTrabalho: ApresentacaoDeTrabalho[] = []
+    let outrasProducoesBibliograficas: OutraProducaoBibliografica[] = []
+    let textosEmRevistasOuJornais: TextoEmJornalOuRevista[] = []
+    let capitulosDeLivrosPublicados: CapituloDeLivroPublicado[] = []
+    let livrosPublicadosOuOrganizados: LivroPublicadoOuOrganizado[] = []
+    let artigosPublicados: Artigo[] = []
+    let artigosAceitosParaPublicacao: Artigo[] = []
 
-    // if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
-    //   trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
-    //     producaoBibliografica['TRABALHOS-EM-EVENTOS'][
-    //       'TRABALHO-EM-EVENTOS_asArray'
-    //     ]
-    //   )
-    // }
+    if (producaoBibliografica?.['TRABALHOS-EM-EVENTOS']) {
+      trabalhosEmEventos = this.eventsWorksService.makeTrabalhoEmEvento(
+        producaoBibliografica['TRABALHOS-EM-EVENTOS'][
+          'TRABALHO-EM-EVENTOS_asArray'
+        ]
+      )
+    }
 
-    // if (
-    //   participacaoEmEventosCongressos?.[
-    //     'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray'
-    //   ]
-    // ) {
-    //   outrasParticipacoesEmEventosCongressos =
-    //     this.otherParticipationsInEventsConferencesService.makeOutrasParticipacoesEmEventosCongressos(
-    //       participacaoEmEventosCongressos[
-    //         'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray'
-    //       ]
-    //     )
-    // }
+    if (
+      participacaoEmEventosCongressos?.[
+        'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray'
+      ]
+    ) {
+      outrasParticipacoesEmEventosCongressos =
+        this.otherParticipationsInEventsConferencesService.makeOutrasParticipacoesEmEventosCongressos(
+          participacaoEmEventosCongressos[
+            'OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS_asArray'
+          ]
+        )
+    }
 
-    // if (participacaoEmEventosCongressos?.['PARTICIPACAO-EM-ENCONTRO_asArray']) {
-    //   participacoesEmEncontros =
-    //     this.participationInMeetingService.makeParticipacoesEmEncontros(
-    //       participacaoEmEventosCongressos['PARTICIPACAO-EM-ENCONTRO_asArray']
-    //     )
-    // }
+    if (participacaoEmEventosCongressos?.['PARTICIPACAO-EM-ENCONTRO_asArray']) {
+      participacoesEmEncontros =
+        this.participationInMeetingService.makeParticipacoesEmEncontros(
+          participacaoEmEventosCongressos['PARTICIPACAO-EM-ENCONTRO_asArray']
+        )
+    }
 
-    // if (participacaoEmEventosCongressos?.['PARTICIPACAO-EM-SIMPOSIO_asArray']) {
-    //   participacoesEmSimposios =
-    //     this.participationInSimposiumService.makeParticipacoesEmSimposios(
-    //       participacaoEmEventosCongressos['PARTICIPACAO-EM-SIMPOSIO_asArray']
-    //     )
-    // }
+    if (participacaoEmEventosCongressos?.['PARTICIPACAO-EM-SIMPOSIO_asArray']) {
+      participacoesEmSimposios =
+        this.participationInSimposiumService.makeParticipacoesEmSimposios(
+          participacaoEmEventosCongressos['PARTICIPACAO-EM-SIMPOSIO_asArray']
+        )
+    }
 
-    // if (
-    //   participacaoEmEventosCongressos?.['PARTICIPACAO-EM-SEMINARIO_asArray']
-    // ) {
-    //   participacoesEmSeminarios =
-    //     this.participationInSeminaryService.makeParticipacoesEmSeminarios(
-    //       participacaoEmEventosCongressos['PARTICIPACAO-EM-SEMINARIO_asArray']
-    //     )
-    // }
+    if (
+      participacaoEmEventosCongressos?.['PARTICIPACAO-EM-SEMINARIO_asArray']
+    ) {
+      participacoesEmSeminarios =
+        this.participationInSeminaryService.makeParticipacoesEmSeminarios(
+          participacaoEmEventosCongressos['PARTICIPACAO-EM-SEMINARIO_asArray']
+        )
+    }
 
-    // if (
-    //   participacaoEmEventosCongressos?.['PARTICIPACAO-EM-CONGRESSO_asArray']
-    // ) {
-    //   participacoesEmCongressos =
-    //     this.participationInCongressService.makeParticipacoesEmCongressos(
-    //       participacaoEmEventosCongressos['PARTICIPACAO-EM-CONGRESSO_asArray']
-    //     )
-    // }
+    if (
+      participacaoEmEventosCongressos?.['PARTICIPACAO-EM-CONGRESSO_asArray']
+    ) {
+      participacoesEmCongressos =
+        this.participationInCongressService.makeParticipacoesEmCongressos(
+          participacaoEmEventosCongressos['PARTICIPACAO-EM-CONGRESSO_asArray']
+        )
+    }
 
-    // if (demaisTiposProducaoTecnica?.['OUTRA-PRODUCAO-TECNICA_asArray']) {
-    //   outrasProducoesTecnicas =
-    //     this.otherTechnicalProductionService.makeOutraProducaoTecnica(
-    //       demaisTiposProducaoTecnica['OUTRA-PRODUCAO-TECNICA_asArray']
-    //     )
-    // }
+    if (demaisTiposProducaoTecnica?.['OUTRA-PRODUCAO-TECNICA_asArray']) {
+      outrasProducoesTecnicas =
+        this.otherTechnicalProductionService.makeOutraProducaoTecnica(
+          demaisTiposProducaoTecnica['OUTRA-PRODUCAO-TECNICA_asArray']
+        )
+    }
 
-    // if (demaisTiposProducaoTecnica?.['MIDIA-SOCIAL-WEBSITE-BLOG_asArray']) {
-    //   midiasSociaisWebsitesBlogs =
-    //     this.socialMediaWebsiteBlogService.makeMidiaSocialWebsiteBlog(
-    //       demaisTiposProducaoTecnica['MIDIA-SOCIAL-WEBSITE-BLOG_asArray']
-    //     )
-    // }
+    if (demaisTiposProducaoTecnica?.['MIDIA-SOCIAL-WEBSITE-BLOG_asArray']) {
+      midiasSociaisWebsitesBlogs =
+        this.socialMediaWebsiteBlogService.makeMidiaSocialWebsiteBlog(
+          demaisTiposProducaoTecnica['MIDIA-SOCIAL-WEBSITE-BLOG_asArray']
+        )
+    }
 
-    // if (demaisTiposProducaoTecnica?.['PROGRAMA-DE-RADIO-OU-TV_asArray']) {
-    //   programasDeRadioOuTV =
-    //     this.radioOrTvProgramService.makeProgramaDeRadioOuTV(
-    //       demaisTiposProducaoTecnica['PROGRAMA-DE-RADIO-OU-TV_asArray']
-    //     )
-    // }
+    if (demaisTiposProducaoTecnica?.['PROGRAMA-DE-RADIO-OU-TV_asArray']) {
+      programasDeRadioOuTV =
+        this.radioOrTvProgramService.makeProgramaDeRadioOuTV(
+          demaisTiposProducaoTecnica['PROGRAMA-DE-RADIO-OU-TV_asArray']
+        )
+    }
 
-    // if (demaisTiposProducaoTecnica?.['ORGANIZACAO-DE-EVENTO_asArray']) {
-    //   organizacoesDeEventos =
-    //     this.eventOrganizationService.makeOrganizacoesDeEventos(
-    //       demaisTiposProducaoTecnica['ORGANIZACAO-DE-EVENTO_asArray']
-    //     )
-    // }
+    if (demaisTiposProducaoTecnica?.['ORGANIZACAO-DE-EVENTO_asArray']) {
+      organizacoesDeEventos =
+        this.eventOrganizationService.makeOrganizacoesDeEventos(
+          demaisTiposProducaoTecnica['ORGANIZACAO-DE-EVENTO_asArray']
+        )
+    }
 
-    // if (
-    //   demaisTiposProducaoTecnica?.[
-    //     'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray'
-    //   ]
-    // ) {
-    //   desenvolvimentosDeMaterialDidáticoOuInstrucional =
-    //     this.developmentOfEducationalOrInstructionalMaterialService.makeDesenvolvimentosDeMateriais(
-    //       demaisTiposProducaoTecnica[
-    //         'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray'
-    //       ]
-    //     )
-    // }
+    if (
+      demaisTiposProducaoTecnica?.[
+        'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray'
+      ]
+    ) {
+      desenvolvimentosDeMaterialDidáticoOuInstrucional =
+        this.developmentOfEducationalOrInstructionalMaterialService.makeDesenvolvimentosDeMateriais(
+          demaisTiposProducaoTecnica[
+            'DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL_asArray'
+          ]
+        )
+    }
 
-    // if (demaisTiposProducaoTecnica?.EDITORACAO_asArray) {
-    //   editoracoes = this.editorialWorkService.makeEditoracao(
-    //     demaisTiposProducaoTecnica.EDITORACAO_asArray
-    //   )
-    // }
+    if (demaisTiposProducaoTecnica?.EDITORACAO_asArray) {
+      editoracoes = this.editorialWorkService.makeEditoracao(
+        demaisTiposProducaoTecnica.EDITORACAO_asArray
+      )
+    }
 
-    // if (
-    //   demaisTiposProducaoTecnica?.['CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray']
-    // ) {
-    //   cursosDeCurtaDuracaoMinistrados =
-    //     this.shortTermCourseDeliveredService.makeCursosCurtosMinistrados(
-    //       demaisTiposProducaoTecnica[
-    //         'CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray'
-    //       ]
-    //     )
-    // }
+    if (
+      demaisTiposProducaoTecnica?.['CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray']
+    ) {
+      cursosDeCurtaDuracaoMinistrados =
+        this.shortTermCourseDeliveredService.makeCursosCurtosMinistrados(
+          demaisTiposProducaoTecnica[
+            'CURSO-DE-CURTA-DURACAO-MINISTRADO_asArray'
+          ]
+        )
+    }
 
-    // if (demaisTiposProducaoTecnica?.['APRESENTACAO-DE-TRABALHO_asArray']) {
-    //   apresentacoesDeTrabalho =
-    //     this.presentationOfWorkService.makeApresentacoesDeTrabalho(
-    //       demaisTiposProducaoTecnica['APRESENTACAO-DE-TRABALHO_asArray']
-    //     )
-    // }
+    if (demaisTiposProducaoTecnica?.['APRESENTACAO-DE-TRABALHO_asArray']) {
+      apresentacoesDeTrabalho =
+        this.presentationOfWorkService.makeApresentacoesDeTrabalho(
+          demaisTiposProducaoTecnica['APRESENTACAO-DE-TRABALHO_asArray']
+        )
+    }
 
-    // if (
-    //   demaistiposDeProducaoBibliografica?.[
-    //     'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray'
-    //   ]
-    // ) {
-    //   outrasProducoesBibliograficas =
-    //     this.otherBibliographicWorkService.makeApresentacoesDeTrabalho(
-    //       demaistiposDeProducaoBibliografica[
-    //         'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray'
-    //       ]
-    //     )
-    // }
-    // if (textosEmJER?.['TEXTO-EM-JORNAL-OU-REVISTA_asArray']) {
-    //   textosEmRevistasOuJornais =
-    //     this.textInNewspaperOrMagazineService.makeTextosEmJornaisOuRevistas(
-    //       textosEmJER['TEXTO-EM-JORNAL-OU-REVISTA_asArray']
-    //     )
-    // }
+    if (
+      demaistiposDeProducaoBibliografica?.[
+        'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray'
+      ]
+    ) {
+      outrasProducoesBibliograficas =
+        this.otherBibliographicWorkService.makeApresentacoesDeTrabalho(
+          demaistiposDeProducaoBibliografica[
+            'OUTRA-PRODUCAO-BIBLIOGRAFICA_asArray'
+          ]
+        )
+    }
+    if (textosEmJER?.['TEXTO-EM-JORNAL-OU-REVISTA_asArray']) {
+      textosEmRevistasOuJornais =
+        this.textInNewspaperOrMagazineService.makeTextosEmJornaisOuRevistas(
+          textosEmJER['TEXTO-EM-JORNAL-OU-REVISTA_asArray']
+        )
+    }
 
-    // if (capitulosDeLivros?.['CAPITULO-DE-LIVRO-PUBLICADO_asArray']) {
-    //   capitulosDeLivrosPublicados =
-    //     this.publishedBookChapterService.makeApresentacoesDeTrabalho(
-    //       capitulosDeLivros['CAPITULO-DE-LIVRO-PUBLICADO_asArray']
-    //     )
-    // }
+    if (capitulosDeLivros?.['CAPITULO-DE-LIVRO-PUBLICADO_asArray']) {
+      capitulosDeLivrosPublicados =
+        this.publishedBookChapterService.makeApresentacoesDeTrabalho(
+          capitulosDeLivros['CAPITULO-DE-LIVRO-PUBLICADO_asArray']
+        )
+    }
 
-    // if (livros?.['LIVRO-PUBLICADO-OU-ORGANIZADO_asArray']) {
-    //   livrosPublicadosOuOrganizados = this.pubblishedBookService.makeLivros(
-    //     livros['LIVRO-PUBLICADO-OU-ORGANIZADO_asArray']
-    //   )
-    // }
+    if (livros?.['LIVRO-PUBLICADO-OU-ORGANIZADO_asArray']) {
+      livrosPublicadosOuOrganizados = this.pubblishedBookService.makeLivros(
+        livros['LIVRO-PUBLICADO-OU-ORGANIZADO_asArray']
+      )
+    }
 
-    // if (artigos.aceitos?.['ARTIGO-ACEITO-PARA-PUBLICACAO_asArray']) {
-    //   artigosAceitosParaPublicacao = this.articleService.makeArtigos(
-    //     artigos.aceitos['ARTIGO-ACEITO-PARA-PUBLICACAO_asArray']
-    //   )
-    // }
+    if (artigos.aceitos?.['ARTIGO-ACEITO-PARA-PUBLICACAO_asArray']) {
+      artigosAceitosParaPublicacao = this.articleService.makeArtigos(
+        artigos.aceitos['ARTIGO-ACEITO-PARA-PUBLICACAO_asArray']
+      )
+    }
 
-    // if (artigos.publicados?.['ARTIGO-PUBLICADO_asArray']) {
-    //   artigosPublicados = this.articleService.makeArtigos(
-    //     artigos.publicados['ARTIGO-PUBLICADO_asArray']
-    //   )
-    // }
+    if (artigos.publicados?.['ARTIGO-PUBLICADO_asArray']) {
+      artigosPublicados = this.articleService.makeArtigos(
+        artigos.publicados['ARTIGO-PUBLICADO_asArray']
+      )
+    }
 
     const generalSections =
       this.generalSectionsService.makeGeneralSections(value)
-
-    // console.log('generalSections', generalSections)
 
     const lattesObj = {
       nome,
@@ -389,7 +399,8 @@ export class AddCurriculumsComponent {
       capitulosDeLivrosPublicados,
       livrosPublicadosOuOrganizados,
       artigosAceitosParaPublicacao,
-      artigosPublicados
+      artigosPublicados,
+      generalSections
     }
 
     const createCurriculumDto = {
@@ -409,12 +420,13 @@ export class AddCurriculumsComponent {
     )
   }
 
-  readFile(file: File): void {
+  readFile(file: File, fileName: string): void {
     const reader = new FileReader()
     reader.onloadend = () => {
       const arrayBuffer = reader.result as ArrayBuffer
+      console.log('arrayBuffer', arrayBuffer)
       const xmlString = this.convertArrayBufferToString(arrayBuffer)
-
+      console.log('chamando parseXml com ', xmlString)
       const result = this.parseXml(xmlString)
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -427,6 +439,7 @@ export class AddCurriculumsComponent {
 
       if (createCurriculumDto) {
         this.curriculumsData.curriculums.push(createCurriculumDto)
+        this.filesNames.push(fileName)
       }
     }
     reader.readAsArrayBuffer(file) // Leia o arquivo como ArrayBuffer
@@ -436,7 +449,10 @@ export class AddCurriculumsComponent {
     const files: FileList = event.target.files
     if (files && files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-        this.readFile(files[i])
+        // verificar se o arquivo e xml
+        if (files[i].name.split('.')[1] === 'xml') {
+          this.readFile(files[i], files[i].name)
+        }
       }
     }
   }

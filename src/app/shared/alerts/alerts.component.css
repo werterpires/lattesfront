@@ -34,3 +34,8 @@
 #alertsButtons button:active {
   background-color: var(--orange);
 }
+
+#alert {
+  position: relative;
+  z-index: 100;
+}

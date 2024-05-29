@@ -10,7 +10,6 @@
     </div>
 
     <div id="content">
-      <!-- com o ngStyle, o input deve controlar se ele tem o before ou o after. se o lenght de currículos for igual a zero, ele deve ter o before -->
       <label for="">
         Arquivos<input
           id="addFileInput"
@@ -20,12 +19,19 @@
           [ngStyle]="{ '::before': curriculumsData.curriculums.length === 0 }"
       /></label>
 
-      <p id="addFileText" *ngIf="curriculumsData.curriculums.length > 0">
-        {{ curriculumsData.curriculums.length }} arquivos selecionado<span
-          *ngIf="curriculumsData.curriculums.length > 1"
-          >s</span
-        >.
-      </p>
+      <ng-container *ngIf="curriculumsData.curriculums.length > 0">
+        <p id="addFileText">
+          {{ curriculumsData.curriculums.length }} arquivos selecionado<span
+            *ngIf="curriculumsData.curriculums.length > 1"
+            >s</span
+          >.
+        </p>
+        <div id="filesNames">
+          <span *ngFor="let file of filesNames" class="fileName">
+            {{ file }}
+          </span>
+        </div>
+      </ng-container>
 
       <div id="buttonLine">
         <div></div>

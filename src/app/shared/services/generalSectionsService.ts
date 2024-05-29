@@ -57,9 +57,6 @@ export class GeneralSectionsService {
       data['OUTRA-PRODUCAO']['ORIENTACOES-CONCLUIDAS']
     )
 
-    // console.log('data s', data['OUTRA-PRODUCAO']['ORIENTACOES-CONCLUIDAS'])
-    // console.log('orientacoesConcluidasSubData', orientacoesConcluidasSubData)
-
     const generalSections: GeneralSections = {
       ...dadosGeraisSubData,
       ...demaisTiposDeProducaoBibliograficaSubData,
@@ -800,7 +797,6 @@ export class GeneralSectionsService {
     }
 
     if (!data) return orientacoesConcluidasArrays
-    console.log('data', data)
 
     const orientacoesConcluidasDeMestrado =
       data['ORIENTACOES-CONCLUIDAS-PARA-MESTRADO_asArray']
@@ -862,7 +858,6 @@ export class GeneralSectionsService {
           }
         })
     }
-    console.log('orientacoesConcluidasArrays', orientacoesConcluidasArrays)
 
     return orientacoesConcluidasArrays
   }
