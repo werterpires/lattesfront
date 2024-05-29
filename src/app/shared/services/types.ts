@@ -60,3 +60,8 @@ export interface ILattesCurriculum {
   livrosPublicadosOuOrganizados: LivroPublicadoOuOrganizado[]
   artigosPublicados: Artigo[]
 }
+
+export interface ITag {
+  _id: string
+  tagName: string
+}

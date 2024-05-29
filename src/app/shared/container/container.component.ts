@@ -4,6 +4,7 @@ import { AddCurriculumsComponent } from '../add-curriculums/add-curriculums.comp
 import { NgClass, NgIf } from '@angular/common'
 import { Router } from '@angular/router'
 import { IUserFromJwt } from './types'
+import { TagsService } from '../services/tags.service'
 
 @Component({
   selector: 'app-container',
@@ -19,12 +20,14 @@ export class ContainerComponent {
 
   constructor(
     private readonly curriculumService: CurriculumnsService,
+    private readonly tagsService: TagsService,
     public router: Router
   ) {}
 
   ngOnInit(): void {
     if (this.curriculumService.curriculumnsObject.value.length === 0) {
       this.curriculumService.getAllCurriculumns().subscribe()
+      this.tagsService.getAllTags().subscribe()
     }
 
     if (typeof localStorage === 'undefined') {
@@ -42,11 +45,11 @@ export class ContainerComponent {
     }
   }
 
-  redirect(route: string) {
+  redirect(route: string): void {
     this.router.navigate([route])
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('accessToken')
     this.router.navigate(['login'])
   }
