@@ -424,9 +424,9 @@ export class AddCurriculumsComponent {
     const reader = new FileReader()
     reader.onloadend = () => {
       const arrayBuffer = reader.result as ArrayBuffer
-      console.log('arrayBuffer', arrayBuffer)
+
       const xmlString = this.convertArrayBufferToString(arrayBuffer)
-      console.log('chamando parseXml com ', xmlString)
+
       const result = this.parseXml(xmlString)
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

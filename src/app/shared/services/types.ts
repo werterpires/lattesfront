@@ -23,6 +23,7 @@ export interface ICurriculum {
   serviceYears: string
   curriculum: ILattesCurriculum
   updatedDate: string
+  tags: ITag[]
 }
 
 export interface ICreateCurriculums {
@@ -64,4 +65,6 @@ export interface ILattesCurriculum {
 export interface ITag {
   _id: string
   tagName: string
+  back?: string
+  color?: string
 }

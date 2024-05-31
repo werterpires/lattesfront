@@ -25,7 +25,6 @@ export class TagsService {
   ) {}
 
   getAllTags(): Observable<ITag[]> {
-    console.log('getAllTags')
     if (typeof localStorage === 'undefined') {
       console.error('LocalStorage is not defined.')
       return of([])
@@ -56,6 +55,10 @@ export class TagsService {
               return 1
             }
           })
+          tags.forEach((tag) => {
+            tag.back = this.turnAnyNameIntoHexadecimal(tag, 'back')
+            tag.color = this.turnAnyNameIntoHexadecimal(tag, 'color')
+          })
 
           this.tagsObject.next(tags)
           return tags
@@ -69,5 +72,112 @@ export class TagsService {
 
   redirectToLogin(): void {
     void this.router.navigate(['login'])
+  }
+
+  turnAnyNameIntoHexadecimal(tag: ITag, type: 'back' | 'color'): string {
+    const length = tag.tagName.length
+
+    const maxNum = length * 35
+
+    let decimalNum = 0
+
+    for (let i = 0; i < length; i++) {
+      const charCode = tag.tagName[i].toLowerCase().charCodeAt(0)
+      const charValue =
+        this.reference[this.normalizeText(String.fromCharCode(charCode))] || 0
+      decimalNum += charValue
+    }
+
+    const perCent = decimalNum / maxNum
+
+    const finalDecimalValue = Math.floor(perCent * 16777215)
+
+    let hexValue =
+      type === 'back'
+        ? finalDecimalValue.toString(16)
+        : this.findInverseColor(finalDecimalValue.toString(16))
+
+    hexValue = hexValue.padStart(6, '0')
+
+    if (hexValue.length > 6) {
+      hexValue = hexValue.substring(0, 6)
+    }
+
+    return '#' + hexValue
+  }
+
+  normalizeText(letra: string): string {
+    return letra
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ç/g, 'c')
+      .replace(/Ç/g, 'C')
+      .toLowerCase()
+  }
+
+  findInverseColor(color: string): string {
+    if (this.isLightColor(color)) {
+      return '000000'
+    } else {
+      return 'ffffff'
+    }
+  }
+
+  isLightColor(color: string): boolean {
+    // Remove o caractere '#' se estiver presente
+    const hexValue = color.startsWith('#') ? color.slice(1) : color
+
+    // Converter componentes R, G, B de hexadecimal para decimal
+    const r = parseInt(hexValue.slice(0, 2), 16)
+    const g = parseInt(hexValue.slice(2, 4), 16)
+    const b = parseInt(hexValue.slice(4, 6), 16)
+
+    // Calcular a luminosidade percebida
+    const luminance = 0.299 * r + 0.587 * g + 0.114 * b
+
+    // Definir um limiar de luminosidade
+    const threshold = 128 // Meio do intervalo 0-255
+
+    // Comparar a luminosidade com o limiar
+    return luminance > threshold
+  }
+
+  reference: Record<any, number> = {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+    a: 10,
+    b: 11,
+    c: 12,
+    d: 13,
+    e: 14,
+    f: 15,
+    g: 16,
+    h: 17,
+    i: 18,
+    j: 19,
+    k: 20,
+    l: 21,
+    m: 22,
+    n: 23,
+    o: 24,
+    p: 25,
+    q: 26,
+    r: 27,
+    s: 28,
+    t: 29,
+    u: 30,
+    v: 31,
+    w: 32,
+    x: 33,
+    y: 34,
+    z: 35
   }
 }

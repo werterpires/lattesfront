@@ -1,0 +1,70 @@
+<div class="tagsContainer">
+  <img
+    src="assets/icons/tagIcon.svg"
+    alt=""
+    [ngClass]="{ vanish: !open }"
+    class="tagIcon"
+    (click)="open = !open"
+  />
+  <div class="tagNameInputDiv" *ngIf="open">
+    <input
+      class="tagInput"
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="filterTags()"
+      placeholder="Pesquise uma tag e clique sobre ela"
+    />
+
+    <div class="options">
+      <p
+        *ngFor="let tag of filteredTags"
+        class="option"
+        (click)="selectTag(tag)"
+        [ngStyle]="{
+          '--hover-background-color': tag.back,
+          '--hover-color': tag.color
+        }"
+      >
+        {{ tag.tagName }}
+      </p>
+    </div>
+  </div>
+
+  <div class="disjunctiveInputDiv" *ngIf="open">
+    <label for="" class="disjunctiveLabel">
+      Ou
+      <input
+        type="radio"
+        id="disjunctive"
+        name="disjunctive"
+        [value]="true"
+        checked
+        (input)="emitTagFilter(true)"
+      />
+    </label>
+    <label for="" class="disjunctiveLabel">
+      E
+      <input
+        type="radio"
+        id="conjunctive"
+        name="disjunctive"
+        [value]="false"
+        (input)="emitTagFilter(false)"
+      />
+    </label>
+  </div>
+
+  <div class="selectedTags">
+    <span
+      *ngFor="let tag of selectedTags"
+      class="selectedTag"
+      [ngStyle]="{
+        'background-color': tag.back,
+        color: tag.color
+      }"
+      (click)="selectTag(tag)"
+    >
+      {{ tag.tagName }}
+    </span>
+  </div>
+</div>

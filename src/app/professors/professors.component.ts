@@ -13,6 +13,7 @@ import { Participacao, TrabalhoEmEventos } from '../shared/services/objTypes'
 import * as eventProps from '../sections/trablhos-em-eventos/props'
 import * as participationsProps from '../sections/outras-participacoes-em-Eventos-Congressos/props'
 import { Props } from '../shared/quantitative-section/tpes'
+import { TagsFilterComponent } from '../tags-filter/tags-filter.component'
 
 @Component({
   selector: 'app-professors',
@@ -25,7 +26,8 @@ import { Props } from '../shared/quantitative-section/tpes'
     AccordionComponent,
     QuantitativeProfessorsComponent,
     ProfessorDataComponent,
-    QualitativeSectionComponent
+    QualitativeSectionComponent,
+    TagsFilterComponent
   ],
   templateUrl: './professors.component.html',
   styleUrl: './professors.component.css'
@@ -52,6 +54,11 @@ export class ProfessorsComponent {
   participationsQuantiProps: Props[] = participationsProps.participationProps
   participationsQualiProps: Props[] =
     participationsProps.participationQualyProps
+
+  filterTag: { tagNames: string[]; disjunctive: boolean } = {
+    tagNames: [],
+    disjunctive: true
+  }
 
   constructor(
     private readonly curriculumnsService: CurriculumnsService,
@@ -144,7 +151,14 @@ export class ProfessorsComponent {
           filters.some((filter) =>
             curriculum.serviceYears.toLowerCase().includes(filter)
           )) &&
-        (this.onlyActives ? curriculum.active : true)
+        (this.onlyActives ? curriculum.active : true) &&
+        (this.filterTag.tagNames.length === 0 || !this.filterTag.disjunctive
+          ? this.filterTag.tagNames.every((tagName) =>
+              curriculum.tags.some((tag) => tag.tagName === tagName)
+            )
+          : this.filterTag.tagNames.some((tagName) =>
+              curriculum.tags.some((tag) => tag.tagName === tagName)
+            ))
       )
     })
   }

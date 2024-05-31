@@ -1,0 +1,98 @@
+.tagsContainer {
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  top: 45px;
+  border: 1px var(--gray) solid;
+}
+
+.options:hover {
+  display: block;
+}
+
+.tagInput {
+  width: 150px;
+  height: 45px;
+  outline: none;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  padding: 14px;
+  font-weight: 400px;
+  font-size: 14px;
+  line-height: 16.8px;
+}
+
+.disjunctiveInputDiv {
+  width: 120px;
+  height: 45px;
+  outline: none;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  padding: 14px;
+  font-weight: 400px;
+  font-size: 14px;
+  line-height: 16.8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.disjunctiveLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tagInput:focus + .options {
+  display: block;
+}
+
+.option {
+  cursor: pointer;
+  padding: 5px;
+  background-color: white;
+}
+
+.option:hover {
+  /* background-color: var(--gray);
+  color: white; */
+
+  background-color: var(--hover-background-color);
+  color: var(--hover-color);
+}
+
+.selectedTags {
+  width: 316px;
+  height: 45px;
+  /* padding: 14px; */
+  overflow: auto;
+  /* position: absolute; */
+  left: 0px;
+  top: 0px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.selectedTag {
+  padding: 4px;
+  height: fit-content;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tagIcon {
+  cursor: pointer;
+  width: 20px;
+}
+
+.vanish {
+  opacity: 50%;
+}

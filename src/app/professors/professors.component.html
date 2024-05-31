@@ -10,7 +10,7 @@
           #filter
           type="text"
           (input)="filterString = filter.value; filterCurriculums()"
-          placeholder="Pesquisar"
+          placeholder="Pesquise um nome ou um ano de vínculo"
         />
       </div>
 
@@ -20,6 +20,10 @@
           type="checkbox"
           (input)="onlyActives = !onlyActives; filterCurriculums()"
       /></label>
+
+      <app-tags-filter
+        (tagFilterEmmiter)="filterTag = $event; filterCurriculums()"
+      ></app-tags-filter>
     </div>
 
     <div class="cards">
