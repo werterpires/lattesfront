@@ -255,6 +255,7 @@ export class ParticipacoesEmCongressosComponent {
               lattesid: curriculum.lattesId,
               active: curriculum.active,
               serviceYears: curriculum.serviceYears,
+              tags: curriculum.tags,
               ...participation
             })
           )

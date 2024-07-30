@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Props } from './tpes'
 import { Participacao, TrabalhoEmEventos } from '../services/objTypes'
+import { ITagFilter } from 'src/app/tags-filter/types'
 
 @Injectable({ providedIn: 'root' })
 export class FiltersService {
@@ -10,7 +11,8 @@ export class FiltersService {
     onlyServiceYears: boolean,
     yersToConsider: string[],
     sectionObjects: Participacao[] | TrabalhoEmEventos[] = [],
-    sectionType: string
+    sectionType: string,
+    tagsFilter: ITagFilter
   ): Participacao[] | TrabalhoEmEventos[] {
     // Filters with values applied
     const filters = sectionProps.filter(
@@ -24,7 +26,8 @@ export class FiltersService {
       onlyActives,
       onlyServiceYears,
       yersToConsider,
-      sectionType
+      sectionType,
+      tagsFilter
     )
 
     return sectionObjects
@@ -39,14 +42,16 @@ export class FiltersService {
     onlyActives: boolean,
     onlyServiceYears: boolean,
     yersToConsider: string[],
-    sectionType: string
+    sectionType: string,
+    tagsFilter: ITagFilter
   ): Participacao[] | TrabalhoEmEventos[] {
     sectionObjects = this.filterParticipacoes(
       sectionObjects,
       filters,
       onlyActives,
       onlyServiceYears,
-      yersToConsider
+      yersToConsider,
+      tagsFilter
     )
 
     return sectionObjects
@@ -57,11 +62,37 @@ export class FiltersService {
     filters: Props[],
     onlyActives: boolean,
     onlyServiceYears: boolean,
-    yersToConsider: string[]
+    yersToConsider: string[],
+    tagsFilter: ITagFilter
   ): Participacao[] {
     sectionObjects = sectionObjects.filter((section) => {
+      console.log('filterParicipacos called')
       const sec = section
-
+      console.log(' existem tags na seção ', !!sec.tags)
+      console.log(' quantidade de tags ', sec.tags?.length)
+      if (sec.tags && sec.tags.length > 0) {
+        console.log('tags da secao:', sec.tags)
+        console.log(
+          'tamanho do tags names do filter',
+          tagsFilter.tagNames.length
+        )
+        console.log('disjuntivo?', tagsFilter.disjunctive)
+        if (tagsFilter.tagNames.length === 0 || !tagsFilter.disjunctive) {
+          console.log(
+            'opção 1',
+            tagsFilter.tagNames.every((tagName) =>
+              sec.tags?.some((tag) => tag.tagName === tagName)
+            )
+          )
+        } else {
+          console.log(
+            'opção 2',
+            tagsFilter.tagNames.some((tagName) =>
+              sec.tags?.some((tag) => tag.tagName === tagName)
+            )
+          )
+        }
+      }
       return (
         (filters.every((prop) => {
           const key = prop.key as keyof Participacao
@@ -85,7 +116,14 @@ export class FiltersService {
           (!onlyServiceYears ||
             (sec.serviceYears?.includes(sec.ano ?? '?') &&
               (yersToConsider.length === 0 ||
-                yersToConsider.includes(sec.ano ?? '?'))))) ||
+                yersToConsider.includes(sec.ano ?? '?')))) &&
+          (tagsFilter.tagNames.length === 0 || !tagsFilter.disjunctive
+            ? tagsFilter.tagNames.every((tagName) =>
+                sec.tags?.some((tag) => tag.tagName === tagName)
+              )
+            : tagsFilter.tagNames.some((tagName) =>
+                sec.tags?.some((tag) => tag.tagName === tagName)
+              ))) ||
         false
       )
     })

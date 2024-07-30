@@ -1,9 +1,12 @@
+import { ITag } from './types'
+
 interface dadosBasicosSecoes {
   lattesid?: string
   nome?: string
   active?: boolean
   serviceYears?: string
   ano?: string
+  tags?: ITag[]
 
   palavrasChave?: string[]
   areasDoConhecimento?: AreasDoConhecimento
@@ -129,6 +132,7 @@ export interface Participacao extends dadosBasicosSecoes {
   ano?: string
   pais?: string
   idioma?: string
+
   meioDeDivulgacao?: string
   homePageDoTrabalho?: string
   flagRelevancia?: string

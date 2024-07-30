@@ -9,6 +9,7 @@
   position: absolute;
   top: 45px;
   border: 1px var(--gray) solid;
+  z-index: 3;
 }
 
 .options:hover {

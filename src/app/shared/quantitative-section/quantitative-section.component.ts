@@ -15,6 +15,8 @@ import { CountService } from './counts.service'
 import { ChartData, ChartSerie } from 'src/app/charts/quantity/types'
 import { ReportService } from './report.service'
 import { QuantityComponent } from 'src/app/charts/quantity/quantity.component'
+import { ITagFilter } from 'src/app/tags-filter/types'
+import { TagsFilterComponent } from 'src/app/tags-filter/tags-filter.component'
 
 @Component({
   selector: 'app-quantitative-section',
@@ -27,7 +29,8 @@ import { QuantityComponent } from 'src/app/charts/quantity/quantity.component'
     NgStyle,
     NgClass,
     FormsModule,
-    FilterInputComponent
+    FilterInputComponent,
+    TagsFilterComponent
   ],
   templateUrl: './quantitative-section.component.html',
   styleUrl: './quantitative-section.component.css'
@@ -55,6 +58,10 @@ export class QuantitativeSectionComponent {
   orderProp: string = 'nome'
 
   quantityDesc = true
+  tagsFilter: ITagFilter = {
+    tagNames: [],
+    disjunctive: true
+  }
 
   graph = false
   multi: ChartSerie[] = []
@@ -99,14 +106,14 @@ export class QuantitativeSectionComponent {
     if (!this.sectionProps) {
       return
     }
-
     this.sectionObjects = this.filtersService.filterNow(
       this.sectionProps,
       this.onlyActives,
       this.onlyServiceYears,
       this.yersToConsider,
       this.sectionObjects,
-      this.sectionType
+      this.sectionType,
+      this.tagsFilter
     )
     this.orderNow()
   }

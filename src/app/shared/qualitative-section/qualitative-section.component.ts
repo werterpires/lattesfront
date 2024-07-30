@@ -13,6 +13,8 @@ import { TableService } from './table.service'
 import { FailDataPipe } from 'src/app/pipes/fail-data.pipe'
 import { ReportService } from './report.service'
 import { UtilsService } from '../services/util.service'
+import { TagsFilterComponent } from 'src/app/tags-filter/tags-filter.component'
+import { ITagFilter } from 'src/app/tags-filter/types'
 
 @Component({
   selector: 'app-qualitative-section',
@@ -21,9 +23,11 @@ import { UtilsService } from '../services/util.service'
     FailDataPipe,
     AccordionComponent,
     FilterInputComponent,
+    TagsFilterComponent,
     FormsModule,
     NgFor,
     NgIf,
+
     NgClass
   ],
   templateUrl: './qualitative-section.component.html',
@@ -49,6 +53,7 @@ export class QualitativeSectionComponent {
   atualPage: number = 1
   resultsPerPage: number = 5
   pagesNumber!: number
+  tagsFilter: ITagFilter = { tagNames: [], disjunctive: true }
 
   constructor(
     public utilsService: UtilsService,
@@ -82,7 +87,15 @@ export class QualitativeSectionComponent {
   }
 
   filterNow(): void {
+    console.log('filterNow called')
+    console.log('sectionProps:', this.sectionProps)
+    console.log('onlyActives:', this.onlyActives)
+    console.log('onlyServiceYears:', this.onlyServiceYears)
+    console.log('sectionType:', this.sectionType)
+    console.log('tagsFilter:', this.tagsFilter)
+
     if (!this.sectionProps) {
+      console.log('sectionProps is falsy, returning early')
       return
     }
 
@@ -92,8 +105,11 @@ export class QualitativeSectionComponent {
       this.onlyServiceYears,
       [],
       this.sectionObjects,
-      this.sectionType
+      this.sectionType,
+      this.tagsFilter
     )
+
+    console.log('filtered sectionObjects:', this.sectionObjects)
 
     this.orderNow()
   }

@@ -21,6 +21,9 @@
         (change)="getSectionObjects()"
       />
     </label>
+    <app-tags-filter
+      (tagFilterEmmiter)="tagsFilter = $event; filterNow()"
+    ></app-tags-filter>
   </div>
   <div class="tableContainer">
     <table class="table">
@@ -31,7 +34,7 @@
               <app-filter-input
                 *ngIf="prop.showFilter"
                 [filter]="prop.filterObject"
-                (filterEvent)="prop.filterObject = $event; getSectionObjects()"
+                (filterEvent)="prop.filterObject = $event; filterNow()"
               ></app-filter-input>
               <p>{{ prop.name }}</p>
               <img

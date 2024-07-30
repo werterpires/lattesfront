@@ -62,6 +62,10 @@
         name="graph"
       />
     </label>
+
+    <app-tags-filter
+      (tagFilterEmmiter)="tagsFilter = $event; getSectionObjects()"
+    ></app-tags-filter>
   </div>
   <div class="dataShower">
     <div class="dataContainer" [ngStyle]="{ translate: graph ? '-50%' : '0' }">

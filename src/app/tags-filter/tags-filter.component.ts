@@ -3,6 +3,7 @@ import { TagsService } from '../shared/services/tags.service'
 import { ITag } from '../shared/services/types'
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common'
 import { FormsModule } from '@angular/forms'
+import { ITagFilter } from './types'
 
 @Component({
   selector: 'app-tags-filter',
@@ -12,10 +13,7 @@ import { FormsModule } from '@angular/forms'
   styleUrl: './tags-filter.component.css'
 })
 export class TagsFilterComponent {
-  @Output() tagFilterEmmiter = new EventEmitter<{
-    tagNames: string[]
-    disjunctive: boolean
-  }>()
+  @Output() tagFilterEmmiter = new EventEmitter<ITagFilter>()
 
   tags: ITag[] = []
   filteredTags: ITag[] = []

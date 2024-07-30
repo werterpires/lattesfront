@@ -73,7 +73,8 @@ export class OutrasProducoesBibliograficasComponent {
               nome: curriculum.curriculum.nome,
               lattesid: curriculum.lattesId,
               active: curriculum.active,
-              serviceYears: curriculum.serviceYears
+              serviceYears: curriculum.serviceYears,
+              tags: curriculum.tags
             })
           )
         ),
