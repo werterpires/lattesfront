@@ -57,13 +57,24 @@ export class UtilsService {
       }
     })
 
-    // Splits the input into multiple strings and removes whitespace
-    const trechosRestantes = text.split(/\s+/).filter((trecho) => trecho.trim())
+    // Remove any letters and signs
+    text = text.replace(/[^0-9\s]/g, ' ')
+    console.log('text', text)
 
-    newText.push(...trechosRestantes)
+    // Remove any part of text with more than 4 digits or less than 4 digits (unless it is the last position)
+    let parts = text.split(/\s+/)
+    const lastPart = parts.pop()
 
-    // Removes duplicates and sorts the list
-    newText = [...new Set(newText)].sort()
+    parts = parts.filter((part) => part.length === 4)
+
+    // Add filtered parts to newText
+    newText.push(...parts)
+
+    // Remove duplicates and sort the list
+    newText = [...new Set(newText)].sort((a, b) => parseInt(a) - parseInt(b))
+    if (lastPart && lastPart.length === 4) {
+      newText.push(lastPart)
+    } else newText.push(' ')
 
     return newText
   }

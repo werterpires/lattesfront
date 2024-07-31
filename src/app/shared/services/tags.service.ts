@@ -24,6 +24,32 @@ export class TagsService {
     private readonly router: Router
   ) {}
 
+  createTag(tagName: string): Observable<ITag> {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      throwError(() => new Error('Access Token not found'))
+    }
+
+    return this.httpClient
+      .post<ITag>(
+        environment.API + '/tags',
+        { tagName },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          if (error.status === 401) {
+            this.redirectToLogin()
+          }
+          return throwError(() => new Error(error.error.message))
+        })
+      )
+  }
+
   getAllTags(): Observable<ITag[]> {
     if (typeof localStorage === 'undefined') {
       console.error('LocalStorage is not defined.')

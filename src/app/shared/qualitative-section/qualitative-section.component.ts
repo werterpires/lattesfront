@@ -87,15 +87,7 @@ export class QualitativeSectionComponent {
   }
 
   filterNow(): void {
-    console.log('filterNow called')
-    console.log('sectionProps:', this.sectionProps)
-    console.log('onlyActives:', this.onlyActives)
-    console.log('onlyServiceYears:', this.onlyServiceYears)
-    console.log('sectionType:', this.sectionType)
-    console.log('tagsFilter:', this.tagsFilter)
-
     if (!this.sectionProps) {
-      console.log('sectionProps is falsy, returning early')
       return
     }
 
@@ -108,8 +100,6 @@ export class QualitativeSectionComponent {
       this.sectionType,
       this.tagsFilter
     )
-
-    console.log('filtered sectionObjects:', this.sectionObjects)
 
     this.orderNow()
   }

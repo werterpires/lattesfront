@@ -22,4 +22,111 @@
   font-size: 16px;
   line-height: 19.2px;
   color: #00000099;
+  border: none;
+  outline: none;
+  padding: none;
+}
+
+.propValue:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.propValue:focus {
+  transform: scale(1.15);
+  border-bottom: 1px solid var(--primary);
+  cursor: text;
+}
+
+.tag {
+  padding: 4px;
+  margin-right: 4px;
+  height: fit-content;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tagContainer {
+  padding: 4px;
+  display: flex;
+  width: fit-content;
+  max-width: 80vw;
+  flex-wrap: wrap;
+  gap: 4px;
+  position: relative;
+}
+
+.plusIcon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.plusIcon:hover {
+  cursor: pointer;
+  transform: translate(0, -5px);
+}
+
+.options {
+  top: 45px;
+  border: 1px var(--gray) solid;
+  z-index: 3;
+}
+
+.options:hover {
+  display: block;
+}
+
+.tagInput {
+  width: 150px;
+  height: 45px;
+  outline: none;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  padding: 14px;
+  font-weight: 400px;
+  font-size: 14px;
+  line-height: 16.8px;
+}
+
+.createTag {
+  background-color: var(--gray);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  font-weight: 400px;
+  font-size: 14px;
+  line-height: 16.8px;
+  position: absolute;
+  right: -45px;
+  top: 0;
+}
+
+.createTag:hover {
+  transform: translate(0, -5px);
+}
+
+.createTag:active {
+  background-color: var(--terciary);
+}
+.option {
+  cursor: pointer;
+  padding: 5px;
+  background-color: white;
+}
+
+.option:hover {
+  /* background-color: var(--gray);
+  color: white; */
+
+  background-color: var(--hover-background-color);
+  color: var(--hover-color);
+}
+
+#professorDataComponent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

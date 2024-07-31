@@ -66,33 +66,8 @@ export class FiltersService {
     tagsFilter: ITagFilter
   ): Participacao[] {
     sectionObjects = sectionObjects.filter((section) => {
-      console.log('filterParicipacos called')
       const sec = section
-      console.log(' existem tags na seção ', !!sec.tags)
-      console.log(' quantidade de tags ', sec.tags?.length)
-      if (sec.tags && sec.tags.length > 0) {
-        console.log('tags da secao:', sec.tags)
-        console.log(
-          'tamanho do tags names do filter',
-          tagsFilter.tagNames.length
-        )
-        console.log('disjuntivo?', tagsFilter.disjunctive)
-        if (tagsFilter.tagNames.length === 0 || !tagsFilter.disjunctive) {
-          console.log(
-            'opção 1',
-            tagsFilter.tagNames.every((tagName) =>
-              sec.tags?.some((tag) => tag.tagName === tagName)
-            )
-          )
-        } else {
-          console.log(
-            'opção 2',
-            tagsFilter.tagNames.some((tagName) =>
-              sec.tags?.some((tag) => tag.tagName === tagName)
-            )
-          )
-        }
-      }
+
       return (
         (filters.every((prop) => {
           const key = prop.key as keyof Participacao

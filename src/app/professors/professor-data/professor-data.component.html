@@ -1,11 +1,100 @@
-<div class="professorData">
-  <div>
-    <p class="professorName">{{ Curriculums[0].curriculum.nome }}</p>
+<div id="professorDataComponent">
+  <div class="professorData">
+    <div>
+      <p class="professorName">{{ Curriculums[0].curriculum.nome }}</p>
+    </div>
+
+    <div>
+      <p>
+        <span class="propName">ID Lattes: </span>
+        <span class="propValue">{{ Curriculums[0].lattesId }}</span>
+      </p>
+      <p>
+        <span class="propName">Anos de Serviço: </span>
+        <input
+          name="serviceYears"
+          class="propValue"
+          type="text"
+          #serviceYears
+          [value]="Curriculums[0].serviceYears"
+          (change)="
+            Curriculums[0].serviceYears = utilService
+              .getYears(serviceYears.value)
+              .join(' ')
+          "
+        />
+      </p>
+      <p>
+        <span class="propName">Ativo: </span>
+        <select
+          class="propValue"
+          name="active"
+          id="active"
+          #activeSelect
+          (change)="atualizeActive(activeSelect.value)"
+        >
+          <option [selected]="Curriculums[0].active" [value]="true">Sim</option>
+          <option [selected]="!Curriculums[0].active" [value]="false">
+            Não
+          </option>
+        </select>
+      </p>
+
+      <div>
+        <span class="propName">Tags: </span>
+        <div class="tagContainer">
+          <span
+            *ngFor="let tag of Curriculums[0].tags"
+            class="propValue tag"
+            [ngStyle]="{
+              'background-color': tag.back,
+              color: tag.color
+            }"
+            (click)="unselectTag(tag)"
+            >{{ tag.tagName }}</span
+          >
+          <img
+            class="plusIcon"
+            src="assets/icons/plusIcon.svg"
+            (click)="addTagOpen = !addTagOpen"
+          />
+          <div class="tagNameInputDiv" *ngIf="addTagOpen">
+            <input
+              class="tagInput"
+              type="text"
+              [(ngModel)]="searchText"
+              (input)="filterTags()"
+              placeholder="Pesquise uma tag e clique sobre ela"
+            />
+
+            <div class="options">
+              <p
+                *ngFor="let tag of filteredTags"
+                class="option"
+                (click)="selectTag(tag)"
+                [ngStyle]="{
+                  '--hover-background-color': tag.back,
+                  '--hover-color': tag.color
+                }"
+              >
+                {{ tag.tagName }}
+              </p>
+            </div>
+            <div
+              class="createTag"
+              (click)="createTag()"
+              *ngIf="
+                filteredTags.length === 0 && addTagOpen && searchText.length > 0
+              "
+            >
+              Criar Tag
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <p>
-      <span class="propName">ID Lattes: </span>
-      <span class="propValue">{{ Curriculums[0].lattesId }}</span>
-    </p>
-  </div>
+  <button type="button" (click)="updateProfessor()" class="smallButton">
+    Salvar
+  </button>
 </div>

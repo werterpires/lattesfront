@@ -68,3 +68,7 @@ export interface ITag {
   back?: string
   color?: string
 }
+
+export interface ICreateTag {
+  tagName: string
+}
