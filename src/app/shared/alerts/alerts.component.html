@@ -1,15 +1,22 @@
 <div id="alert" *ngIf="showAlert">
   <app-modal>
-    <div
-      id="alertsContainer"
-      [ngStyle]="{ border: alertTypes[alertType].color + ' solid 2px' }"
-    >
+    <div id="alertsContainer">
+      <div id="iconContainer">
+        <img
+          [src]="'assets/icons/' + alertTypes[alertType].icon + '.svg'"
+          alt=""
+          class="alertsIcon"
+        />
+      </div>
+
       <div>
-        <h1>{{ title }}</h1>
+        <h1 class="alertsTitle" [style.color]="alertTypes[alertType].color">
+          {{ title }}
+        </h1>
       </div>
       <div>
         <ng-container *ngFor="let paragraph of text"
-          ><p>{{ paragraph }}</p></ng-container
+          ><p class="alertsText">{{ paragraph }}</p></ng-container
         >
       </div>
     </div>

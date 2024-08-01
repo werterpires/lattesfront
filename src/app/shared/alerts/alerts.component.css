@@ -1,29 +1,31 @@
 #alertsContainer {
   padding: 10px;
-  border-radius: 10px;
+
   font-family: var(--fontAnek);
-  color: white;
+  border-bottom: var(--gray) 1px solid;
+  padding: 24px;
 }
 
-#alertsButtons {
-  margin-top: 10px;
+.modalsButtons {
   display: flex;
   justify-content: space-evenly;
   gap: 10px;
+  display: flex;
+  justify-content: space-around;
+  padding: 17px;
 }
 
-#alertsButtons button {
-  min-width: 60px;
-  padding: 10px;
+.modalsButtons button {
+  min-width: 45px;
+  padding: 6px 12px;
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
 
-  background-color: var(--green);
+  background-color: var(--primary);
   color: white;
 
-  font-family: var(--fontAnek);
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -36,6 +38,37 @@
 }
 
 #alert {
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
   z-index: 100;
+}
+
+.alertsTitle {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 19.2px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.alertsText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19.2px;
+  text-align: center;
+  color: var(--primary);
+}
+
+.alertsIcon {
+  height: 100px;
+}
+
+#iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 16px;
 }
