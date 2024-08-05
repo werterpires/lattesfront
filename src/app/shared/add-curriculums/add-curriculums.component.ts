@@ -82,7 +82,8 @@ export class AddCurriculumsComponent {
     private readonly loader: LoaderService,
     private readonly addCurriculumService: AddCurriculumsService,
     private readonly alertService: AlertsService,
-    private readonly curriculumnsService: CurriculumnsService
+    private readonly curriculumnsService: CurriculumnsService,
+    private readonly loaderService: LoaderService
   ) {}
 
   curriculumsData: ICreateCurriculums = {
@@ -151,8 +152,9 @@ export class AddCurriculumsComponent {
     return byteCharacters.join('')
   }
 
-  makeCreateCurriculumDto(curr: any): ICreateCurriculum | null {
+  async makeCreateCurriculumDto(curr: any): Promise<ICreateCurriculum | null> {
     const value: IXml = curr.value
+    console.log(value)
 
     if (
       !value['_NUMERO-IDENTIFICADOR'] ||
@@ -364,13 +366,13 @@ export class AddCurriculumsComponent {
     }
 
     if (artigos.aceitos?.['ARTIGO-ACEITO-PARA-PUBLICACAO_asArray']) {
-      artigosAceitosParaPublicacao = this.articleService.makeArtigos(
+      artigosAceitosParaPublicacao = await this.articleService.makeArtigos(
         artigos.aceitos['ARTIGO-ACEITO-PARA-PUBLICACAO_asArray']
       )
     }
 
     if (artigos.publicados?.['ARTIGO-PUBLICADO_asArray']) {
-      artigosPublicados = this.articleService.makeArtigos(
+      artigosPublicados = await this.articleService.makeArtigos(
         artigos.publicados['ARTIGO-PUBLICADO_asArray']
       )
     }
@@ -422,7 +424,7 @@ export class AddCurriculumsComponent {
 
   readFile(file: File, fileName: string): void {
     const reader = new FileReader()
-    reader.onloadend = () => {
+    reader.onloadend = async () => {
       const arrayBuffer = reader.result as ArrayBuffer
 
       const xmlString = this.convertArrayBufferToString(arrayBuffer)
@@ -435,7 +437,9 @@ export class AddCurriculumsComponent {
         value
       }))
 
-      const createCurriculumDto = this.makeCreateCurriculumDto(curriculoData[0])
+      const createCurriculumDto = await this.makeCreateCurriculumDto(
+        curriculoData[0]
+      )
 
       if (createCurriculumDto) {
         this.curriculumsData.curriculums.push(createCurriculumDto)
@@ -446,6 +450,8 @@ export class AddCurriculumsComponent {
   }
 
   onFileSelected(event: any): void {
+    this.loaderService.showLoader()
+
     const files: FileList = event.target.files
     if (files && files.length > 0) {
       for (let i = 0; i < files.length; i++) {
@@ -455,5 +461,6 @@ export class AddCurriculumsComponent {
         }
       }
     }
+    this.loaderService.hideLoader()
   }
 }

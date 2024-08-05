@@ -72,3 +72,7 @@ export interface ITag {
 export interface ICreateTag {
   tagName: string
 }
+
+export interface IStratum {
+  stratum: string
+}

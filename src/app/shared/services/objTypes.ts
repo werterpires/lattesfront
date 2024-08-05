@@ -440,6 +440,7 @@ export interface Artigo extends dadosBasicosSecoes {
   doi?: string
   tituloDoArtigoIngles?: string
   flagDivulgacaoCientifica?: string
+  estrato?: string
 
   tituloDoPeriodicoOuRevista?: string
   issn?: string

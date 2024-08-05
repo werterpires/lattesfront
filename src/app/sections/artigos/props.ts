@@ -141,6 +141,14 @@ export const qualitativeProps: Props[] = [
     width: '240px'
   },
   {
+    name: 'Estrato',
+    key: 'estrato',
+    showFilter: false,
+    ascending: true,
+    filterObject: { text: [], disjunctive: true },
+    width: '120px'
+  },
+  {
     name: 'ISSN',
     key: 'issn',
     showFilter: false,

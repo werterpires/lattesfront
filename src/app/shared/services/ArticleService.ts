@@ -2,16 +2,25 @@
 import { Injectable } from '@angular/core'
 import { AreasDoConhecimento, Artigo } from './objTypes'
 import { UtilsService } from './util.service'
+import { IStratum } from './types'
+import { QuallisService } from './quallis.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  constructor(private readonly utilsService: UtilsService) {}
+  estrato: IStratum = {
+    stratum: 'arroz'
+  }
 
-  makeArtigos(data: any[]): Artigo[] {
+  constructor(
+    private readonly utilsService: UtilsService,
+    private readonly quallisService: QuallisService
+  ) {}
+
+  async makeArtigos(data: any[]): Promise<Artigo[]> {
     const articles: Artigo[] = []
-    data.forEach((element) => {
+    for (const element of data) {
       const autores = this.utilsService.makeAutores(element)
 
       let areasDoConhecimento: AreasDoConhecimento = {}
@@ -22,6 +31,17 @@ export class ArticleService {
       }
 
       const palavrasChave = this.utilsService.makePalavrasChave(element)
+      const issn = element['DETALHAMENTO-DO-ARTIGO']._ISSN
+      const title =
+        element['DETALHAMENTO-DO-ARTIGO']['_TITULO-DO-PERIODICO-OU-REVISTA']
+
+      console.log(issn, title)
+      console.log(typeof issn, typeof title)
+      console.log(issn.trim().length > 1)
+
+      if (issn && issn.trim().length > 0 && title && title.trim().length > 0) {
+        await this.getStratum(issn, title.replace(/ /g, '_'))
+      }
 
       const dev: Artigo = {
         autores,
@@ -58,12 +78,29 @@ export class ArticleService {
         paginaInicial: element['DETALHAMENTO-DO-ARTIGO']['_PAGINA-INICIAL'],
         paginaFinal: element['DETALHAMENTO-DO-ARTIGO']['_PAGINA-FINAL'],
         localDePublicacao:
-          element['DETALHAMENTO-DO-ARTIGO']['_LOCAL-DE-PUBLICACAO']
+          element['DETALHAMENTO-DO-ARTIGO']['_LOCAL-DE-PUBLICACAO'],
+        estrato: this.estrato?.stratum || 'Não localizado'
       }
-      articles.push(dev)
-    })
 
+      articles.push(dev)
+      this.estrato = { stratum: '' }
+    }
     return articles
+  }
+
+  async getStratum(issn: string, title: string): Promise<void> {
+    await new Promise<void>((resolve, reject) => {
+      this.quallisService.getStratum(issn, title).subscribe({
+        next: (stratum) => {
+          this.estrato = stratum
+
+          resolve()
+        },
+        error: (err) => {
+          reject(err)
+        }
+      })
+    })
   }
 
   /**
